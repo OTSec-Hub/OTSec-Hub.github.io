@@ -53,26 +53,84 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
   // Set all projects state
   React.useEffect(() => {
-    const tempData = [];
+  //const tempData = [];
+  //   if (projectsData !== undefined && projectsData.length !== 0) {
+  //     projectsData.forEach((element) => {
+  //       const tempObj = {
+  //         id: null,
+  //         homepage: null,
+  //         description: null,
+  //         image: null,
+  //         name: null,
+  //         html_url: null,
+  //       };
+  //       tempObj.id = element.id;
+  //       tempObj.homepage = element.homepage;
+  //       tempObj.description = element.description;
+  //       tempObj.name = element.name;
+  //       tempObj.html_url = element.html_url;
+  //       tempData.push(tempObj);
+  //     });
+  //     if (
+  //       projectCardImages !== (undefined && null) &&
+  //       projectCardImages.length !== 0
+  //     ) {
+  //       projectCardImages.forEach((element) => {
+  //         tempData.forEach((ele) => {
+  //           if (element.name.toLowerCase() === ele.name.toLowerCase()) {
+  //             ele.image = element.image;
+  //           }
+  //         });
+  //       });
+  //     }
+  //     dispatch(setProjects(tempData));
+  //   }
+  // }, [projectsData, projectCardImages, dispatch]);
+  const tempData = [];
+
+    const placeholderProjects = [
+      {
+        id: "placeholder-1",
+        homepage: "#",
+        description: "This is a placeholder project description.",
+        image: "https://via.placeholder.com/300x200?text=Project+1",
+        name: "Placeholder Project 1",
+        html_url: "#",
+      },
+      {
+        id: "placeholder-2",
+        homepage: "#",
+        description: "Another placeholder for a future project.",
+        image: "https://via.placeholder.com/300x200?text=Project+2",
+        name: "Placeholder Project 2",
+        html_url: "#",
+      },
+      {
+        id: "placeholder-3",
+        homepage: "#",
+        description: "Stay tuned for more projects.",
+        image: "https://via.placeholder.com/300x200?text=Project+3",
+        name: "Placeholder Project 3",
+        html_url: "#",
+      },
+    ];
+
     if (projectsData !== undefined && projectsData.length !== 0) {
       projectsData.forEach((element) => {
         const tempObj = {
-          id: null,
-          homepage: null,
-          description: null,
+          id: element.id,
+          homepage: element.homepage,
+          description: element.description,
           image: null,
-          name: null,
-          html_url: null,
+          name: element.name,
+          html_url: element.html_url,
         };
-        tempObj.id = element.id;
-        tempObj.homepage = element.homepage;
-        tempObj.description = element.description;
-        tempObj.name = element.name;
-        tempObj.html_url = element.html_url;
         tempData.push(tempObj);
       });
+
       if (
-        projectCardImages !== (undefined && null) &&
+        projectCardImages !== undefined &&
+        projectCardImages !== null &&
         projectCardImages.length !== 0
       ) {
         projectCardImages.forEach((element) => {
@@ -83,7 +141,10 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           });
         });
       }
+
       dispatch(setProjects(tempData));
+    } else {
+      dispatch(setProjects(placeholderProjects));
     }
   }, [projectsData, projectCardImages, dispatch]);
 
