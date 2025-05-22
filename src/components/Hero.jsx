@@ -12,7 +12,7 @@ import { Light, Dark } from "../config";
 import { useErrorBoundary } from "react-error-boundary";
 import { Link } from "react-scroll";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import SocialLinks from "./SocialLinks";
+// import SocialLinks from "./SocialLinks";
 
 // #region styled-components
 const spin = keyframes`
@@ -109,9 +109,9 @@ const Hero = ({ name }) => {
             <h1 className="mb-3 display-3 title">
               {name === null ? "null" : name}
             </h1>
-            <div className="d-flex align-items-center justify-content-center">
+            {/*<div className="d-flex align-items-center justify-content-center">
               <SocialLinks />
-            </div>
+            </div> */}
           </Col>
           <Col className="d-none d-md-block">
             <img
