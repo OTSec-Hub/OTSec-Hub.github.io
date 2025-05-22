@@ -15,7 +15,7 @@ import Logo from "./images/logo.svg";
  **************************************************************
   Add your GitHub username (string - "YourUsername") below.
 */
-export const githubUsername = "RyleeJames2004";
+export const githubUsername = "OTSec-Hub";
 
 // Navbar Logo image
 export const navLogo = null;
