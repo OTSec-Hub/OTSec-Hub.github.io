@@ -86,7 +86,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
   //     dispatch(setProjects(tempData));
   //   }
   // }, [projectsData, projectCardImages, dispatch]);
-  const tempData = [];
+  //const tempData = [];
 
     const placeholderProjects = [
       {
@@ -113,39 +113,47 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         name: "Placeholder Project 3",
         html_url: "#",
       },
+      {
+        id: "placeholder-4",
+        homepage: "#",
+        description: "Another one.",
+        image: "https://via.placeholder.com/300x200?text=Project+4",
+        name: "Placeholder Project 4",
+        html_url: "#",
+      },
     ];
 
-    if (projectsData !== undefined && projectsData.length !== 0) {
-      projectsData.forEach((element) => {
-        const tempObj = {
-          id: element.id,
-          homepage: element.homepage,
-          description: element.description,
-          image: null,
-          name: element.name,
-          html_url: element.html_url,
-        };
-        tempData.push(tempObj);
-      });
+    // if (projectsData !== undefined && projectsData.length !== 0) {
+    //   projectsData.forEach((element) => {
+    //     const tempObj = {
+    //       id: element.id,
+    //       homepage: element.homepage,
+    //       description: element.description,
+    //       image: null,
+    //       name: element.name,
+    //       html_url: element.html_url,
+    //     };
+    //     tempData.push(tempObj);
+    //   });
 
-      if (
-        projectCardImages !== undefined &&
-        projectCardImages !== null &&
-        projectCardImages.length !== 0
-      ) {
-        projectCardImages.forEach((element) => {
-          tempData.forEach((ele) => {
-            if (element.name.toLowerCase() === ele.name.toLowerCase()) {
-              ele.image = element.image;
-            }
-          });
-        });
-      }
+    //   if (
+    //     projectCardImages !== undefined &&
+    //     projectCardImages !== null &&
+    //     projectCardImages.length !== 0
+    //   ) {
+    //     projectCardImages.forEach((element) => {
+    //       tempData.forEach((ele) => {
+    //         if (element.name.toLowerCase() === ele.name.toLowerCase()) {
+    //           ele.image = element.image;
+    //         }
+    //       });
+    //     });
+    //   }
 
-      dispatch(setProjects(tempData));
-    } else {
+    //   dispatch(setProjects(tempData));
+    // } else {
       dispatch(setProjects(placeholderProjects));
-    }
+    //}
   }, [projectsData, projectCardImages, dispatch]);
 
   // Set main projects state
@@ -160,9 +168,9 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         );
         tempArray.length !== 0
           ? dispatch(setMainProjects([...tempArray]))
-          : dispatch(setMainProjects([...projects.slice(0, 3)]));
+          : dispatch(setMainProjects([...projects.slice(0, 4)]));
       } else {
-        dispatch(setMainProjects([...projects.slice(0, 3)]));
+        dispatch(setMainProjects([...projects.slice(0, 4)]));
       }
     }
   }, [projects, filteredProjects, dispatch]);
