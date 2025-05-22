@@ -21,12 +21,13 @@ const Home = () => {
   const data = useSelector(selectProjects);
 
   React.useEffect(() => {
-    updateTitle(`${userData.name} | Portfolio`);
+    updateTitle(`OTSec-Hub.io`);
   }, [userData]);
 
   return (
     <>
-      <Hero name={userData.name} />
+      {/*<Hero name={userData.name} */} />
+      <Hero name="OTSec-Hub" />
       <main>
         <AboutMe
           avatar_url={userData.avatar_url}
