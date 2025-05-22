@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/OTSec-Hub.io/static/css/main.1b910307.css",
+    "main.js": "/OTSec-Hub.io/static/js/main.c561a9c4.js",
+    "static/media/hero-dark.jpg": "/OTSec-Hub.io/static/media/hero-dark.37f2556d620821979e99.jpg",
+    "static/media/hero-light.jpg": "/OTSec-Hub.io/static/media/hero-light.78b77836d8aee4d7d3cb.jpg",
+    "service-worker.js": "/OTSec-Hub.io/service-worker.js",
+    "static/media/GH.svg": "/OTSec-Hub.io/static/media/GH.b9e9a9aa6f05e9dfe5dcb8991bda3e4d.svg",
+    "static/media/defaultNavLogo.svg": "/OTSec-Hub.io/static/media/defaultNavLogo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/logo.svg": "/OTSec-Hub.io/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/OTSec-Hub.io/index.html",
+    "main.1b910307.css.map": "/OTSec-Hub.io/static/css/main.1b910307.css.map",
+    "main.c561a9c4.js.map": "/OTSec-Hub.io/static/js/main.c561a9c4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1b910307.css",
+    "static/js/main.c561a9c4.js"
+  ]
+}
