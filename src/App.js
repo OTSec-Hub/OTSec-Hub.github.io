@@ -43,6 +43,19 @@ const propTypes = {
   ),
 };
 
+// Helper function to import all images from a folder
+function importAll(r) {
+  let images = {};
+  r.keys().forEach((item) => {
+    // item is like './imageName.png'
+    images[item.replace('./', '')] = r(item);
+  });
+  return images;
+}
+
+// Import all images from src/images folder
+const projectImages = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
+
 const App = ({ projectCardImages = [], filteredProjects = [] }) => {
   const theme = useSelector(selectMode);
   const projects = useSelector(selectProjects);
@@ -93,7 +106,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         id: "placeholder-1",
         homepage: "#",
         description: "This is a placeholder project description.",
-        image: "https://via.placeholder.com/300x200?text=Project+1",
+        image: projectImages['id_card.png'],
         name: "Placeholder Project 1",
         html_url: "https://www.google.com/search?q=puppy+images",
       },
@@ -101,7 +114,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         id: "placeholder-2",
         homepage: "#",
         description: "Another placeholder for a future project.",
-        image: "https://via.placeholder.com/300x200?text=Project+2",
+        image: projectImages['security_1.png'],
         name: "Placeholder Project 2",
         html_url: "https://www.google.com/search?q=cute+baby+alligator+images&tbm=isch",
       },
@@ -109,7 +122,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         id: "placeholder-3",
         homepage: "#",
         description: "Stay tuned for more projects.",
-        image: "https://via.placeholder.com/300x200?text=Project+3",
+        image: projectImages['laptop.png'],
         name: "Placeholder Project 3",
         html_url: "https://nyuad.nyu.edu/en/",
       },
@@ -117,7 +130,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         id: "placeholder-4",
         homepage: "#",
         description: "Another one.",
-        image: "https://via.placeholder.com/300x200?text=Project+4",
+        image: projectImages['lock.png'],
         name: "Placeholder Project 4",
         html_url: "#",
       },
