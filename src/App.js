@@ -95,7 +95,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         description: "This is a placeholder project description.",
         image: "https://via.placeholder.com/300x200?text=Project+1",
         name: "Placeholder Project 1",
-        html_url: "#",
+        html_url: "https://www.google.com/search?q=puppy+images",
       },
       {
         id: "placeholder-2",
@@ -103,7 +103,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         description: "Another placeholder for a future project.",
         image: "https://via.placeholder.com/300x200?text=Project+2",
         name: "Placeholder Project 2",
-        html_url: "#",
+        html_url: "https://www.google.com/search?q=cute+baby+alligator+images&tbm=isch",
       },
       {
         id: "placeholder-3",
@@ -111,7 +111,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         description: "Stay tuned for more projects.",
         image: "https://via.placeholder.com/300x200?text=Project+3",
         name: "Placeholder Project 3",
-        html_url: "#",
+        html_url: "https://nyuad.nyu.edu/en/",
       },
       {
         id: "placeholder-4",
