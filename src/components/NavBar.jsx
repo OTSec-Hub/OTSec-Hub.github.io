@@ -20,15 +20,15 @@ const navLinks = {
     { id: "2R", name: "All Projects", route: "/All-Projects" },
   ],
   to: [
-    { id: "1T", name: "Home", to: "Home" },
-    { id: "2T", name: "About Me", to: "About" },
-    { id: "3T", name: "Projects", to: "Projects" },
-    { id: "4T", name: "Contact", to: "Contact" },
+    { id: "1T", name: "Home", to: "Home" },    
+    { id: "2T", name: "Projects", to: "Projects" },
+    { id: "3T", name: "Contact", to: "Contact" },
   ],
 };
 // #endregion
 
 //{ id: "3T", name: "Skills", to: "Skills" },
+// { id: "2T", name: "About Me", to: "About" },
 
 // #region styled-components
 const StyledDiv = styled.div`
