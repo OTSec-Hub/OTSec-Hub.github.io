@@ -3,7 +3,7 @@ import React from "react";
 import { useGetUsersQuery } from "../app/apiSlice";
 // Components
 import Hero from "../components/Hero";
-import AboutMe from "../components/AboutMe";
+//import AboutMe from "../components/AboutMe";
 //import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
@@ -26,14 +26,14 @@ const Home = () => {
 
   return (
     <>
-      {/*<Hero name={userData.name} */} />
+      {/*<Hero name={userData.name} */} 
       <Hero name="OTSec-Hub" />
       <main>
-        <AboutMe
+        {/*<AboutMe
           avatar_url={userData.avatar_url}
           bio={userData.bio}
           moreInfo={moreInfo}
-        />
+        /> */}
         {/* <Skills /> */}
         {/*<Projects filteredProjects={filteredProjects} /> */}
         <Projects filteredProjects={data.slice(0, 6)} />
