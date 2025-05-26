@@ -181,9 +181,9 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         );
         tempArray.length !== 0
           ? dispatch(setMainProjects([...tempArray]))
-          : dispatch(setMainProjects([...projects.slice(0, 4)]));
+          : dispatch(setMainProjects([...projects.slice(0, 3)]));
       } else {
-        dispatch(setMainProjects([...projects.slice(0, 4)]));
+        dispatch(setMainProjects([...projects.slice(0, 3)]));
       }
     }
   }, [projects, filteredProjects, dispatch]);

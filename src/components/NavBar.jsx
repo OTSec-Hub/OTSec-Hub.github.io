@@ -20,9 +20,12 @@ const navLinks = {
     { id: "2R", name: "All Projects", route: "/All-Projects" },
   ],
   to: [
-    { id: "1T", name: "Home", to: "Home" },    
-    { id: "2T", name: "Projects", to: "Projects" },
-    { id: "3T", name: "Contact", to: "Contact" },
+    { id: "1T", name: "Home", to: "Home" }, 
+    { id: "2T", name: "Introduction", to: "Introduction" },   
+    { id: "3T", name: "ICS Labs", to: "Projects" },
+    { id: "4T", name: "Announcements", to: "Accouncements" },
+    { id: "5T", name: "Weekly Discussions", to: "Weekly Discussions" },
+    { id: "6T", name: "Contact Us", to: "Contact" },
   ],
 };
 // #endregion
