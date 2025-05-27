@@ -28,6 +28,8 @@ const navLinks = {
       ]
     },
     { id: "4R", name: "Announcements", route: "/Announce"},
+    { id: "5R", name: "Weekly Discussions", route: "/Discussions"},
+    { id: "6R", name: "Contact Us", route: "/ContactPage"},
   ],
   to: [
     { id: "1T", name: "Home", to: "Home" }, 
