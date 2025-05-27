@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.1b910307.css",
-    "main.js": "/static/js/main.5a9c2cc2.js",
-    "static/media/hero-light.jpg": "/static/media/hero-light.78b77836d8aee4d7d3cb.jpg",
+    "main.js": "/static/js/main.bbcd244f.js",
+    "static/media/hero-light.jpg": "/static/media/hero-light.9be50835d5300f307d6f.jpg",
     "static/media/security_1.png": "/static/media/security_1.aee2b1b958109c34edb3.png",
     "static/media/id_card.png": "/static/media/id_card.6b3c5001bec70e513efe.png",
     "static/media/lock.png": "/static/media/lock.b0c0eaef454980e4e60e.png",
@@ -14,10 +14,10 @@
     "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/index.html",
     "main.1b910307.css.map": "/static/css/main.1b910307.css.map",
-    "main.5a9c2cc2.js.map": "/static/js/main.5a9c2cc2.js.map"
+    "main.bbcd244f.js.map": "/static/js/main.bbcd244f.js.map"
   },
   "entrypoints": [
     "static/css/main.1b910307.css",
-    "static/js/main.5a9c2cc2.js"
+    "static/js/main.bbcd244f.js"
   ]
 }
