@@ -16,6 +16,8 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";
+import IntroductionPage from "./pages/IntroductionPage";
+import Lab1Page from "./pages/Lab1Page";
 import NotFound from "./pages/NotFound";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -103,12 +105,12 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
     const placeholderProjects = [
       {
-        id: "placeholder-1",
-        homepage: "#",
+        id: "lab1",
+        homepage: "lab1",
         description: "This is a placeholder project description.",
         image: projectImages['id_card.png'],
-        name: "Placeholder Project 1",
-        html_url: "https://www.google.com/search?q=puppy+images",
+        name: "Lab 1: Wireshark",
+        url: "lab1",
       },
       {
         id: "placeholder-2",
@@ -116,7 +118,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         description: "Another placeholder for a future project.",
         image: projectImages['security_1.png'],
         name: "Placeholder Project 2",
-        html_url: "https://www.google.com/search?q=cute+baby+alligator+images&tbm=isch",
+        url: "https://www.google.com/search?q=cute+baby+alligator+images&tbm=isch",
       },
       {
         id: "placeholder-3",
@@ -124,7 +126,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         description: "Stay tuned for more projects.",
         image: projectImages['laptop.png'],
         name: "Placeholder Project 3",
-        html_url: "https://nyuad.nyu.edu/en/",
+        url: "https://nyuad.nyu.edu/en/",
       },
       {
         id: "placeholder-4",
@@ -132,39 +134,10 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         description: "Another one.",
         image: projectImages['lock.png'],
         name: "Placeholder Project 4",
-        html_url: "#",
+        url: "#",
       },
     ];
 
-    // if (projectsData !== undefined && projectsData.length !== 0) {
-    //   projectsData.forEach((element) => {
-    //     const tempObj = {
-    //       id: element.id,
-    //       homepage: element.homepage,
-    //       description: element.description,
-    //       image: null,
-    //       name: element.name,
-    //       html_url: element.html_url,
-    //     };
-    //     tempData.push(tempObj);
-    //   });
-
-    //   if (
-    //     projectCardImages !== undefined &&
-    //     projectCardImages !== null &&
-    //     projectCardImages.length !== 0
-    //   ) {
-    //     projectCardImages.forEach((element) => {
-    //       tempData.forEach((ele) => {
-    //         if (element.name.toLowerCase() === ele.name.toLowerCase()) {
-    //           ele.image = element.image;
-    //         }
-    //       });
-    //     });
-    //   }
-
-    //   dispatch(setProjects(tempData));
-    // } else {
       dispatch(setProjects(placeholderProjects));
     //}
   }, [projectsData, projectCardImages, dispatch]);
@@ -230,6 +203,8 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/All-Projects" element={<AllProjects />} />
+          <Route path="/IntroductionPage" element={<IntroductionPage />} />
+          <Route path="/lab1" element={<Lab1Page />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer mode={footerTheme} />

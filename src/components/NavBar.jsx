@@ -10,7 +10,7 @@ import { Link, useLocation } from "react-router-dom";
 import defaultLogo from "../images/defaultNavLogo.svg";
 // Components
 import { Link as ScrollLink } from "react-scroll";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import ThemeToggle from "./ThemeToggle";
 
 // #region constants
@@ -18,14 +18,21 @@ const navLinks = {
   routes: [
     { id: "1R", name: "Home", route: "/" },
     { id: "2R", name: "All Projects", route: "/All-Projects" },
+    { id: "3R", name: "Introduction", route: "/IntroductionPage" },
+    {
+      id: "4R",
+      name: "Resources",
+      dropdown: true,
+      children: [
+        { id: "2T-1", name: "ICS Labs", route: "/All-Projects" }
+      ]
+    },
   ],
   to: [
-    { id: "1T", name: "Home", to: "Home" }, 
-    { id: "2T", name: "Introduction", to: "Introduction" },   
-    { id: "3T", name: "ICS Labs", to: "Projects" },
-    { id: "4T", name: "Announcements", to: "Accouncements" },
-    { id: "5T", name: "Weekly Discussions", to: "Weekly Discussions" },
-    { id: "6T", name: "Contact Us", to: "Contact" },
+    { id: "1T", name: "Home", to: "Home" },    
+    { id: "2T", name: "Announcements", to: "Accouncements" },
+    { id: "3T", name: "Weekly Discussions", to: "Weekly Discussions" },
+    { id: "4T", name: "Contact Us", to: "Contact" },
   ],
 };
 // #endregion
@@ -111,26 +118,48 @@ const NavBar = ({ Logo = defaultLogo, callBack, closeDelay = 125 }) => {
                     );
                   })
                 : navLinks.routes.map((el) => {
-                    return (
-                      <Nav.Item key={el.id}>
-                        <Link
-                          to={el.route}
-                          className={
-                            pathname === el.route
-                              ? "nav-link active"
-                              : "nav-link"
-                          }
-                          onClick={() => {
-                            setTimeout(() => {
-                              setisExpanded(false);
-                            }, closeDelay);
-                          }}
-                        >
-                          {el.name}
-                        </Link>
-                      </Nav.Item>
-                    );
-                  })}
+                    if (el.dropdown && Array.isArray(el.children)) {
+                      return (
+                        <NavDropdown key={el.id} title={el.name} id={`nav-dropdown-${el.id}`}>
+                          {el.children.map((child) => (
+                            <NavDropdown.Item
+                              key={child.id}
+                              as={Link}
+                              to={child.route}
+                              onClick={() => {
+                                setTimeout(() => {
+                                  setisExpanded(false);
+                                }, closeDelay);
+                              }}
+                            >
+                              {child.name}
+                            </NavDropdown.Item>
+                          ))}
+                        </NavDropdown>
+                      );
+                    } else {
+                      return (
+                        <Nav.Item key={el.id}>
+                          <Link
+                            to={el.route}
+                            className={
+                              pathname === el.route
+                                ? "nav-link active"
+                                : "nav-link"
+                            }
+                            onClick={() => {
+                              setTimeout(() => {
+                                setisExpanded(false);
+                              }, closeDelay);
+                            }}
+                          >
+                            {el.name}
+                          </Link>
+                        </Nav.Item>
+                      );
+                    }
+                  })
+              }
             </Nav>
             <Nav>
               <ThemeToggle

@@ -10,6 +10,8 @@ import GH from "../images/GH.svg";
 // Components
 import { Card } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
 // #region styled-components
 const StyledCard = styled.div`
   .card {
@@ -69,7 +71,9 @@ const propTypes = {
   url: PropTypes.string.isRequired,
 };
 
+
 const ProjectCard = ({ demo, description, image, name, url }) => {
+  console.log("demo value:", demo);
   return (
     <StyledCard>
       <Card>
@@ -82,19 +86,18 @@ const ProjectCard = ({ demo, description, image, name, url }) => {
         <Card.Body className="overflow-auto text-center">
           <Card.Title>{name}</Card.Title>
           <Card.Text>{description}</Card.Text>
-          {demo !== (undefined && null && "") ? (
-            <Card.Link href={demo}>
-              {"Live Demo "}
-              <Icon icon="icon-park-outline:code-computer" />
-            </Card.Link>
+          {demo ? (
+            <Link to={`/${demo}`} style={{ textDecoration: "none" }}>
+              Click Here <Icon icon="icon-park-outline:code-computer" />
+            </Link>
           ) : null}
         </Card.Body>
-        <Card.Footer className="text-center">
+        {/* <Card.Footer className="text-center">
           <Card.Link href={url}>
             {"Click Here!"}
-            {/*<Icon icon="icomoon-free:github" />*/}
+            {/*<Icon icon="icomoon-free:github" />
           </Card.Link>
-        </Card.Footer>
+        </Card.Footer> */}
       </Card>
     </StyledCard>
   );

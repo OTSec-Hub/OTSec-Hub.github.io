@@ -30,13 +30,12 @@ export const Blog = null;
 export { HeroLight as Light };
 export { HeroDark as Dark };
 
-/* About Me
+/* Introduction
  **************************************************************
   Add a second paragraph for the about me section.
 */
-/*export const moreInfo =
-  "I enjoy learning about technology and helping others use it to improve their lives and be more productive. I built this site with React, React Bootstrap, Redux, and the GitHub REST API.";
-*/
+export const moreInfo ="introduction text";
+
 /* Skills
  ************************************************************** 
   Add or remove skills in the SAME format below, choose icons here - https://icon-sets.iconify.design/
