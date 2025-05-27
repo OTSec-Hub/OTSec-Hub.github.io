@@ -18,6 +18,7 @@ import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";
 import IntroductionPage from "./pages/IntroductionPage";
 import Lab1Page from "./pages/Lab1Page";
+import Announcements from "./pages/Announcements";
 import NotFound from "./pages/NotFound";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -204,6 +205,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route exact path="/" element={<Home />} />
           <Route path="/All-Projects" element={<AllProjects />} />
           <Route path="/IntroductionPage" element={<IntroductionPage />} />
+          <Route path="/Announce" element={<Announcements />} />
           <Route path="/lab1" element={<Lab1Page />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

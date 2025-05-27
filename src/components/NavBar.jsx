@@ -17,22 +17,25 @@ import ThemeToggle from "./ThemeToggle";
 const navLinks = {
   routes: [
     { id: "1R", name: "Home", route: "/" },
-    { id: "2R", name: "All Projects", route: "/All-Projects" },
-    { id: "3R", name: "Introduction", route: "/IntroductionPage" },
+    // { id: "2R", name: "All Projects", route: "/All-Projects" },
+    { id: "2R", name: "Introduction", route: "/IntroductionPage" },
     {
-      id: "4R",
+      id: "3R",
       name: "Resources",
       dropdown: true,
       children: [
-        { id: "2T-1", name: "ICS Labs", route: "/All-Projects" }
+        { id: "3R-1", name: "ICS Labs", route: "/All-Projects" }
       ]
     },
+    { id: "4R", name: "Announcements", route: "/Announce"},
   ],
   to: [
-    { id: "1T", name: "Home", to: "Home" },    
-    { id: "2T", name: "Announcements", to: "Accouncements" },
-    { id: "3T", name: "Weekly Discussions", to: "Weekly Discussions" },
-    { id: "4T", name: "Contact Us", to: "Contact" },
+    { id: "1T", name: "Home", to: "Home" }, 
+    { id: "2T", name: "Introduction", to: "Introduction" },  
+    { id: "3T", name: "Resources", to: "Resources" }, 
+    { id: "4T", name: "Announcements", to: "Accouncements" },
+    { id: "5T", name: "Weekly Discussions", to: "Weekly Discussions" },
+    { id: "6T", name: "Contact Us", to: "Contact" },
   ],
 };
 // #endregion
