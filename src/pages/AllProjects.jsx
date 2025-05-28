@@ -113,7 +113,7 @@ const AllProjects = () => {
     content = (
       <>
         <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"All Projects"} />
+          <Title size={"h2"} text={"ICS Labs"} />
         </Container>
         <Container className="d-flex flex-column justify-content-center">
           <Loading />
@@ -124,7 +124,12 @@ const AllProjects = () => {
     content = (
       <>
         <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"All Projects"} />
+          <Title size={"h2"} text={"ICS Labs"} />
+        </Container>
+        <Container className="mb-3">
+          <p className="text-center fs-5 text-muted">
+            Industrial Control Systems (ICS) are of paramount importance nowadays. In this series of labs, we will help you understand what a Programmable Logic Controller (PLC) is, what ICS are, the security vectors of ICS, how PLC binaries differ from standard binaries, and how to reverse engineer and fuzz them. All materials could be found on our Github repository : https://github.com/HaithemLamri/OTSsec-Hub/tree/main.
+          </p>
         </Container>
         <Container>
           <InputGroup className="mx-auto mb-3">

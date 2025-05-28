@@ -26,6 +26,21 @@ const Lab1Page = () => {
           <div className="row">
             {/* Left column: Main Content */}
             <div className="col-md-8">
+              {/* Image Placeholder */}
+              <div
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  backgroundColor: "#e9ecef",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                <span className="text-muted">[Image Placeholder]</span>
+              </div>
               <section>
                 <h3 className="mt-4">Description</h3>
                 <p>
