@@ -9,6 +9,7 @@ import { updateTitle } from "../utils";
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
 import SidebarBox from "../components/SidebarBox";
+import image from "../images/lab1pic.jpg";
 
 const Lab1Page = () => {
   React.useEffect(() => {
@@ -27,20 +28,17 @@ const Lab1Page = () => {
             {/* Left column: Main Content */}
             <div className="col-md-6 offset-md-1">
               {/* Image Placeholder */}
-              <div
+              <img
+                src={image}
+                alt="Lab 1 Wireshark Screenshot"
                 style={{
                   width: "95%",
                   height: "300px",
-                  backgroundColor: "#e9ecef",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  objectFit: "cover",
                   borderRadius: "0.5rem",
                   marginBottom: "1.5rem",
                 }}
-              >
-                <span className="text-muted">[Image Placeholder]</span>
-              </div>
+              />
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
