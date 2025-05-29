@@ -4,7 +4,7 @@ import styled from "styled-components";
 // State
 import PropTypes from "prop-types";
 // Components
-import SocialLinks from "./SocialLinks";
+//import SocialLinks from "./SocialLinks";
 
 // #region styled-components
 const StyledFooter = styled.footer`
@@ -47,8 +47,7 @@ const Footer = ({ mode }) => {
     <StyledFooter
       $mode={mode}
       className="d-flex align-items-center justify-content-center p-2"
-    >
-      <SocialLinks />
+    >    
     </StyledFooter>
   );
 };
