@@ -9,7 +9,7 @@ import { updateTitle } from "../utils";
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
 import SidebarBox from "../components/SidebarBox";
-import image from "../images/lab1pic.jpg";
+import image from "../images/lab1pic.webp";
 
 const Lab1Page = () => {
   React.useEffect(() => {
