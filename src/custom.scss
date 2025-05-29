@@ -3,5 +3,9 @@
 // Set the primary color for the theme
 //$blue: #61dbfb;
 $blue: #28a745;
+
+:root {
+  --custom-blue: #{$blue};
+}
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
