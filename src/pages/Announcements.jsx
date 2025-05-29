@@ -25,7 +25,7 @@ const Announcements = () => {
         <Container>
           <div className="row">
             {/* Left column: Main Content */}
-            <div className="col-md-7 offset-md-0" style={{ marginLeft: "6%" }}>
+            <div className="col-md-7 offset-md-0" style={{ marginLeft: "5%" }}>
               <section>
                 {/*<h3 className="mt-4">Description</h3>*/}
 {/*                <p style={{ fontSize: "1.25rem" }}>

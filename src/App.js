@@ -110,7 +110,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
       {
         id: "lab1",
         homepage: "lab1",
-        description: "Lab 1 short description.",
+        description: "Analyze network captures to identify OT security attacks using Wireshark.",
         image: projectImages['id_card.png'],
         name: "Lab 1: Wireshark",
         url: "lab1",
