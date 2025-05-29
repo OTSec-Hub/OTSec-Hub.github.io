@@ -27,7 +27,7 @@ const IntroductionPage = () => {
             {/* Left column: Main Content */}
             <div className="col-md-8">
               <section>
-                <h3 className="mt-4">WEBSITE Description</h3>
+                <h4 className="mt-4">WEBSITE Description</h4>
                 <p>
                   OTSEC-HUB is a platform for the Operational Technology (OT) Security community. We provide content related to OT security for both academic and research purposes. Our goal is to offer talks, courses, interactive labs, datasets, and more—free for everyone. Anyone can collaborate and share their knowledge here!
                 </p>
