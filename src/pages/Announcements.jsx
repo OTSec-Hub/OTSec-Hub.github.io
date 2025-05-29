@@ -25,31 +25,23 @@ const Announcements = () => {
         <Container>
           <div className="row">
             {/* Left column: Main Content */}
-            <div className="col-md-8">
+            <div className="col-md-7 offset-md-0" style={{ marginLeft: "6%" }}>
               <section>
                 {/*<h3 className="mt-4">Description</h3>*/}
-                <p>
-                  We are preparing new teaching, research, and industry-related content for all Operational Technology Security enthusiasts! This page will list all our latest news and announcements—keep refreshing and checking for newly uploaded content!
-                </p>
-
-{/*                <h4 className="mt-4">WEBSITE Objectives</h4>
-                <ul>
-                  <li>Becoming one of the largest hubs for OT security practitioners and enthusiasts.</li>
-                  <li>Offering learning content through courses and interactive labs, covering topics from beginner to advanced levels.</li>
-                  <li>Advancing OTSec research by collecting datasets, facilitating communication among researchers, and organizing monthly talks.</li>
-                </ul>
-
-                <h4 className="mt-4">What you will find here</h4>
-                <ul>
-                  <li><strong>Talks Page</strong> – Recordings of our monthly talks, featuring researchers and engineers discussing relevant topics.</li>
-                  <li><strong>Resources Page</strong> – Links to courses, labs, research papers, and ready-to-use datasets.</li>
-                  <li><strong>Contact Page</strong> – Instructions on how to become a permanent member by filling out a form.</li>
-                </ul>
-
-                <h4 className="mt-4">How to JOIN US?</h4>
-                <p>
-                  If you’d like to contribute by offering a talk, course, dataset, or if you have a suggestion, feel free to contact us at <code>mm6446 at nyu dot edu</code>.
-                </p> */}
+{/*                <p style={{ fontSize: "1.25rem" }}>
+                  We are preparing new <strong>teaching, research, and industry-related</strong> content for all <strong>Operational Technology Security enthusiasts!</strong> This page will list all our latest news and announcements—keep refreshing and checking for newly uploaded content!
+                </p> */} 
+                <p style={{ fontSize: "1.25rem" }}>
+                  We are preparing new{" "}
+                  <strong style={{ color: "var(--custom-blue)" }}>
+                    teaching, research, and industry-related
+                  </strong>{" "}
+                  content for all{" "}
+                  <strong style={{ color: "var(--custom-blue)" }}>
+                    Operational Technology Security enthusiasts!
+                  </strong>{" "}
+                  This page will list all our latest news and announcements—keep refreshing and checking for newly uploaded content!
+                </p>             
               </section>
             </div>
             <div className="col-md-4">
