@@ -49,7 +49,7 @@ const AllProjects = () => {
   let content;
 
   React.useEffect(() => {
-    updateTitle(`${userData.name} | All Projects`);
+    updateTitle(`${userData.name} | All Labs`);
   }, [userData]);
 
   React.useEffect(() => {
@@ -137,8 +137,8 @@ const AllProjects = () => {
               <Icon icon="ic:round-search" />
             </InputGroup.Text>
             <FormControl
-              placeholder="Project name"
-              aria-label="Search projects"
+              placeholder="Lab name"
+              aria-label="Search labs"
               aria-describedby="search"
               onChange={(e) => setSearchInput(e.currentTarget.value)}
             />

@@ -8,7 +8,6 @@ import { updateTitle } from "../utils";
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
-import SidebarBox from "../components/SidebarBox";
 import image from "../images/lab1pic.webp";
 
 const Lab1Page = () => {
@@ -26,17 +25,18 @@ const Lab1Page = () => {
         <Container>
           <div className="row">
             {/* Left column: Main Content */}
-            <div className="col-md-6 offset-md-1">
+            <div className="col-md-8" style={{ marginLeft: "19%" }}>
               {/* Image Placeholder */}
               <img
                 src={image}
                 alt="Lab 1 Wireshark Screenshot"
                 style={{
-                  width: "95%",
+                  width: "80%",
                   height: "300px",
                   objectFit: "cover",
                   borderRadius: "0.5rem",
                   marginBottom: "1.5rem",
+                  marginLeft: "5%",
                 }}
               />
               <section>
@@ -44,7 +44,7 @@ const Lab1Page = () => {
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
                 <strong>LAB 1: NETWORK TRAFFIC ANALYSIS WITH WIRESHARK </strong> 
                 </h3>
-                <p style={{ fontSize: "1.1rem" }}>
+                <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
                   🎯 <strong style={{ color: "var(--custom-blue)" }}>Objective:</strong> Analyze network captures to identify OT security attacks using Wireshark. Packet captures are provided inside a compressed archive (.zip).
                 </p>                
               </section>
@@ -201,29 +201,6 @@ const Lab1Page = () => {
                   📄 View sample analysis (PDF)
                 </a>
               </section>
-            </div>
-            <div className="col-md-4">
-              <SidebarBox
-                title="Recent Posts"
-                items={[
-                  { text: "NEWS", link: "/news" },     // add link if you have one, or remove link property
-                  { text: "Welcome", link: "/welcome" }
-                ]}
-              />
-
-              <SidebarBox
-                title="Recent Comments"
-                items={[
-                  { text: "No comments to show." }     // no link here, just text
-                ]}
-              />
-
-              <SidebarBox
-                title="Archives"
-                items={[
-                  { text: "February 2025" }
-                ]}
-              />
             </div>
           </div>
         </Container>

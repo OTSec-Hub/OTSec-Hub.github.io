@@ -205,7 +205,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         </Element>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/All-Projects" element={<AllProjects />} />
+          <Route path="/All-Labs" element={<AllProjects />} />
           <Route path="/IntroductionPage" element={<IntroductionPage />} />
           <Route path="/Announce" element={<Announcements />} />
           <Route path="/Discussions" element={<Discussions />} />
