@@ -9,7 +9,8 @@ import HeroLight from "./images/hero-light.jpg";
 import HeroDark from "./images/hero-dark.jpg";
 
 // Projects Images (add your images to the images directory and import below)
-import Logo from "./images/logo.svg";
+import Logo from "./images/logo.png";
+import plainLogo from "./images/plainLogo.png"
 
 /* START HERE
  **************************************************************
@@ -18,7 +19,7 @@ import Logo from "./images/logo.svg";
 export const githubUsername = "OTSec-Hub";
 
 // Navbar Logo image
-export const navLogo = null;
+export const navLogo = plainLogo;
 
 /* Main
  ************************************************************** 

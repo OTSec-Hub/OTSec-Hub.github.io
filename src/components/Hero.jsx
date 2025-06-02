@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // Icons
 import { Icon } from "@iconify/react";
 // Images
-import Logo from "../images/logo.svg";
+import Logo from "../images/logo.png";
 import { Light, Dark } from "../config";
 // Components
 import { useErrorBoundary } from "react-error-boundary";
@@ -15,14 +15,14 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 // import SocialLinks from "./SocialLinks";
 
 // #region styled-components
-const spin = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
+// const spin = keyframes`
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// `;
 
 const StyledHero = styled.header`
   position: relative;
@@ -65,11 +65,6 @@ const StyledHero = styled.header`
     height: 10rem;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-img {
-      animation: ${spin} infinite 20s linear;
-    }
-  }
 
   @media screen and (min-width: 1180px) {
     &::before {
@@ -109,15 +104,14 @@ const Hero = ({ name }) => {
             <h1 className="mb-3 display-3 title">
               {name === null ? "null" : name}
             </h1>
-            {/*<div className="d-flex align-items-center justify-content-center">
-              <SocialLinks />
-            </div> */}
           </Col>
           <Col className="d-none d-md-block">
             <img
               src={Logo}
               alt="React Logo"
-              className="w-75 mx-auto hero-img"
+              // className="w-110 mx-auto hero-img"
+              className="hero-img"
+              style={{ width: "112%", marginTop: "5rem", marginLeft: "-43rem"}}
             />
           </Col>
         </Row>
