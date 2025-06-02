@@ -87,7 +87,7 @@ const ProjectCard = ({ demo, description, image, name, url }) => {
           <Card.Title>{name}</Card.Title>
           <Card.Text>{description}</Card.Text>
           {demo ? (
-            <Link to={`/${demo}`} style={{ textDecoration: "none" }}>
+            <Link to={`/All-Labs/${demo}`} style={{ textDecoration: "none" }}>
               Click Here <Icon icon="icon-park-outline:code-computer" />
             </Link>
           ) : null}

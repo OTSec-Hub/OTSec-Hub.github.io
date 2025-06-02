@@ -108,12 +108,12 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
     const placeholderProjects = [
       {
-        id: "lab1",
-        homepage: "lab1",
+        id: "Lab1",
+        homepage: "Lab1",
         description: "Analyze network captures to identify OT security attacks using Wireshark.",
         image: projectImages['id_card.png'],
         name: "Lab 1: Wireshark",
-        url: "lab1",
+        url: "Lab1",
       },
       {
         id: "lab2",
@@ -210,7 +210,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Announce" element={<Announcements />} />
           <Route path="/Discussions" element={<Discussions />} />
           <Route path="/ContactPage" element={<ContactPage />} />
-          <Route path="/lab1" element={<Lab1Page />} />
+          <Route path="/All-Labs/Lab1" element={<Lab1Page />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer mode={footerTheme} />
