@@ -90,7 +90,7 @@ const Lab1Page = () => {
                   <strong>2. Download Lab Materials: </strong>
                 </p>
                 <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
+                  href="/labMaterials/LAB1.zip"  // replace with your actual ZIP file path
                   download
                   style={{
                     display: "inline-block",

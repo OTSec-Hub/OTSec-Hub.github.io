@@ -18,6 +18,11 @@ import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";
 import IntroductionPage from "./pages/IntroductionPage";
 import Lab1Page from "./pages/Lab1Page";
+import Lab2Page from "./pages/Lab2Page";
+import Lab3Page from "./pages/Lab3Page";
+import Lab4Page from "./pages/Lab4Page";
+import Lab5Page from "./pages/Lab5Page";
+import Lab6Page from "./pages/Lab6Page";
 import Announcements from "./pages/Announcements";
 import Discussions from "./pages/Discussions";
 import ContactPage from "./pages/ContactPage";
@@ -116,28 +121,44 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         url: "Lab1",
       },
       {
-        id: "lab2",
-        homepage: "#",
+        id: "Lab2",
+        homepage: "Lab2",
         description: "Lab 2 short description",
         image: projectImages['security_1.png'],
         name: "Lab 2",
-        url: "#",
+        url: "Lab2",
       },
       {
-        id: "lab3",
-        homepage: "#",
+        id: "Lab3",
+        homepage: "Lab3",
         description: "Lab 3 short description",
         image: projectImages['laptop.png'],
         name: "Lab 3",
-        url: "#",
+        url: "Lab3",
       },
       {
-        id: "lab4",
-        homepage: "#",
+        id: "Lab4",
+        homepage: "Lab4",
         description: "Lab 4 short description",
         image: projectImages['lock.png'],
         name: "Lab 4",
-        url: "#",
+        url: "Lab4",
+      },
+      {
+        id: "Lab5",
+        homepage: "Lab5",
+        description: "Lab 5 short description",
+        image: projectImages['lab5.png'],
+        name: "Lab 5",
+        url: "Lab5",
+      },
+      {
+        id: "Lab6",
+        homepage: "Lab6",
+        description: "Lab 6 short description",
+        image: projectImages['lab6.png'],
+        name: "Lab 6",
+        url: "Lab6",
       },
     ];
 
@@ -211,6 +232,11 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Discussions" element={<Discussions />} />
           <Route path="/ContactPage" element={<ContactPage />} />
           <Route path="/All-Labs/Lab1" element={<Lab1Page />} />
+          <Route path="/All-Labs/Lab2" element={<Lab2Page />} />
+          <Route path="/All-Labs/Lab3" element={<Lab3Page />} />
+          <Route path="/All-Labs/Lab4" element={<Lab4Page />} />
+          <Route path="/All-Labs/Lab5" element={<Lab5Page />} />
+          <Route path="/All-Labs/Lab6" element={<Lab6Page />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer mode={footerTheme} />
