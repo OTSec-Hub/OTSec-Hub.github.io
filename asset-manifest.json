@@ -1,8 +1,9 @@
 {
   "files": {
     "main.css": "/static/css/main.00036769.css",
-    "main.js": "/static/js/main.f8028c94.js",
+    "main.js": "/static/js/main.d8371380.js",
     "static/media/lab1pic.jpg": "/static/media/lab1pic.266b498071d090792d0e.jpg",
+    "static/media/lab2pic.webp": "/static/media/lab2pic.66449870ebeb23435883.webp",
     "static/media/hero-light.jpg": "/static/media/hero-light.9be50835d5300f307d6f.jpg",
     "static/media/lab1pic.webp": "/static/media/lab1pic.5b4b922dc5742f5c666e.webp",
     "static/media/logo.png": "/static/media/logo.c54c3790ee4e5333eeea.png",
@@ -10,17 +11,19 @@
     "static/media/plainLogo.png": "/static/media/plainLogo.9ee089cc724f1ef93564.png",
     "static/media/id_card.png": "/static/media/id_card.6b3c5001bec70e513efe.png",
     "static/media/lock.png": "/static/media/lock.b0c0eaef454980e4e60e.png",
+    "static/media/lab5.png": "/static/media/lab5.0d5a9bcde86753f86260.png",
     "static/media/laptop.png": "/static/media/laptop.1328709247f28b57867d.png",
     "service-worker.js": "/service-worker.js",
+    "static/media/lab6.png": "/static/media/lab6.8dca3bf853a4321c3441.png",
     "static/media/security_2.png": "/static/media/security_2.b50692ebb8c02693b858.png",
     "static/media/GH.svg": "/static/media/GH.b9e9a9aa6f05e9dfe5dcb8991bda3e4d.svg",
     "static/media/defaultNavLogo.svg": "/static/media/defaultNavLogo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/index.html",
     "main.00036769.css.map": "/static/css/main.00036769.css.map",
-    "main.f8028c94.js.map": "/static/js/main.f8028c94.js.map"
+    "main.d8371380.js.map": "/static/js/main.d8371380.js.map"
   },
   "entrypoints": [
     "static/css/main.00036769.css",
-    "static/js/main.f8028c94.js"
+    "static/js/main.d8371380.js"
   ]
 }
