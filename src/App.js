@@ -23,7 +23,7 @@ import Lab3Page from "./pages/Lab3Page";
 import Lab4Page from "./pages/Lab4Page";
 import Lab5Page from "./pages/Lab5Page";
 import Lab6Page from "./pages/Lab6Page";
-import Datasets from "./pages/Datasets"
+import Benchmarks from "./pages/Benchmarks"
 import Announcements from "./pages/Announcements";
 import Discussions from "./pages/Discussions";
 import ContactPage from "./pages/ContactPage";
@@ -228,7 +228,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/Resources/All-Labs" element={<AllProjects />} />
-          <Route path="/Resources/Datasets" element={<Datasets />} />
+          <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
           <Route path="/IntroductionPage" element={<IntroductionPage />} />
           <Route path="/Announce" element={<Announcements />} />
           <Route path="/Discussions" element={<Discussions />} />
