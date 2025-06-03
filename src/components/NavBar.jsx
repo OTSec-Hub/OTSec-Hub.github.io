@@ -20,7 +20,8 @@ const navLinks = {
       id: "3R",
       name: "Resources",
       dropdown: true,
-      children: [{ id: "3R-1", name: "ICS Labs", route: "/All-Labs" }]
+      children: [{ id: "3R-1", name: "ICS Labs", route: "/Resources/All-Labs" },
+        {id: "3R-2", name: "Datasets", route: "/Resources/Datasets"}]
     },
     { id: "4R", name: "Announcements", route: "/Announce" },
     { id: "5R", name: "Weekly Discussions", route: "/Discussions" },

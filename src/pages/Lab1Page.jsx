@@ -182,7 +182,7 @@ const Lab1Page = () => {
                   <strong>3. Reference Sample: </strong>
                 </p>
                 <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
+                  href="/labMaterials/Lab1_Analysis.pdf"  // replace with your actual ZIP file path
                   download
                   style={{
                     display: "inline-block",

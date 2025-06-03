@@ -12,17 +12,7 @@ import { Light, Dark } from "../config";
 import { useErrorBoundary } from "react-error-boundary";
 import { Link } from "react-scroll";
 import { Button, Col, Container, Row } from "react-bootstrap";
-// import SocialLinks from "./SocialLinks";
 
-// #region styled-components
-// const spin = keyframes`
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// `;
 
 const StyledHero = styled.header`
   position: relative;
