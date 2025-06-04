@@ -101,17 +101,17 @@ const Hero = ({ name }) => {
               alt="React Logo"
               // className="w-110 mx-auto hero-img"
               className="hero-img"
-              style={{ width: "80%", marginTop: "10rem", marginLeft: "-43rem"}}
+              style={{ width: "80%", marginTop: "0em", marginLeft: "-43rem"}}
             />
           </Col>
         </Row>
-        <Row className="align-items-end down-container">
+{/*        <Row className="align-items-end down-container">
           <Col className="m-4 text-center">
             <Link to={"About"} className="link-icons">
               <Icon icon="fa6-solid:circle-chevron-down" />
             </Link>
           </Col>
-        </Row>
+        </Row>*/}
         <Button
           className="d-none"
           onClick={() =>
