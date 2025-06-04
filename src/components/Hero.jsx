@@ -101,7 +101,7 @@ const Hero = ({ name }) => {
               alt="React Logo"
               // className="w-110 mx-auto hero-img"
               className="hero-img"
-              style={{ width: "112%", marginTop: "2rem", marginLeft: "-43rem"}}
+              style={{ width: "80%", marginTop: "10rem", marginLeft: "-43rem"}}
             />
           </Col>
         </Row>
