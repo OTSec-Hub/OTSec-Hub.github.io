@@ -68,7 +68,7 @@ const Announcements = () => {
               />
             </div>
           </div>
-        </Container>*/}
+        </Container>
 
         <BackToTop home="Home" />
       </main>

@@ -230,8 +230,8 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Resources/All-Labs" element={<AllProjects />} />
           <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
           <Route path="/IntroductionPage" element={<IntroductionPage />} />
-          <Route path="/Announce" element={<Announcements />} />
-          <Route path="/Discussions" element={<Discussions />} />
+          <Route path="/Announcements" element={<Announcements />} />
+          <Route path="/Weekly-Discussions" element={<Discussions />} />
           <Route path="/ContactPage" element={<ContactPage />} />
           <Route path="/All-Labs/Lab1" element={<Lab1Page />} />
           <Route path="/All-Labs/Lab2" element={<Lab2Page />} />

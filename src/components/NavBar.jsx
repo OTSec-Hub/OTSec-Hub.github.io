@@ -23,8 +23,8 @@ const navLinks = {
       children: [{ id: "3R-1", name: "ICS Labs", route: "/Resources/All-Labs" },
         {id: "3R-2", name: "Benchmarks", route: "/Resources/Benchmarks"}]
     },
-    { id: "4R", name: "Announcements", route: "/Announce" },
-    { id: "5R", name: "Weekly Discussions", route: "/Discussions" },
+    { id: "4R", name: "Announcements", route: "/Announcements" },
+    { id: "5R", name: "Weekly Discussions", route: "/Weekly-Discussions" },
     { id: "6R", name: "Contact Us", route: "/ContactPage" }
   ]
 };
