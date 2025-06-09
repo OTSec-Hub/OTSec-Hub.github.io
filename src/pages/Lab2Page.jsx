@@ -79,7 +79,10 @@ const Lab2Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",
+                display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
                 SET UP
                 </h4>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
@@ -109,22 +112,15 @@ const Lab2Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
                   PART I
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
                 Follow the steps below to generate PLC code for the subsystem. It should take you <strong>10-20 minutes</strong> to complete (estimated time excluding software download). 
                 </p>
-              </section>
-              <hr
-                style={{
-                  borderTop: "3px solid var(--custom-blue)",
-                  opacity: 0.4,
-                  margin: "1.5rem 0",
-                  width: "95%",
-                }}
-              />
-              <section style={{ paddingBottom: "0.25rem" }}>
+
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 1
                 </h4>
@@ -204,22 +200,15 @@ const Lab2Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem"}}>
                   PART II
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
                 Follow the steps below to complete the lab 2 activities. It will take approximately <strong>30-50 minutes</strong> to complete. 
                 </p>
-              </section>
-              <hr
-                style={{
-                  borderTop: "3px solid var(--custom-blue)",
-                  opacity: 0.4,
-                  margin: "1.5rem 0",
-                  width: "95%",
-                }}
-              />
-              <section style={{ paddingBottom: "1rem" }}>
+
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 1
                 </h4>

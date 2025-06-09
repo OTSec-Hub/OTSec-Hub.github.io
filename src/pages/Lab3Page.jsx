@@ -89,29 +89,36 @@ const Lab3Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",  display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
                 SET UP
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
-                CODESYS installation instructions:{" "}
-                <a
-                href="/labMaterials/lab3-Materials/Lab 3 CODESYS install v2.pdf" // Replace with actual URL
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                >
-                Lab 3 CODESYS install v2.pdf
-                </a>
-                <br />
-                Download the Lab 3 folder:{" "}
-                <a
-                href="/labMaterials/lab3-Materials/LAB 3-20210723T184103Z-001.zip" // Replace with actual URL
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                >
-                LAB 3-20210723T184103Z-001.zip
-                </a>
+                <ul style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px", paddingLeft: "1.5rem" }}>
+                  <li style={{ marginBottom: "0.5rem" }}>
+                    CODESYS installation instructions:{" "}
+                    <a
+                      href="/labMaterials/lab3-Materials/Lab 3 CODESYS install v2.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+                    >
+                      Lab 3 CODESYS install v2.pdf
+                    </a>
+                  </li>
+                  <li>
+                    Download the Lab 3 folder:{" "}
+                    <a
+                      href="/labMaterials/lab3-Materials/LAB 3-20210723T184103Z-001.zip"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+                    >
+                      LAB 3-20210723T184103Z-001.zip
+                    </a>
+                  </li>
+                </ul>
                 </p>
               </section>
               <hr
@@ -123,7 +130,9 @@ const Lab3Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",  display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
                   PART I
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
@@ -219,7 +228,9 @@ const Lab3Page = () => {
               />
 
               <section style={{ paddingBottom: "5rem" }}>
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",  display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
                   PART II
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>

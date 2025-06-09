@@ -9,6 +9,14 @@ import { updateTitle } from "../utils";
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
 import image from "../images/lab1pic.webp";
+import part1step1Image from "../images/lab4_Items/part1-step1.png"
+import part2step1Image from "../images/lab4_Items/part2-step1.png"
+import part2step2Image from "../images/lab4_Items/part2-step2.png"
+import part2step3Image from "../images/lab4_Items/part2-step3.png"
+import part2step4Image from "../images/lab4_Items/part2-step4.png"
+import part2step5Image from "../images/lab4_Items/part2-step5.png"
+import part2step6Image from "../images/lab4_Items/part2-step6.png"
+import part2step7Image from "../images/lab4_Items/part2-step7.png"
 
 const Lab4Page = () => {
   React.useEffect(() => {
@@ -79,29 +87,38 @@ const Lab4Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",
+                            display: "inline-block",
+                            borderBottom: "2px solid var(--custom-blue)",
+                            paddingBottom: "0.2rem" }}>
                 SET UP
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
-                CODESYS installation instructions:{" "}
-                <a
-                href="/labMaterials/lab3-Materials/Lab 3 CODESYS install v2.pdf" // Replace with actual URL
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                >
-                Lab 3 CODESYS install v2.pdf
-                </a>
-                <br />
-                Download the Lab 3 folder:{" "}
-                <a
-                href="/labMaterials/lab3-Materials/LAB 3-20210723T184103Z-001.zip" // Replace with actual URL
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                >
-                LAB 3-20210723T184103Z-001.zip
-                </a>
+                  <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                    <li>
+                      In order to complete the assignment, you need ModRSsim2 and QModMaster, which are already 
+                      provided in the Lab 4 folder, and Wireshark. Wireshark can be downloaded from{" "}
+                      <a
+                      href="https://www.wireshark.org/#download" // Replace with actual URL
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+                      >
+                      https://www.wireshark.org/#download.
+                      </a>
+                    </li>
+                    <li>
+                      Download the Lab 4 folder and unzip it:{" "}
+                      <a
+                      href="/labMaterials/lab4-Materials/LAB 4-20210723T184106Z-001.zip" // Replace with actual URL
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+                      >
+                      LAB 4-20210723T184106Z-001.zip.
+                      </a>
+                    </li>
+                  </ul>
                 </p>
               </section>
               <hr
@@ -113,55 +130,223 @@ const Lab4Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",
+                          display: "inline-block",
+                          borderBottom: "2px solid var(--custom-blue)",
+                          paddingBottom: "0.2rem" }}>
                   PART I
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
-                Arrange <strong>10-20 minutes</strong> to complete Part I. 
+                Spend some time to get familar with QModMaster. It will take approximately <strong>10-20 minutes</strong> to complete. 
                 </p>
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 1
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-                Open <strong>Codesys</strong>, and open project from LAB 3\Control System/ and select the file <strong>Desalination Cascade Control_HMI</strong>.
+                Open Lab 4 folder and run QModMaster. In <strong>QModMaster</strong>, open the Manual page (click on the icon shown in the image below), and go over it.
                 </p>
+              <img
+                src={part1step1Image}
+                alt="Step 1 screenshot"
+                style={{
+                  width: "75%",
+                  height: "215px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "9%",
+                }}
+              />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 2
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-                Click on Visualization on the left menu and play around with properties on the right.
+                Click to answer the questions on Brightspace based on the manual.
+                  <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                    <li>
+                    Questions: Lab 4 - Knowledge Checks
+                    </li>
+                  </ul>
                 </p>
+              </section>
+              <hr
+                style={{
+                  borderTop: "3px solid var(--custom-blue)",
+                  opacity: 0.4,
+                  margin: "1.5rem 0",
+                  width: "95%",
+                }}
+              />
+
+              <section style={{ paddingBottom: "0rem" }}>
+                <h4 style={{ fontWeight: "bold",
+                          display: "inline-block",
+                          borderBottom: "2px solid var(--custom-blue)",
+                          paddingBottom: "0.2rem" }}>
+                  PART II
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Follow the steps below to complete the lab 4 activities. It will take approximately <strong>20-40 minutes</strong> to complete.  
+                All of the steps followed and the screenshots of the end results should be compiled in the lab report. 
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 1
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Open both <strong>ModRSsim2</strong> and <strong>QModMaster</strong>. In QModMaster, go to <strong>File</strong> and <strong>Load Session</strong>. 
+                Navigate to the Lab 4 folder and open <strong>“Lab Client.ses”</strong> which is the session file you need for this lab.
+                </p>
+              <img
+                src={part2step1Image}
+                alt="Step 1 screenshot"
+                style={{
+                  width: "95%",
+                  height: "107px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "0%",
+                }}
+              />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 2
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
+                Start the <strong>ModRSsim2</strong> from the icon on the right top corner.
+                </p>
+              <img
+                src={part2step2Image}
+                alt="Step 2 screenshot"
+                style={{
+                  width: "75%",
+                  height: "150px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "9%",
+                }}
+              />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 3
                 </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-                Start the PLC from the <strong>“Codesys Control Win sysTray”</strong> presented in the System tray (hidden icons) at the bottom right of your windows. 
+                <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
+                Make sure your settings match these.
                 </p>
+                <img
+                  src={part2step3Image}
+                  alt="Step 3 screenshot"
+                  style={{
+                    width: "60%",
+                    height: "400px",
+                    objectFit: "fill",
+                    borderRadius: "0.5rem",
+                    marginBottom: "1.5rem",
+                    marginLeft: "16%",
+                  }}
+                />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 4
                 </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-                Login from the Online tab and click on the Play icon in the top bar. Note: You may have to login twice for this to work.
-              </p>
+                <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
+                Click on the connect icon on the top bar in <strong>QModMaster</strong>.
+                </p>
+                <img
+                  src={part2step4Image}
+                  alt="Step 4 screenshot"
+                  style={{
+                    width: "70%",
+                    height: "400px",
+                    objectFit: "fill",
+                    borderRadius: "0.5rem",
+                    marginBottom: "1.5rem",
+                    marginLeft: "11%",
+                  }}
+                />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 5
                 </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-              Once you run it, it’ll open the application in a demo mode. Press <strong>Alt+F4</strong> to <strong>quit the demo mode</strong>.
-              </p>
+                <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
+                Make sure both software are connected by checking the connected number on the left 
+                top corner of the <strong>ModRSsim2</strong> software. Once it shows (1/10) connected, both of them 
+                can talk to each other and we can proceed to the assignment.
+                </p>
+                <img
+                  src={part2step5Image}
+                  alt="Step 5 screenshot"
+                  style={{
+                    width: "90%",
+                    height: "200px",
+                    objectFit: "fill",
+                    borderRadius: "0.5rem",
+                    marginBottom: "1.5rem",
+                    marginLeft: "5%",
+                  }}
+                />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 6
                 </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-              Open your preferred browser and go to <strong style={{ color: "var(--custom-blue)" }}>http://127.0.0.1:8080</strong> you may note 
-              that the url automatically changes to <strong style={{ color: "var(--custom-blue)" }}>http://127.0.0.1:8080/nyu_ot_security.htm</strong> once the simulation opens.
-              </p>
+                <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
+                Press the scan button on the top bar in <strong>QModMaster</strong>.
+                </p>
+                <img
+                  src={part2step6Image}
+                  alt="Step 6 screenshot"
+                  style={{
+                    width: "65%",
+                    height: "400px",
+                    objectFit: "fill",
+                    borderRadius: "0.5rem",
+                    marginBottom: "1.5rem",
+                    marginLeft: "15%",
+                  }}
+                />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 7
                 </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
+                The top bar of ModRSsim2 shows packets being sent and received - showing both the server and client are talking to each other. 
+                </p>
+                <img
+                  src={part2step7Image}
+                  alt="Step 7 screenshot"
+                  style={{
+                    width: "95%",
+                    height: "200px",
+                    objectFit: "fill",
+                    borderRadius: "0.5rem",
+                    marginBottom: "1.5rem",
+                    marginLeft: "2%",
+                  }}
+                />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 8
+                </h4>
+                <ul style={{ fontSize: "1.1rem", marginBottom: "1rem", paddingLeft: "1.5rem", maxWidth: "800px" }}>
+                  <li>
+                    Make changes in the register via <strong>ModRSsim2</strong> and see if the changes are reflected in <strong>QModMaster</strong>.
+                  </li>
+                  <li>
+                    Change the settings in <strong>QModMaster</strong> to Read holding register so that you can track the changes in the holding register.
+                  </li>
+                  <li>
+                    Do the vice-versa: make changes through <strong>QModMaster</strong> and read through <strong>ModRSsim2</strong> to see if the changes are reflected. 
+                    <strong> Hint:</strong> You may need to stop the scan and change settings such as the Function Code to do this.
+                  </li>
+                </ul>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 9
+                </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "0rem"}}>
-              Your first task for this lab is to open settings and <strong>change the URL to your name</strong> instead of <strong>nyu_ot_security</strong>.
-              </p>
+                Using your knowledge acquired from working with the model, write a report highlighting:
+                <ul style={{ fontSize: "1.1rem", marginBottom: "1rem", paddingLeft: "1.5rem", maxWidth: "800px" }}>
+                  <li>
+                    Change the holding register values at address 400041-400050 to any integer value in ModRSsim2 and show how the changes are reflected in QModMaster.
+                  </li>
+                  <li>
+                    Change the value of the 400016th address from QModMaster and show how it is reflected in ModRSsim2.
+                  </li>
+                </ul>
+                </p>
               </section>
               <hr
                 style={{
@@ -173,50 +358,38 @@ const Lab4Page = () => {
               />
 
               <section style={{ paddingBottom: "5rem" }}>
-                <h4 style={{ fontWeight: "bold" }}>
-                  PART II
+                <h4 style={{ fontWeight: "bold",
+                          display: "inline-block",
+                          borderBottom: "2px solid var(--custom-blue)",
+                          paddingBottom: "0.2rem" }}>
+                  PART III
                 </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
-                Follow the steps below to complete the lab 3 activities. It will take approximately <strong>30-50 minutes</strong> to complete. 
+                <p style={{ fontSize: "1.1rem", marginBottom: "0rem"}}>
+                Let's perform the tasks above using Wireshark. It will take approximately <strong>30-60 minutes</strong> to complete. 
                 </p>
-                <h4 style={{ fontWeight: "bold" }}>
-                  STEP 1
-                </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-                You will create a complete HMI of the system. Be creative and make sure you are 
-                monitoring all the critical variables of the system. You should also include some 
-                commands on your interface to interact with the code in real-time such as <strong>"start/stop the PLC"</strong> and <strong>"change the setpoint to a different value"</strong>. 
-                </p>
-                <h4 style={{ fontWeight: "bold" }}>
-                  STEP 2
+                <h4 style={{ fontWeight: "bold",marginTop: "1.0rem" }}>
+                  STEPS
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
-                Using your knowledge acquired from the lab, write a report highlighting:
-                <br /><br />
-                  <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
-                    <li>
-                    Steps taken to create and program a button to start and stop the PLC when pressed.  
-                    Hint:  You may need to change code to disable the testing loop at startup.
-                    </li>
-                    <li>
-                    Steps taken to create and program a button to alter the value of setpoint to a different 
-                    value. You can decide the value on your own.  Hint:  Instead of a button you might 
-                    use another control that can display and control the value.
-                    </li>
-                    <li>
-                    Screenshots of the final result (from Part I and Part II) as well as the code are needed in the report.
-                    </li>
-                  </ul>
-                Hint: Watch{" "}
+                Open Wireshark and complete the following tasks. If you are new to Wireshark,{" "}
                 <a
-                href="https://www.youtube.com/watch?v=9PjPJDvVbgU" // Replace with actual URL
+                href="https://www.youtube.com/watch?v=lb1Dw0elw0Q" // Replace with actual URL
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                this video tutorial
+               click here to watch this tutorial. 
                 </a>
-                {" "}if you need some help.
+                {" "}All the tasks should be included in the report:
+                  <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                    <li>
+                    Repeat the steps done in Part II, but with Wireshark open and find the packets used in that communication. 
+                    Specify the protocol used, the transaction identifier, and the reference number for each of them.
+                    </li>
+                    <li>
+                    All of the steps followed and the screenshots of the end results should be compiled in a detailed lab report. 
+                    </li>
+                  </ul>
                 </p>
               </section>
             </div>

@@ -73,7 +73,10 @@ const Lab1Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",
+                  display: "inline-block",
+                  borderBottom: "2px solid var(--custom-blue)",
+                  paddingBottom: "0.2rem" }}>
                   PART I
                 </h4>
 
@@ -88,7 +91,10 @@ const Lab1Page = () => {
                 </a>{""}
                 . Arrange <strong>20–40 minutes</strong> to read it before moving on to Part II.
                 </p>
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",
+                display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
                   PART II
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
@@ -104,7 +110,10 @@ const Lab1Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
+                <h4 style={{ fontWeight: "bold",
+                display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
                 SET UP
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
