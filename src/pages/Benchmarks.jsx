@@ -1,10 +1,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Card, Row, Col } from "react-bootstrap";
+import { Container} from "react-bootstrap";
 
 // Components
-import BackToTop from "../components/BackToTop";
+// import BackToTop from "../components/BackToTop";
 import Title from "../components/Title";
 
 // Utils
@@ -61,6 +61,9 @@ import datasets from "../components/datasets";
 
 
 function Benchmarks() {
+    React.useEffect(() => {
+    updateTitle("benchmarks | OTSec-Hub.io");
+  }, []);
   return (
     <div>
       <Container className="text-center my-5">
