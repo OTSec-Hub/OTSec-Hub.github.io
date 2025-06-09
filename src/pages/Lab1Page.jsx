@@ -218,12 +218,15 @@ const Lab1Page = () => {
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
                 Using your knowledge acquired from reading the research paper, and playing around with the model (changing values and seeing their impact), write a brief report (maximum 3 pages) highlighting:
-                </p>
                 <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
                   <li>The key things you understood from the lab </li>
                   <li>The various factors affecting the output of the simulation.</li>
                   <li>Screenshots showing the above.</li>
                 </ul>
+                </p>
+                <p style={{ color: "var(--custom-blue)", fontSize: "1.1rem" }}>
+                  Submit your lab report to: mm6446@nyu.edu
+                </p>
                 {/*ask where to say submit report to*/}
               </section>
             </div>

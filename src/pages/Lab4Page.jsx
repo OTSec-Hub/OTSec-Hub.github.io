@@ -391,6 +391,9 @@ const Lab4Page = () => {
                     </li>
                   </ul>
                 </p>
+                <p style={{ color: "var(--custom-blue)", fontSize: "1.1rem" }}>
+                  Submit your lab report to: mm6446@nyu.edu
+                </p>
               </section>
             </div>
           </div>
