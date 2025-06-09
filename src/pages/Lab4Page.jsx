@@ -19,7 +19,7 @@ const Lab4Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 4:" />
+          <Title size="h2" text="Lab 4" />
         </Container>
 
         <Container>
@@ -42,10 +42,32 @@ const Lab4Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong>LAB 4: ... </strong> 
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 4 </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
-                  🎯 <strong style={{ color: "var(--custom-blue)" }}>Objective:</strong>
+                The goal of this assignment is to better understand <strong style={{ color: "var(--custom-blue)" }}>SCADA</strong> and <strong style={{ color: "var(--custom-blue)" }}>industrial control 
+                protocols like Modbus</strong>. Students will gain firsthand experience in identifying and 
+                learning how a host (client) and a server interact, and how this interaction works.
+                  <br /><br />
+                  This assignment is broken into three parts:
+                  <br /><br />
+                  <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                    <li>
+                      <strong style={{ color: "var(--custom-blue)" }}>Part I: </strong>
+                      You are tasked to get familiar with QModMaster and to go over the manual and understand what the Modbus protocol 
+                      is and how it works. Refer to Step 1 in Part I to see how to open the QModMaster manual for information on the Modbus protocol.
+                    </li>
+                    <li>
+                      <strong style={{ color: "var(--custom-blue)" }}>Part II: </strong>
+                      You are tasked to observe how this communication works with Modbus protocol and play around with the interface. 
+                      You will see if the changes done in either the client or the server are reflected in the other.
+                    </li>
+                    <li>
+                      <strong style={{ color: "var(--custom-blue)" }}>Part III: </strong>
+                      Open Wireshark and try to capture the packets that were used for communication.
+                    </li>
+                  </ul>
+                  Both Parts II and III should be included in the lab report.
                 </p>                
               </section>
               <hr
@@ -58,59 +80,29 @@ const Lab4Page = () => {
               />
               <section className="mt-4">
                 <h4 style={{ fontWeight: "bold" }}>
-                  🛠️ SETUP INSTRUCTIONS
+                SET UP
                 </h4>
-
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Install Wireshark: </strong>
-                </p>
-                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Download Wireshark
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallWinInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Windows Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallOSXInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      macOS Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/#download" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Linux Installation Guide
-                    </a>
-                  </li>
-                </ul>*/}
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Download Lab Materials: </strong>
-                </p>
-{/*                <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
-                  download
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                CODESYS installation instructions:{" "}
+                <a
+                href="/labMaterials/lab3-Materials/Lab 3 CODESYS install v2.pdf" // Replace with actual URL
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                  📦 Download lab1.zip
-                </a>*/}
-{/*                <p style={{ color: "#666666", fontSize: "0.9rem", marginTop: "0.5rem",maxWidth: "600px"}}>
-                  <strong>Note:</strong> Packet capture files are named generically (e.g., attack1, attack2, attack3). Your task is to match each capture to the correct attack type.
-                </p>*/}
+                Lab 3 CODESYS install v2.pdf
+                </a>
+                <br />
+                Download the Lab 3 folder:{" "}
+                <a
+                href="/labMaterials/lab3-Materials/LAB 3-20210723T184103Z-001.zip" // Replace with actual URL
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+                >
+                LAB 3-20210723T184103Z-001.zip
+                </a>
+                </p>
               </section>
               <hr
                 style={{
@@ -122,25 +114,54 @@ const Lab4Page = () => {
               />
               <section className="mt-4">
                 <h4 style={{ fontWeight: "bold" }}>
-                  🎥 TUTORIAL RESOURCES
+                  PART I
                 </h4>
-{/*                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.youtube.com/watch?v=txi2p5_OjKU" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Modbus Protocol Basics (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=MtI72wz4f5Y" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      WannaCry Ransomware Explained (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=3t1BNAavrlQ" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Malware Traffic Analysis Using Wireshark (YouTube)
-                    </a>
-                  </li>
-                </ul>*/}
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Arrange <strong>10-20 minutes</strong> to complete Part I. 
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 1
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Open <strong>Codesys</strong>, and open project from LAB 3\Control System/ and select the file <strong>Desalination Cascade Control_HMI</strong>.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 2
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Click on Visualization on the left menu and play around with properties on the right.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 3
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Start the PLC from the <strong>“Codesys Control Win sysTray”</strong> presented in the System tray (hidden icons) at the bottom right of your windows. 
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 4
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Login from the Online tab and click on the Play icon in the top bar. Note: You may have to login twice for this to work.
+              </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 5
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+              Once you run it, it’ll open the application in a demo mode. Press <strong>Alt+F4</strong> to <strong>quit the demo mode</strong>.
+              </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 6
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+              Open your preferred browser and go to <strong style={{ color: "var(--custom-blue)" }}>http://127.0.0.1:8080</strong> you may note 
+              that the url automatically changes to <strong style={{ color: "var(--custom-blue)" }}>http://127.0.0.1:8080/nyu_ot_security.htm</strong> once the simulation opens.
+              </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 7
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "0rem"}}>
+              Your first task for this lab is to open settings and <strong>change the URL to your name</strong> instead of <strong>nyu_ot_security</strong>.
+              </p>
               </section>
               <hr
                 style={{
@@ -150,56 +171,53 @@ const Lab4Page = () => {
                   width: "95%",
                 }}
               />
+
               <section style={{ paddingBottom: "5rem" }}>
                 <h4 style={{ fontWeight: "bold" }}>
-                  📋 ASSIGNMENT INSTRUCTIONS
+                  PART II
                 </h4>
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Analyze Any Two Packet Captures: </strong>
-                </p>*/}
-{/*                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  🧩 Packet captures included in the Lab (types you should identify):
-                </p>*/}
-{/*                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>Malformed Modbus Packet</li>
-                  <li>WannaCry SMB Exploit</li>
-                  <li>Reprogram Modbus PLC</li>
-                  <li>Base Training Capture</li>
-                  <li>Start/Stop and Upload Action</li>
-                </ul>*/}
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Prepare a Report: </strong>
-                </p>*/}
-{/*                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  For each analyzed capture, include:
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Follow the steps below to complete the lab 3 activities. It will take approximately <strong>30-50 minutes</strong> to complete. 
                 </p>
-                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>🗂️ File Name</li>
-                  <li>🖼️ Analysis (with screenshots)</li>
-                  <li>🧠 Conclusion and reasoning for identification</li>
-                </ul>*/}
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>3. Reference Sample: </strong>
-                </p>*/}
-{/*                <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
-                  download
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 1
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                You will create a complete HMI of the system. Be creative and make sure you are 
+                monitoring all the critical variables of the system. You should also include some 
+                commands on your interface to interact with the code in real-time such as <strong>"start/stop the PLC"</strong> and <strong>"change the setpoint to a different value"</strong>. 
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 2
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "rem"}}>
+                Using your knowledge acquired from the lab, write a report highlighting:
+                <br /><br />
+                  <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                    <li>
+                    Steps taken to create and program a button to start and stop the PLC when pressed.  
+                    Hint:  You may need to change code to disable the testing loop at startup.
+                    </li>
+                    <li>
+                    Steps taken to create and program a button to alter the value of setpoint to a different 
+                    value. You can decide the value on your own.  Hint:  Instead of a button you might 
+                    use another control that can display and control the value.
+                    </li>
+                    <li>
+                    Screenshots of the final result (from Part I and Part II) as well as the code are needed in the report.
+                    </li>
+                  </ul>
+                Hint: Watch{" "}
+                <a
+                href="https://www.youtube.com/watch?v=9PjPJDvVbgU" // Replace with actual URL
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                  📄 View sample analysis (PDF)
-                </a>*/}
+                this video tutorial
+                </a>
+                {" "}if you need some help.
+                </p>
               </section>
             </div>
           </div>

@@ -15,6 +15,8 @@ import part1step5Image from "../images/lab2_Items/part1-step5.png"
 import part2step2Image from "../images/lab2_Items/part2-step2.png"
 import part2step3Image from "../images/lab2_Items/part2-step3.png"
 import part2step4Image from "../images/lab2_Items/part2-step4.png"
+import part2step6Image from "../images/lab2_Items/part2-step6.png"
+import part2step7Image from "../images/lab2_Items/part2-step7.png"
 
 const Lab2Page = () => {
   React.useEffect(() => {
@@ -292,6 +294,18 @@ const Lab2Page = () => {
                 Double click on the <strong>TestBench(FB)</strong> to open it in a tab. Delete <strong>PLC_PRG</strong> from the application and main 
                 task if it exists, and drag-and-drop mainTB to main task for execution. (Look at the following image for reference)
                 </p>
+              <img
+                src={part2step6Image}
+                alt="Step 6 screenshot"
+                style={{
+                  width: "80%",
+                  height: "450px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 7
                 </h4>
@@ -309,6 +323,18 @@ const Lab2Page = () => {
                 </a>
                 {/*need an updated link for the referal link*/}
                 </p>
+              <img
+                src={part2step7Image}
+                alt="Step 7 screenshot"
+                style={{
+                  width: "70%",
+                  height: "200px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "11%",
+                }}
+              />
                 <h4 style={{ fontWeight: "bold" }}>
                   STEP 8
                 </h4>
