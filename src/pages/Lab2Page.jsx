@@ -9,6 +9,12 @@ import { updateTitle } from "../utils";
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
 import image from "../images/lab2pic.webp";
+import part1step2Image from "../images/lab2_Items/part1-step2.png"
+import part1step4Image from "../images/lab2_Items/part1-step4.png"
+import part1step5Image from "../images/lab2_Items/part1-step5.png"
+import part2step2Image from "../images/lab2_Items/part2-step2.png"
+import part2step3Image from "../images/lab2_Items/part2-step3.png"
+import part2step4Image from "../images/lab2_Items/part2-step4.png"
 
 const Lab2Page = () => {
   React.useEffect(() => {
@@ -19,7 +25,7 @@ const Lab2Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 2:" />
+          <Title size="h2" text="Lab 2" />
         </Container>
 
         <Container>
@@ -42,10 +48,24 @@ const Lab2Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong>LAB 2: ... </strong> 
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 2 </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
-                  🎯 <strong style={{ color: "var(--custom-blue)" }}>Objective:</strong>
+                The goal of this assignment is to better understand an <strong style={{ color: "var(--custom-blue)" }}>industrial control system (ICS)</strong> and gain hands-on experience with <strong style={{ color: "var(--custom-blue)" }}>Codesys</strong>. 
+                Codesys is a development environment for programming controller applications. The same water desalination process used in lab 1 
+                will be demonstrated in this lab.
+                  <br /><br />
+                  This assignment is broken into two parts:
+                  <br /><br />
+                <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                  <li> <strong style={{ color: "var(--custom-blue)" }}>Part I: </strong>You will open the <strong style={{ color: "var(--custom-blue)" }}>Lab 2 file (MSFcascade)</strong> and generate <strong style={{ color: "var(--custom-blue)" }}>PLC code for the subsystem </strong>
+                  at the bottom of the PLC. This results in creation of a file which can be imported into Codesys and worked on.
+                  </li>
+                  <li> <strong style={{ color: "var(--custom-blue)" }}>Part II: </strong>Import the PLC code generated in <strong style={{ color: "var(--custom-blue)" }}>Part I </strong>and execute it. You will learn about PLC code 
+                  generation, importing it into Codesys, and running it as well as altering the code and seeing the changes in the emulation. This assignment requires students 
+                  to answer some questions on Brightspace and submit a write-up. Reports will be due for the second part of this project.
+                  </li>
+                </ul>
                 </p>                
               </section>
               <hr
@@ -58,59 +78,25 @@ const Lab2Page = () => {
               />
               <section className="mt-4">
                 <h4 style={{ fontWeight: "bold" }}>
-                  🛠️ SETUP INSTRUCTIONS
+                SET UP
                 </h4>
-
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Install Wireshark: </strong>
-                </p>
-                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Download Wireshark
-                    </a>
+                <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
+                <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                  <li> In addition to Matlab, which you already used for the previous assignment, you will need to download and use <strong style={{ color: "var(--custom-blue)" }}>Codesys</strong>. The other files required are provided in the Lab 2 folder.
                   </li>
                   <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallWinInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Windows Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallOSXInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      macOS Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/#download" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Linux Installation Guide
-                    </a>
-                  </li>
-                </ul>*/}
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Download Lab Materials: </strong>
-                </p>
-{/*                <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
-                  download
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
+                  Download the Lab 2 folder and unzip it:{" "}
+                  <a
+                  href="/labMaterials/lab2-Materials/LAB 2-20210723T184048Z-001.zip" // Replace with actual URL
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                  📦 Download lab1.zip
-                </a>*/}
-{/*                <p style={{ color: "#666666", fontSize: "0.9rem", marginTop: "0.5rem",maxWidth: "600px"}}>
-                  <strong>Note:</strong> Packet capture files are named generically (e.g., attack1, attack2, attack3). Your task is to match each capture to the correct attack type.
-                </p>*/}
+                 LAB 2-20210723T184048Z-001.zip
+                </a>
+                  </li>
+                </ul>
+                </p>                 
               </section>
               <hr
                 style={{
@@ -122,25 +108,11 @@ const Lab2Page = () => {
               />
               <section className="mt-4">
                 <h4 style={{ fontWeight: "bold" }}>
-                  🎥 TUTORIAL RESOURCES
+                  PART I
                 </h4>
-{/*                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.youtube.com/watch?v=txi2p5_OjKU" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Modbus Protocol Basics (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=MtI72wz4f5Y" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      WannaCry Ransomware Explained (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=3t1BNAavrlQ" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Malware Traffic Analysis Using Wireshark (YouTube)
-                    </a>
-                  </li>
-                </ul>*/}
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Follow the steps below to generate PLC code for the subsystem. It should take you <strong>10-20 minutes</strong> to complete (estimated time excluding software download). 
+                </p>
               </section>
               <hr
                 style={{
@@ -150,56 +122,254 @@ const Lab2Page = () => {
                   width: "95%",
                 }}
               />
-              <section style={{ paddingBottom: "5rem" }}>
+              <section style={{ paddingBottom: "0.25rem" }}>
                 <h4 style={{ fontWeight: "bold" }}>
-                  📋 ASSIGNMENT INSTRUCTIONS
+                  STEP 1
                 </h4>
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Analyze Any Two Packet Captures: </strong>
-                </p>*/}
-{/*                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  🧩 Packet captures included in the Lab (types you should identify):
-                </p>*/}
-{/*                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>Malformed Modbus Packet</li>
-                  <li>WannaCry SMB Exploit</li>
-                  <li>Reprogram Modbus PLC</li>
-                  <li>Base Training Capture</li>
-                  <li>Start/Stop and Upload Action</li>
-                </ul>*/}
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Prepare a Report: </strong>
-                </p>*/}
-{/*                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  For each analyzed capture, include:
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Go to <strong>LAB 2/Simulation/msf-thermal-desalination-plant-PLC</strong> and open the file <strong>MSFcascade (Simulink Model)</strong>. 
                 </p>
-                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>🗂️ File Name</li>
-                  <li>🖼️ Analysis (with screenshots)</li>
-                  <li>🧠 Conclusion and reasoning for identification</li>
-                </ul>*/}
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>3. Reference Sample: </strong>
-                </p>*/}
-{/*                <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
-                  download
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 2
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Go to <strong>Model Settings</strong> under the <strong>Modelling tab</strong>.  Make sure the Target IDE is set to <strong>“3S CoDeSys 3.5”</strong>.  The Target IDE path should point to the directory that your 
+                Codesys application is installed within, the default is C:\Program Files (x86)\CODESYS 3.5.17.0.  Lastly, make sure that <strong>“Generate testbench for subsystem”</strong> and 
+                <strong>“Include testbench diagnostic code”</strong> are checked. Then click “Apply.” 
+                </p>
+              <img
+                src={part1step2Image}
+                alt="Step 2 screenshot"
+                style={{
+                  width: "80%",
+                  height: "400px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 3
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Click on Apps and PLC Coder to bring out the PLC Code tab at the top.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 4
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Make sure the <strong>control system at the bottom</strong> of the model is <strong>selected</strong> and click on Generate <strong>PLC Code</strong> at the top under the PLC Code tab. 
+                </p>
+              <img
+                src={part1step4Image}
+                alt="Step 4 screenshot"
+                style={{
+                  width: "80%",
+                  height: "425px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 5
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Your model should look like the image below. If there’s an error while generating the code, delete <strong>plcsrc (in the folder you are working on)</strong> and follow the above steps again. 
+                If the error persists, use the plcsrc provided in the <strong>Codesys folder inside Lab 2</strong> for further steps in Part II.
+                </p>
+              <img
+                src={part1step5Image}
+                alt="Step 5 screenshot"
+                style={{
+                  width: "80%",
+                  height: "435px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
+              </section>
+                <hr
+                style={{
+                  borderTop: "3px solid var(--custom-blue)",
+                  opacity: 0.4,
+                  margin: "1.5rem 0",
+                  width: "95%",
+                }}
+              />
+              <section className="mt-4">
+                <h4 style={{ fontWeight: "bold" }}>
+                  PART II
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Follow the steps below to complete the lab 2 activities. It will take approximately <strong>30-50 minutes</strong> to complete. 
+                </p>
+              </section>
+              <hr
+                style={{
+                  borderTop: "3px solid var(--custom-blue)",
+                  opacity: 0.4,
+                  margin: "1.5rem 0",
+                  width: "95%",
+                }}
+              />
+              <section style={{ paddingBottom: "1rem" }}>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 1
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Open Codesys and start a new project. Select <strong>“standard project”</strong> and create a folder named <strong>“Solution” in Lab 2 folder</strong> to start the project in that.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 2
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Make sure <strong>PLC_PRG</strong> is set to <strong>Structured Text</strong>.  
+                </p>
+              <img
+                src={part2step2Image}
+                alt="Step 2 screenshot"
+                style={{
+                  width: "80%",
+                  height: "325px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 3
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                In the left panel "Devices", click on "Application" to select it.  Go to <strong>“Project”</strong> in the top bar and select <strong>import PLCcodeXML</strong>. 
+                Open <strong>Lab 2/Codesys/plcscr/MSFcascade.xml</strong> and import all the objects. 
+                </p>
+                <img
+                  src={part2step3Image}
+                  alt="Step 3 screenshot"
                   style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
+                    width: "50%",
+                    height: "600px",
+                    objectFit: "fill",
+                    borderRadius: "0.5rem",
+                    marginBottom: "1.5rem",
+                    marginLeft: "17%",
                   }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
+                />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 4
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Make sure that the objects on the left look like this after you are done importing them.
+                </p>
+                <img
+                  src={part2step4Image}
+                  alt="Step 4 screenshot"
+                  style={{
+                    width: "50%",
+                    height: "450px",
+                    objectFit: "fill",
+                    borderRadius: "0.5rem",
+                    marginBottom: "1.5rem",
+                    marginLeft: "17%",
+                  }}
+                />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 5
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                <strong>NOTE: If you cannot find the objects i.e. TestBench, MainTB and Control, use the Codesys project provided in Lab2/Codesys/Control System, which is already set up for you. </strong>
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 6
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Double click on the <strong>TestBench(FB)</strong> to open it in a tab. Delete <strong>PLC_PRG</strong> from the application and main 
+                task if it exists, and drag-and-drop mainTB to main task for execution. (Look at the following image for reference)
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 7
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Start Plc from the <strong>“Codesys Control Win sysTray”</strong> present in the <strong>System tray (hidden icons)</strong> at the bottom right of your windows.
+                <br /><br />
+                If some issues arise during this,{" "}
+                  <a
+                  href="https://www.helpme-codesys.com/help-sp17-lower.html" // Replace with actual URL
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                  📄 View sample analysis (PDF)
-                </a>*/}
+                 please refer to the FAS's here.
+                </a>
+                {/*need an updated link for the referal link*/}
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 8
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Double click on Device to open the configuration. Click on <strong>Scan Network</strong> at the top.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 9
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Click on your device prompted on the scan network screen.  If you do not see a device in the listing, uncheck the box labeled 
+                "Hide non-matching devices, filter by Target ID".  If you have to uncheck this box you will need to upgrade the device in the list.  
+                Do this by double-clicking the device in the list and clicking "Yes" in the next dialog box, you will return to the beginning of this 
+                step and should now be able to select the upgraded device.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 10
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                You will be prompted to add a device user. Input the credentials you desire. Username as <strong>“admin”</strong> and password as <strong>“admin”</strong> should work.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 11
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Once you set the credentials, you should be prompted to login automatically. If not, then go to Online from the top bar and login. 
+                If it asks you to set up an active path, click ok. Download the latest version when prompted,  Run the testbench using the play button 
+                on the top. (Make sure you are on the TestBench tab).   If the play button is grayed out you need to login.  When you click play the 
+                emulation should run and you should see changes on the testbench tab.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 12
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Wait for the testbench to cross 2000. Answer the questions on Brightspace based on the values observed.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 13
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Click to answer the questions on Brightspace based on the values observed.
+                <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                  <li> Questions: Lab 2 - Knowledge Checks
+                  </li>
+                </ul>
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 14
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Using your knowledge acquired from playing around with the model, write a brief report (<strong>maximum 3 pages</strong>) addressing:
+                <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                  <li>
+                  Alter the code to find the value of Ws when the test cycle number is 1000 and 1500? Specify in the report the values and how you got them. 
+                  </li>
+                  <li>
+                  Identify the connection between the two softwares used for this lab and how do they interact with each other. If you make certain changes in 
+                  Simulink model before converting it into a PLC, will those changes be reflected in Codesys? If Yes, make some changes and show how they are reflected. 
+                  </li>
+                </ul>
+                </p>
               </section>
             </div>
           </div>

@@ -9,6 +9,9 @@ import { updateTitle } from "../utils";
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
 import image from "../images/lab1pic.webp";
+import step2Image from "../images/lab1_Items/lab1-step2.png"
+import step3Image from "../images/lab1_Items/lab1-step3.png"
+import step4Image from "../images/lab1_Items/lab1-step4.png"
 
 const Lab1Page = () => {
   React.useEffect(() => {
@@ -19,7 +22,7 @@ const Lab1Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 1: Wireshark" />
+          <Title size="h2" text="Lab 1" />
         </Container>
 
         <Container>
@@ -29,7 +32,7 @@ const Lab1Page = () => {
               {/* Image Placeholder */}
               <img
                 src={image}
-                alt="Lab 1 Wireshark Screenshot"
+                alt="Lab 1"
                 style={{
                   width: "80%",
                   height: "300px",
@@ -42,10 +45,23 @@ const Lab1Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong>LAB 1: NETWORK TRAFFIC ANALYSIS WITH WIRESHARK </strong> 
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 1 </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
-                  🎯 <strong style={{ color: "var(--custom-blue)" }}>Objective:</strong> Analyze network captures to identify OT security attacks using Wireshark. Packet captures are provided inside a compressed archive (.zip).
+                  The goal of this assignment is to gain a better understanding of what an <strong style={{ color: "var(--custom-blue)" }}>industrial process</strong> is
+                  and gain hands-on experience with <strong style={{ color: "var(--custom-blue)" }}>Matlab</strong> and <strong style={{ color: "var(--custom-blue)" }}>Simulink</strong>. These tools 
+                  are typically used to simulate industrial processes. A water desalination will be demonstrated in this lab. 
+                  <br /><br />
+                  This assignment is broken into two parts:
+                  <br /><br />
+                <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                  <li> <strong style={{ color: "var(--custom-blue)" }}>Part I: </strong>you are tasked to go over a <strong style={{ color: "var(--custom-blue)" }}>research paper </strong> describing the <strong style={{ color: "var(--custom-blue)" }}>desalination process </strong>and summarize your findings. 
+                  Going over the paper is essential as it provides details of the various processes you will be interacting with in the lab.  The lab report summary should include a discussion of the paper that covers threats, 
+                  attack surfaces, and specific attacks with impacts to performance and mechanical/physical systems.</li>
+                  <li> <strong style={{ color: "var(--custom-blue)" }}>Part II: </strong>you will perform a simulation of parts of the desalination process. You will learn what <strong style={{ color: "var(--custom-blue)" }}>input (sensors)</strong>, <strong style={{ color: "var(--custom-blue)" }}>outputs (actuators)</strong>, and <strong style={{ color: "var(--custom-blue)" }}>control (cascade PID loop) </strong>
+                  are. You will familiarize yourself with the simulation environment and experiment with different values on which the output of the desalination process depends. These values should be specified in the report for this project. This assignment requires you to answer some questions on Brightspace and submit a write-up.</li>
+                </ul>
+                Both Part I and Part II should be documented in your lab report. 
                 </p>                
               </section>
               <hr
@@ -58,58 +74,25 @@ const Lab1Page = () => {
               />
               <section className="mt-4">
                 <h4 style={{ fontWeight: "bold" }}>
-                  🛠️ SETUP INSTRUCTIONS
+                  PART I
                 </h4>
 
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Install Wireshark: </strong>
-                </p>
-                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Download Wireshark
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallWinInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Windows Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallOSXInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      macOS Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/#download" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Linux Installation Guide
-                    </a>
-                  </li>
-                </ul>
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Download Lab Materials: </strong>
-                </p>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
                 <a
-                  href="/labMaterials/LAB1.zip"  // replace with your actual ZIP file path
-                  download
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
+                  href="/labMaterials/lab1-Materials/AsiaCCS-19.pdf" // Replace with actual URL
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                  📦 Download lab1.zip
-                </a>
-                <p style={{ color: "#666666", fontSize: "0.9rem", marginTop: "0.5rem",maxWidth: "600px"}}>
-                  <strong>Note:</strong> Packet capture files are named generically (e.g., attack1, attack2, attack3). Your task is to match each capture to the correct attack type.
+                  Click here to download the research article
+                </a>{""}
+                . Arrange <strong>20–40 minutes</strong> to read it before moving on to Part II.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  PART II
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Follow the steps below to complete the lab 1 activities. It will take approximately <strong>40-80 minutes</strong> to complete. 
                 </p>
               </section>
               <hr
@@ -122,25 +105,14 @@ const Lab1Page = () => {
               />
               <section className="mt-4">
                 <h4 style={{ fontWeight: "bold" }}>
-                  🎥 TUTORIAL RESOURCES
+                SET UP
                 </h4>
-                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.youtube.com/watch?v=txi2p5_OjKU" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Modbus Protocol Basics (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=MtI72wz4f5Y" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      WannaCry Ransomware Explained (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=3t1BNAavrlQ" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Malware Traffic Analysis Using Wireshark (YouTube)
-                    </a>
-                  </li>
-                </ul>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                In order to complete the assignment, you need to use <strong style={{ color: "var(--custom-blue)" }}>MATLAB</strong> and <strong style={{ color: "var(--custom-blue)" }}>Simulink</strong>. If you have not yet done so, 
+                view Lab 0: Installing Course Software for instructions on installing MATLAB and Simulink.
+                <br /><br />
+                *<strong>If you are using a Mac</strong>, you can use <strong>MATLAB online</strong> to complete this lab. Use these instructions for accessing MATLAB online and using Lab 1 files.
+                </p>
               </section>
               <hr
                 style={{
@@ -152,54 +124,98 @@ const Lab1Page = () => {
               />
               <section style={{ paddingBottom: "5rem" }}>
                 <h4 style={{ fontWeight: "bold" }}>
-                  📋 ASSIGNMENT INSTRUCTIONS
+                  STEP 1
                 </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Analyze Any Two Packet Captures: </strong>
-                </p>
-                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  🧩 Packet captures included in the Lab (types you should identify):
-                </p>
-                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>Malformed Modbus Packet</li>
-                  <li>WannaCry SMB Exploit</li>
-                  <li>Reprogram Modbus PLC</li>
-                  <li>Base Training Capture</li>
-                  <li>Start/Stop and Upload Action</li>
-                </ul>
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Prepare a Report: </strong>
-                </p>
-                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  For each analyzed capture, include:
-                </p>
-                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>🗂️ File Name</li>
-                  <li>🖼️ Analysis (with screenshots)</li>
-                  <li>🧠 Conclusion and reasoning for identification</li>
-                </ul>
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>3. Reference Sample: </strong>
-                </p>
-                <a
-                  href="/labMaterials/Lab1_Analysis.pdf"  // replace with your actual ZIP file path
-                  download
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                  Download the Lab 1 folder and unzip it:{" "}
+                  <a
+                  href="/labMaterials/lab1-Materials/LAB 1-20210723T183949Z-001.zip" // Replace with actual URL
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                  📄 View sample analysis (PDF)
+                 LAB 1-20210723T183949Z-001.zip
                 </a>
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 2
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Go to <strong>LAB 1\Simulation\msf-thermal-desalination-plant-LAB</strong> folder in your machine, copy and paste the path to folder in MATLAB and wait for it to initialize. Then open the MSFcascade.mdl file. This can take anywhere from 30 secs to 2 mins. A text is provided at the bottom left to indicate the current state of the program in Matlab.
+                </p>
+              <img
+                src={step2Image}
+                alt="Step 2 screenshot"
+                style={{
+                  width: "80%",
+                  height: "300px",
+                  objectFit: "cover",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 3
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Go to the simulation tab on the top bar, and find the <strong>“Run”</strong> button on it. Press the button to run the simulation and see the results.
+                </p>
+              <img
+                src={step3Image}
+                alt="Step 3 screenshot"
+                style={{
+                  width: "80%",
+                  height: "450px",
+                  objectFit: "cover",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 4
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Change the values of signal selection and observe the changes to the graphs.
+                </p>
+              <img
+                src={step4Image}
+                alt="Step 4 screenshot"
+                style={{
+                  width: "80%",
+                  height: "425px",
+                  objectFit: "fill",
+                  borderRadius: "0.5rem",
+                  marginBottom: "1.5rem",
+                  marginLeft: "5%",
+                }}
+              />
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 5
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Answer the following questions based on the values observed: 
+                {/*ask how to link the questions*/}
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 6
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Recall what you read from the research paper, and play around with the interface and find out the various values that impact the output of the simulation.
+                </p>
+                <h4 style={{ fontWeight: "bold" }}>
+                  STEP 7
+                </h4>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
+                Using your knowledge acquired from reading the research paper, and playing around with the model (changing values and seeing their impact), write a brief report (maximum 3 pages) highlighting:
+                </p>
+                <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
+                  <li>The key things you understood from the lab </li>
+                  <li>The various factors affecting the output of the simulation.</li>
+                  <li>Screenshots showing the above.</li>
+                </ul>
+                {/*ask where to say submit report to*/}
               </section>
             </div>
           </div>
