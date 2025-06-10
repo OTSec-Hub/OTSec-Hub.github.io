@@ -8,7 +8,7 @@ import { updateTitle } from "../utils";
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
-import image from "../images/lab1pic.webp";
+import image from "../images/lab6_Items/lab6.webp";
 import image1 from "../images/lab6_Items/part1-image1.png"
 import image2 from "../images/lab6_Items/step1.png"
 import image3 from "../images/lab6_Items/step1,2.png"
