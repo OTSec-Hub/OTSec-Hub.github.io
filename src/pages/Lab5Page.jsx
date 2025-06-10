@@ -19,7 +19,7 @@ const Lab5Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 5:" />
+          <Title size="h2" text="Lab 5" />
         </Container>
 
         <Container>
@@ -42,10 +42,12 @@ const Lab5Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong>LAB 5: ... </strong> 
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 5 </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
-                  🎯 <strong style={{ color: "var(--custom-blue)" }}>Objective:</strong>
+                  The goal of this assignment is to identify various attacks by <strong style={{ color: "var(--custom-blue)" }}>network capture analysis</strong> through <strong style={{ color: "var(--custom-blue)" }}>Wireshark</strong>. 
+                  Various OT Security attacks were used for this lab and the network packets captured during their execution are 
+                  provided to you in the folder. It will take <strong style={{ color: "var(--custom-blue)" }}>2-3 hours</strong> to complete all the analyses.
                 </p>                
               </section>
               <hr
@@ -57,60 +59,23 @@ const Lab5Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
-                  🛠️ SETUP INSTRUCTIONS
+                <h4 style={{ fontWeight: "bold",  display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
+                SET UP
                 </h4>
-
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Install Wireshark: </strong>
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                In order to complete the assignment, you need to use Wireshark. 
+                All the packet captures and one example can be downloaded from this folder:{" "}
+                    <a
+                      href="/labMaterials/lab5-Materials/LAB5.zip"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+                    >
+                      LAB5.zip
+                    </a>
                 </p>
-                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Download Wireshark
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallWinInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Windows Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChBuildInstallOSXInstall.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      macOS Installation Guide
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.wireshark.org/#download" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Linux Installation Guide
-                    </a>
-                  </li>
-                </ul>*/}
-                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Download Lab Materials: </strong>
-                </p>
-{/*                <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
-                  download
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
-                >
-                  📦 Download lab1.zip
-                </a>*/}
-{/*                <p style={{ color: "#666666", fontSize: "0.9rem", marginTop: "0.5rem",maxWidth: "600px"}}>
-                  <strong>Note:</strong> Packet capture files are named generically (e.g., attack1, attack2, attack3). Your task is to match each capture to the correct attack type.
-                </p>*/}
               </section>
               <hr
                 style={{
@@ -121,26 +86,23 @@ const Lab5Page = () => {
                 }}
               />
               <section className="mt-4">
-                <h4 style={{ fontWeight: "bold" }}>
-                  🎥 TUTORIAL RESOURCES
+                <h4 style={{ fontWeight: "bold",  display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
+                  TUTORIAL
                 </h4>
-{/*                <ul style={{ listStyleType: "none", paddingLeft: 0, fontSize: "1rem" }}>
-                  <li>
-                    👉 <a href="https://www.youtube.com/watch?v=txi2p5_OjKU" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Modbus Protocol Basics (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=MtI72wz4f5Y" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      WannaCry Ransomware Explained (YouTube)
-                    </a>
-                  </li>
-                  <li>
-                    🔹 <a href="https://www.youtube.com/watch?v=3t1BNAavrlQ" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                      Malware Traffic Analysis Using Wireshark (YouTube)
-                    </a>
-                  </li>
-                </ul>*/}
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Check out{" "} 
+                <a
+                  href="https://www.youtube.com/watch?v=3t1BNAavrlQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+                >
+                  this video
+                </a>
+                {" "}to learn how malware traffic analysis can be done in Wireshark.
+                </p>
               </section>
               <hr
                 style={{
@@ -150,56 +112,43 @@ const Lab5Page = () => {
                   width: "95%",
                 }}
               />
+
               <section style={{ paddingBottom: "5rem" }}>
-                <h4 style={{ fontWeight: "bold" }}>
-                  📋 ASSIGNMENT INSTRUCTIONS
+                <h4 style={{ fontWeight: "bold",  display: "inline-block",
+                borderBottom: "2px solid var(--custom-blue)",
+                paddingBottom: "0.2rem" }}>
+                  SUBMISSION
                 </h4>
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>1. Analyze Any Two Packet Captures: </strong>
-                </p>*/}
-{/*                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  🧩 Packet captures included in the Lab (types you should identify):
-                </p>*/}
-{/*                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>Malformed Modbus Packet</li>
-                  <li>WannaCry SMB Exploit</li>
-                  <li>Reprogram Modbus PLC</li>
-                  <li>Base Training Capture</li>
-                  <li>Start/Stop and Upload Action</li>
-                </ul>*/}
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>2. Prepare a Report: </strong>
-                </p>*/}
-{/*                <p style={{ paddingLeft: "1.2rem", fontSize: "1rem", marginBottom: "0.5rem" }}>
-                  For each analyzed capture, include:
-                </p>
-                <ul style={{ fontSize: "1rem", paddingLeft: "2.25rem" }}>
-                  <li>🗂️ File Name</li>
-                  <li>🖼️ Analysis (with screenshots)</li>
-                  <li>🧠 Conclusion and reasoning for identification</li>
-                </ul>*/}
-{/*                <p style={{ fontSize: "1.1rem", marginBottom: "0.5rem"}}>
-                  <strong>3. Reference Sample: </strong>
-                </p>*/}
-{/*                <a
-                  href="/path/to/your-file.zip"  // replace with your actual ZIP file path
-                  download
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1rem",
-                    backgroundColor: "var(--custom-blue)",
-                    color: "#fff",
-                    borderRadius: "0.375rem",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    fontSize: "1rem",
-                    transition: "background-color 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#666666")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "var(--custom-blue)")}
+                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
+                Analyze <strong>any 2 of the packet captures</strong> and submit your findings in the form of a report. In your report, indicate:
+                <br /><br />
+                  <ul>
+                    <li><strong>File Name</strong></li>
+                    <li><strong>Analysis</strong> (with screenshots to support your reasoning)</li>
+                    <li><strong>Conclusion</strong></li>
+                  </ul>
+                The packet captures in the folder include:
+                <br /><br />
+                  <ul>
+                    <li>malformed_modbus_packet</li>
+                    <li>wannacry_smb</li>
+                    <li>reprogram_modbus_plc</li>
+                    <li>base_training</li>
+                    <li>start_stop_and_upload</li>
+                  </ul>
+                  A sample analysis is attached for reference:{" "} 
+                  <a
+                  href="/labMaterials/lab5-Materials/Lab5_Analysis.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
                 >
-                  📄 View sample analysis (PDF)
-                </a>*/}
+                  Lab5_Analysis.pdf
+                </a>
+                </p>
+                  <p style={{ color: "var(--custom-blue)", fontSize: "1.1rem" }}>
+                  Submit your lab report to: mm6446@nyu.edu
+                </p>
               </section>
             </div>
           </div>
