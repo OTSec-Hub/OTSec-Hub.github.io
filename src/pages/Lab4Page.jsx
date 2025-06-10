@@ -8,7 +8,7 @@ import { updateTitle } from "../utils";
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
-import image from "../images/lab1pic.webp";
+import image from "../images/lab4_Items/lab4.webp";
 import part1step1Image from "../images/lab4_Items/part1-step1.png"
 import part2step1Image from "../images/lab4_Items/part2-step1.png"
 import part2step2Image from "../images/lab4_Items/part2-step2.png"
@@ -390,9 +390,6 @@ const Lab4Page = () => {
                     All of the steps followed and the screenshots of the end results should be compiled in a detailed lab report. 
                     </li>
                   </ul>
-                </p>
-                <p style={{ color: "var(--custom-blue)", fontSize: "1.1rem" }}>
-                  Submit your lab report to: mm6446@nyu.edu
                 </p>
               </section>
             </div>

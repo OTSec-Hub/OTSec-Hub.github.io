@@ -358,22 +358,6 @@ const Lab2Page = () => {
                   STEP 12
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
-                Wait for the testbench to cross 2000. Answer the questions on Brightspace based on the values observed.
-                </p>
-                <h4 style={{ fontWeight: "bold" }}>
-                  STEP 13
-                </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
-                Click to answer the questions on Brightspace based on the values observed.
-                <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
-                  <li> Questions: Lab 2 - Knowledge Checks
-                  </li>
-                </ul>
-                </p>
-                <h4 style={{ fontWeight: "bold" }}>
-                  STEP 14
-                </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem", maxWidth: "800px"}}>
                 Using your knowledge acquired from playing around with the model, write a brief report (<strong>maximum 3 pages</strong>) addressing:
                 <ul style={{ fontSize: "1.1rem", paddingLeft: "2.25rem" }}>
                   <li>
@@ -384,9 +368,6 @@ const Lab2Page = () => {
                   Simulink model before converting it into a PLC, will those changes be reflected in Codesys? If Yes, make some changes and show how they are reflected. 
                   </li>
                 </ul>
-                </p>
-                <p style={{ color: "var(--custom-blue)", fontSize: "1.1rem" }}>
-                  Submit your lab report to: mm6446@nyu.edu
                 </p>
               </section>
             </div>

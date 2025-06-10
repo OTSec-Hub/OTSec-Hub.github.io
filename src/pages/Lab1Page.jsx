@@ -204,17 +204,10 @@ const Lab1Page = () => {
                   STEP 5
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
-                Answer the following questions based on the values observed: 
-                {/*ask how to link the questions*/}
-                </p>
-                <h4 style={{ fontWeight: "bold" }}>
-                  STEP 6
-                </h4>
-                <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
                 Recall what you read from the research paper, and play around with the interface and find out the various values that impact the output of the simulation.
                 </p>
                 <h4 style={{ fontWeight: "bold" }}>
-                  STEP 7
+                  STEP 6
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
                 Using your knowledge acquired from reading the research paper, and playing around with the model (changing values and seeing their impact), write a brief report (maximum 3 pages) highlighting:
@@ -224,10 +217,6 @@ const Lab1Page = () => {
                   <li>Screenshots showing the above.</li>
                 </ul>
                 </p>
-                <p style={{ color: "var(--custom-blue)", fontSize: "1.1rem" }}>
-                  Submit your lab report to: mm6446@nyu.edu
-                </p>
-                {/*ask where to say submit report to*/}
               </section>
             </div>
           </div>
