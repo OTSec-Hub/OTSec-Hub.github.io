@@ -17,6 +17,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";
 import IntroductionPage from "./pages/IntroductionPage";
+import Lab0Page from "./pages/Lab0Page";
 import Lab1Page from "./pages/Lab1Page";
 import Lab2Page from "./pages/Lab2Page";
 import Lab3Page from "./pages/Lab3Page";
@@ -115,11 +116,19 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
     const placeholderProjects = [
       {
+        id: "Lab0",
+        homepage: "Lab0",
+        description: "",
+        image: projectImages['lab0.png'],
+        name: "Lab 0: Installing Course Software",
+        url: "Lab0",
+      },
+      {
         id: "Lab1",
         homepage: "Lab1",
-        description: "Analyze network captures to identify OT security attacks using Wireshark.",
+        description: "Lab 1 short description",
         image: projectImages['id_card.png'],
-        name: "Lab 1: Wireshark",
+        name: "Lab 1: ",
         url: "Lab1",
       },
       {
@@ -235,6 +244,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Announcements" element={<Announcements />} />
           <Route path="/Weekly-Discussions" element={<Discussions />} />
           <Route path="/ContactPage" element={<ContactPage />} />
+          <Route path="/All-Labs/Lab0" element={<Lab0Page />} />
           <Route path="/All-Labs/Lab1" element={<Lab1Page />} />
           <Route path="/All-Labs/Lab2" element={<Lab2Page />} />
           <Route path="/All-Labs/Lab3" element={<Lab3Page />} />
