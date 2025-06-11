@@ -24,7 +24,9 @@ import Lab3Page from "./pages/Lab3Page";
 import Lab4Page from "./pages/Lab4Page";
 import Lab5Page from "./pages/Lab5Page";
 import Lab6Page from "./pages/Lab6Page";
+import Exercise001 from "./pages/Exercise-001"
 import Benchmarks from "./pages/Benchmarks"
+import Exercises from "./pages/Exercises"
 import Announcements from "./pages/Announcements";
 import Discussions from "./pages/Discussions";
 import ContactPage from "./pages/ContactPage";
@@ -239,7 +241,9 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route exact path="/" element={<Home />} />
           <Route path="/Resources/All-Labs" element={<AllProjects />} />
           <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
+          <Route path="/Resources/Exercises" element={<Exercises />} />
           <Route path="/Benchmarks/:datasetId" element={<DatasetDetail />} />
+          <Route path="/Exercises/Exercise-001" element={<Exercise001 />} />
           <Route path="/IntroductionPage" element={<IntroductionPage />} />
           <Route path="/Announcements" element={<Announcements />} />
           <Route path="/Weekly-Discussions" element={<Discussions />} />
