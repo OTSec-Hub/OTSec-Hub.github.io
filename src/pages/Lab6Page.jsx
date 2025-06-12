@@ -615,10 +615,7 @@ const Lab6Page = () => {
                 DELIVERABLES
                 </h4>
                 <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
-                1. Complete <span style={{ color:"var(--custom-blue)"}}>Lab 6 Knowledge Checks{" "}</span> 
-                </p>
-                <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
-                2. Create a report describing the following:
+                Create a report describing the following:
                 <ul>
                   <li>From Step 1, capture a screenshot showing both TB0 and Wd monitors in Matlab Simulink.</li>
                   <li>From Step 2, discuss which attack you chose to perform, a screenshot of ICSREF showing the 
