@@ -442,6 +442,77 @@ function scrollToId(id) {
                   Cyber-Specific Activities
                 </h4>
                 <br /><br />
+                <ol>
+                  <li>
+                  What types of cybersecurity policies, plans, and / or protocols does your company have in place to detect, respond to, and recover from a cyberattack?
+                  </li>
+                  <li>
+                  Who would your organization contact internally or externally about the incident?
+                  </li>
+                  <li>
+                  What internal and external messages should be developed? How are they distributed?
+                  </li>
+                  <li>
+                  What are the business implications of the scenario? How are they determined?
+                  </li>
+                  <li>
+                  Would your organization contact customers? If so, how is your firm’s public relations department involved? What role would you have in shaping the messages for customers and media inquiries?
+                  </li>
+                  <li>
+                  At what point is law enforcement contacted?
+                  </li>
+                  <li>
+                  What protocols exist in your firm to address such an event?
+                  <ol type="a">
+                    <li>
+                    Are there detection, prioritization, and response capabilities?
+                    </li>
+                    <li>
+                    Do employees know what constitutes suspicious cybersecurity activities or incidents?
+                    </li>
+                    <li>
+                    Do they know what actions to take when one arises?
+                    </li>
+                  </ol>
+                  </li>
+                  <li>
+                    Would this incident trigger contact with regulators?
+                    <ol type = "a">
+                    <li>
+                    When would your organization make contact?
+                    </li>
+                    </ol>
+                  </li>
+                  <li>
+                    If SCADA or ICS systems are compromised, do you have back up manual procedures for these systems?
+                  </li>
+                  <li>
+                    If SCADA or ICS systems are compromised, what cascading impacts may occur both internally to your facility and externally to other stakeholders / community members?
+                  </li>
+                  <li>
+                    Given the scenario, does your Emergency Action Plan (EAP) include measures for protecting the security of chemicals at your facility?
+                  </li>
+                  <li>
+                    Who is responsible for ensuring the chemical security measures are met?
+                  </li>
+                  <li>
+                    Given the scenario, does your notification to responders include information about the chemicals at your facility?
+                    <ol type = "a">
+                      <li>
+                        Do you maintain a relationship with first responders as to what chemicals are at your facility?
+                      </li>
+                      <li>
+                      Do you know if they are able to adequately respond if an attack at your facility impacts those chemicals?
+                      </li>
+                      <li>
+                      Who else within the first responder community should be notified if the attack impacts those chemicals?
+                      </li>
+                    </ol>
+                  </li>
+                  <li>
+                  Are IT and business continuity planning (BCP) functions coordinated with physical security? Will they collaborate with public relations, human resources, and legal departments?
+                  </li>
+                </ol>
               </section>
             </div>
           </div>

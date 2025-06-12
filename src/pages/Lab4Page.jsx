@@ -157,7 +157,7 @@ const Lab4Page = () => {
                   marginLeft: "9%",
                 }}
               />
-                <h4 style={{ fontWeight: "bold" }}>
+{/*                <h4 style={{ fontWeight: "bold" }}>
                   STEP 2
                 </h4>
                 <p style={{ fontSize: "1.1rem", marginBottom: "1rem"}}>
@@ -167,7 +167,7 @@ const Lab4Page = () => {
                     Questions: Lab 4 - Knowledge Checks
                     </li>
                   </ul>
-                </p>
+                </p>*/}
               </section>
               <hr
                 style={{
