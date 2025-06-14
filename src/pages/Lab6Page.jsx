@@ -34,7 +34,7 @@ const Lab6Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 6" />
+          <Title size="h2" text="Lab 6 - PLC Binary Reverse Engineering" />
         </Container>
 
         <Container>

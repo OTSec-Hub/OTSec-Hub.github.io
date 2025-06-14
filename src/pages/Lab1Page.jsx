@@ -22,7 +22,7 @@ const Lab1Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 1" />
+          <Title size="h2" text="Lab 1 - Industrial process simulation and process-aware attacks" />
         </Container>
 
         <Container>
@@ -45,7 +45,7 @@ const Lab1Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong style={{ color: "var(--custom-blue)" }}>LAB 1 </strong>
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 1</strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
                   The goal of this assignment is to gain a better understanding of what an <strong style={{ color: "var(--custom-blue)" }}>industrial process</strong> is

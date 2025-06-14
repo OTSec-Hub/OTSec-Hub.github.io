@@ -22,7 +22,7 @@ const Lab3Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 3" />
+          <Title size="h2" text="Lab 3 - Human Machine Interface (HMI) development and interfacing" />
         </Container>
 
         <Container>
@@ -45,7 +45,7 @@ const Lab3Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong style={{ color: "var(--custom-blue)" }}>LAB 3 </strong>
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 3: </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
                   The goal of this assignment is to better understand a <strong style={{ color: "var(--custom-blue)" }}>Human Machine Interface (HMI)</strong> and 

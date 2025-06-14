@@ -27,7 +27,7 @@ const Lab4Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 4" />
+          <Title size="h2" text="Lab 4 - Industrial Protocols Programming and Interfacing" />
         </Container>
 
         <Container>

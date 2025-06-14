@@ -18,7 +18,7 @@ const Lab5Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 5" />
+          <Title size="h2" text="Lab 5 - Operational Technology networks analysis" />
         </Container>
 
         <Container>

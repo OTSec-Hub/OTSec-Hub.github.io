@@ -26,7 +26,7 @@ const Lab0Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 0" />
+          <Title size="h2" text="Lab 0 - Installing Course Software" />
         </Container>
 
         <Container>

@@ -27,7 +27,7 @@ const Lab2Page = () => {
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Lab 2" />
+          <Title size="h2" text="Lab 2 - Programmable Logic Controller programming" />
         </Container>
 
         <Container>
@@ -50,7 +50,7 @@ const Lab2Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong style={{ color: "var(--custom-blue)" }}>LAB 2 </strong>
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 2: PROGRAMMABLE LOGIC CONTROLLER PROGRAMMING </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
                 The goal of this assignment is to better understand an <strong style={{ color: "var(--custom-blue)" }}>industrial control system (ICS)</strong> and gain hands-on experience with <strong style={{ color: "var(--custom-blue)" }}>Codesys</strong>. 
