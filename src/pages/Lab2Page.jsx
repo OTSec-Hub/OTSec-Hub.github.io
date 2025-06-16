@@ -369,6 +369,18 @@ const Lab2Page = () => {
                   </li>
                 </ul>
                 </p>
+{/*                <Card>
+                  <CardHeader>Step 3: Generating PLC Code</CardHeader>
+                  <CardContent>
+                    <p>After selecting the subsystem, you should click:</p>
+                    <Question
+                      type="multiple-choice"
+                      question="Where do you click to generate PLC code?"
+                      options={["Apps > Simulation", "PLC Code tab", "Diagnostics Tab", "Project > Build"]}
+                      answer="PLC Code tab"
+                    />
+                  </CardContent>
+                </Card>*/}
               </section>
             </div>
           </div>
