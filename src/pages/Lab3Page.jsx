@@ -5,6 +5,8 @@ import BackToTop from "../components/BackToTop";
 // Utils
 import { updateTitle } from "../utils";
 
+import Quiz from "../components/Quiz";
+
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
@@ -12,6 +14,54 @@ import image from "../images/lab3_Items/lab3.webp";
 import part1step2Image from "../images/lab3_Items/part1-step2.png"
 import part1step3Image from "../images/lab3_Items/part1-step3.png"
 import part1step4Image from "../images/lab3_Items/part1-step4.png"
+
+const lab3QuizQuestions = [
+  {
+    id: 1,
+    question: "What is the main objective of Lab 3?",
+    options: [
+      "To analyze network traffic with Wireshark",
+      "To create and interact with an HMI for a simulated PLC system using Codesys",
+      "To write structured text code for sensors",
+      "To simulate firewall rules on a control system",
+    ],
+    correctAnswer: "To create and interact with an HMI for a simulated PLC system using Codesys",
+  },
+  {
+    id: 2,
+    question: "Where can you access the web-based HMI once the simulation is running?",
+    options: [
+      "http://localhost:3000",
+      "http://192.168.0.1:8080",
+      "http://127.0.0.1:8080",
+      "http://10.0.0.1:5000",
+    ],
+    correctAnswer: "http://127.0.0.1:8080",
+  },
+  {
+    id: 3,
+    question: "What does Part II of Lab 3 require you to add to the HMI?",
+    options: [
+      "A script to compile the PLC code",
+      "Data packet sniffer controls",
+      "Commands to start/stop the PLC and change setpoint values",
+      "Encryption settings for PLC communication",
+    ],
+    correctAnswer: "Commands to start/stop the PLC and change setpoint values",
+  },
+  {
+    id: 4,
+    question: "Which of the following is a required component of your HMI design in Part II?",
+    options: [
+      "Real-time display and control of critical system variables",
+      "A login screen with password encryption",
+      "A dark mode theme switcher",
+      "Network scanning and diagnostics tools",
+    ],
+    correctAnswer: "Real-time display and control of critical system variables",
+  },
+];
+
 
 const Lab3Page = () => {
   React.useEffect(() => {
@@ -45,7 +95,7 @@ const Lab3Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong style={{ color: "var(--custom-blue)" }}>LAB 3: </strong>
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 3 </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
                   The goal of this assignment is to better understand a <strong style={{ color: "var(--custom-blue)" }}>Human Machine Interface (HMI)</strong> and 
@@ -227,7 +277,7 @@ const Lab3Page = () => {
                 }}
               />
 
-              <section style={{ paddingBottom: "5rem" }}>
+              <section style={{ paddingBottom: "0rem" }}>
                 <h4 style={{ fontWeight: "bold",  display: "inline-block",
                 borderBottom: "2px solid var(--custom-blue)",
                 paddingBottom: "0.2rem" }}>
@@ -276,6 +326,7 @@ const Lab3Page = () => {
                 {" "}if you need some help.
                 </p>
               </section>
+              <Quiz questions={lab3QuizQuestions} />
             </div>
           </div>
         </Container>

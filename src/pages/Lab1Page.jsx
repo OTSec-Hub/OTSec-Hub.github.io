@@ -7,6 +7,8 @@ import BackToTop from "../components/BackToTop";
 // Utils
 import { updateTitle } from "../utils";
 
+import Quiz from "../components/Quiz";
+
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
@@ -14,6 +16,45 @@ import image from "../images/lab1pic.webp";
 import step2Image from "../images/lab1_Items/lab1-step2.png"
 import step3Image from "../images/lab1_Items/lab1-step3.png"
 import step4Image from "../images/lab1_Items/lab1-step4.png"
+
+
+const lab1QuizQuestions = [
+  {
+    id: 1,
+    question: "What is the primary objective of Lab 1?",
+    options: [
+      "To configure network firewalls for industrial systems",
+      "To install Simulink add-ons",
+      "To understand industrial processes and simulate a desalination system",
+      "To analyze Wireshark packet captures",
+    ],
+    correctAnswer: "To understand industrial processes and simulate a desalination system",
+  },
+  {
+    id: 2,
+    question: "What type of control system is featured in the simulation of Lab 1?",
+    options: ["On/Off Control", "Feedforward Loop", "Cascade PID Loop", "Fuzzy Logic Controller"],
+    correctAnswer: "Cascade PID Loop",
+  },
+  {
+    id: 3,
+    question: "What is the purpose of reviewing the research paper in Part I of the lab?",
+    options: [
+      "To learn how to install MATLAB",
+      "To write a technical manual",
+      "To understand threats, attack surfaces, and their impact on industrial processes",
+      "To study programming syntax",
+    ],
+    correctAnswer: "To understand threats, attack surfaces, and their impact on industrial processes",
+  },
+  {
+    id: 4,
+    question: "Which tool is used to run and visualize the desalination process simulation?",
+    options: ["Wireshark", "MATLAB with Simulink", "CODESYS", "Python"],
+    correctAnswer: "MATLAB with Simulink",
+  },
+];
+
 
 const Lab1Page = () => {
   React.useEffect(() => {
@@ -220,7 +261,7 @@ const Lab1Page = () => {
                 </ul>
                 </p>
               </section>
-
+              <Quiz questions={lab1QuizQuestions} />
             </div>
           </div>
         </Container>

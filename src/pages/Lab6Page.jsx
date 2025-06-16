@@ -5,6 +5,8 @@ import BackToTop from "../components/BackToTop";
 // Utils
 import { updateTitle } from "../utils";
 
+import Quiz from "../components/Quiz";
+
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
@@ -24,6 +26,65 @@ import image12 from "../images/lab6_Items/step2,4.png"
 import image13 from "../images/lab6_Items/step2,5.png"
 import image14 from "../images/lab6_Items/step2,6.png"
 import image15 from "../images/lab6_Items/step2,7.png"
+
+const lab6QuizQuestions = [
+  {
+    id: 1,
+    question: "What is the main target of the process-aware attack in Lab 6?",
+    options: [
+      "The firewall configuration of a PLC network",
+      "The physical wiring of the plant’s sensors",
+      "The PID controllers regulating the desalination process",
+      "The IP address of the SCADA master",
+    ],
+    correctAnswer: "The PID controllers regulating the desalination process",
+  },
+  {
+    id: 2,
+    question: "What tool is used to reverse engineer the PLC binary in this lab?",
+    options: [
+      "Wireshark",
+      "ICSREF",
+      "ModScan",
+      "ImHex Debugger",
+    ],
+    correctAnswer: "ICSREF",
+  },
+  {
+    id: 3,
+    question: "Which specific change is made to the PID parameters during the attack?",
+    options: [
+      "The PID controller is deleted",
+      "The Setpoint value is replaced with a random integer",
+      "The Integral gain is increased to cause instability",
+      "The PLC cycle time is doubled",
+    ],
+    correctAnswer: "The Integral gain is increased to cause instability",
+  },
+  {
+    id: 4,
+    question: "How are memory addresses of PID parameters identified in the `.PRG` binary?",
+    options: [
+      "By decoding Modbus messages from the HMI",
+      "By using hex editors with process logs",
+      "By running pidargs and analyzing subroutine call graphs in ICSREF",
+      "By scanning the Simulink model structure",
+    ],
+    correctAnswer: "By running pidargs and analyzing subroutine call graphs in ICSREF",
+  },
+  {
+    id: 5,
+    question: "What is a key observable effect of the attack on the simulated desalination process?",
+    options: [
+      "The network interface stops responding",
+      "The temperature readings are encrypted",
+      "Distillate flow rate (Wd) becomes unstable or overshoots",
+      "The SCADA HMI stops refreshing",
+    ],
+    correctAnswer: "Distillate flow rate (Wd) becomes unstable or overshoots",
+  },
+];
+
 
 const Lab6Page = () => {
   React.useEffect(() => {
@@ -624,6 +685,7 @@ const Lab6Page = () => {
                 </ul>
                 </p>
               </section>
+              <Quiz questions={lab6QuizQuestions} />
             </div>
           </div>
         </Container>

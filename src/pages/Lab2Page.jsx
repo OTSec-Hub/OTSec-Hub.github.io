@@ -5,6 +5,8 @@ import BackToTop from "../components/BackToTop";
 // Utils
 import { updateTitle } from "../utils";
 
+import Quiz from "../components/Quiz";
+
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
@@ -17,6 +19,55 @@ import part2step3Image from "../images/lab2_Items/part2-step3.png"
 import part2step4Image from "../images/lab2_Items/part2-step4.png"
 import part2step6Image from "../images/lab2_Items/part2-step6.png"
 import part2step7Image from "../images/lab2_Items/part2-step7.png"
+
+
+const lab2QuizQuestions = [
+  {
+    id: 1,
+    question: "What is the main purpose of Lab 2?",
+    options: [
+      "To capture network traffic with Wireshark",
+      "To write custom Python scripts for automation",
+      "To generate and execute PLC code for a desalination process using Simulink and Codesys",
+      "To simulate industrial firewalls in a virtual environment",
+    ],
+    correctAnswer: "To generate and execute PLC code for a desalination process using Simulink and Codesys",
+  },
+  {
+    id: 2,
+    question: "Which software must the Simulink model be configured to target for PLC code generation?",
+    options: [
+      "MATLAB Online",
+      "CODESYS 3.5",
+      "Visual Studio",
+      "Arduino IDE",
+    ],
+    correctAnswer: "CODESYS 3.5",
+  },
+  {
+    id: 3,
+    question: "After importing the PLC code into Codesys, which programming language should be selected for PLC_PRG?",
+    options: [
+      "Ladder Diagram",
+      "Function Block Diagram",
+      "Structured Text",
+      "Sequential Function Chart",
+    ],
+    correctAnswer: "Structured Text",
+  },
+  {
+    id: 4,
+    question: "What should you do if generating PLC code in Simulink fails?",
+    options: [
+      "Restart MATLAB and try again",
+      "Manually edit the XML file",
+      "Use the pre-generated 'plcsrc' folder provided in Lab 2",
+      "Skip the step and continue",
+    ],
+    correctAnswer: "Use the pre-generated 'plcsrc' folder provided in Lab 2",
+  },
+];
+
 
 const Lab2Page = () => {
   React.useEffect(() => {
@@ -50,7 +101,7 @@ const Lab2Page = () => {
               <section>
                 <h3 className="mt-4"> 
                 <span role="img" aria-label="magnifying glass">🔎</span>{' '}
-                <strong style={{ color: "var(--custom-blue)" }}>LAB 2: PROGRAMMABLE LOGIC CONTROLLER PROGRAMMING </strong>
+                <strong style={{ color: "var(--custom-blue)" }}>LAB 2 </strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem",maxWidth: "800px" }}> 
                 The goal of this assignment is to better understand an <strong style={{ color: "var(--custom-blue)" }}>industrial control system (ICS)</strong> and gain hands-on experience with <strong style={{ color: "var(--custom-blue)" }}>Codesys</strong>. 
@@ -369,19 +420,8 @@ const Lab2Page = () => {
                   </li>
                 </ul>
                 </p>
-{/*                <Card>
-                  <CardHeader>Step 3: Generating PLC Code</CardHeader>
-                  <CardContent>
-                    <p>After selecting the subsystem, you should click:</p>
-                    <Question
-                      type="multiple-choice"
-                      question="Where do you click to generate PLC code?"
-                      options={["Apps > Simulation", "PLC Code tab", "Diagnostics Tab", "Project > Build"]}
-                      answer="PLC Code tab"
-                    />
-                  </CardContent>
-                </Card>*/}
               </section>
+              <Quiz questions={lab2QuizQuestions} />
             </div>
           </div>
         </Container>

@@ -5,6 +5,8 @@ import BackToTop from "../components/BackToTop";
 // Utils
 import { updateTitle } from "../utils";
 
+import Quiz from "../components/Quiz";
+
 // Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
@@ -17,6 +19,49 @@ import part2step4Image from "../images/lab4_Items/part2-step4.png"
 import part2step5Image from "../images/lab4_Items/part2-step5.png"
 import part2step6Image from "../images/lab4_Items/part2-step6.png"
 import part2step7Image from "../images/lab4_Items/part2-step7.png"
+
+const lab4QuizQuestions = [
+  {
+    id: 1,
+    question: "What is the primary function of the Modbus protocol in industrial systems?",
+    options: [
+      "To create encrypted communication tunnels",
+      "To transfer files between machines",
+      "To enable communication between PLCs and supervisory systems",
+      "To host virtual machines on a network",
+    ],
+    correctAnswer: "To enable communication between PLCs and supervisory systems",
+  },
+  {
+    id: 2,
+    question: "Which software acts as the Modbus server (simulated PLC) in Lab 4?",
+    options: ["Wireshark", "QModMaster", "ModRSsim2", "Simulink"],
+    correctAnswer: "ModRSsim2",
+  },
+  {
+    id: 3,
+    question: "What must be done before you can observe register changes between QModMaster and ModRSsim2?",
+    options: [
+      "Run MATLAB",
+      "Click the connect button in QModMaster and ensure (1/10) connected is shown in ModRSsim2",
+      "Log into Wireshark",
+      "Compile the PLC code",
+    ],
+    correctAnswer: "Click the connect button in QModMaster and ensure (1/10) connected is shown in ModRSsim2",
+  },
+  {
+    id: 4,
+    question: "When analyzing Modbus communication in Wireshark, which of the following is typically included in the packet details?",
+    options: [
+      "Transaction identifier and function code",
+      "Firewall rule metadata",
+      "PLC firmware version",
+      "User login credentials",
+    ],
+    correctAnswer: "Transaction identifier and function code",
+  },
+];
+
 
 const Lab4Page = () => {
   React.useEffect(() => {
@@ -357,7 +402,7 @@ const Lab4Page = () => {
                 }}
               />
 
-              <section style={{ paddingBottom: "5rem" }}>
+              <section style={{ paddingBottom: "0rem" }}>
                 <h4 style={{ fontWeight: "bold",
                           display: "inline-block",
                           borderBottom: "2px solid var(--custom-blue)",
@@ -392,6 +437,7 @@ const Lab4Page = () => {
                   </ul>
                 </p>
               </section>
+              <Quiz questions={lab4QuizQuestions} />
             </div>
           </div>
         </Container>

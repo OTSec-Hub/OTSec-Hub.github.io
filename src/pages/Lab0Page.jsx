@@ -5,7 +5,7 @@ import BackToTop from "../components/BackToTop";
 // Utils
 import { updateTitle } from "../utils";
 
-import FillInTheBlank from "../components/FillInTheBlank";
+// import FillInTheBlank from "../components/FillInTheBlank";
 import Quiz from "../components/Quiz";
 
 // Styles
@@ -20,36 +20,58 @@ import image5 from "../images/lab0_Items/pic5.png"
 import image6 from "../images/lab0_Items/pic6.png"
 import image7 from "../images/lab0_Items/pic7.png"
 
-const lab0FillInQuestions = [
-  {
-    id: 1,
-    question: "You must install MATLAB and ________ to complete all labs.",
-    correctAnswer: "Simulink",
-  },
-  {
-    id: 2,
-    question: "To install CODESYS, create an ________ Customer Account.",
-    correctAnswer: "Individual",
-  },
-];
+// const lab0FillInQuestions = [
+//   {
+//     id: 1,
+//     question: "You must install MATLAB and ________ to complete all labs.",
+//     correctAnswer: "Simulink",
+//   },
+//   {
+//     id: 2,
+//     question: "To install CODESYS, create an ________ Customer Account.",
+//     correctAnswer: "Individual",
+//   },
+// ];
 
 const lab0QuizQuestions = [
   {
     id: 1,
-    question: "What does PLC stand for?",
-    options: [
-      "Programmable Logic Controller",
-      "Primary Logic Circuit",
-      "Programmable Link Controller",
-      "Process Logic Control",
-    ],
-    correctAnswer: "Programmable Logic Controller",
+    question: "What is the minimum amount of free disk space recommended for installing the required lab software?",
+    options: ["10 GB", "20 GB", "40 GB", "100 GB"],
+    correctAnswer: "40 GB",
   },
   {
     id: 2,
-    question: "Which software is used in Lab 2?",
-    options: ["Matlab", "Codesys", "Wireshark", "Visual Studio"],
-    correctAnswer: "Codesys",
+    question: "Which MATLAB tools must be installed to complete all labs?",
+    options: [
+      "Simulink and Data Acquisition Toolbox",
+      "Simulink and Simulink PLC Coder",
+      "Simulink only",
+      "No add-ons are needed",
+    ],
+    correctAnswer: "Simulink and Simulink PLC Coder",
+  },
+  {
+    id: 3,
+    question: "Why can’t the online version of MATLAB be used for this course?",
+    options: [
+      "It is a paid service",
+      "It does not support all required features",
+      "It is too slow for simulations",
+      "It’s not compatible with Windows",
+    ],
+    correctAnswer: "It does not support all required features",
+  },
+  {
+    id: 4,
+    question: "What version of CODESYS is required for the labs?",
+    options: [
+      "Latest version (any)",
+      "Version 3.5.17.0 (32-bit)",
+      "Version 3.5.20.0 (64-bit)",
+      "Web-based version",
+    ],
+    correctAnswer: "Version 3.5.17.0 (32-bit)",
   },
 ];
 
@@ -310,7 +332,7 @@ const Lab0Page = () => {
                 </p>
               </section>
               <Quiz questions={lab0QuizQuestions} />
-              <FillInTheBlank questions={lab0FillInQuestions} />
+              {/*<FillInTheBlank questions={lab0FillInQuestions} />*/}
             </div>
           </div>
         </Container>
