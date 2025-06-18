@@ -32,6 +32,8 @@ import Discussions from "./pages/Discussions";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import DatasetDetail from "./components/DatasetDetail";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
 import AppFallback from "./components/AppFallback";
@@ -248,6 +250,8 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Announcements" element={<Announcements />} />
           <Route path="/Weekly-Discussions" element={<Discussions />} />
           <Route path="/ContactPage" element={<ContactPage />} />
+          <Route path="/LoginPage" element={<LoginPage />} />
+          <Route path="/RegisterPage" element={<RegisterPage />} />
           <Route path="/All-Labs/Lab0" element={<Lab0Page />} />
           <Route path="/All-Labs/Lab1" element={<Lab1Page />} />
           <Route path="/All-Labs/Lab2" element={<Lab2Page />} />

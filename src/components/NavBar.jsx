@@ -10,6 +10,8 @@ import { Link, useLocation } from "react-router-dom";
 import defaultLogo from "../images/defaultNavLogo.svg";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import ThemeToggle from "./ThemeToggle";
+import LoginLink from "./LoginLink";
+
 
 // #region constants
 const navLinks = {
@@ -21,8 +23,8 @@ const navLinks = {
       name: "Resources",
       dropdown: true,
       children: [{ id: "3R-1", name: "ICS Labs", route: "/Resources/All-Labs" },
-        {id: "3R-2", name: "Benchmarks", route: "/Resources/Benchmarks"},
-        {id: "3R-3", name: "Exercises", route: "/Resources/Exercises"}]
+      { id: "3R-2", name: "Benchmarks", route: "/Resources/Benchmarks" },
+      { id: "3R-3", name: "Exercises", route: "/Resources/Exercises" }]
     },
     { id: "4R", name: "Announcements", route: "/Announcements" },
     { id: "5R", name: "Weekly Discussions", route: "/Weekly-Discussions" },
@@ -42,7 +44,7 @@ const StyledDiv = styled.div`
 
   .logo-img {
     background: ${({ theme }) =>
-      theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
+    theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
   }
 
   .nav-link.active,
@@ -123,9 +125,8 @@ const NavBar = ({ Logo = defaultLogo, callBack, closeDelay = 125 }) => {
                   <Nav.Item key={el.id}>
                     <Link
                       to={el.route}
-                      className={`nav-link ${
-                        pathname === el.route ? "active" : ""
-                      }`}
+                      className={`nav-link ${pathname === el.route ? "active" : ""
+                        }`}
                       onClick={() =>
                         setTimeout(() => setisExpanded(false), closeDelay)
                       }
@@ -136,11 +137,15 @@ const NavBar = ({ Logo = defaultLogo, callBack, closeDelay = 125 }) => {
                 );
               })}
             </Nav>
-            <Nav>
+            <Nav className="d-flex flex-row ms-auto align-items-center gap-3">
               <ThemeToggle
                 closeDelay={closeDelay}
                 setExpanded={setisExpanded}
                 setTheme={callBack}
+              />
+              <LoginLink
+                closeDelay={closeDelay}
+                setExpanded={setisExpanded}
               />
             </Nav>
           </Navbar.Collapse>
