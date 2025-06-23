@@ -14,6 +14,7 @@ const StyledSection = styled.section`
 // #endregion
 
 // #region component
+//format the contact form on the page
 const Contact = () => {
   return (
     <Element name={"Contact"} id="contact">

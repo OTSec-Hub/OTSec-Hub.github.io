@@ -1,17 +1,22 @@
-import React from "react";
-// Components
 
+//import core library
+import React from "react";
+
+//import components
 import BackToTop from "../components/BackToTop";
-// Utils
+import SidebarBox from "../components/SidebarBox";
+import Title from "../components/Title";
+
+//import utility function to update page title dynamically
 import { updateTitle } from "../utils";
 
 // Styles
 import { Container } from "react-bootstrap";
-import Title from "../components/Title";
-import SidebarBox from "../components/SidebarBox";
 
+//functional component: announcements page
 const Announcements = () => {
   React.useEffect(() => {
+    // Run on mount: set the browser tab title
     updateTitle("Announcements | OTSec-Hub.io");
   }, []);
 
@@ -27,10 +32,7 @@ const Announcements = () => {
             {/* Left column: Main Content */}
             <div className="col-md-7 offset-md-0" style={{ marginLeft: "5%" }}>
               <section>
-                {/*<h3 className="mt-4">Description</h3>*/}
-{/*                <p style={{ fontSize: "1.25rem" }}>
-                  We are preparing new <strong>teaching, research, and industry-related</strong> content for all <strong>Operational Technology Security enthusiasts!</strong> This page will list all our latest news and announcements—keep refreshing and checking for newly uploaded content!
-                </p> */} 
+              {/* Main announcement message */}
                 <p style={{ fontSize: "1.25rem" }}>
                   We are preparing new{" "}
                   <strong style={{ color: "var(--custom-blue)" }}>
@@ -44,6 +46,8 @@ const Announcements = () => {
                 </p>             
               </section>
             </div>
+
+            {/* Right column – Sidebar with static sections */}
             <div className="col-md-4">
               <SidebarBox
                 title="Recent Posts"

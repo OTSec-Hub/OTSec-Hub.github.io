@@ -1,17 +1,32 @@
 
 
-
+//import react and necessary hooks
 import React from "react";
+
+//import styled components for custom styling
 import styled from "styled-components";
+
+//import to acccess global state
 import { useSelector } from "react-redux";
 import { selectMode } from "../app/appSlice";
+
+//prop validation
 import PropTypes from "prop-types";
+
+//for navigation
 import { Link, useLocation } from "react-router-dom";
+
+//import the logo
 import defaultLogo from "../images/defaultNavLogo.svg";
+
+//import Bootstrap components for building the responsive navigation bar
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+
+//to change the light/dark theme of the site
 import ThemeToggle from "./ThemeToggle";
 
 // #region constants
+// list the navigation links to show in the navbar
 const navLinks = {
   routes: [
     { id: "1R", name: "Home", route: "/" },
@@ -31,6 +46,7 @@ const navLinks = {
 };
 // #endregion
 
+//custom styled wrapper for the navbar
 const StyledDiv = styled.div`
   .navbar {
     border-bottom: var(--border);
@@ -53,12 +69,14 @@ const StyledDiv = styled.div`
   }
 `;
 
+//define expected props and their types
 const propTypes = {
   Logo: PropTypes.node,
   callBack: PropTypes.func,
   closeDelay: PropTypes.number
 };
 
+//main navigation bar component
 const NavBar = ({ Logo = defaultLogo, callBack, closeDelay = 125 }) => {
   const theme = useSelector(selectMode);
   const [isExpanded, setisExpanded] = React.useState(false);

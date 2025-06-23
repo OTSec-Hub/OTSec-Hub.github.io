@@ -1,4 +1,6 @@
 // src/data/datasets.js
+
+//array of placeholder datasets for the benchmarks page
 const datasets = [
   {
     id: "dataset:001",

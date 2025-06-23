@@ -1,14 +1,19 @@
+//for state and import necessary hooks rom React Router
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
+//import all the datasets for the benchmark page
 import datasets from "./datasets";
 
+//to display all the information for a single, selected dataset
 function DatasetDetail() {
-  const { datasetId } = useParams();
-  const navigate = useNavigate();
+  const { datasetId } = useParams(); //get ID from URL parameters
+  const navigate = useNavigate(); //hook to navigate back or to other routes
 
-  const decodedId = decodeURIComponent(datasetId);
-  const dataset = datasets.find(d => d.id === decodedId);
+  const decodedId = decodeURIComponent(datasetId); //decode dataset ID
+  const dataset = datasets.find(d => d.id === decodedId); //match to the dataset with the ID
 
+  //show an error message if result not found
   if (!dataset) {
     return (
       <div className="p-4">
@@ -20,6 +25,7 @@ function DatasetDetail() {
     );
   }
 
+  //otherwise provide its details: title, description, link
   return (
     <div className="p-4 max-w-xl mx-auto">
       <button
@@ -43,4 +49,5 @@ function DatasetDetail() {
   );
 }
 
+//export dataset detail component
 export default DatasetDetail;

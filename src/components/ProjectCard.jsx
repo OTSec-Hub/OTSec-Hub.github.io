@@ -1,3 +1,4 @@
+//import react
 import React from "react";
 // Styles
 import styled from "styled-components";
@@ -9,10 +10,11 @@ import { Icon } from "@iconify/react";
 import GH from "../images/GH.svg";
 // Components
 import { Card } from "react-bootstrap";
-
+//link component for internal routing
 import { Link } from "react-router-dom";
 
 // #region styled-components
+// Styled wrapper for the Bootstrap Card with custom theming and hover effects
 const StyledCard = styled.div`
   .card {
     height: var(--card-height);
@@ -63,6 +65,7 @@ const StyledCard = styled.div`
 // #endregion
 
 // #region component
+// Define expected props and types for ProjectCard
 const propTypes = {
   demo: PropTypes.string,
   description: PropTypes.string,
@@ -71,7 +74,7 @@ const propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-
+// Functional component to render a single project card
 const ProjectCard = ({ demo, description, image, name, url }) => {
   console.log("demo value:", demo);
   return (

@@ -1,22 +1,33 @@
+//import for building component
 import React from "react";
 
+// Component for a Fill-in-the-Blank questions
+// Takes `questions` as a prop, which is an array of question objects
 const FillInTheBlank = ({ questions }) => {
+
+  //use state to store user's answer
   const [userAnswers, setUserAnswers] = React.useState({});
+
+  //state to determine whether to show correct answer or not
   const [showResults, setShowResults] = React.useState(false);
 
+  //handle changes in input fields
   const handleChange = (id, value) => {
     setUserAnswers({ ...userAnswers, [id]: value });
   };
 
+  //handle submit button
   const handleSubmit = () => {
     setShowResults(true);
   };
 
+  //reset the quiz -> clear all prior selections and hid results
   const handleReset = () => {
     setUserAnswers({});
     setShowResults(false);
   };
 
+  //format the fill in the blank questions and answers; button functionalities
   return (
     <section style={{ maxWidth: 800, marginTop: "2rem" }}>
       <h4 style={{ color: "var(--custom-blue)", fontWeight: "bold" }}>📝 Fill in the Blanks</h4>

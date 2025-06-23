@@ -1,3 +1,5 @@
+//create array of provided exercises that will be displayed on the exercises page
+
 const eDatasets = [
   {
     id: "exercise:001",

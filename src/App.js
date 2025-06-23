@@ -220,6 +220,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", () => {
       const storedTheme = getStoredTheme();
+      //set light or dark theme
       if (storedTheme !== "light" && storedTheme !== "dark") {
         setThemes();
       }

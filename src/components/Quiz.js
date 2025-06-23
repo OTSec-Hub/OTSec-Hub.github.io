@@ -1,29 +1,34 @@
+//import react and useState hook
 import React, { useState } from "react";
 
+//accept array of questions as props
 const Quiz = ({ questions }) => {
-  const [currentQ, setCurrentQ] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const [score, setScore] = useState(0);
-  const [showScore, setShowScore] = useState(false);
-  const [showResults, setShowResults] = useState(false);
-  const [userAnswers, setUserAnswers] = useState({});
+  const [currentQ, setCurrentQ] = useState(0); //track current question index
+  const [selected, setSelected] = useState(null); //track currently selected answer
+  const [score, setScore] = useState(0); //track user's total score
+  const [showScore, setShowScore] = useState(false); //to display score summary
+  const [showResults, setShowResults] = useState(false); //to display full quiz results
+  const [userAnswers, setUserAnswers] = useState({}); //store user's selected answers by Question ID
 
+  //handle answer selection
   const handleAnswer = (option) => {
-    setSelected(option);
+    setSelected(option); //store selected option
     const correct = option === questions[currentQ].correctAnswer;
-    if (correct) setScore((prev) => prev + 1);
-    setUserAnswers((prev) => ({ ...prev, [questions[currentQ].id]: option }));
+    if (correct) setScore((prev) => prev + 1); //increase score if correct
+    setUserAnswers((prev) => ({ ...prev, [questions[currentQ].id]: option })); //store answer by question ID
   };
 
+  //go to the next question or complete the quiz
   const handleNext = () => {
     if (currentQ + 1 < questions.length) {
-      setCurrentQ(currentQ + 1);
-      setSelected(null);
+      setCurrentQ(currentQ + 1); //move to next question
+      setSelected(null); //reset selected anser
     } else {
-      setShowScore(true);
+      setShowScore(true); //show score summary if no more questions
     }
   };
 
+  //restart quiz
   const handleTryAgain = () => {
     setCurrentQ(0);
     setSelected(null);
@@ -33,11 +38,13 @@ const Quiz = ({ questions }) => {
     setUserAnswers({});
   };
 
+  //detect dark mode for styling
   const isDarkMode =
     typeof window !== "undefined" &&
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 
+  //quiz styling
   return (
     <section>
       <hr
@@ -52,11 +59,14 @@ const Quiz = ({ questions }) => {
         Quick Quiz: Test Your Knowledge
       </h3>
 
+      {/* Render current question and answer options */}
       {!showScore && !showResults && (
         <>
           <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
             {questions[currentQ].question}
           </p>
+
+          {/* Answer options as buttons */}
           <ul style={{ listStyleType: "none", padding: 0 }}>
             {questions[currentQ].options.map((option) => (
               <li key={option} style={{ marginBottom: 8 }}>
@@ -79,6 +89,8 @@ const Quiz = ({ questions }) => {
               </li>
             ))}
           </ul>
+
+          {/* "Next" or "Finish" button shown after selecting an answer */}
           {selected && (
             <button
               onClick={handleNext}
@@ -98,6 +110,7 @@ const Quiz = ({ questions }) => {
         </>
       )}
 
+      {/* Show users total score and post-quiz actions */}
       {showScore && !showResults && (
         <div style={{ maxWidth: 800 }}>
           <p
@@ -109,6 +122,8 @@ const Quiz = ({ questions }) => {
           >
             Your score: {score} / {questions.length}
           </p>
+
+          {/* Button to view full results */}
           <button
             onClick={() => setShowResults(true)}
             style={{
@@ -123,6 +138,8 @@ const Quiz = ({ questions }) => {
           >
             See Results
           </button>
+
+          {/* Button to retake quiz */}
           <button
             onClick={handleTryAgain}
             style={{
@@ -139,6 +156,7 @@ const Quiz = ({ questions }) => {
         </div>
       )}
 
+      {/* Detailed results with answer correctness */}
       {showResults && (
         <div style={{ maxWidth: 800, marginTop: 20 }}>
           {questions.map((q) => {
@@ -170,6 +188,8 @@ const Quiz = ({ questions }) => {
                     {userAnswer || "No answer"}
                   </span>
                 </p>
+
+                {/* Show correct answer if user was wrong */}
                 {!isCorrect && (
                   <p>
                     Correct answer:{" "}
@@ -181,6 +201,8 @@ const Quiz = ({ questions }) => {
               </div>
             );
           })}
+
+          {/* Button to retake the quiz from results screen */}
           <button
             onClick={handleTryAgain}
             style={{
