@@ -12,14 +12,14 @@ import SidebarBox from "../components/SidebarBox";
 
 const Discussions = () => {
   React.useEffect(() => {
-    updateTitle("Discussions | OTSec-Hub.io");
+    updateTitle("Discussion-Forums | OTSec-Hub.io");
   }, []);
 
   return (
     <>
       <main>
         <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Weekly Discussions" />
+          <Title size="h2" text="Discussion Forums" />
         </Container>
 
         <Container>
@@ -28,39 +28,23 @@ const Discussions = () => {
             <div className="col-md-7 offset-md-0" style={{ marginLeft: "5%" }}>
               <section>
                 {/*<h3 className="mt-4">Description</h3>*/}
-                <p style={{ fontSize: "1.25rem" }}>
-                  As part of our commitment to serving the{" "}
-                  <strong style={{ color: "var(--custom-blue)" }}>
-                    Operational Technology Security community
-                  </strong>
-                  , we will host{" "}
-                  <strong style={{ color: "var(--custom-blue)" }}>
-                    weekly, bi-weekly, or monthly discussions
-                  </strong>
-                  {" "}featuring{" "}
-                  <strong style={{ color: "var(--custom-blue)" }}>
-                    OTSec experts
-                  </strong>
-                  . The talks will be held on{" "}
-                  <strong style={{ color: "var(--custom-blue)" }}>
-                    Zoom
-                  </strong>
-                  , and recordings will be shared on our{" "}
-                  <strong style={{ color: "var(--custom-blue)" }}>
-                    YouTube channel
-                  </strong>
-                  .
-                </p>               
+            <p style={{ fontSize: "1.25rem" }}>
+              OTSEC-HUB is proud to host an open discussion forum dedicated to the{" "}
+              <strong style={{ color: "var(--custom-blue)" }}>
+                Operational Technology and ICS Security community
+              </strong>
+              . Here, anyone can share insights, ask questions, post research, and collaborate on topics related to ICS security. Whether you’re a beginner, practitioner, or researcher, this space is yours to connect, learn, and grow together.
+            </p>             
               </section>
             </div>
             <div className="col-md-4">
-              <SidebarBox
+              {/* <SidebarBox
                 title="Recent Posts"
                 items={[
                   { text: "NEWS", link: "/news" },     // add link if you have one, or remove link property
                   { text: "Welcome", link: "/welcome" }
                 ]}
-              />
+              /> */}
 
               <SidebarBox
                 title="Recent Comments"
@@ -69,12 +53,12 @@ const Discussions = () => {
                 ]}
               />
 
-              <SidebarBox
+              {/* <SidebarBox
                 title="Archives"
                 items={[
                   { text: "February 2025" }
                 ]}
-              />
+              /> */}
             </div>
           </div>
         </Container>

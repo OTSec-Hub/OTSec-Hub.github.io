@@ -49,13 +49,13 @@ const Announcements = () => {
 
             {/* Right column – Sidebar with static sections */}
             <div className="col-md-4">
-              <SidebarBox
+              {/* <SidebarBox
                 title="Recent Posts"
                 items={[
                   { text: "NEWS", link: "/news" },     // add link if you have one, or remove link property
                   { text: "Welcome", link: "/welcome" }
                 ]}
-              />
+              /> */}
 
               <SidebarBox
                 title="Recent Comments"
@@ -64,12 +64,12 @@ const Announcements = () => {
                 ]}
               />
 
-              <SidebarBox
+              {/* <SidebarBox
                 title="Archives"
                 items={[
                   { text: "February 2025" }
                 ]}
-              />
+              /> */}
             </div>
           </div>
         </Container>
