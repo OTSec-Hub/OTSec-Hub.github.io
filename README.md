@@ -31,9 +31,10 @@ cd backend
 python3 -m venv venv
 
 # Activate environment
-source venv/bin/activate  # macOS/Linux
+source venv/bin/activate # macOS
 
-# RunServer
+# Install Packages
 pip install -r requirements.txt
 
+# RunServer
 uvicorn main:app --reload
