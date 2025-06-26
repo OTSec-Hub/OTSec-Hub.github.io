@@ -1,0 +1,39 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+.env.*
+
+# Database files (if any local sqlite or backups)
+*.sqlite3
+*.db
+
+# Migrations (optional)
+migrations/
+alembic.ini
+
+# Logs
+*.log
+
+# IDE and editor configs
+.vscode/
+.idea/
+
+# Coverage reports and test cache
+.coverage
+.pytest_cache/
+.tox/
+htmlcov/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build files
+build/
+dist/
+*.egg-info/
