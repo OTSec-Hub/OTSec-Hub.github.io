@@ -18,7 +18,7 @@ import plainLogo from "./images/plainLogo.png"
 */
 
 // src/config.js
-export const githubUsername = "MaNn0";
+export const githubUsername = process.env.REACT_APP_GITHUB_USERNAME;
 export const githubToken = process.env.REACT_APP_GITHUB_TOKEN;
  // your token as a string
 
