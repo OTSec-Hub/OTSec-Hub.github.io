@@ -22,6 +22,7 @@ import Sidebar from "../../components/Admin/AdminSidebar";
 import EditBtn from "../../components/Admin/EditBtn";
 import DeleteBtn from "../../components/Admin/DeleteBtn";
 import styled from "styled-components";
+import AddBtn from './../../components/Admin/AddBtn';
 
 // Simple themed components
 const ThemedTableContainer = styled(TableContainer)`
@@ -45,6 +46,7 @@ const ThemedTableRow = styled(TableRow)`
 const ThemedTypography = styled(Typography)`
   color: ${({ theme }) => theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"} !important;
 `;
+
 
 export default function UserManagment({ children }) {
     const [users, setUsers] = useState([]);
@@ -108,7 +110,7 @@ export default function UserManagment({ children }) {
                                         fullWidth
                                         sx={{
                                             '& .MuiInputLabel-root': {
-                                                color: theme?.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)",
+                                                color: theme?.name === "light" ? "#212529" : "rgba(255, 255, 255, 0.8)",
                                             },
                                             '& .MuiOutlinedInput-root': {
                                                 '& fieldset': {
@@ -204,6 +206,7 @@ export default function UserManagment({ children }) {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
+                                    <AddBtn />
                                 </Box>
 
                                 <ThemedTableContainer component={Paper}>
@@ -227,8 +230,8 @@ export default function UserManagment({ children }) {
                                                     <ThemedTableCell align="center">{user.role}</ThemedTableCell>
                                                     <ThemedTableCell align="center">
                                                         <Box display="flex" gap={1} justifyContent="center">
-                                                            <EditBtn />
-                                                            <DeleteBtn />
+                                                            <EditBtn user={user} />
+                                                            <DeleteBtn userId={user.id}  />
                                                         </Box>
                                                     </ThemedTableCell>
                                                 </ThemedTableRow>

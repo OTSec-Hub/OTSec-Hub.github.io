@@ -40,6 +40,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import UsersManagment from "./pages/Admin/UsersManagment";
 import TrackProgress from "./pages/Admin/TrackProgress";
 import CourseManagment from "./pages/Admin/CourseManagement";
+import VerificationPage from "./pages/VerificationPage";
 
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -232,6 +233,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/UsersManagment" element={<UsersManagment />} />
           <Route path="/TrackProgress" element={<TrackProgress />} />
           <Route path="/CourseMAnagment" element={<CourseManagment />} />
+          <Route path="/verify-email" element={<VerificationPage />} />
           <Route path="/All-Labs/Lab0" element={<Lab0Page />} />
           <Route path="/All-Labs/Lab1" element={<Lab1Page />} />
           <Route path="/All-Labs/Lab2" element={<Lab2Page />} />

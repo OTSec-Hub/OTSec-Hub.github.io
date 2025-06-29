@@ -75,7 +75,7 @@ const Sidebar = () => {
 
                 <Nav className="flex-column">
                     {SidebarItems.map((item) => (
-                        <SidebarLink as={NavLink} key={item.id} to={item.route} className="nav-link px-1">
+                        <SidebarLink as={NavLink} key={item.name} to={item.route} className="nav-link px-1">
                             {item.icon}
                             {item.name}
                         </SidebarLink>
