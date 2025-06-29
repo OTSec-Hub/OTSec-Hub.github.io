@@ -22,6 +22,24 @@ Create `.env` file in `/backend`:
 ```env
 DATABASE_URL=postgresql://<username>:<password>@<host>/<database_name>
 REACT_DOT_SERVER=http://localhost:3000
+
+# Email Configuration
+MAIL_USERNAME=abdelrahmann.ramadann@gmail.com
+MAIL_PASSWORD=wink wfus mhef apgo
+MAIL_FROM=abdelrahmann.ramadann@gmail.com
+MAIL_PORT=587
+MAIL_SERVER=smtp.gmail.com
+MAIL_STARTTLS=True
+MAIL_SSL_TLS=False
+MAIL_FROM_NAME="OTSec-Hub"
+```
+### 2. 🔐 Environment Setup
+
+Create `.env` file in `/backend`:
+```env
+REACT_APP_API_BASE_URL=http://localhost:8000
+REACT_APP_GITHUB_TOKEN=your-token
+REACT_APP_GITHUB_USERNAME=your-username
 ```
 
 # Navigate to backend
