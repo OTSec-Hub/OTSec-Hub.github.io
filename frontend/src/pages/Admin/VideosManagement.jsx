@@ -128,7 +128,7 @@ export default function VideoManagement({ children }) {
                                         fullWidth
                                         sx={{
                                             '& .MuiInputLabel-root': {
-                                                color: theme?.name === "light" ? "#212529" : "rgba(255, 255, 255, 0.8)",
+                                                color: theme?.name === "light" ? "#212529" : "#ffffff",
                                             },
                                             '& .MuiOutlinedInput-root': {
                                                 '& fieldset': {
