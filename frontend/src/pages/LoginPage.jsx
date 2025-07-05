@@ -69,7 +69,12 @@ const LoginPage = () => {
                 });
 
                 if (!response.ok) {
-                    throw new Error("Invalid email or password");
+                    if(response.status === 401)
+                        throw new Error("Invalid email or password");
+                    else if(response.status === 403)
+                        throw new Error("Email is not verified");
+                    else
+                        throw new Error("Login failed, please try again later");
                 }
 
                 const data = await response.json();

@@ -3,6 +3,7 @@ from app.routes import user as user_routes
 from app.routes import auth
 from app.routes import educators
 from app.database import engine, Base
+from app.routes import video
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
@@ -27,6 +28,7 @@ app.add_middleware(
 app.include_router(user_routes.router, tags=["users"])
 app.include_router(auth.router, prefix="/api/auth")
 app.include_router(educators.router, prefix="/api")
+app.include_router(video.router, prefix="/api/video")
 
 # Initialize database
 # Base.metadata.drop_all(bind=engine)

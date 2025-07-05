@@ -1,19 +1,27 @@
 // src/pages/VideoDetailPage.jsx
-import React from "react";
-import { useParams } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Button, Spinner } from "react-bootstrap";
 import ReactPlayer from "react-player";
+import styled from "styled-components";
 import Quiz from "../components/Quiz";
+import axios from 'axios'
+import { FiArrowLeft } from "react-icons/fi";
 
-// Sample video data (later replace with API from database)
-const videos = [
-    {
-        id: 1,
-        title: "ICS Security Lab 1",
-        description: "Introductory lab on ICS security and PLC concepts.",
-        url: "https://www.youtube.com/embed/P7ZCGY8fXOU",
-    },
-];
+
+const BackButton = styled(Button)`
+  margin-bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: ${({ theme }) => theme.primary};
+  border: none;
+  padding: 0.5rem 1.25rem;
+
+  &:hover {
+    background: ${({ theme }) => theme.primaryHover};
+  }
+`;
 
 const lab0QuizQuestions = [
     {
@@ -59,19 +67,57 @@ const lab0QuizQuestions = [
 
 const VideoDetailPage = () => {
     const { videoId } = useParams();
-    const video = videos.find((v) => v.id === Number(videoId));
+    const [video, setVideo] = useState(null)
+    const [hasPlayed, setHasPlayed] = useState(false);
 
-    if (!video) return <h2 className="text-center mt-5">Video not found</h2>;
-    const handlePlay = () => {
-        // Logic to track video play can be added here
-        console.log(`Playing video: ${video.title}`);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        async function fetchVideo() {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/video/get_video/${videoId}`)
+                setVideo(response.data);
+            } catch (err) {
+                console.error('error fetch video:', err)
+            }
+        }
+        fetchVideo()
+    }, [])
+
+    const handlePlay = async () => {
+        if (!hasPlayed) {
+            try {
+                await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/video/video_view`, {
+                    video_id: videoId
+                },{headers:{
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                    "Content-Type": "application/json"
+                }});
+                setHasPlayed(true);
+            } catch (err) {
+                console.error('Failed to track video play:', err);
+            }
+        }
     };
+
+    if (!video) return (
+        <div className="text-center mt-5">
+            <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
+        </div>
+    );
+
     return (
+
+
         <Container fluid className="py-5">
             <div className="mx-auto px-4 px-md-5" style={{ maxWidth: "1140px" }}>
-
+                {/* <BackButton onClick={() => navigate(-1)}>
+                    <FiArrowLeft /> Back to Videos
+                </BackButton> */}
                 <h2 className="mb-3">{video.title}</h2>
-                <p className="text-muted mb-4">{video.description}</p>
+                <p className="text-muted mb-4">{video.subtitle}</p>
                 <div className="ratio ratio-16x9">
                     <ReactPlayer
                         url={video.url}
@@ -81,6 +127,7 @@ const VideoDetailPage = () => {
                         onPlay={handlePlay}
                     />
                 </div>
+                <p className="text-muted my-4">{video.description}</p>
                 <div className="">
                     <Quiz questions={lab0QuizQuestions} />
                 </div>

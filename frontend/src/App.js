@@ -56,6 +56,7 @@ import Footer from "./components/Footer";
 import { footerTheme, navLogo } from "./config";
 // Util
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
+import VideosManagment from "./pages/Admin/VideosManagement";
 
 
 // #region component
@@ -232,7 +233,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/UsersManagment" element={<UsersManagment />} />
           <Route path="/TrackProgress" element={<TrackProgress />} />
-          <Route path="/CourseMAnagment" element={<CourseManagment />} />
+          <Route path="/VideosManagement" element={<VideosManagment />} />
           <Route path="/verify-email" element={<VerificationPage />} />
           <Route path="/All-Labs/Lab0" element={<Lab0Page />} />
           <Route path="/All-Labs/Lab1" element={<Lab1Page />} />

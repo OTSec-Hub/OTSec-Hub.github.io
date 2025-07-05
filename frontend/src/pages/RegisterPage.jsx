@@ -54,6 +54,14 @@ const RegisterPage = () => {
             const email = form.elements.email.value;
             const name = form.elements.fullName.value;
             const password = form.elements.password.value;
+            const passwordConfirm = form.elements.confirmPassword.value;
+            if (password !== passwordConfirm) {
+                setError("Passwords do not match");
+                setValidated(false);
+                setLoading(false)
+                return;
+            }
+
 
             try {
                 const response = await axios.post(
@@ -62,12 +70,13 @@ const RegisterPage = () => {
                 );
 
                 if (response.status === 201 || response.status === 200) {
-                    setSuccess("Registration successful! Please log in.");
+                    setSuccess("A verification email has been sent. Please check your inbox.");
                     form.reset();
                     setValidated(false);
-                } else {
+                } else if (response.status === 400) {
+                    setError("Email already registered!");
+                } else
                     setError("Registration failed. Please try again.");
-                }
             } catch (err) {
                 if (err.response?.data?.detail) {
                     setError(err.response.data.detail);
@@ -120,10 +129,25 @@ const RegisterPage = () => {
                         required
                         type="password"
                         // placeholder="Enter your password"
+                        id="password"
                         minLength={6}
                     />
                     <Form.Control.Feedback type="invalid">
                         Password must be at least 6 characters.
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-4" controlId="confirmPassword">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                        required
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                    />
+
+                    <Form.Control.Feedback type="invalid">
+                        Password doesn't match
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -136,7 +160,7 @@ const RegisterPage = () => {
 
                 {error && (
                     <Alert variant="danger" onClose={() => setError(null)} dismissible>
-                        {error?.data?.detail && <p>{error.data.detail}</p>}
+                        {error}
                     </Alert>
                 )}
 
@@ -166,7 +190,6 @@ const RegisterPage = () => {
                 </div>
             </Form>
         </StyledRegister>
-
     );
 };
 

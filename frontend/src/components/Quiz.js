@@ -60,7 +60,7 @@ const Quiz = ({ questions }) => {
               <li key={option} className="mb-2">
                 <button
                   className={`btn w-100 ${
-                    selected === option ? "btn-primary text-white" : "btn-outline-secondary text-white"
+                    selected === option ? "btn-primary" : "btn-outline-secondary "
                   }`}
                   onClick={() => handleAnswer(option)}
                   // disabled={selected !== null}

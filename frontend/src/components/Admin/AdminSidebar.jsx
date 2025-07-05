@@ -2,7 +2,7 @@
 import React from "react";
 import { Button, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { BarChart3, Users, BookOpen, LineChart } from "lucide-react";
+import { BarChart3, Users, BookOpen, LayoutDashboard, Flag, Dumbbell, Video, Settings, LineChart } from "lucide-react";
 import styled from "styled-components";
 
 
@@ -52,11 +52,15 @@ const SidebarLink = styled(NavLink)`
 
 
 const SidebarItems = [
-    { name: "Dashboard", icon: <LineChart />, route: "/AdminDashboard" },
+    { name: "Dashboard", icon: <LayoutDashboard />, route: "/AdminDashboard" },
     { name: "User Management", icon: <Users />, route: "/UsersManagment" },
     { name: "Track Progress", icon: <BarChart3 />, route: "/TrackProgress" },
-    { name: "Course Management", icon: <BookOpen />, route: "/CourseMAnagment" },
-]
+    { name: "ICS Labs Management", icon: <BookOpen />, route: "/CourseManagement" },
+    { name: "Benchmarks Management", icon: <Flag />, route: "/BenchmarksManagement" },
+    { name: "Exercises Management", icon: <Dumbbell />, route: "/ExercisesManagement" },
+    { name: "Videos Management", icon: <Video />, route: "/VideosManagement" },
+    { name: "Settings", icon: <Settings />, route: "/Settings" } // Optional
+];
 
 
 const Sidebar = () => {

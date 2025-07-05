@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { Link } from "react-router-dom";
-// Components
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Title from "../components/Title";
 import BackToTop from "../components/BackToTop";
@@ -25,42 +25,44 @@ const StyledSection = styled.section`
 
 // #region component
 const Videos = () => {
-    React.useEffect(() => {
+    const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+        async function fetchVideos() {
+            try {
+                const response = await axios.get(
+                    `${process.env.REACT_APP_API_BASE_URL}/api/video/get_videos`
+                );
+                setVideos(response.data);
+            } catch (error) {
+                console.error("Failed to fetch videos:", error);
+                setVideos([]);
+            }
+        }
+        fetchVideos();
+    }, []);
+
+    useEffect(() => {
         updateTitle("ICS Videos");
     }, []);
 
-    const videos = [{
-        id: 1,
-        title: "ICS Security Lab 1",
-        description:
-            "An introductory lab on Industrial Control System (ICS) security, including PLC concepts and analysis.",
-        url: "https://www.youtube.com/watch?v=P7ZCGY8fXOU",
-        image: "https://img.youtube.com/vi/P7ZCGY8fXOU/maxresdefault.jpg",
-    }, {
-        id: 2,
-        title: "ICS Security Lab 1",
-        description:
-            "An introductory lab on Industrial Control System (ICS) security, including PLC concepts and analysis.",
-        url: "https://www.youtube.com/watch?v=P7ZCGY8fXOU",
-        image: "https://img.youtube.com/vi/P7ZCGY8fXOU/maxresdefault.jpg",
-    },
-    {
-        id: 3,
-        title: "ICS Security Lab 1",
-        description:
-            "An introductory lab on Industrial Control System (ICS) security, including PLC concepts and analysis.",
-        url: "https://www.youtube.com/watch?v=P7ZCGY8fXOU",
-        image: "https://img.youtube.com/vi/P7ZCGY8fXOU/maxresdefault.jpg",
-    },
-    {
-        id: 4,
-        title: "ICS Security Lab 1",
-        description:
-            "An introductory lab on Industrial Control System (ICS) security, including PLC concepts and analysis.",
-        url: "https://www.youtube.com/watch?v=P7ZCGY8fXOU",
-        image: "https://img.youtube.com/vi/P7ZCGY8fXOU/maxresdefault.jpg",
-    },
-    ];
+    function getYouTubeVideoId(url) {
+        try {
+            const parsed = new URL(url);
+            if (parsed.hostname === 'youtu.be') {
+                return parsed.pathname.slice(1);
+            } else if (
+                parsed.hostname === 'www.youtube.com' ||
+                parsed.hostname === 'youtube.com'
+            ) {
+                return parsed.searchParams.get('v');
+            }
+            return null;
+        } catch (err) {
+            console.error('Invalid YouTube URL:', err);
+            return null;
+        }
+    }
 
     return (
         <>
@@ -72,7 +74,9 @@ const Videos = () => {
 
                     <Container>
                         <p className="text-center fs-5 text-muted mb-4">
-                            In this series of labs, we explore the fundamentals of ICS security, PLCs, and common attack vectors. More videos coming soon.
+                            In this series of labs, we explore the fundamentals of ICS
+                            security, PLCs, and common attack vectors. More videos coming
+                            soon.
                         </p>
 
                         <Row className="g-4">
@@ -81,13 +85,13 @@ const Videos = () => {
                                     <Card className="video-card h-100">
                                         <Card.Img
                                             variant="top"
-                                            src={video.image}
+                                            src={`https://img.youtube.com/vi/${getYouTubeVideoId(video.url)}/sddefault.jpg`}
                                             alt={video.title}
                                             className="video-thumbnail"
                                         />
                                         <Card.Body>
                                             <Card.Title>{video.title}</Card.Title>
-                                            <Card.Text>{video.description}</Card.Text>
+                                            <Card.Text>{video.subtitle}</Card.Text>
                                             <Link to={`/Resources/Videos/${video.id}`}>
                                                 <Button variant="primary">Watch</Button>
                                             </Link>
@@ -96,7 +100,6 @@ const Videos = () => {
                                 </Col>
                             ))}
                         </Row>
-
                     </Container>
                 </StyledSection>
             </main>

@@ -29,8 +29,8 @@ async def add_educator(
 
     # Create verification token
     token = create_verification_token(email)
-    temp_password = secrets.token_urlsafe(8)
-    hashed_password = pwd_context.hash(temp_password)
+    password = secrets.token_urlsafe(8)
+    hashed_password = pwd_context.hash(password)
     # Create new user
     db_user = User(
         name=name,
@@ -52,7 +52,7 @@ async def add_educator(
     await send_verification_email(
         email=email,
         name=name,
-        temp_password=temp_password,
+        password=password,
         token=token,
         redirect_url=redirectUrl,
         background_tasks=background_tasks

@@ -114,7 +114,7 @@ export default function VerificationPage() {
                   Email Verified Successfully!
                 </Typography>
                 <Typography  paragraph>
-                  Your OTSEC-HUB educator account has been verified.
+                  Your OTSEC-HUB account has been verified.
                 </Typography>
                 <Button
                   variant="contained"
