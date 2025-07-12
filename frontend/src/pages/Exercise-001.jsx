@@ -1,516 +1,181 @@
-
-
-// Components
+import React from "react";
+import { Container } from "react-bootstrap";
 import BackToTop from "../components/BackToTop";
 import Title from "../components/Title";
-// Utils
 import { updateTitle } from "../utils";
-// Styles
-import { Container } from "react-bootstrap";
-import React from "react";
-
 
 const Exercise001 = () => {
   React.useEffect(() => {
     updateTitle("exercise-001 | OTSec-Hub.io");
   }, []);
 
-const navLinkStyle = {
-  background: "none",
-  border: "none",
-  color: "var(--custom-blue)",
-  fontWeight: "bold",
-  cursor: "pointer",
-  textDecoration: "none",
-  padding: "0.5rem 1rem",
-  borderRadius: "4px",
-  transition: "background-color 0.3s ease",
-  fontSize: "1rem",
-  fontFamily: "inherit",
-  outline: "none",
-};
-
-
-// const navLinkHoverStyle = {
-//   backgroundColor: "var(--custom-blue)",
-//   color: "white",
-// };
-
-
-function scrollToId(id) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-  }
-}
-
-// function NavLink({ children, onClick }) {
-//   return (
-//     <button className="nav-link" onClick={onClick} type="button">
-//       {children}
-//     </button>
-//   );
-// }
-
+  const sectionHeaderStyle = {
+    fontWeight: "bold",
+    display: "inline-block",
+    borderBottom: "2px solid var(--custom-blue)",
+    paddingBottom: "0.2rem",
+    marginTop: "0rem"
+  };
 
   return (
     <>
       <main>
-        <Container className="d-flex justify-content-center my-5">
-          <Title size="h2" text="Chemical Sector Cyber Tabletop Exercise" />
-        </Container>
-
-        <Container className="d-flex justify-content-center mb-4">
-        <nav>
-          <button style={navLinkStyle} onClick={() => scrollToId("module1")}>Module 1</button>
-          <span style={{ margin: "0 1rem" }}>|</span>
-          <button style={navLinkStyle} onClick={() => scrollToId("module2")}>Module 2</button>
-        </nav>
-{/*        <nav>
-          <NavLink onClick={() => scrollToId("module2")}>Module 2</NavLink>
-        </nav>*/}
+        <Container className="d-flex justify-content-center my-3">
+          <Title size="h2" text="AI-Augmented Intrusion: Reconnaissance and Deception" />
         </Container>
 
         <Container>
           <div className="row">
             <div className="col-md-8" style={{ marginLeft: "19%" }}>
-              <section id="module1">
-              <br />
-                <h2 style={{ color: "var(--custom-blue)",textAlign: "center" }}>MODULE ONE: THREAT</h2>
-                <h4 style={{ fontWeight: "bold",  display: "inline-block",
-                borderBottom: "2px solid var(--custom-blue)",
-                paddingBottom: "0.2rem" }}>
-                  Scenario
-                </h4>
-                <p><strong>[Insert Location]</strong></p>
-                <p><strong>[Insert Month, Day, Year]: [Time]</strong></p>
+              <section>
+                <h4 style={sectionHeaderStyle}>Purpose</h4>
                 <p>
-                  The <strong>[insert name of state or regional]</strong> Fusion Center has received updated intelligence 
-                  analysis bulletins that express concern about the growing sophistication of and cooperation among 
-                  groups involved in environmental, cyber, and economic terrorism.
+                  Evaluate your ability to detect, analyze, and respond to early-stage AI-enhanced intrusions involving:
                 </p>
-                <p>
-                  The U.S. Department of Homeland Security (DHS) Industrial Control Systems Cyber Emergency Response Team 
-                  (ICS-CERT) issues an alert stating that a software programmer has developed computer malware, which 
-                  exploits a specific vulnerability, and can replicate itself over networks with vulnerable systems.
-                </p>
-                <p>
-                  This malware appears to be very similar to Stuxnet, initially spreading indiscriminately; however, it 
-                  is determined that this new malware includes a highly specialized payload that is designed to only 
-                  target <strong>[insert your facility’s SCADA software program, i.e., Siemens]</strong> SCADA systems that 
-                  are configured to control and monitor <strong>[insert your facility’s specific industrial processes]</strong>.
-                </p>
-                <p>
-                  The programmer deployed this malware on the open Internet without any particular target in mind, only 
-                  the goal of maximum infection.
-                </p>
-                <p>The media is reporting a cybersecurity scare of potential global proportions.</p>
-                <p>
-                  Several employees of <strong>[insert your facility name]</strong> use a company-owned laptop outside of 
-                  the physical workspace. In particular, one employee frequently connects to a wireless network hotspot at 
-                  a local coffee shop to check his / her social media accounts and personal email before work.
-                </p>
+                <ul>
+                  <li>AI-generated phishing and impersonation of trusted vendors</li>
+                  <li>Synthetic operational instructions embedded in familiar workflows</li>
+                  <li>Time manipulation and subtle log forgery</li>
+                  <li>Threats to operator trust, system integrity and situational awareness</li>
+                  <li>Cross-team coordination during low-signal anomalies</li>
+                </ul>
               </section>
 
               <section>
-              <br /> <br />
-                <h4 style={{ fontWeight: "bold",  display: "inline-block",
-                borderBottom: "2px solid var(--custom-blue)",
-                paddingBottom: "0.2rem" }}>
-                  Discussion Questions
-                </h4>
-                <br /> <br />
-                <h4
-                  style={{
-                    fontStyle: "italic",
-                    fontWeight: "normal",
-                    display: "inline",
-                    color: "var(--custom-blue)",
-                    fontSize: "1.3rem",  // smaller font size
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  General Discussion Questions
-                </h4>
-                <br /><br />
+                <br />
+                <h4 style={sectionHeaderStyle}>Exercise Objectives</h4>
                 <ol>
-                  <li>
-                    Given the threat, what is the process by which your organization would receive intelligence and protective measure information?
-                    <ol type="a">
-                      <li>
-                        With which departments and/or agencies or other organizations would your organization communicate regarding the potential threat?
-                      </li>
-                      <li>
-                        Does your organization maintain a relationship with its CISA Protective Security Advisor (PSA) or CISA Cybersecurity Advisor (CSA)?
-                        If so, is there a rapid means of contacting them?
-                      </li>
-                      <li>
-                        Does your organization use the Homeland Security Information Network-Critical Infrastructure (HSIN-CI) Chemical Sector portal?
-                      </li>
-                      <li>
-                        Is your organization subscribed to the DHS Cyber Spotlight newsletter?
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    What internal information sharing and dissemination processes does your organization currently have in place?
-                    <ol type="a">
-                      <li>
-                        Who are the key stakeholders or groups (e.g., sectors, agencies, associations) with whom your organization must communicate to protect its critical infrastructure assets?
-                      </li>
-                      <li>
-                        Does your stakeholder group currently have information sharing processes? Are they documented?
-                      </li>
-                      <li>
-                        In addition to notifications to industry and federal government stakeholders, when would your organization initiate notification procedures to local and state authorities?
-                      </li>
-                      <li>
-                        How does your organization prioritize internal and external notifications?
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    What information platforms, if any, does your organization currently use?
-                    <ol type="a">
-                      <li>
-                        Does your organization currently own an information sharing platform? If so, does it have collaboration capabilities or is it used more as an intelligence / information collection repository?
-                      </li>
-                      <li>
-                        Are the platforms used for cyber incidents and the platforms used for other types of emergencies different? Are there common elements?
-                      </li>
-                      <li>
-                        What other capabilities (e.g., document library, calendar, alerts, special tools) would allow your organization to share information and help protect its critical infrastructure assets?
-                      </li>
-                      <li>
-                        Are there any technological conditions that, if not met, would be “show-stoppers”?
-                      </li>
-                      <li>
-                        What restrictions regarding access to and dissemination of information affect the ability to share information within your organization and with its public and private stakeholders (e.g., protected critical infrastructure information [PCII], sensitive but unclassified [SBU], business confidential)?
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    How does your organization process the information it receives (e.g., formal reporting, rumors, social media) for further dissemination within the organization and to personnel?
-                  </li>
-                  <li>
-                    What resources are used to disseminate information?
-                    <ol type="a">
-                      <li>
-                        What notification capabilities (e.g., alerts, emails, telecommunications, text messages, special tools) does your organization use to share information and to communicate the process for implementing protective measures?
-                      </li>
-                      <li>
-                        Are there technological barriers, legal considerations, or institutional sensitivities that might affect or limit information sharing?
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    Given current and established information sharing procedures, what types of official information are the most useful (immediate information versus analyzed information) to your organization?
-                    <ol type="a">
-                      <li>
-                        Does your organization perform independent analysis on information provided? If so, what does that analysis process look like?
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    If there is identified “suspicious behavior” observed at a chemical facility, how does the facility report this information locally and within the Chemical Sector?
-                    <ol type="a">
-                      <li>Are trends in suspicious activities tracked across the Chemical Sector nationwide?</li>
-                      <li>Is your organization aware of the “If You See Something, Say Something™” campaign or the Nationwide Suspicious Activity Reporting (SAR) Initiative (NSI)?</li>
-                    </ol>
-                  </li>
-                  <li>
-                    Given evidence of a credible cyber threat to the Chemical Sector, does your organization review its cyber security protocols?
-                  </li>
-                  <li>
-                    What protective security measures or recommendations, if any, will your organization employ following this cyber threat?
-                    <ol type="a">
-                      <li>Does your organization coordinate protective measure implementation with any other organization within the Chemical Sector, or with government entities, such as law enforcement agencies or the PSA / CSA?</li>
-                      <li>How are the protective measures put in place by the Chemical Sector communicated back to the government?</li>
-                      <li>How useful are the recommended protective measures provided in information bulletins and advisories distributed by DHS (e.g., a Joint Intelligence Bulletin [JIB])?</li>
-                    </ol>
-                  </li>
-                </ol>
-              <br /> <br />
-                <h4
-                  style={{
-                    fontStyle: "italic",
-                    fontWeight: "normal",
-                    display: "inline",
-                    color: "var(--custom-blue)",
-                    fontSize: "1.3rem",  // smaller font size
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Cyber-Specific Activities
-                </h4>
-                <br /><br />
-                <ol>
-                  <li>Does your organization have policies or procedures to address cyber vulnerabilities or cyber threats?</li>
-                  <li>What are the procedures and requirements for hardening / securing mobile devices (e.g., laptops, smartphones, and tablets)?</li>
-                  <li>Is the security of these mobile devices ever tested (vulnerability scans, penetration tests, assessments)?</li>
-                  <li>How often is the security tested on these mobile devices?</li>
-                  <li>Is software installed on mobile devices that can be used to control or access your organization’s control system? What are the security procedures? Are there any security controls in place (such as encryption of the communication channel)?</li>
-                  <li>Is operational information (system configuration files, network diagrams, training manuals, or archive data) stored on these devices? How is this information protected from unauthorized access?</li>
-                  <li>If SCADA or ICS systems are compromised, do you have back up manual procedures for these systems?</li>
-                  <li>If SCADA or ICS systems are compromised, what cascading impacts may occur both internally to your facility and externally to other stakeholder / community members?</li>
-                  <li>How are the security policies relating to your mobile devices enforced?</li>
-                  <li>When onsite, are mobile devices connected to the internal operations local-area network (LAN)?</li>
-                  <li>What would be the impact of a lost or stolen device? How many devices are lost or stolen per year? What is the procedure for reporting a lost or stolen device?</li>
-                  <li>Are there laptops that function as servers when offsite (e.g., file transfer protocol [FTP], web, file shares)?</li>
-                  <li>Has there ever been a security-related incident involving mobile devices?</li>
-                  <li>
-                    Does your company have a formal / informal policy or procedure pertaining to information technology (IT) account management?
-                    <ol type="a">
-                      <li>Do these policies or procedures include protocols / steps for establishing, activating, modifying, disabling, and removing accounts?</li>
-                      <li>Do these policies or procedures include protocols / steps for notifying IT account managers / administrators when users are terminated?</li>
-                    </ol>
-                  </li>
-                  <li>
-                  Does your company employ a formal sanctions process for personnel failing to comply with established information security policies and procedures? If so, has this been communicated to the employees, and how often?
-                  </li>
-                  <li>
-                    Security awareness and training:
-                    <ol type="a">
-                      <li>
-                        Does your company provide basic cybersecurity awareness training to all your information system users (including managers and senior executives)? How often is this training provided?
-                      </li>
-                      <li>
-                        Is cybersecurity awareness training provided to new employees prior to them being able to access the information system?
-                      </li>
-                      <li>
-                        Does your company provide adequate security-related training to IT managers, system and network administrators, and other IT personnel having access to system-level software? How often do they receive the training?
-                      </li>
-                    </ol>
-                  </li>
-                  <li>
-                    Does your company terminate information system access upon termination of an individual’s employment?
-                  </li>
-                  <li>
-                    Does your company retrieve all information system-related property (e.g., authentication key, system administration’s handbook / manual, keys, identification cards) during the employment termination process?
-                  </li>
-                  <li>
-                    Does your company participate in the Enhanced Cybersecurity Services (ECS) program through DHS? Would participation in such a program be useful in this situation? If so, how would it be used?
-                  </li>
-                  <li>
-                    Is your company a member of the Critical Infrastructure Cyber Community (C3) Voluntary Program through DHS?
-                  </li>
-                  <li>
-                    Has your company implemented the Framework for Improving Critical Infrastructure Cybersecurity issued by the National Institute of Standards and Technology (NIST)? How does the framework help your company manage cybersecurity risks?
-                  </li>
+                  <li>Assess procedures for verifying vendor communications and urgent updates</li>
+                  <li>Identify gaps in authentication, approval, and auditability of override actions</li>
+                  <li>Test awareness and response to log tampering and time-based deception</li>
+                  <li>Improve cross-validation between systems, data sources and roles</li>
+                  <li>Reflect on trust boundaries across teams</li>
                 </ol>
               </section>
-            </div>
-          </div>
-        </Container>
-        <hr
-        style={{
-        borderTop: "3px solid var(--custom-blue)",
-        opacity: 0.4,
-        margin: "1.5rem 0",
-        width: "95%",
-        marginLeft: "auto",
-        marginRight: "auto",
-        }}
-        />
-        <Container>
-          <div className="row">
-            <div className="col-md-8" style={{ marginLeft: "19%" }}>
-              <section id="module2">
-              <br />
-                <h2 style={{ color: "var(--custom-blue)",textAlign: "center" }}>MODULE TWO: INCIDENT AND INCIDENT AFTERMATH</h2>
-                <h4 style={{ fontWeight: "bold",  display: "inline-block",
-                borderBottom: "2px solid var(--custom-blue)",
-                paddingBottom: "0.2rem" }}>
-                  Scenario
-                </h4>
-                <p><strong>[Insert Facility Name and Location]</strong></p>
-                <p><strong>[Insert Month, Day, Year]: [Time]</strong></p>
-                <p>
-                On the morning of the outbreak, an employee of [insert your facility name] connects his / her laptop to a wireless network hotspot at a local coffee shop. 
-                The employee frequently connects to this hotspot to check his / her personal email and social media accounts prior to work.
-                </p>
-                <p>
-                  The malware (from an infected host connected to the wireless network) scans the local coffee shop subnet for vulnerable systems, 
-                  propagating itself onto the employee’s laptop in a matter of seconds.
-                </p>
-                <p>
-                  Later that morning, the employee briefly connects the laptop to the LAN at [insert your facility name] to 
-                  download data for work-related purposes.
-                </p>
-                <p>
-                  Within minutes, several systems are infected on [insert your facility name’s] network. The laptop is disconnected and unused for the 
-                  remainder of the day, but the malware is already attempting to spread to other local subnets. Eventually, the primary control 
-                  network is scanned, and vulnerable systems are exploited.
-                </p>
-                <p>
-                At some point, infected systems begin to propagate the malware outside of [insert your facility name] by scanning thousands of 
-                random IP addresses across the Internet, increasing overall network traffic severalfold. As a result of these activities, 
-                network system performance degrades significantly in the control system environment.
-                </p>
-                <p>
-                  The mid-shift operator notices some apparent system slowness in reporting system health, device status, etc. The operator logs 
-                  onto the system and begins performing manual checks. During this process, the operator notices that the screen flickers several 
-                  times, but there is no other evidence of a problem. He continues to perform manual checks of the devices and equipment, confirming 
-                  that everything seems to be running normally.
-                </p>
-                <p>
-                  A technician at the internet service provider (ISP) for [insert your facility name] is aware of outbreaks of this particular malware and 
-                  begins to check traffic logs for possible signs of contamination. ISP sends out an email alert to customers that appear to be infected before 
-                  complaints are generated by other network providers. [Insert your facility name] received one of those emails but it does not get routed to 
-                  the appropriate cybersecurity personnel until mid-afternoon.
-                </p>
-                <p>
-                  A worker, who is verifying that all valves are in the “off” position, notices Valve #1 is “open”. According to company 
-                  protocols, he reports the incident.
-                </p>
-                <p>
-                Half (50%) of the failsafe systems are triggered and begin to shutdown various processes. These shutdowns are accompanied by several effluent 
-                and / or gas releases that mandate reporting to the Environmental Protection Agency (EPA), state environmental officials, and local first 
-                responders. A hazardous materials emergency is declared, and the local media outlets begin to call asking for a statement.
-                </p>
-                <p>
-                Half (50%) of the failsafe systems are triggered and begin to shutdown various processes. These shutdowns are accompanied by several effluent 
-                and / or gas releases that mandate reporting to the Environmental Protection Agency (EPA), state environmental officials, and local first 
-                responders. A hazardous materials emergency is declared, and the local media outlets begin to call asking for a statement.
-                </p>
-                <p>
-                Once the attack is realized, control system administrators need to contain and recover the environment at [insert your facility name]. 
-                They determine that the outbreak is isolated to the control networks. During the process, control data is lost, aspects of the SCADA 
-                operation are forced to manual overrides, and there is general loss of functionality in key services across the entire facility.
-                </p>
-              </section>
+
               <section>
-              <br /> <br />
-                <h4 style={{ fontWeight: "bold",  display: "inline-block",
-                borderBottom: "2px solid var(--custom-blue)",
-                paddingBottom: "0.2rem" }}>
-                  Discussion Questions
-                </h4>
-              <br /> <br />
-                <h4
-                  style={{
-                    fontStyle: "italic",
-                    fontWeight: "normal",
-                    display: "inline",
-                    color: "var(--custom-blue)",
-                    fontSize: "1.3rem",  // smaller font size
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  General Discussion Questions
-                </h4>
-                <br /><br />
+                <br />
+                <h4 style={sectionHeaderStyle}>Scenario</h4>
+                <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Day 1 – Sector Wide Threat Advisory:</h5>
+                <p>
+                CISA releases a sector-wide Cybersecurity Advisory describing the emergence of a threat actor group named “Phantom Signal” who are leveraging generative AI to craft highly targeted spear-phishing emails. These campaigns are aimed at industrial control system engineers, HMI operators, and maintenance personnel across a range of sectors reliant on operational technology, such as energy, water, manufacturing, and chemical processing.
+                </p>
+                <p>
+                Emails impersonating known vendors include malicious attachments disguised as vendor configuration updates. Several critical infrastructure providers have flagged phishing emails that imitate their internal change management workflows and support ticket formats with alarming accuracy.
+                </p>
+                <p>
+                 Your facility’s CISO forwards the alert to the OT Security Lead, noting that your plant’s SCADA vendor was referenced in the advisory; either as a spoofed sender or as a potential compromised source of updates. 
+                </p>
+                <p>
+                Later in the day, your OT Security team discovers that a shift engineer received an email appearing to be from the SCADA vendor’s support team, containing a ZIP file with a “critical patch.” The email was formatted correctly and referenced a known support ticket. Believing it was legitimate, the engineer unzipped the file and launched the included installer. No immediate issues were observed, and the activity was not reported at the time.
+                </p>
+                <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Discussion Questions</h5>
                 <ol>
-                  <li>
-                    What are your organization’s information sharing responsibilities during the response to the incident?
-                  </li>
-                  <li>
-                    What formal information sharing processes would your organization use at this point?
-                  </li>
-                  <li>What resources are used to disseminate information?</li>
+                  <li>How do you verify the authenticity of SCADA vendor alerts and patches?</li>
                   <ol type="a">
-                  <li>
-                    What notification capabilities (e.g. alerts, emails, telecommunications, text messages, special tools) does your organization use to share information and communicate protective measures implementation?
-                  </li>
-                  <li>
-                    Are there technological barriers, legal considerations, or institutional sensitivities that might affect or limit information sharing, such as religious customs that prohibit use of electronic communication during specific times?
-                    <ol type="i">
-                      <li>
-                        If so, how will threat-based alerts and notifications be distributed to community members who might not receive the latest alert through electronic communication methods?
-                      </li>
-                    </ol>
-                  </li>
+                    <li>
+                      How are SCADA vendor domains and certificates validated or whitelisted on your network?
+                    </li>
                   </ol>
-                  <li>
-                  What protective security measures will be employed at your organization following these cyber-attacks?
-                  </li>
-                  <li>
-                  What measures would local law enforcement take at this time to protect your organization (e.g., improved cyber security, employee training, increased vigilance)?
-                  </li>
+                  <li>Do you use out-of-band confirmations for urgent advisories?</li>
+                  <li>Which individuals or teams are responsible for assessing and approving vendor-supplied patches that raise security concerns?</li>
+                  <ol type="a">
+                    <li>
+                      Is there a formal process in place to verify, test, or isolate vendor patches before they are deployed in your OT environment? Who initiates that process?
+                    </li>
+                  </ol>
+                  <li>What is your protocol for handling suspicious files before they're opened?</li>
+                  <ol type="a">
+                    <li>
+                      What is your procedure for handling unsolicited vendor updates that appear urgent?
+                    </li>
+                    <li>
+                      Would your email filtering or endpoint protection catch this ZIP file before delivery or execution?
+                    </li>
+                  </ol>
                 </ol>
-              <br /> <br />
-                <h4
-                  style={{
-                    fontStyle: "italic",
-                    fontWeight: "normal",
-                    display: "inline",
-                    color: "var(--custom-blue)",
-                    fontSize: "1.3rem",  // smaller font size
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Cyber-Specific Activities
-                </h4>
-                <br /><br />
+              </section>
+
+              <section>
+                <br />
+                <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Day 3 - Deceptive Operational Guidance:</h5>
+                <p>
+                  An engineer at an HMI Terminal receives a digital bulletin titled "Sensor Drift Advisory – Maintenance Override Authorized." The message appears to originate from your internal maintenance scheduler and instructs the engineer to manually override Safety Damper 32 due to pressure fluctuations allegedly caused by sensor drift.
+                </p>
+                <p>
+                 The bulletin is displayed through the standard workflow interface, uses exact internal formatting, and references a legitimate past maintenance ticket, making it appear fully credible. The system does not prompt for additional confirmation, and the override is staged and executed automatically. No alerts or warnings are triggered. 
+                </p>
+                <p>
+                  Upon later review, no record of the advisory exists in the CMMS (Computerized Maintenance Management System) or the central work order system. Internal audit logs show no official
+issuance of the override instruction. The command was generated by malware embedded within the HMI, mimicking past operator behavior based on cloned historical input patterns.
+                </p>
+                <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Discussion Questions</h5>
                 <ol>
-                  <li>
-                  What types of cybersecurity policies, plans, and / or protocols does your company have in place to detect, respond to, and recover from a cyberattack?
-                  </li>
-                  <li>
-                  Who would your organization contact internally or externally about the incident?
-                  </li>
-                  <li>
-                  What internal and external messages should be developed? How are they distributed?
-                  </li>
-                  <li>
-                  What are the business implications of the scenario? How are they determined?
-                  </li>
-                  <li>
-                  Would your organization contact customers? If so, how is your firm’s public relations department involved? What role would you have in shaping the messages for customers and media inquiries?
-                  </li>
-                  <li>
-                  At what point is law enforcement contacted?
-                  </li>
-                  <li>
-                  What protocols exist in your firm to address such an event?
+                  <li>Are override instructions cross-checked with ticketing systems or supervisor approvals?</li>
                   <ol type="a">
                     <li>
-                    Are there detection, prioritization, and response capabilities?
+                      Is there a process to ensure overrides are legitimate and not maliscious or mistaken?
                     </li>
                     <li>
-                    Do employees know what constitutes suspicious cybersecurity activities or incidents?
-                    </li>
-                    <li>
-                    Do they know what actions to take when one arises?
+                      Could an attacker forge override instructions that look real without being verified against authorized records?
                     </li>
                   </ol>
-                  </li>
-                  <li>
-                    Would this incident trigger contact with regulators?
-                    <ol type = "a">
+                  <li>Are HMI messages version controlled or auditable</li>
+                  <ol type="a">
                     <li>
-                    When would your organization make contact?
+                      Can tampered or forged HMI messages be detected later?
                     </li>
+                    <li>
+                      Do you have digital forensics or change tracking on your HMI interface?
+                    </li>
+                  </ol>                  
+                  <li>Does the system support dual-operator confirmation for overrides</li>
+                  <ol type="a">
+                    <li>
+                      Are there safeguards to prevent a single point of failure or insider threat?
+                    </li>
+                  </ol>  
+                </ol>
+              </section>
+
+              <section>
+                <br />
+                <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Day 4 - Temporal Log Disruptions:</h5>
+                <p>
+                  During overnight monitoring, a shift supervisor notices system logs containing alerts timestamped 6 to 12 hours in the future. Sensor values appear plausible, for example, showing a gradual rise in temperature or pressure, but contradict real-time readings from nearby independent gauges.
+                </p>
+                <p>
+                 Some log entries have been edited and digitally signed using valid user credentials, even though those users were not on shift during the logged activity, suggesting credential compromise or impersonation. 
+                </p>
+                <p>
+                Initial IT investigation confirms that log authenticity checksums remain intact, indicating that manipulation likely occurred at the firmware or storage layer.  
+                </p>
+                <p>
+                 While all ICS subsystems use NTP for time synchronization, clock skew is regionally inconsistent, adding complexity to the forensic analysis. 
+                </p>
+                <p><i>IT and OT teams must collaborate to determine how these sophisticated temporal manipulations are occurring undetected and to identify affected systems.</i></p>
+
+                <p><i>While the anomalies have not yet triggered operational consequences, the nature of the deception suggests deeper, undetected compromise may be present. At this stage, your organization must decide whether to escalate its posture or continue monitoring.</i></p>
+
+                <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Discussion Questions</h5>
+                <ol>
+                  <li>What multi-factor or hardware-based validation methods exist for critical override commands?</li>
+                  <li>
+                    How does your organization authenticate the origin and validity of internal ICS messages?
+                    <ol type="a">
+                      <li>Have operators received scenario-based training on synthetic data threats or AI-injected instructions?</li>
                     </ol>
                   </li>
+                  <li>How would you cross-check operational instructions with your internal work order systems or maintenance logs?</li>
+                  <li>Are logs stored in WORM (Write Once Read Many) or immutable systems?</li>
+                  <li>Is log metadata (e.g., MAC addresses, device ID) used for source correlation?</li>
+                  <li>How do you detect tampering across decentralized time domains?</li>
+                  <li>Do you maintain a historical “golden dataset” of baseline log behavior for anomaly detection?</li>
                   <li>
-                    If SCADA or ICS systems are compromised, do you have back up manual procedures for these systems?
-                  </li>
-                  <li>
-                    If SCADA or ICS systems are compromised, what cascading impacts may occur both internally to your facility and externally to other stakeholders / community members?
-                  </li>
-                  <li>
-                    Given the scenario, does your Emergency Action Plan (EAP) include measures for protecting the security of chemicals at your facility?
-                  </li>
-                  <li>
-                    Who is responsible for ensuring the chemical security measures are met?
-                  </li>
-                  <li>
-                    Given the scenario, does your notification to responders include information about the chemicals at your facility?
-                    <ol type = "a">
-                      <li>
-                        Do you maintain a relationship with first responders as to what chemicals are at your facility?
-                      </li>
-                      <li>
-                      Do you know if they are able to adequately respond if an attack at your facility impacts those chemicals?
-                      </li>
-                      <li>
-                      Who else within the first responder community should be notified if the attack impacts those chemicals?
-                      </li>
+                    Considering the advanced nature of this manipulation, what process or technology gaps does this incident reveal in your OT security posture?
+                    <ol type="a">
+                      <li>What improvements would you prioritize in response to these gaps?</li>
                     </ol>
-                  </li>
-                  <li>
-                  Are IT and business continuity planning (BCP) functions coordinated with physical security? Will they collaborate with public relations, human resources, and legal departments?
                   </li>
                 </ol>
               </section>
@@ -525,3 +190,4 @@ function scrollToId(id) {
 };
 
 export default Exercise001;
+

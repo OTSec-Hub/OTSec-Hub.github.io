@@ -55,8 +55,6 @@ export default function VideoManagement({ children }) {
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
-
-
     const theme = useTheme();
 
     useEffect(() => {
@@ -64,6 +62,8 @@ export default function VideoManagement({ children }) {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/video/get_videos`);
                 setVideos(response.data);
+                console.log(response.data);
+                
             } catch (error) {
                 console.error("Error fetching videos:", error);
             } 
@@ -150,7 +150,7 @@ export default function VideoManagement({ children }) {
                                     <Table>
                                         <ThemedTableHead>
                                             <TableRow>
-                                                <ThemedTableCell align="center">ID</ThemedTableCell>
+                                                <ThemedTableCell align="center">Video</ThemedTableCell>
                                                 <ThemedTableCell align="center">Title</ThemedTableCell>
                                                 <ThemedTableCell align="center">Subtitle</ThemedTableCell>
                                                 <ThemedTableCell align="center">Description</ThemedTableCell>
@@ -181,6 +181,7 @@ export default function VideoManagement({ children }) {
                                                             sx={{
                                                                 maxWidth: 200,
                                                                 maxHeight: 60,
+                                                                margin: '0 auto',
                                                                 overflow: 'auto',
                                                                 whiteSpace: 'pre-wrap',
                                                                 wordWrap: 'break-word',

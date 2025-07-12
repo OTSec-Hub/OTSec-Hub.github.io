@@ -6,6 +6,9 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Title from "../components/Title";
 import BackToTop from "../components/BackToTop";
 import { updateTitle } from "../utils";
+import { InputGroup, FormControl } from "react-bootstrap";
+import { Icon } from "@iconify/react";
+
 
 // #region styled-components
 const StyledSection = styled.section`
@@ -26,6 +29,8 @@ const StyledSection = styled.section`
 // #region component
 const Videos = () => {
     const [videos, setVideos] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+
 
     useEffect(() => {
         async function fetchVideos() {
@@ -74,13 +79,38 @@ const Videos = () => {
 
                     <Container>
                         <p className="text-center fs-5 text-muted mb-4">
-                            In this series of labs, we explore the fundamentals of ICS
+                            In this series of videos, we explore the fundamentals of ICS
                             security, PLCs, and common attack vectors. More videos coming
                             soon.
                         </p>
-
+                        <p className="text-center fs-7 text-muted mb-4">
+                            Want to contribute to the community? If you have a video related to OT/ICS security, you can{" "}
+                        <Link to="/Resources/Videos/Video-Submission" className="text-primary fw-semibold text-decoration-none">
+                        submit your own here
+                        </Link>
+                        </p>
+                    </Container>
+                    <Container className="d-flex justify-content-center mb-4">
+                    <InputGroup className="mx-auto">
+                        <InputGroup.Text id="search">
+                        <Icon icon="ic:round-search" />
+                        </InputGroup.Text>
+                        <FormControl
+                        placeholder="Search videos by title"
+                        aria-label="Search videos"
+                        aria-describedby="search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.currentTarget.value)}
+                        />
+                    </InputGroup>
+                    </Container>
+                    <Container>
                         <Row className="g-4">
-                            {videos.map((video) => (
+                            {videos
+                            .filter((video) =>
+                                video.title.toLowerCase().includes(searchTerm.toLowerCase())
+                            )
+                            .map((video) => (
                                 <Col key={video.id} xs={12} md={6} lg={4}>
                                     <Card className="video-card h-100">
                                         <Card.Img

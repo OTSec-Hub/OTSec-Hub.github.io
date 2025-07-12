@@ -24,6 +24,8 @@ import Lab4Page from "./pages/Lab4Page";
 import Lab5Page from "./pages/Lab5Page";
 import Lab6Page from "./pages/Lab6Page";
 import Exercise001 from "./pages/Exercise-001"
+import Exercise002 from './pages/Exercise-002'
+import Exercise003 from './pages/Exercise-003'
 import Benchmarks from "./pages/Benchmarks"
 import Exercises from "./pages/Exercises"
 import Announcements from "./pages/Announcements";
@@ -41,6 +43,7 @@ import UsersManagment from "./pages/Admin/UsersManagment";
 import TrackProgress from "./pages/Admin/TrackProgress";
 import CourseManagment from "./pages/Admin/CourseManagement";
 import VerificationPage from "./pages/VerificationPage";
+import VideoSubmissionPage from "./pages/StudentVideoSubmission";
 
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -221,9 +224,12 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
           <Route path="/Resources/Exercises" element={<Exercises />} />
           <Route path="/Resources/Videos" element={<Videos />} />
+          <Route path="/Resources/Videos/Video-Submission" element={<VideoSubmissionPage />} />
           <Route path="/Resources/Videos/:videoId" element={<VideoDetailPage />} />
           <Route path="/Benchmarks/:datasetId" element={<DatasetDetail />} />
           <Route path="/Exercises/Exercise-001" element={<Exercise001 />} />
+          <Route path="/Exercises/Exercise-002" element={<Exercise002 />} />
+          <Route path="/Exercises/Exercise-003" element={<Exercise003 />} />
           <Route path="/Announcements" element={<Announcements />} />
           <Route path="/Weekly-Discussions" element={<Discussions />} />
           <Route path="/ContactPage" element={<ContactPage />} />

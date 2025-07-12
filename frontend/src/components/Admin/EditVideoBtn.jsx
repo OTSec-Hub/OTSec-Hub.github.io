@@ -12,12 +12,13 @@ import axios from "axios";
 
 const EditVideoBtn = ({ video }) => {
   const [open, setOpen] = React.useState(false);
-  const [passwordError, setPasswordError] = useState("");
   const [videoData, setVideoData] = React.useState({
     id: video.id || "",
     title: video.title || "",
     subtitle: video.subtitle || "",
     description: video.description || "",
+    url: video.url || "",
+    quizzes: video.quizzes || [],
   });
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
@@ -55,6 +56,8 @@ const EditVideoBtn = ({ video }) => {
           title: videoData.title,
           subtitle: videoData.subtitle,
           description: videoData.description,
+          url: videoData.url,
+          quizzess: videoData.quizzes,
         }
       );
       setSuccess(true);
@@ -79,6 +82,18 @@ const EditVideoBtn = ({ video }) => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit video</DialogTitle>
         <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="url"
+            label="Url"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={videoData.url}
+            onChange={handleChange}
+            disabled={loading}
+          />
           <TextField
             autoFocus
             margin="dense"
@@ -113,6 +128,56 @@ const EditVideoBtn = ({ video }) => {
             onChange={handleChange}
             disabled={loading}
           />
+
+          {videoData.quizzes.map((quiz, index) => (
+            <div key={index} style={{ marginTop: "20px", padding: "10px", border: "1px solid #ccc", borderRadius: "6px" }}>
+              <TextField
+                label={`Question ${index + 1}`}
+                variant="standard"
+                fullWidth
+                value={quiz.question}
+                onChange={(e) => {
+                  const updated = [...videoData.quizzes];
+                  updated[index].question = e.target.value;
+                  setVideoData((prev) => ({ ...prev, quizzes: updated }));
+                }}
+                disabled={loading}
+                style={{ marginBottom: "10px" }}
+              />
+
+              <TextField
+                label="Correct Answer"
+                variant="standard"
+                fullWidth
+                value={quiz.correct_answer}
+                onChange={(e) => {
+                  const updated = [...videoData.quizzes];
+                  updated[index].correct_answer = e.target.value;
+                  setVideoData((prev) => ({ ...prev, quizzes: updated }));
+                }}
+                disabled={loading}
+                style={{ marginBottom: "10px" }}
+              />
+
+              {["option1", "option2", "option3", "option4"].map((optKey, optIndex) => (
+                <TextField
+                  key={optKey}
+                  label={`Option ${optIndex + 1}`}
+                  variant="standard"
+                  fullWidth
+                  value={quiz[optKey]}
+                  onChange={(e) => {
+                    const updated = [...videoData.quizzes];
+                    updated[index][optKey] = e.target.value;
+                    setVideoData((prev) => ({ ...prev, quizzes: updated }));
+                  }}
+                  disabled={loading}
+                  style={{ marginBottom: "5px" }}
+                />
+              ))}
+            </div>
+          ))}
+
 
           {success && (
             <p

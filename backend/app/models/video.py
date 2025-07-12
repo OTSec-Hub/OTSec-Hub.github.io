@@ -13,3 +13,5 @@ class Video(Base):
     # educator = relationship("Educator", back_populates="videos")  # Relationship to Educator
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)  # Creation timestamp
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)  # Update timestamp
+    
+    quizzes = relationship("Quiz", back_populates="video", cascade="all, delete-orphan")

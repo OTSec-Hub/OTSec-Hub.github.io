@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
+from .quiz import QuizOut
+from typing import List, Optional
 
 
 class VideoViewCreate(BaseModel):
@@ -9,8 +11,11 @@ class VideoViewOut(VideoViewCreate):
     user_id: int
     video_id: int
     first_viewed: datetime
-    user_name: str
-    video_title: str
+    user_name: Optional[str] = None
+    video_title: Optional[str] = None
+    got_fullmark: Optional[bool] = None
+    # quizzes: List[QuizOut]
+
 
     class Config:
         # orm_mode = True
