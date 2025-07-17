@@ -1,19 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from app.schemas.video import VideoCreate, VideoOut, VideoUpdate
-from app.schemas.quiz import QuizOut 
-from app.schemas.videoView import VideoViewCreate , VideoViewOut
 from app.models.video import Video
 from app.models.quiz import Quiz
-from app.models.videoView import VideoView
 from app.database import get_db
 from typing import List
-from app.auth.auth import get_current_user
 from dotenv import load_dotenv
-from app.models.user import User
-import os
 
 load_dotenv()
 router = APIRouter()
@@ -99,14 +93,11 @@ def update_video(video_id: int, video: VideoUpdate, db: Session = Depends(get_db
                     db_quiz.question = updated_quiz.question
                 if updated_quiz.correct_answer:
                     db_quiz.correct_answer = updated_quiz.correct_answer
-                if updated_quiz.option1:
-                    db_quiz.option1 = updated_quiz.option1
-                if updated_quiz.option2:
-                    db_quiz.option2 = updated_quiz.option2
-                if updated_quiz.option3:
-                    db_quiz.option3 = updated_quiz.option3
-                if updated_quiz.option4:
-                    db_quiz.option4 = updated_quiz.option4
+                if updated_quiz.options:
+                    db_quiz.option1 = updated_quiz.options[0]
+                    db_quiz.option2 = updated_quiz.options[1]
+                    db_quiz.option3 = updated_quiz.options[2]
+                    db_quiz.option4 = updated_quiz.options[3]
 
     db.commit()
     db.refresh(db_video)
@@ -129,102 +120,3 @@ def delete_video(video_id:int,db : Session = Depends(get_db)):
 # ====================================================================================
 # ====================================================================================
 
-@router.post("/video_view", response_model=VideoViewOut)
-async def track_video_view(
-    view: VideoViewCreate,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    try:
-        # Check if view already exists
-        existing = db.query(VideoView).filter(
-            VideoView.user_id == current_user.id,
-            VideoView.video_id == view.video_id
-        ).first()
-
-        if not existing:
-            db_view = VideoView(
-                user_id=current_user.id,
-                # user_name=current_user.name,
-                video_id=view.video_id
-            )
-            db.add(db_view)
-            db.commit()
-            db.refresh(db_view)
-            return db_view
-        return existing
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
-    
-# @router.get('/get_video_views', response_model=List[VideoOut])
-# def get_video_views(db: Session = Depends(get_db)):
-#     viewed_videos = db.query(VideoView).all()
-#     return viewed_videos
-
-@router.get("/video_views", response_model=list[VideoViewOut])
-async def get_video_views(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    try:
-        views = (
-            db.query(VideoView)
-            .join(User, VideoView.user_id == User.id)
-            .join(Video, VideoView.video_id == Video.id)
-            .options(joinedload(VideoView.user), joinedload(VideoView.video))
-            .all()
-        )
-        return [
-            VideoViewOut(
-                user_id=view.user_id,
-                video_id=view.video_id,
-                first_viewed=view.first_viewed,
-                user_name=view.user.name,
-                video_title=view.video.title,
-                got_fullmark=view.got_fullmark
-            )
-            for view in views
-        ]
-        # return [VideoViewOut.from_orm(view) for view in views] 
-        # #won't work because Pydantic tries to access .user_name and .video_title on the VideoView model instance, but those fields do not exist directly
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    
-# @router.get("/video_view/has_watched/{video_id}")
-# async def has_watched_video(video_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-#     view = db.query(VideoView).filter_by(
-#         video_id=video_id,
-#         user_id=current_user.id
-#     ).first()
-
-#     return {"hasWatched": view is not None}
-    
-
-@router.patch("/video_view/fullmark/{video_id}")
-async def mark_fullmark(video_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    try:
-        view = db.query(VideoView).filter_by(
-            video_id=video_id,
-            user_id=current_user.id
-        ).first()
-
-        if not view:
-            raise HTTPException(status_code=404, detail="View not found")
-
-        view.got_fullmark = True
-        db.commit()
-        return {"message": "Marked as full score"}
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
-    
-@router.get("/single_view/{video_id}", response_model=VideoViewOut)
-def single_view(video_id: int, 
-                db: Session = Depends(get_db), 
-                current_user: User = Depends(get_current_user)):
-    user_id = current_user.id
-
-    view = db.query(VideoView).filter_by(user_id=user_id, video_id=video_id).first()
-
-    if not view:
-        raise HTTPException(status_code=404, detail="User has not watched this video")
-
-    return view

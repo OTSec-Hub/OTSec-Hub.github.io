@@ -41,9 +41,17 @@ import ProfilePage from "./pages/ProfilePage";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import UsersManagment from "./pages/Admin/UsersManagment";
 import TrackProgress from "./pages/Admin/TrackProgress";
-import CourseManagment from "./pages/Admin/CourseManagement";
+import LabsManagement from "./pages/Admin/LabsManagement"
 import VerificationPage from "./pages/VerificationPage";
 import VideoSubmissionPage from "./pages/StudentVideoSubmission";
+import ExerciseSubmission from "./pages/ExerciseSubmission";
+import VideosManagment from "./pages/Admin/VideosManagement";
+import LabSubmission from "./pages/LabSubmission";
+import BenchmarkSubmission from "./pages/BenchmarkSubmission";
+import CommunityLabs from "./pages/CommunityLabs";
+import CommunityExercises from "./pages/CommunityExercises";
+import CommunityVideos from "./pages/CommunityVideos";
+import CommunityBenchmarks from "./pages/CommunityBenchmarks";
 
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -59,7 +67,6 @@ import Footer from "./components/Footer";
 import { footerTheme, navLogo } from "./config";
 // Util
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
-import VideosManagment from "./pages/Admin/VideosManagement";
 
 
 // #region component
@@ -156,7 +163,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
       },
     ];
 
-      dispatch(setProjects(placeholderProjects));
+    dispatch(setProjects(placeholderProjects));
     //}
   }, [projectsData, projectCardImages, dispatch]);
 
@@ -224,14 +231,21 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
           <Route path="/Resources/Exercises" element={<Exercises />} />
           <Route path="/Resources/Videos" element={<Videos />} />
-          <Route path="/Resources/Videos/Video-Submission" element={<VideoSubmissionPage />} />
           <Route path="/Resources/Videos/:videoId" element={<VideoDetailPage />} />
           <Route path="/Benchmarks/:datasetId" element={<DatasetDetail />} />
           <Route path="/Exercises/Exercise-001" element={<Exercise001 />} />
           <Route path="/Exercises/Exercise-002" element={<Exercise002 />} />
           <Route path="/Exercises/Exercise-003" element={<Exercise003 />} />
+          <Route path="/Resources/Videos/Video-Submission" element={<VideoSubmissionPage />} />
+          <Route path="/Resources/Exercises/Exercise-Submission" element={<ExerciseSubmission />} />
+          <Route path="/Resources/All-Labs/Lab-Submission" element={<LabSubmission />} />
+          <Route path="/Resources/Benchmarks/Benchmark-Submission" element={<BenchmarkSubmission />} />
           <Route path="/Announcements" element={<Announcements />} />
           <Route path="/Weekly-Discussions" element={<Discussions />} />
+          <Route path="/Community/Community-Labs" element={<CommunityLabs />} />
+          <Route path="/Community/Community-Exercises" element={<CommunityExercises />} />
+          <Route path="/Community/Community-Videos" element={<CommunityVideos />} />
+          <Route path="/Community/Community-Benchmarks" element={<CommunityBenchmarks />} />
           <Route path="/ContactPage" element={<ContactPage />} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route path="/RegisterPage" element={<RegisterPage />} />
@@ -240,6 +254,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/UsersManagment" element={<UsersManagment />} />
           <Route path="/TrackProgress" element={<TrackProgress />} />
           <Route path="/VideosManagement" element={<VideosManagment />} />
+          <Route path="/LabsManagement" element={<LabsManagement />} />
           <Route path="/verify-email" element={<VerificationPage />} />
           <Route path="/All-Labs/Lab0" element={<Lab0Page />} />
           <Route path="/All-Labs/Lab1" element={<Lab1Page />} />

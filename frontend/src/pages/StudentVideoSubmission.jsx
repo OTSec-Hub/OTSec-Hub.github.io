@@ -185,7 +185,7 @@ const VideoSubmissionPage = () => {
   <div className="col text-center" style={{ marginLeft: "-65px" }}>
     <h1 className="mb-0">Submit Your Video!</h1>
   </div>
-  <div className="col-auto" /> {/* Empty col to balance the row */}
+  <div className="col-auto" /> {/*Empty col to balance the row*/}
 </div>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formTitle">

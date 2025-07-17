@@ -90,7 +90,7 @@ const VideoDetailPage = () => {
     const handlePlay = async () => {
         if (!hasPlayed) {
             try {
-                await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/video/video_view`, {
+                await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/video_view`, {
                     video_id: videoId
                 }, {
                     headers: {
@@ -134,7 +134,7 @@ const VideoDetailPage = () => {
                 </div>
                 <p className="text-muted my-4">{video.description}</p>
                 <div className="">
-                    <Quiz questions={quizzes} />
+                    <Quiz questions={quizzes} videoId={videoId} />
                 </div>
             </div>
         </Container>

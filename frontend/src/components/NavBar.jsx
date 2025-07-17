@@ -26,11 +26,24 @@ const navLinks = {
         { id: "3R-4", name: "Videos", route: "/Resources/Videos" },
       ]
     },
-    { id: "3R", name: "Announcements", route: "/Announcements" },
-    { id: "4R", private: true, name: "Discussions Forums", route: "/Weekly-Discussions" },
-    { id: "5R", name: "Contact Us", route: "/ContactPage" }
+    {
+      id: "3R",
+      name: "Community",
+      dropdown: true,
+      private: true, // <-- Add flag
+      children: [
+        { id: "3R-1", name: "Labs", route: "/Community/Community-Labs" },
+        { id: "3R-2", name: "Benchmarks", route: "/Community/Community-Benchmarks" },
+        { id: "3R-3", name: "Exercises", route: "/Community/Community-Exercises" },
+        { id: "3R-4", name: "Videos", route: "/Community/Community-Videos" },
+      ]
+    },
+    { id: "4R", name: "Announcements", route: "/Announcements" },
+    { id: "5R", private: true, name: "Discussions Forums", route: "/Weekly-Discussions" },
+    { id: "6R", name: "Contact Us", route: "/ContactPage" }
   ]
 };
+
 // #endregion
 
 const StyledDiv = styled.div`

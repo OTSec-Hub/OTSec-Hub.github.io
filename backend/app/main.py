@@ -1,9 +1,6 @@
 from fastapi import FastAPI
-from app.routes import user as user_routes
-from app.routes import auth
-from app.routes import educators
+from app.routes import user, auth, educators, video, videoProgress, pieProgress
 from app.database import engine, Base
-from app.routes import video
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
@@ -25,10 +22,12 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(user_routes.router, tags=["users"])
-app.include_router(auth.router, prefix="/api/auth")
-app.include_router(educators.router, prefix="/api")
-app.include_router(video.router, prefix="/api/video")
+app.include_router(user.router, tags=["users"])
+app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
+app.include_router(educators.router, prefix="/api/educators", tags=["educators"])
+app.include_router(video.router, prefix="/api/video", tags=["videos"])
+app.include_router(videoProgress.router, prefix="/api", tags=["video_views"])
+app.include_router(pieProgress.router, prefix="/api/progress", tags=["pieProgress"])
 
 # Initialize database
 # Base.metadata.drop_all(bind=engine)

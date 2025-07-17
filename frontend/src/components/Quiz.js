@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const Quiz = ({ questions }) => {
-  const { videoId } = useParams();
+const Quiz = ({ questions, videoId }) => {
+  // const { videoId } = useParams();
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
@@ -19,17 +19,21 @@ const Quiz = ({ questions }) => {
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   useEffect(() => {
+    if (!videoId) {
+      setIsWatched(true);
+      return;
+    }
+
     const checkWatchedStatus = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/video/single_view/${videoId}`,
+          `${process.env.REACT_APP_API_BASE_URL}/api/video_view/single_view/${videoId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
-        console.log('a5r response:', response.data);
 
         // If video view exists, allow quiz
         if (response.data) {
@@ -37,21 +41,26 @@ const Quiz = ({ questions }) => {
         } else {
           setIsWatched(false);
         }
-        // console.log(response.data.got_fullmark);
 
-        if (response.data.got_fullmark) {
-          setCompletedQuiz(true)
+        if (response.data?.got_fullmark) {
+          setCompletedQuiz(true);
         } else {
-          setCompletedQuiz(false)
+          setCompletedQuiz(false);
         }
       } catch (error) {
-        console.error("Failed to check video view status:", error);
-        setIsWatched(false); // fallback
+        if (error.response && error.response.status === 404) {
+          // Not found is expected — no console error needed
+          setIsWatched(false);
+        } else {
+          console.error("Failed to check video view status:", error);
+          setIsWatched(false); // fallback for other errors
+        }
       }
     };
 
     checkWatchedStatus();
   }, [videoId]);
+
 
   const handleAnswer = (option) => {
     setSelected(option);
@@ -68,10 +77,10 @@ const Quiz = ({ questions }) => {
       setShowScore(true);
 
       // ✅ Patch if full mark
-      if (score === questions.length) {
+      if (score === questions.length && videoId) {
         try {
           await axios.patch(
-            `${process.env.REACT_APP_API_BASE_URL}/api/video/video_view/fullmark/${videoId}`,
+            `${process.env.REACT_APP_API_BASE_URL}/api/video_view/fullmark/${videoId}`,
             {},
             {
               headers: {
@@ -152,7 +161,8 @@ const Quiz = ({ questions }) => {
       <div className="d-flex align-items-start justify-content-between">
         <h3 className=" text-primary">Quick Quiz: Test Your Knowledge</h3>
         {completedQuiz &&
-          <div className="alert alert-success d-inline-block py-2 px-3" style={{ maxWidth: 600 }}>
+          <div className="alert alert-success d-inline-block py-2 px-3
+          " style={{ maxWidth: 600 }}>
             <strong>Solved ✅</strong>
           </div>
         }

@@ -17,6 +17,23 @@ const Exercise003 = () => {
     marginTop: "0rem"
   };
 
+    //Form state
+  const [formResponses, setFormResponses] = React.useState({
+    response1: "",
+    response2: "",
+    response3: "",
+    response4:"",
+    response5:""
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted responses:", formResponses);
+    alert("Thanks for submitting your reflections!");
+    // You could also POST to an API or store in localStorage here
+  };
+
+
   return (
     <>
       <main>
@@ -133,6 +150,83 @@ const Exercise003 = () => {
                 </ol>
               </section>
 
+            </div>
+          </div>
+        </Container>
+<Container>
+          <div className="row">
+            <div className="col-md-8" style={{ marginLeft: "19%" }}>
+              <section style={{ marginTop: "2rem", padding: "1rem", borderTop: "2px solid var(--custom-blue)" }}>
+                <h4 style={sectionHeaderStyle}>Post-Exercise Reflection</h4>
+                <form onSubmit={handleSubmit}>
+                  <div style={{ marginBottom: "1rem" }}>
+                    <label htmlFor="response1">What were your key takeaways from this exercise?</label>
+                    <textarea
+                      id="response1"
+                      name="response1"
+                      className="form-control"
+                      rows={3}
+                      value={formResponses.response1}
+                      onChange={(e) =>
+                        setFormResponses({ ...formResponses, response1: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div style={{ marginBottom: "1rem" }}>
+                    <label htmlFor="response2">How did this scenario highlight strengths or weaknesses in your current processes or tools?</label>
+                    <textarea
+                      id="response2"
+                      name="response2"
+                      className="form-control"
+                      rows={3}
+                      value={formResponses.response3}
+                      onChange={(e) =>
+                        setFormResponses({ ...formResponses, response3: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div style={{ marginBottom: "1rem" }}>
+                    <label htmlFor="response3">If this scenario occurred in your organization, what would you do differently now that you’ve completed the exercise?</label>
+                    <textarea
+                      id="response3"
+                      name="response3"
+                      className="form-control"
+                      rows={3}
+                      value={formResponses.response3}
+                      onChange={(e) =>
+                        setFormResponses({ ...formResponses, response3: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div style={{ marginBottom: "1rem" }}>
+                    <label htmlFor="response4">Were there any moments in the exercise where you felt unsure how to respond? What additional training or resources would help?</label>
+                    <textarea
+                      id="response4"
+                      name="response4"
+                      className="form-control"
+                      rows={3}
+                      value={formResponses.response3}
+                      onChange={(e) =>
+                        setFormResponses({ ...formResponses, response3: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div style={{ marginBottom: "1rem" }}>
+                    <label htmlFor="response5">What risks or system dependencies were exposed that you hadn’t fully considered before?</label>
+                    <textarea
+                      id="response5"
+                      name="response5"
+                      className="form-control"
+                      rows={3}
+                      value={formResponses.response3}
+                      onChange={(e) =>
+                        setFormResponses({ ...formResponses, response3: e.target.value })
+                      }
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+              </section>
             </div>
           </div>
         </Container>

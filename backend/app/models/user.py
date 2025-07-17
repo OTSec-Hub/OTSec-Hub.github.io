@@ -13,3 +13,5 @@ class User(Base):
     verification_token = Column(String, nullable=True)
     # course_id = Column(Integer, ForeignKey('courses.id'))
     # course = relationship("Course", back_populates="students")
+    
+    video_progress = relationship("VideoProgress", back_populates="user")

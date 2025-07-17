@@ -5,6 +5,7 @@ from .auth import create_access_token, SECRET_KEY, ALGORITHM
 from dotenv import load_dotenv
 import os
 
+#create temp token for educator
 def create_verification_token(email: str):
     return create_access_token(
         data={"email": email, "purpose": "verify_educator"},

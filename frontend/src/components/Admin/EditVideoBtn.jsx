@@ -50,24 +50,36 @@ const EditVideoBtn = ({ video }) => {
     setSuccess(false);
 
     try {
+      const payload = {
+        title: videoData.title,
+        subtitle: videoData.subtitle,
+        description: videoData.description,
+        url: videoData.url,
+        quizzes: videoData.quizzes.map(q => ({
+          id: q.id,
+          question: q.question,
+          correct_answer: q.correct_answer,
+          options: [q.option1, q.option2, q.option3, q.option4], // ✅ critical line
+        }))
+      };
+
+      console.log("Payload to send:", payload); // debug
+
       const response = await axios.put(
         `${process.env.REACT_APP_API_BASE_URL}/api/video/update_video/${videoData.id}`,
-        {
-          title: videoData.title,
-          subtitle: videoData.subtitle,
-          description: videoData.description,
-          url: videoData.url,
-          quizzess: videoData.quizzes,
-        }
+        payload
       );
+
       setSuccess(true);
     } catch (err) {
       console.error(err);
       setError("Failed to update video.");
     } finally {
       setLoading(false);
+      console.log("Data updated successfully");
     }
   };
+
 
   return (
     <>

@@ -69,7 +69,14 @@ function Benchmarks() {
       <Container className="text-center my-5">
         <Title size="h2" text="Benchmarks" />
       </Container>
-
+      <container className="mb-3">
+      <p className="text-center fs-7 text-muted mb-4">
+        Know a valuable dataset others should explore? Contribute it to the benchmarks section{" "}
+        <Link to="/Resources/Benchmarks/Benchmark-Submission" className="text-primary fw-semibold text-decoration-none">
+          here.
+        </Link>
+      </p>
+      </container>
       <div className="p-4 max-w-xl mx-auto">
         {/*<h1 className="text-xl font-bold mb-4">Datasets</h1>*/}
         {datasets.map(dataset => (

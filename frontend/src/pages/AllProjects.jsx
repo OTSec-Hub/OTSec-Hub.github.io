@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // Styles
 import styled from "styled-components";
 // State
@@ -129,6 +130,12 @@ const AllProjects = () => {
         <Container className="mb-3">
           <p className="text-center fs-5 text-muted">
             Industrial Control Systems (ICS) are of paramount importance nowadays. In this series of labs, we will help you understand what a Programmable Logic Controller (PLC) is, what ICS are, the security vectors of ICS, how PLC binaries differ from standard binaries, and how to reverse engineer and fuzz them. All materials could be found on our Github repository : https://github.com/HaithemLamri/OTSsec-Hub/tree/main.
+          </p>
+          <p className="text-center fs-7 text-muted mb-4">
+            Built a hands-on lab others can learn from? Share it with the community{" "}
+            <Link to="/Resources/All-Labs/Lab-Submission" className="text-primary fw-semibold text-decoration-none">
+              here.
+            </Link>
           </p>
         </Container>
         <Container>

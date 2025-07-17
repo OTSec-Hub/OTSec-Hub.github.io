@@ -1,13 +1,19 @@
-from fastapi import APIRouter,Depends, BackgroundTasks, HTTPException
+from fastapi import APIRouter,Depends, BackgroundTasks, HTTPException, status
 from sqlalchemy.orm import Session
 from ..database import get_db
 from ..auth.email import send_verification_email
 from ..auth.verification import create_verification_token, verify_educator_token
 from ..models.user import User
-from ..schemas.user import UserCreate
+from ..schemas.user import UserCreate, UserOut, Token, UserLogin
+from ..auth.auth import verify_password, create_access_token
+from passlib.hash import bcrypt
 from pydantic import BaseModel
+from dotenv import load_dotenv
+import os
 
-router = APIRouter(tags=["authentication"])
+load_dotenv()
+
+router = APIRouter()
 
 # Note camelCase to match frontend
 
@@ -34,6 +40,46 @@ router = APIRouter(tags=["authentication"])
 #     )
     
 #     return {"message": "Verification email sent"}
+
+
+@router.post("/register", response_model=UserOut)
+async def register(user: UserCreate,background_tasks: BackgroundTasks
+, db: Session = Depends(get_db)):
+    # Check if email already exists
+    existing_user = db.query(User).filter(User.email == user.email).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+
+    # Hash the password and create user
+    hashed = bcrypt.hash(user.password)
+    token = create_verification_token(user.email)
+    db_user = User(name=user.name, email=user.email, password=hashed,is_verified=False, verification_token=token)
+    
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+
+    await send_verification_email(
+        email=user.email,
+        name=user.name,
+        token=token,
+        redirect_url=f"{os.getenv('REACT_DOT_SERVER')}/#/verify-email",
+        background_tasks=background_tasks,
+
+    )
+    return db_user;
+
+
+@router.post("/login", response_model=Token)
+def login(user: UserLogin, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.email == user.email).first()
+    if not db_user or not verify_password(user.password, db_user.password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    if not db_user.is_verified:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Email is not verified")
+    access_token = create_access_token(data={"user_id": db_user.id})
+    return {"access_token": access_token, "token_type": "bearer"}
+
 
 @router.get("/verify-email")
 async def verify_email(

@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { selectMode } from "../app/appSlice";
 import { Button, Form, Spinner, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import RegisterForm from "./RegisterForm";
 
 // #region styled-components
 const StyledRegister = styled.div`
@@ -65,7 +64,7 @@ const RegisterPage = () => {
 
             try {
                 const response = await axios.post(
-                    `${process.env.REACT_APP_API_BASE_URL}/register`,
+                    `${process.env.REACT_APP_API_BASE_URL}/api/auth/register`,
                     { email, name, password }
                 );
 

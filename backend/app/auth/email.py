@@ -1,10 +1,7 @@
 import os
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
-from pydantic import EmailStr
 from fastapi import BackgroundTasks
-from dotenv import load_dotenv
 from typing import Optional
-
 
     
 conf = ConnectionConfig(
@@ -13,8 +10,8 @@ conf = ConnectionConfig(
     MAIL_FROM=os.getenv("MAIL_FROM"),
     MAIL_PORT=int(os.getenv("MAIL_PORT")),
     MAIL_SERVER=os.getenv("MAIL_SERVER"),
-    MAIL_STARTTLS=True,  # Explicitly set (for port 587)
-    MAIL_SSL_TLS=False,  # Must be False when using STARTTLS
+    MAIL_STARTTLS=True,
+    MAIL_SSL_TLS=False,
     USE_CREDENTIALS=True,
     VALIDATE_CERTS=True
 )

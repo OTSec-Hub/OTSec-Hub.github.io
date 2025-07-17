@@ -55,7 +55,7 @@ const SidebarItems = [
     { name: "Dashboard", icon: <LayoutDashboard />, route: "/AdminDashboard" },
     { name: "User Management", icon: <Users />, route: "/UsersManagment" },
     { name: "Track Progress", icon: <BarChart3 />, route: "/TrackProgress" },
-    { name: "ICS Labs Management", icon: <BookOpen />, route: "/CourseManagement" },
+    { name: "ICS Labs Management", icon: <BookOpen />, route: "/LabsManagement" },
     { name: "Benchmarks Management", icon: <Flag />, route: "/BenchmarksManagement" },
     { name: "Exercises Management", icon: <Dumbbell />, route: "/ExercisesManagement" },
     { name: "Videos Management", icon: <Video />, route: "/VideosManagement" },

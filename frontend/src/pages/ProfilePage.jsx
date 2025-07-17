@@ -19,7 +19,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
-            navigate("/login");
+            navigate("/LoginPage");
             return;
         }
 
@@ -56,7 +56,7 @@ const ProfilePage = () => {
 
         const token = localStorage.getItem("token");
         if (!token) {
-            navigate("/login");
+            navigate("/LoginPage");
             return;
         }
 

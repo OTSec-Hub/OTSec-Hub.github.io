@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-router = APIRouter(prefix="/educators", tags=["educators"])
+router = APIRouter()
 
 @router.post("/add_educator", response_model=UserOut)
 async def add_educator(
