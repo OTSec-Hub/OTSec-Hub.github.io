@@ -11,11 +11,7 @@ class Video(Base):
     description = Column(String, nullable=True)
     url = Column(String, index=True, nullable=False)
     
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)  # Creation timestamp
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)  # Update timestamp
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
     
-    # Relationships
     quizzes = relationship("Quiz", back_populates="video", cascade="all, delete-orphan")
-    
-    # relationship for VideoProgress
-    user_progress = relationship("VideoProgress", back_populates="video", cascade="all, delete-orphan")

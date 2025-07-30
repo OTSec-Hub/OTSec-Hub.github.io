@@ -3,16 +3,22 @@ from typing import Optional, List
 from .quiz import QuizCreate, QuizOut, QuizUpdate
 
 class LabCreate(BaseModel):
-    name: str
+    content: str
+    title: str
+    lab_img : str
     quizzes: List[QuizCreate]
     
 class LabOut(BaseModel):
     id: int
-    name: str
+    content: str
+    title: str
+    lab_img : str
     quizzes: List[QuizOut]
     
 class LabUpdate(BaseModel):
-    name: Optional[str] = None
+    content: Optional[str] = None
+    title: str
+    lab_img : str
     quizzes: Optional[List[QuizUpdate]] = None
     
     class Config:

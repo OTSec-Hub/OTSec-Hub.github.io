@@ -133,7 +133,7 @@ const EditBtn = ({ user }) => {
               onChange={handleChange}
               disabled={loading}
             >
-              <MenuItem value="student">Student</MenuItem>
+              <MenuItem value="member">Member</MenuItem>
               <MenuItem value="educator">Educator</MenuItem>
             </Select>
           </FormControl>

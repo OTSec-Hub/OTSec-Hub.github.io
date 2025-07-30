@@ -14,6 +14,7 @@ import image from "../images/lab3_Items/lab3.webp";
 import part1step2Image from "../images/lab3_Items/part1-step2.png"
 import part1step3Image from "../images/lab3_Items/part1-step3.png"
 import part1step4Image from "../images/lab3_Items/part1-step4.png"
+import { useParams } from "react-router-dom";
 
 const lab3QuizQuestions = [
   {
@@ -25,7 +26,7 @@ const lab3QuizQuestions = [
       "To write structured text code for sensors",
       "To simulate firewall rules on a control system",
     ],
-    correctAnswer: "To create and interact with an HMI for a simulated PLC system using Codesys",
+    correct_answer: "To create and interact with an HMI for a simulated PLC system using Codesys",
   },
   {
     id: 2,
@@ -36,7 +37,7 @@ const lab3QuizQuestions = [
       "http://127.0.0.1:8080",
       "http://10.0.0.1:5000",
     ],
-    correctAnswer: "http://127.0.0.1:8080",
+    correct_answer: "http://127.0.0.1:8080",
   },
   {
     id: 3,
@@ -47,7 +48,7 @@ const lab3QuizQuestions = [
       "Commands to start/stop the PLC and change setpoint values",
       "Encryption settings for PLC communication",
     ],
-    correctAnswer: "Commands to start/stop the PLC and change setpoint values",
+    correct_answer: "Commands to start/stop the PLC and change setpoint values",
   },
   {
     id: 4,
@@ -58,15 +59,16 @@ const lab3QuizQuestions = [
       "A dark mode theme switcher",
       "Network scanning and diagnostics tools",
     ],
-    correctAnswer: "Real-time display and control of critical system variables",
+    correct_answer: "Real-time display and control of critical system variables",
   },
 ];
 
 
-const Lab3Page = () => {
+const Lab3Page = ({labId}) => {
   React.useEffect(() => {
     updateTitle("lab3 | OTSec-Hub.io");
   }, []);
+
 
   return (
     <>
@@ -110,7 +112,7 @@ const Lab3Page = () => {
                     <li>
                       <strong style={{ color: "var(--custom-blue)" }}>Part I: </strong>
                       You are tasked to run the HMI and play around with the drag and drop buttons
-                      and see what each of them does. Students have to take a deep dive into the
+                      and see what each of them does. Members have to take a deep dive into the
                       <strong style={{ color: "var(--custom-blue)" }}> various settings</strong> and
                       <strong style={{ color: "var(--custom-blue)" }}>
                         {" "}figure out a way to change the URL to their own name
@@ -326,7 +328,7 @@ const Lab3Page = () => {
                 {" "}if you need some help.
                 </p>
               </section>
-              <Quiz questions={lab3QuizQuestions} />
+              <Quiz questions={lab3QuizQuestions} labId={labId} mode="lab" />
             </div>
           </div>
         </Container>

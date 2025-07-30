@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer,Boolean, String, ForeignKey
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey
 from app.database import Base
 from sqlalchemy.orm import relationship
 
@@ -8,10 +8,8 @@ class User(Base):
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String)
-    role = Column(String, default='student')
+    role = Column(String, default='member')
     is_verified = Column(Boolean, default=False)  
     verification_token = Column(String, nullable=True)
-    # course_id = Column(Integer, ForeignKey('courses.id'))
-    # course = relationship("Course", back_populates="students")
     
-    video_progress = relationship("VideoProgress", back_populates="user")
+    user_progress = relationship("UserProgress", back_populates="user", cascade="all, delete-orphan")

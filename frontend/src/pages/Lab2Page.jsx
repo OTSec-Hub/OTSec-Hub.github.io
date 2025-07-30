@@ -19,6 +19,7 @@ import part2step3Image from "../images/lab2_Items/part2-step3.png"
 import part2step4Image from "../images/lab2_Items/part2-step4.png"
 import part2step6Image from "../images/lab2_Items/part2-step6.png"
 import part2step7Image from "../images/lab2_Items/part2-step7.png"
+import { useParams } from "react-router-dom";
 
 
 const lab2QuizQuestions = [
@@ -31,7 +32,7 @@ const lab2QuizQuestions = [
       "To generate and execute PLC code for a desalination process using Simulink and Codesys",
       "To simulate industrial firewalls in a virtual environment",
     ],
-    correctAnswer: "To generate and execute PLC code for a desalination process using Simulink and Codesys",
+    correct_answer: "To generate and execute PLC code for a desalination process using Simulink and Codesys",
   },
   {
     id: 2,
@@ -42,7 +43,7 @@ const lab2QuizQuestions = [
       "Visual Studio",
       "Arduino IDE",
     ],
-    correctAnswer: "CODESYS 3.5",
+    correct_answer: "CODESYS 3.5",
   },
   {
     id: 3,
@@ -53,7 +54,7 @@ const lab2QuizQuestions = [
       "Structured Text",
       "Sequential Function Chart",
     ],
-    correctAnswer: "Structured Text",
+    correct_answer: "Structured Text",
   },
   {
     id: 4,
@@ -64,15 +65,16 @@ const lab2QuizQuestions = [
       "Use the pre-generated 'plcsrc' folder provided in Lab 2",
       "Skip the step and continue",
     ],
-    correctAnswer: "Use the pre-generated 'plcsrc' folder provided in Lab 2",
+    correct_answer: "Use the pre-generated 'plcsrc' folder provided in Lab 2",
   },
 ];
 
 
-const Lab2Page = () => {
+const Lab2Page = ({labId}) => {
   React.useEffect(() => {
     updateTitle("lab2 | OTSec-Hub.io");
   }, []);
+
 
   return (
     <>
@@ -115,7 +117,7 @@ const Lab2Page = () => {
                   at the bottom of the PLC. This results in creation of a file which can be imported into Codesys and worked on.
                   </li>
                   <li> <strong style={{ color: "var(--custom-blue)" }}>Part II: </strong>Import the PLC code generated in <strong style={{ color: "var(--custom-blue)" }}>Part I </strong>and execute it. You will learn about PLC code 
-                  generation, importing it into Codesys, and running it as well as altering the code and seeing the changes in the emulation. This assignment requires students 
+                  generation, importing it into Codesys, and running it as well as altering the code and seeing the changes in the emulation. This assignment requires members 
                   to answer some questions on Brightspace and submit a write-up. Reports will be due for the second part of this project.
                   </li>
                 </ul>
@@ -421,7 +423,7 @@ const Lab2Page = () => {
                 </ul>
                 </p>
               </section>
-              <Quiz questions={lab2QuizQuestions} />
+              <Quiz questions={lab2QuizQuestions} labId={labId} mode="lab" />
             </div>
           </div>
         </Container>

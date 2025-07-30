@@ -26,6 +26,8 @@ const ProfilePage = () => {
         const fetchUserData = async () => {
             try {
                 const decoded = jwtDecode(token);
+                console.log(decoded);
+                
                 const response = await axios.get(
                     `${process.env.REACT_APP_API_BASE_URL}/users/${decoded.user_id}`,
                     {

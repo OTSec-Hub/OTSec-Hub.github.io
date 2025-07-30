@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
-const Quiz = ({ questions, videoId }) => {
-  // const { videoId } = useParams();
+const Quiz = ({ questions = [], videoId, labId, mode = "video" }) => {
+  const isLab = mode === "lab";
+  const isStatic = mode === "static";
+  const contentId = mode === "video" ? videoId : labId;
+  console.log(contentId);
+
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
@@ -11,62 +14,70 @@ const Quiz = ({ questions, videoId }) => {
   const [showResults, setShowResults] = useState(false);
   const [userAnswers, setUserAnswers] = useState({});
   const [isWatched, setIsWatched] = useState(null);
-  const [completedQuiz, setCompletedQuiz] = useState(false)
+  const [completedQuiz, setCompletedQuiz] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const isDarkMode =
-    typeof window !== "undefined" &&
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   useEffect(() => {
-    if (!videoId) {
-      setIsWatched(true);
-      return;
-    }
-
-    const checkWatchedStatus = async () => {
+    const initializeQuiz = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/video_view/single_view/${videoId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
+        // Skip check for static content
+
+        if (contentId != undefined) {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/track_progress/single_view`,
+            {
+              params: {  // Moved content_type and content_id to params
+                content_type: mode,
+                content_id: contentId
+              },
+              headers: {  // Proper headers structure
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+              }
+            }
+          );
+          console.log(response.data);
+
+          // For videos, check if watched (record exists)
+          if (mode === "video") {
+            setIsWatched(!!response.data);
           }
-        );
+          // For labs, we don't restrict access - just check completion status
+          else if (mode === "lab") {
+            setIsWatched(true); // Always allow access to lab quizzes
+          }
 
-        // If video view exists, allow quiz
-        if (response.data) {
-          setIsWatched(true);
-        } else {
-          setIsWatched(false);
-        }
-
-        if (response.data?.got_fullmark) {
-          setCompletedQuiz(true);
-        } else {
-          setCompletedQuiz(false);
+          // Set the actual quiz completion status
+          setCompletedQuiz(response.data?.quiz_completed ?? false);
         }
       } catch (error) {
-        if (error.response && error.response.status === 404) {
-          // Not found is expected — no console error needed
-          setIsWatched(false);
+        if (error.response?.status === 404) {
+          // No record found - for videos, not watched
+          // For labs, we still allow access
+          setIsWatched(mode === "lab");
+          setCompletedQuiz(false);
+
         } else {
-          console.error("Failed to check video view status:", error);
-          setIsWatched(false); // fallback for other errors
+          console.error("Quiz initialization error:", error);
+          setIsWatched(mode === "lab"); // Allow access to labs even if error
+          setCompletedQuiz(false);
         }
+      } finally {
+        setLoading(false);
+        console.log('fail here');
       }
     };
 
-    checkWatchedStatus();
-  }, [videoId]);
+    initializeQuiz();
+  }, [videoId, labId, isStatic, mode]);
 
 
   const handleAnswer = (option) => {
     setSelected(option);
     const correct = option === questions[currentQ].correct_answer;
-    if (correct) setScore((prev) => prev + 1);
-    setUserAnswers((prev) => ({ ...prev, [questions[currentQ].id]: option }));
+    if (correct) setScore(prev => prev + 1);
+    setUserAnswers(prev => ({ ...prev, [questions[currentQ].id]: option }));
   };
 
   const handleNext = async () => {
@@ -76,20 +87,26 @@ const Quiz = ({ questions, videoId }) => {
     } else {
       setShowScore(true);
 
-      // ✅ Patch if full mark
-      if (score === questions.length && videoId) {
+      // Track progress if all answers correct
+      if (score === questions.length && !isStatic) {
         try {
-          await axios.patch(
-            `${process.env.REACT_APP_API_BASE_URL}/api/video_view/fullmark/${videoId}`,
-            {},
+          await axios.post(
+            `${process.env.REACT_APP_API_BASE_URL}/api/track_progress`,
             {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
+              content_type: mode,
+              content_id: mode === "video" ? videoId : labId,
+              quiz_completed: true
+            },
+            { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
           );
+          setCompletedQuiz(true);
+
+          // For labs, update isWatched since it represents quiz completion
+          if (mode === "lab") {
+            setIsWatched(true);
+          }
         } catch (err) {
-          console.error("Failed to update full mark status:", err);
+          console.error("Progress update failed:", err);
         }
       }
     }
@@ -104,184 +121,127 @@ const Quiz = ({ questions, videoId }) => {
     setUserAnswers({});
   };
 
-  // ✅ 1. Still checking API
-  if (isWatched === null) {
-    return <p>Loading quiz...</p>;
+  if (loading) {
+    return <div className="p-3">Loading quiz...</div>;
   }
 
-  // if (completedQuiz) {
-  //   return (
-  //     <>
-  //       <hr
-  //         style={{
-  //           borderTop: "3px solid var(--custom-blue)",
-  //           opacity: 0.4,
-  //           margin: "2rem auto",
-  //           width: "95%",
-  //         }}
-  //       />
-  //       <div className="alert alert-success  mt-5" style={{ maxWidth: 600 }}>
-  //         <h5>You have successfully completed this quiz.</h5>
-  //       </div>
-  //     </>
-  //   );
-  // }
-
-  // ✅ 2. Block quiz if not watched
-  if (!isWatched) {
+  if (mode === "video" && !isWatched && !isStatic) {
     return (
-      <>
-        <hr
-          style={{
-            borderTop: "3px solid var(--custom-blue)",
-            opacity: 0.4,
-            margin: "2rem auto",
-            width: "95%",
-          }}
-        />
-        <div className="alert alert-warning mt-5" style={{ maxWidth: 600 }}>
+      <div className="mt-4">
+        <hr className="border-top border-primary opacity-40 my-4 w-95" />
+        <div className="alert alert-warning mt-3" style={{ maxWidth: "600px" }}>
           <h5>You must watch the video first to unlock this quiz.</h5>
         </div>
-      </>
+      </div>
     );
   }
 
-  // ✅ 3. Normal quiz flow
+  // if (mode === "lab" && !isWatched && !isStatic) {
+  //   return (
+  //     <div className="mt-4">
+  //       <hr className="border-top border-primary opacity-40 my-4 w-95" />
+  //       <div className="alert alert-warning mt-3" style={{ maxWidth: "600px" }}>
+  //         <h5>You must complete the lab first to unlock this quiz.</h5>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  if (!questions.length) {
+    return (
+      <div className="mt-4">
+        <hr className="border-top border-primary opacity-40 my-4 w-95" />
+        <div className="alert alert-info mt-3" style={{ maxWidth: "600px" }}>
+          <h5>No questions available for this quiz.</h5>
+        </div>
+      </div>
+    );
+  }
+
+  // Get options for current question
+  const currentOptions = questions[currentQ].options || [
+    questions[currentQ].option1,
+    questions[currentQ].option2,
+    questions[currentQ].option3,
+    questions[currentQ].option4
+  ].filter(Boolean);
+
   return (
     <section>
-      <hr
-        style={{
-          borderTop: "3px solid var(--custom-blue)",
-          opacity: 0.4,
-          margin: "2rem auto",
-          width: "95%",
-        }}
-      />
-
+      <hr className="border-top border-primary opacity-40 my-4 w-95" />
       <div className="d-flex align-items-start justify-content-between">
-        <h3 className=" text-primary">Quick Quiz: Test Your Knowledge</h3>
-        {completedQuiz &&
-          <div className="alert alert-success d-inline-block py-2 px-3
-          " style={{ maxWidth: 600 }}>
+        <h3 className="text-primary">Quick Quiz: Test Your Knowledge</h3>
+        {completedQuiz && (
+          <div className="alert alert-success d-inline-block py-2 px-3" style={{ maxWidth: "600px" }}>
             <strong>Solved ✅</strong>
           </div>
-        }
+        )}
       </div>
 
       {!showScore && !showResults && (
-        <>
+        <div className="quiz-container">
           <p className="fs-5">{questions[currentQ].question}</p>
-          <ul className="list-unstyled mx-auto" style={{ maxWidth: 400 }}>
-            {[questions[currentQ].option1, questions[currentQ].option2, questions[currentQ].option3, questions[currentQ].option4].map(
-              (option) => (
-                <li key={option} className="mb-2">
-                  <button
-                    className={`btn w-100 ${selected === option ? "btn-primary" : "btn-outline-secondary"
-                      }`}
-                    onClick={() => handleAnswer(option)}
-                  >
-                    {option}
-                  </button>
-                </li>
-              )
-            )}
+          <ul className="list-unstyled mx-auto" style={{ maxWidth: "400px" }}>
+            {currentOptions.map((option) => (
+              <li key={option} className="mb-2">
+                <button
+                  className={`btn w-100 ${selected === option ? "btn-primary" : "btn-outline-secondary"}`}
+                  onClick={() => handleAnswer(option)}
+                >
+                  {option}
+                </button>
+              </li>
+            ))}
           </ul>
           {selected && (
-            <button
-              className="btn btn-primary text-white mt-3"
-              onClick={handleNext}
-            >
+            <button className="btn btn-primary text-white mt-3" onClick={handleNext}>
               {currentQ + 1 === questions.length ? "Finish" : "Next"}
             </button>
           )}
-        </>
+        </div>
       )}
 
       {showScore && !showResults && (
-        <div style={{ maxWidth: 800 }}>
-          <p style={{ fontSize: "1.3rem", fontWeight: "bold", marginTop: "1rem" }}>
-            Your score: {score} / {questions.length}
-          </p>
-          <button
-            onClick={() => setShowResults(true)}
-            style={{
-              marginRight: "1rem",
-              padding: "8px 16px",
-              cursor: "pointer",
-              borderRadius: 4,
-              backgroundColor: "var(--custom-blue)",
-              color: "white",
-              border: "none",
-            }}
-          >
-            See Results
-          </button>
-          <button
-            onClick={handleTryAgain}
-            style={{
-              padding: "8px 16px",
-              cursor: "pointer",
-              borderRadius: 4,
-              backgroundColor: "#6c757d",
-              color: "white",
-              border: "none",
-            }}
-          >
-            Try Again
-          </button>
+        <div style={{ maxWidth: "800px" }}>
+          <p className="fs-5 fw-bold mt-3">Your score: {score} / {questions.length}</p>
+          <div className="d-flex gap-2">
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowResults(true)}
+            >
+              See Results
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={handleTryAgain}
+            >
+              Try Again
+            </button>
+          </div>
         </div>
       )}
 
       {showResults && (
-        <div style={{ maxWidth: 800, marginTop: 20 }}>
+        <div style={{ maxWidth: "800px", marginTop: "20px" }}>
           {questions.map((q) => {
             const userAnswer = userAnswers[q.id];
             const isCorrect = userAnswer === q.correct_answer;
-            const backgroundColor = isDarkMode
-              ? "#444"
-              : isCorrect
-                ? "#d4edda"
-                : "#f8d7da";
-
-            const textColor = isDarkMode ? "#eee" : "#000";
 
             return (
               <div
                 key={q.id}
-                style={{
-                  marginBottom: 20,
-                  padding: 12,
-                  border: isDarkMode ? "1px solid #555" : "1px solid #ddd",
-                  borderRadius: 6,
-                  backgroundColor,
-                  color: textColor,
-                }}
+                className={`p-3 mb-3 rounded ${isCorrect ? "bg-success-light" : "bg-danger-light"}`}
+                style={{ border: isDarkMode ? "1px solid #555" : "1px solid #ddd" }}
               >
-                <p style={{ fontWeight: "bold" }}>{q.question}</p>
-                <p>
-                  Your answer:{" "}
-                  <span style={{ fontWeight: "bold" }}>{userAnswer || "No answer"}</span>
-                </p>
+                <p className="fw-bold">{q.question}</p>
+                <p>Your answer: <span className="fw-bold">{userAnswer || "No answer"}</span></p>
                 {!isCorrect && (
-                  <p>
-                    Correct answer:{" "}
-                    <span style={{ fontWeight: "bold" }}>{q.correct_answer}</span>
-                  </p>
+                  <p>Correct answer: <span className="fw-bold">{q.correct_answer}</span></p>
                 )}
               </div>
             );
           })}
-          <button
-            onClick={handleTryAgain}
-            style={{
-              padding: "8px 16px",
-              cursor: "pointer",
-              borderRadius: 4,
-              backgroundColor: "var(--custom-blue)",
-              color: "white",
-              border: "none",
-            }}
-          >
+          <button className="btn btn-primary" onClick={handleTryAgain}>
             Try Again
           </button>
         </div>

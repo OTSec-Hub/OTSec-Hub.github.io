@@ -7,10 +7,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import axios from 'axios';
 
-const DeleteBtn = ({ userId }) => {
+const DeleteBtn = ({ name, id }) => {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const token = localStorage.getItem('token')
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,12 +27,14 @@ const DeleteBtn = ({ userId }) => {
     setLoading(true);
     setError(null);
     try {
-      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/delete_user/${userId}`);
+      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/delete_${name}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setLoading(false);
       setOpen(false);
     } catch (err) {
       setLoading(false);
-      setError('Failed to delete user.');
+      setError(`Failed to delete ${name}.`);
     }
   };
 
@@ -55,11 +58,12 @@ const DeleteBtn = ({ userId }) => {
       </StyledWrapper>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Delete User</DialogTitle>
+        <DialogTitle>Delete {name}</DialogTitle>
         <DialogContent>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          Are you sure you want to delete this user? This action cannot be undone.
+          Are you sure you want to delete this {name}? This action cannot be undone.
+          {error && <p style={{ color: 'red', margin: '5px 0 0 0' }}>{error}</p>}
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleClose} disabled={loading}>Cancel</Button>
           <Button onClick={handleDelete} color="error" disabled={loading}>

@@ -4,7 +4,7 @@ class UserCreate(BaseModel):
     name: str
     email: EmailStr
     password: str
-    # role: str = "student"
+    # role: str = "member"
     # is_verified : bool = False
 
 class UserOut(BaseModel):

@@ -23,8 +23,7 @@ import styled from "styled-components";
 import AddVideo from "../../components/Admin/AddVideo";
 import { Link } from "react-router-dom";
 import EditVideoBtn from "../../components/Admin/EditVideoBtn";
-import DeleteVideoBtn from "../../components/Admin/DeleteVideoBtn";
-
+import DeleteBtn from './../../components/Admin/DeleteBtn';
 // Simple themed components
 const ThemedTableContainer = styled(TableContainer)`
   background-color: ${({ theme }) => theme.name === "light" ? "#f8f9fa" : "#3a3b3c"};
@@ -45,8 +44,9 @@ const ThemedTableRow = styled(TableRow)`
 `;
 
 const ThemedTypography = styled(Typography)`
-  color: ${({ theme }) => theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"} !important;
+color: ${({ theme }) => theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"} !important;
 `;
+
 
 
 
@@ -60,7 +60,7 @@ export default function VideoManagement({ children }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/video/get_videos`);
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_videos`);
                 setVideos(response.data);
                 console.log(response.data);
                 
@@ -159,13 +159,13 @@ export default function VideoManagement({ children }) {
                                         </ThemedTableHead>
 
                                         <TableBody>
-                                            {filteredVideos.map((video) => (
-                                                <ThemedTableRow key={video.id} hover>
+                                            {filteredVideos.map((videoData) => (
+                                                <ThemedTableRow key={videoData.id} hover>
                                                     <ThemedTableCell align="center">
-                                                        <Link to={video.url} target="_blank" style={{ textDecoration: 'none' }}>
+                                                        <Link to={videoData.url} target="_blank" style={{ textDecoration: 'none' }}>
                                                             <img
-                                                                src={`https://img.youtube.com/vi/${getYouTubeVideoId(video.url)}/sddefault.jpg`}
-                                                                alt={video.title}
+                                                                src={`https://img.youtube.com/vi/${getYouTubeVideoId(videoData.url)}/sddefault.jpg`}
+                                                                alt={videoData.title}
                                                                 style={{ maxHeight: '50px', maxWidth: '100px' }}
                                                             />
                                                         </Link>
@@ -174,7 +174,7 @@ export default function VideoManagement({ children }) {
                                                     <ThemedTableCell align="center" sx={{
                                                         maxWidth: 200,
                                                         maxHeight: 60,
-                                                    }}>{video.title}</ThemedTableCell>
+                                                    }}>{videoData.title}</ThemedTableCell>
 
                                                     <ThemedTableCell align="center">
                                                         <Box
@@ -187,7 +187,7 @@ export default function VideoManagement({ children }) {
                                                                 wordWrap: 'break-word',
                                                             }}
                                                         >
-                                                            {video.subtitle}
+                                                            {videoData.subtitle}
                                                         </Box>
                                                     </ThemedTableCell>
 
@@ -202,14 +202,14 @@ export default function VideoManagement({ children }) {
                                                                 wordWrap: 'break-word',
                                                             }}
                                                         >
-                                                            {video.description}
+                                                            {videoData.description}
                                                         </Box>
                                                     </ThemedTableCell>
 
                                                     <ThemedTableCell align="center">
                                                         <Box display="flex" justifyContent="center" gap={1}>
-                                                            <EditVideoBtn video={video} />
-                                                            <DeleteVideoBtn videoId={video.id}  />
+                                                            <EditVideoBtn video={videoData} />
+                                                            <DeleteBtn name="video" id={videoData.id}  />
                                                         </Box>
                                                     </ThemedTableCell>
                                                 </ThemedTableRow>

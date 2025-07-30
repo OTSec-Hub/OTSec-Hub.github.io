@@ -3,7 +3,6 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 from datetime import datetime
 
-
 class ExerciseSubmission(Base):
     __tablename__ = "exercise_submissions"
     __table_args__ = (PrimaryKeyConstraint('user_id', 'exercise_id'),)

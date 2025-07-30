@@ -1,44 +1,25 @@
 import React from "react";
-// Components
-
 import BackToTop from "../components/BackToTop";
-// Utils
 import { updateTitle } from "../utils";
-
-// import FillInTheBlank from "../components/FillInTheBlank";
 import Quiz from "../components/Quiz";
-
-// Styles
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
 import image from "../images/lab0_Items/lab0.webp";
-import image1 from "../images/lab0_Items/pic1.png"
-import image2 from "../images/lab0_Items/pic2.png"
-import image3 from "../images/lab0_Items/pic3.png"
-import image4 from "../images/lab0_Items/pic4.png"
-import image5 from "../images/lab0_Items/pic5.png"
-import image6 from "../images/lab0_Items/pic6.png"
-import image7 from "../images/lab0_Items/pic7.png"
-
-// const lab0FillInQuestions = [
-//   {
-//     id: 1,
-//     question: "You must install MATLAB and ________ to complete all labs.",
-//     correctAnswer: "Simulink",
-//   },
-//   {
-//     id: 2,
-//     question: "To install CODESYS, create an ________ Customer Account.",
-//     correctAnswer: "Individual",
-//   },
-// ];
+import image1 from "../images/lab0_Items/pic1.png";
+import image2 from "../images/lab0_Items/pic2.png";
+import image3 from "../images/lab0_Items/pic3.png";
+import image4 from "../images/lab0_Items/pic4.png";
+import image5 from "../images/lab0_Items/pic5.png";
+import image6 from "../images/lab0_Items/pic6.png";
+import image7 from "../images/lab0_Items/pic7.png";
+import { useParams } from "react-router-dom";
 
 const lab0QuizQuestions = [
   {
     id: 1,
     question: "What is the minimum amount of free disk space recommended for installing the required lab software?",
     options: ["10 GB", "20 GB", "40 GB", "100 GB"],
-    correctAnswer: "40 GB",
+    correct_answer: "40 GB",
   },
   {
     id: 2,
@@ -49,7 +30,7 @@ const lab0QuizQuestions = [
       "Simulink only",
       "No add-ons are needed",
     ],
-    correctAnswer: "Simulink and Simulink PLC Coder",
+    correct_answer: "Simulink and Simulink PLC Coder",
   },
   {
     id: 3,
@@ -60,7 +41,7 @@ const lab0QuizQuestions = [
       "It is too slow for simulations",
       "It’s not compatible with Windows",
     ],
-    correctAnswer: "It does not support all required features",
+    correct_answer: "It does not support all required features",
   },
   {
     id: 4,
@@ -71,21 +52,16 @@ const lab0QuizQuestions = [
       "Version 3.5.20.0 (64-bit)",
       "Web-based version",
     ],
-    correctAnswer: "Version 3.5.17.0 (32-bit)",
+    correct_answer: "Version 3.5.17.0 (32-bit)",
   },
 ];
 
+const Lab0Page = ({labId}) => {
 
-
-const Lab0Page = () => {
   React.useEffect(() => {
-    updateTitle("lab0 | OTSec-Hub.io");
+    updateTitle("Lab 0 | OTSec-Hub.io");
   }, []);
-
-
-
-
-
+  
   return (
     <>
       <main>
@@ -95,9 +71,7 @@ const Lab0Page = () => {
 
         <Container>
           <div className="row">
-            {/* Left column: Main Content */}
             <div className="col-md-8" style={{ marginLeft: "20%" }}>
-              {/* Image Placeholder */}
               <img
                 src={image}
                 alt="Lab 0"
@@ -113,7 +87,7 @@ const Lab0Page = () => {
               <section>
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
                   In order to complete the Lab Assignments, you need to download and use several applications on a Windows PC
-                  (this can be a virtual machine) with about 40 GB of free space.  Both applications need to be installed on the same system.
+                  (this can be a virtual machine) with about 40 GB of free space. Both applications need to be installed on the same system.
                 </p>
               </section>
               <hr
@@ -126,7 +100,7 @@ const Lab0Page = () => {
               />
               <section>
                 <h3 className="mt-4">
-                  <strong style={{ color: "var(--custom-blue)" }}>MATLAB, Simulink and Simulink PLC Coder </strong>
+                  <strong style={{ color: "var(--custom-blue)" }}>MATLAB, Simulink and Simulink PLC Coder</strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
                   You should first install Matlab. A licensed version of Matlab is provided by NYU and can be downloaded from NYU Software Library at{" "}
@@ -141,7 +115,7 @@ const Lab0Page = () => {
                   .
                 </p>
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
-                  Note:  MATLAB offers an online version of the software, this will not work with all of the labs in this course.
+                  Note: MATLAB offers an online version of the software, this will not work with all of the labs in this course.
                 </p>
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
                   Create a new account on the Matlab portal using your NYU email. This grants you a special license as a member of
@@ -201,7 +175,7 @@ const Lab0Page = () => {
               />
               <section>
                 <h3 className="mt-4">
-                  <strong style={{ color: "var(--custom-blue)" }}>CODESYS </strong>
+                  <strong style={{ color: "var(--custom-blue)" }}>CODESYS</strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
                   Codesys can be downloaded from{" "}
@@ -268,7 +242,7 @@ const Lab0Page = () => {
                 />
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
                   <ul>
-                    <li>Scroll down and click on the 32-bit version of 3.5.17.0.  Note the project is written with a 32 bit library which is why the 32 bit version is required. </li>
+                    <li>Scroll down and click on the 32-bit version of 3.5.17.0. Note the project is written with a 32 bit library which is why the 32 bit version is required.</li>
                   </ul>
                 </p>
                 <img
@@ -286,11 +260,10 @@ const Lab0Page = () => {
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
                   <ul>
                     <li>Accept the terms</li>
-                    <li>The sofftware will download</li>
+                    <li>The software will download</li>
                     <li>Run the installer and start the installation
                       <ul>
-                        <li> When prompted, select Complete.
-                        </li>
+                        <li>When prompted, select Complete.</li>
                       </ul>
                     </li>
                   </ul>
@@ -309,17 +282,17 @@ const Lab0Page = () => {
                 />
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
                   <ul>
-                    <li>Complete the installation process. </li>
+                    <li>Complete the installation process.</li>
                   </ul>
                 </p>
               </section>
 
               <section>
                 <h3 className="mt-4">
-                  <strong style={{ color: "var(--custom-blue)" }}>WireShark </strong>
+                  <strong style={{ color: "var(--custom-blue)" }}>WireShark</strong>
                 </h3>
                 <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
-                  Download the lates stable release of Wireshark from{" "}
+                  Download the latest stable release of Wireshark from{" "}
                   <a
                     href="https://www.wireshark.org/"
                     target="_blank"
@@ -331,8 +304,7 @@ const Lab0Page = () => {
                   .
                 </p>
               </section>
-              <Quiz questions={lab0QuizQuestions} />
-              {/*<FillInTheBlank questions={lab0FillInQuestions} />*/}
+              <Quiz questions={lab0QuizQuestions} labId={labId} mode="lab" />
             </div>
           </div>
         </Container>

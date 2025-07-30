@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -10,82 +10,83 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Doughnut } from "react-chartjs-2";
 import { useTheme, styled } from "styled-components";
-
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Sidebar from "../../components/Admin/AdminSidebar";
 import axios from "axios";
 
 // Register Chart.js elements
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const COLORS = ["#4CAF50", "#E0E0E0"];
+const COLORS = ["#4CAF50", "#f39821", "#E0E0E0"];
 
-// Styled MUI Accordion with theme-based colors & expanded styles
+// Styled MUI Accordion
 const Accordion = styled(MuiAccordion)`
   background-color: ${({ theme, expanded }) =>
-    expanded ? (theme.name === "light" ? "#c8dadf" : "#3a4750") :
-      (theme.name === "light" ? "#dee2e6" : "#495057")};
-  color: ${({ theme }) => (theme.name === "light" ? "#212529" : "#ffffffd9")};
+    expanded
+      ? theme.name === "light"
+        ? "#c8dadf"
+        : "#3a4750"
+      : theme.name === "light"
+        ? "#dee2e6"
+        : "#495057"};
+  color: ${({ theme }) =>
+    theme.name === "light" ? "#212529" : "#ffffffd9"};
   border-radius: 6px;
   margin-bottom: 16px;
 `;
 
-// Styled Typography consistent with theme
+// Styled Typography
 const ThemedTypography = styled(Typography)`
   color: ${({ theme }) =>
-    theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"};
+    theme.name === "light"
+      ? "rgba(33, 37, 41, 0.85)"
+      : "rgba(255, 255, 255, 0.8)"};
 `;
 
 const TrackProgress = () => {
-  const [studentsProgress, setStudentsProgress] = useState([]);
-  // const [totalVideos, setTotalVideos] = useState(0);
-  const [expanded, setExpanded] = useState(false); // for controlling which Accordion is open
-  // const [totalQuizzes, setTotalQuizzes] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('')
+  const [membersProgress, setMembersProgress] = useState([]);
+  const [expanded, setExpanded] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const theme = useTheme();
 
   useEffect(() => {
-    const fetchStudents = async () => {
+    const fetchMembers = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/progress/stats`,
-
+          `${process.env.REACT_APP_API_BASE_URL}/api/progress/stats`
         );
 
-        const progressData = response.data.map((student) => ({
-          id: student.user_id,
-          name: student.name,
-          completedVideos: student.completed_videos,
-          remainingVideos: student.remaining_videos,
-          completedQuizzes: student.completed_quizzes,
-          remainingQuizzes: student.remaining_quizzes,
-          // videoList: student.videoList || [],
+        const progressData = response.data.map((member) => ({
+          id: member.user_id,
+          name: member.name,
+          completedVideos: member.completed_videos,
+          remainingVideos: member.remaining_videos,
+          completedQuizzes: member.completed_quizzes,
+          remainingQuizzes: member.remaining_quizzes,
+          completedLabs: member.completed_labs,
+          remainingLabs: member.remaining_labs,
         }));
 
-        setStudentsProgress(progressData);
+        setMembersProgress(progressData);
       } catch (err) {
-        console.error("Failed to fetch student progress", err);
+        console.error("Failed to fetch member progress", err);
       }
     };
 
-    fetchStudents();
+    fetchMembers();
   }, []);
 
-
-
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded((prevExpanded) =>
+      isExpanded
+        ? [...prevExpanded, panel]
+        : prevExpanded.filter((id) => id !== panel) 
+    );
   };
 
-  const filteredStudents = studentsProgress.filter((student) =>
-    student.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredMembers = membersProgress.filter((member) =>
+    member.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
 
   return (
     <Box
@@ -96,10 +97,9 @@ const TrackProgress = () => {
       }}
     >
       <Sidebar />
-
       <Box flexGrow={1} p={4}>
         <ThemedTypography variant="h4" fontWeight={600} mb={3}>
-          Student Progress Tracker
+          Member Progress Tracker
         </ThemedTypography>
         <Box display="flex" gap={2} mb={2} alignItems="center">
           <TextField
@@ -110,25 +110,30 @@ const TrackProgress = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             fullWidth
             sx={{
-              '& .MuiInputLabel-root': {
+              "& .MuiInputLabel-root": {
                 color: theme?.name === "light" ? "#212529" : "#ffffff",
               },
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: theme?.name === "light" ? "#ced4da" : "#6c757d",
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor:
+                    theme?.name === "light" ? "#ced4da" : "#6c757d",
                 },
-                '&:hover fieldset': {
-                  borderColor: theme?.name === "light" ? "#adb5bd" : "#495057",
+                "&:hover fieldset": {
+                  borderColor:
+                    theme?.name === "light" ? "#adb5bd" : "#495057",
                 },
               },
-              '& .MuiInputBase-input': {
-                color: theme?.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)",
+              "& .MuiInputBase-input": {
+                color:
+                  theme?.name === "light"
+                    ? "rgba(33, 37, 41, 0.85)"
+                    : "rgba(255, 255, 255, 0.8)",
               },
             }}
           />
         </Box>
         <Box display="flex" flexWrap="wrap" gap={2} mt={3}>
-          {filteredStudents.map((student) => {
+          {filteredMembers.map((member) => {
             const {
               id,
               name,
@@ -136,80 +141,120 @@ const TrackProgress = () => {
               remainingVideos,
               completedQuizzes,
               remainingQuizzes,
-              // videoList
-            } = student;
+              completedLabs,
+              remainingLabs,
+            } = member;
 
             const totalVideos = completedVideos + remainingVideos;
-            const percentVideos = totalVideos > 0 ? Math.round((completedVideos / totalVideos) * 100) : 0;
 
             const totalQuizzes = completedQuizzes + remainingQuizzes;
-            const percentQuizzes = totalQuizzes > 0 ? Math.round((completedQuizzes / totalQuizzes) * 100) : 0;
+
+            const totalLabs = completedLabs + remainingLabs;
+
+            const totalCompleted = completedLabs + completedQuizzes + completedVideos
+            const totalItems = totalLabs + totalQuizzes + totalVideos
+
+            const overallPercent = totalItems > 0 ? Math.round((totalCompleted / totalItems) * 100) : 0
+
+            const percentQuizzes =
+              totalQuizzes > 0
+                ? Math.round((completedQuizzes / totalQuizzes) * 100)
+                : 0;
 
 
-
-            const options = {
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: "bottom",
-                  labels: {
-                    color: theme?.name === "light" ? "#212529" : "#cecfd0",
-                  },
-                },
-              },
-            };
+            const percentVideos =
+              totalVideos > 0
+                ? Math.round((completedVideos / totalVideos) * 100)
+                : 0;
 
             return (
               <Box
-                key={student.id}
+                key={id}
                 sx={{
-                  flex: '1 1 100%',
-                  '@media (min-width: 768px)': {
-                    flex: '1 1 calc(50% - 16px)',
+                  flex: "1 1 100%",
+                  "@media (min-width: 768px)": {
+                    flex: "1 1 calc(50% - 16px)",
                   },
                 }}
               >
                 <Accordion
-                  key={student.id}
-                  expanded={expanded === student.id}
-                  onChange={handleChange(student.id)}
+                  expanded={expanded.includes(id)}
+                  onChange={handleChange(id)}
                   theme={theme}
                   sx={{
-                    backgroundColor: theme?.name === "light" ? "#e9ecef" : "#343a40",
-                    color: theme?.name === "light" ? "#212529" : "#cecfd0",
+                    backgroundColor:
+                      theme?.name === "light" ? "#e9ecef" : "#343a40",
+                    color:
+                      theme?.name === "light" ? "#212529" : "#cecfd0",
                   }}
                 >
                   <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Box display="flex" justifyContent="space-between" width="100%" >
-                      <Typography fontWeight={500}>
-                        {student.email} ({student.name})
-                      </Typography>
-                      <Typography>{percentVideos}% Videos Completed</Typography>
+                    <Box
+                      display="flex"
+                      justifyContent="space-between"
+                      width="100%"
+                    >
+                      <Typography fontWeight={500}>{name}</Typography>
+                      <Typography>{overallPercent}% Completed</Typography>
                     </Box>
                   </AccordionSummary>
                   <AccordionDetails
                     sx={{
-                      backgroundColor: theme?.name === "light" ? "#f8f9fa" : "#3a3b3c",
-                      color: theme?.name === "light" ? "#212529" : "#cecfd0",
-                      padding: '40px 0px'
+                      backgroundColor:
+                        theme?.name === "light" ? "#f8f9fa" : "#3a3b3c",
+                      color:
+                        theme?.name === "light" ? "#212529" : "#cecfd0",
+                      padding: "50px 0px",
                     }}
                   >
-                    <Box display="flex" alignItems="center" justifyContent="center" sx={{ padding: '0 20px' }} gap={4} flexWrap="wrap">
-                      <Box height={250} width={250}>
-                        <Typography textAlign="center" variant="subtitle2" mb={1} color={theme?.name === "light" ? "#212529" : "#cecfd0"}>
-                          Combined Progress 
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      sx={{ padding: "0 20px" }}
+                      gap={4}
+                      flexWrap="wrap"
+                    >
+                      <Box height={270} width={270}>
+                        <Typography
+                          textAlign="center"
+                          variant="subtitle2"
+                          mb={1}
+                          color={
+                            theme?.name === "light" ? "#212529" : "#cecfd0"
+                          }
+                        >
+                          Video and Quiz Progress
                         </Typography>
                         <Doughnut
                           data={{
-                            labels: ["Completed Videos", "Completed Exercises", "Remaining"],
+                            labels: [
+                              "Completed Videos",
+                              "Completed Quizzes",
+                              "Completed Labs",
+                              "Remaining",
+                              // "Remaining Quizzes",
+                              // "Remaining Labs",
+                            ],
                             datasets: [
                               {
                                 data: [
                                   completedVideos,
                                   completedQuizzes,
-                                  remainingVideos + remainingQuizzes,
+                                  completedLabs,
+                                  remainingVideos + remainingQuizzes + remainingLabs,
+                                  // remainingVideos,
+                                  // remainingQuizzes,
+                                  // remainingLabs
                                 ],
-                                backgroundColor: ["#4CAF50", "#f39821ff", "#E0E0E0"],
+                                backgroundColor: [
+                                  "#4CAF50",
+                                  "#f39821",
+                                  "#2196F3", // New color for labs
+                                  "#E0E0E0",
+                                  // "#B0B0B0",
+                                  // "#78909C", //
+                                ],
                                 borderWidth: 1,
                               },
                             ],
@@ -227,37 +272,21 @@ const TrackProgress = () => {
                           }}
                         />
                       </Box>
-
-
                       <Box maxWidth={400} overflow="auto">
-                        <div className="text-center mt-4">
+                        <div className="text-start mt-4">
                           <p>
-                            🎥 <strong>Videos:</strong> {completedVideos} / {totalVideos}
+                            🎥 <strong>Videos Watched:</strong> {completedVideos} / {totalVideos}
                           </p>
                           <p>
-                            📝 <strong>Exercises:</strong> {completedQuizzes} / {totalQuizzes}
+                            📝 <strong>Video Quizzes:</strong> {completedQuizzes} / {totalQuizzes}
+                          </p>
+                          <p>
+                            🧪 <strong>Lab Quizzes:</strong> {completedLabs} / {totalLabs}
                           </p>
                         </div>
                       </Box>
-                      {/* <Box maxWidth={400} overflow="auto">
-                    <ThemedTypography variant="subtitle1" fontWeight={500} mb={1}>
-                      Watched Videos:
-                    </ThemedTypography>
-                    {student.videoList.length > 0 ? (
-                      <ul style={{ paddingLeft: 20, margin: 0 }}>
-                        {student.videoList.map((title, idx) => (
-                          <li className="list-unstyled" key={idx}>
-                            <ThemedTypography variant="body2">{title}</ThemedTypography>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <Typography>No videos watched yet.</Typography>
-                    )}
-                  </Box> */}
                     </Box>
                   </AccordionDetails>
-
                 </Accordion>
               </Box>
             );
@@ -265,7 +294,6 @@ const TrackProgress = () => {
         </Box>
       </Box>
     </Box>
-
   );
 };
 

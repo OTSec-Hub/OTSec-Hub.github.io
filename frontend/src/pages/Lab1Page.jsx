@@ -16,6 +16,7 @@ import image from "../images/lab1pic.webp";
 import step2Image from "../images/lab1_Items/lab1-step2.png"
 import step3Image from "../images/lab1_Items/lab1-step3.png"
 import step4Image from "../images/lab1_Items/lab1-step4.png"
+import { useParams } from "react-router-dom";
 
 
 const lab1QuizQuestions = [
@@ -28,13 +29,13 @@ const lab1QuizQuestions = [
       "To understand industrial processes and simulate a desalination system",
       "To analyze Wireshark packet captures",
     ],
-    correctAnswer: "To understand industrial processes and simulate a desalination system",
+    correct_answer: "To understand industrial processes and simulate a desalination system",
   },
   {
     id: 2,
     question: "What type of control system is featured in the simulation of Lab 1?",
     options: ["On/Off Control", "Feedforward Loop", "Cascade PID Loop", "Fuzzy Logic Controller"],
-    correctAnswer: "Cascade PID Loop",
+    correct_answer: "Cascade PID Loop",
   },
   {
     id: 3,
@@ -45,18 +46,18 @@ const lab1QuizQuestions = [
       "To understand threats, attack surfaces, and their impact on industrial processes",
       "To study programming syntax",
     ],
-    correctAnswer: "To understand threats, attack surfaces, and their impact on industrial processes",
+    correct_answer: "To understand threats, attack surfaces, and their impact on industrial processes",
   },
   {
     id: 4,
     question: "Which tool is used to run and visualize the desalination process simulation?",
     options: ["Wireshark", "MATLAB with Simulink", "CODESYS", "Python"],
-    correctAnswer: "MATLAB with Simulink",
+    correct_answer: "MATLAB with Simulink",
   },
 ];
 
 
-const Lab1Page = () => {
+const Lab1Page = ({labId}) => {
   React.useEffect(() => {
     updateTitle("lab1 | OTSec-Hub.io");
   }, []);
@@ -261,7 +262,7 @@ const Lab1Page = () => {
                 </ul>
                 </p>
               </section>
-              <Quiz questions={lab1QuizQuestions} />
+              <Quiz questions={lab1QuizQuestions} labId={labId} mode="lab" />
             </div>
           </div>
         </Container>

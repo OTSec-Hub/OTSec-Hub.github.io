@@ -36,7 +36,7 @@ const Videos = () => {
         async function fetchVideos() {
             try {
                 const response = await axios.get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/video/get_videos`
+                    `${process.env.REACT_APP_API_BASE_URL}/api/get_videos`
                 );
                 setVideos(response.data);
             } catch (error) {

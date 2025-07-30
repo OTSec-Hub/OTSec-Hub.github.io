@@ -44,7 +44,7 @@ export default function AddBtn({ onAddEducator }) {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/api/educators/add_educator`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/add_educator`,
         {
           email: educatorData.email,
           name: educatorData.name,

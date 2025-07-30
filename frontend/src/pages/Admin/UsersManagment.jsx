@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import Sidebar from "../../components/Admin/AdminSidebar";
 import EditBtn from "../../components/Admin/EditBtn";
-import DeleteBtn from "../../components/Admin/DeleteBtn";
+import DeleteBtn from './../../components/Admin/DeleteBtn';
 import styled from "styled-components";
 import AddBtn from './../../components/Admin/AddBtn';
 
@@ -175,7 +175,7 @@ export default function UserManagment({ children }) {
                                                 All Roles
                                             </MenuItem>
                                             <MenuItem
-                                                value="student"
+                                                value="member"
                                                 sx={{
                                                     color: theme?.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)",
                                                     backgroundColor: theme?.name === "light" ? "#ffffff" : "#3a3b3c",
@@ -187,7 +187,7 @@ export default function UserManagment({ children }) {
                                                     }
                                                 }}
                                             >
-                                                Student
+                                                Member
                                             </MenuItem>
                                             <MenuItem
                                                 value="educator"
@@ -222,16 +222,16 @@ export default function UserManagment({ children }) {
                                         </ThemedTableHead>
 
                                         <TableBody>
-                                            {filteredUsers.map((user) => (
-                                                <ThemedTableRow key={user.id} hover>
-                                                    <ThemedTableCell align="center">{user.id}</ThemedTableCell>
-                                                    <ThemedTableCell align="center">{user.name}</ThemedTableCell>
-                                                    <ThemedTableCell align="center">{user.email}</ThemedTableCell>
-                                                    <ThemedTableCell align="center">{user.role}</ThemedTableCell>
+                                            {filteredUsers.map((userData) => (
+                                                <ThemedTableRow key={userData.id} hover>
+                                                    <ThemedTableCell align="center">{userData.id}</ThemedTableCell>
+                                                    <ThemedTableCell align="center">{userData.name}</ThemedTableCell>
+                                                    <ThemedTableCell align="center">{userData.email}</ThemedTableCell>
+                                                    <ThemedTableCell align="center">{userData.role}</ThemedTableCell>
                                                     <ThemedTableCell align="center">
                                                         <Box display="flex" gap={1} justifyContent="center">
-                                                            <EditBtn user={user} />
-                                                            <DeleteBtn userId={user.id}  />
+                                                            <EditBtn user={userData} />
+                                                            <DeleteBtn name="user" id={userData.id}  />
                                                         </Box>
                                                     </ThemedTableCell>
                                                 </ThemedTableRow>

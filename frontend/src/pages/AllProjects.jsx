@@ -1,30 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
-// Styles
 import styled from "styled-components";
-// State
-import { useSelector } from "react-redux";
-import { selectProjects } from "../app/projectsSlice";
-import { useGetUsersQuery, useGetProjectsQuery } from "../app/apiSlice";
-// Icons
-import { Icon } from "@iconify/react/dist/iconify.js";
-// Components
 import {
-  Col,
   Container,
+  Row,
+  Col,
   FormControl,
   InputGroup,
   Pagination,
-  Row,
+  Card
 } from "react-bootstrap";
-import Loading from "../components/Loading";
+import { Icon } from "@iconify/react";
 import Title from "../components/Title";
-import ProjectCard from "../components/ProjectCard";
 import BackToTop from "../components/BackToTop";
-// Utils
+import ProjectCard from "../components/ProjectCard";
+import Loading from "../components/Loading";
 import { updateTitle } from "../utils";
 
-// #region styled-components
+// Styled section
 const StyledSection = styled.section`
   .input-group {
     max-width: 90vw;
@@ -36,183 +30,79 @@ const StyledSection = styled.section`
     }
   }
 `;
-// #endregion
 
-// #region component
 const AllProjects = () => {
-  const [searchInput, setSearchInput] = React.useState("");
+  const [labs, setLabs] = React.useState([]);
   const [filteredResults, setFilteredResults] = React.useState([]);
-  const [pageItems, setPageItems] = React.useState([]);
+  const [searchInput, setSearchInput] = React.useState("");
   const [activePage, setActivePage] = React.useState(1);
-  const data = useSelector(selectProjects);
-  const { data: userData } = useGetUsersQuery();
-  const { isLoading, isSuccess, isError, error } = useGetProjectsQuery();
-  let content;
+  const [pageItems, setPageItems] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
 
-  React.useEffect(() => {
-    updateTitle(`${userData.name} | All Labs`);
-  }, [userData]);
+  const labsPerPage = 9;
 
-  React.useEffect(() => {
-    if (searchInput !== "") {
-      const filteredData = data.filter((item) => {
-        return item.name.toLowerCase().includes(searchInput.toLowerCase());
-      });
-      const tempPageItems = [];
-      for (
-        let number = 1;
-        number <= Math.ceil(filteredData.length / 6);
-        number++
-      ) {
-        tempPageItems.push(
-          <Pagination.Item
-            key={number}
-            active={number === activePage}
-            onClick={() => setActivePage(number)}
-          >
-            {number}
-          </Pagination.Item>
-        );
-        setPageItems([...tempPageItems]);
-      }
-      if (activePage === 1) {
-        setFilteredResults(filteredData.slice(0, 9));
-      } else {
-        setFilteredResults(
-          filteredData.slice((activePage - 1) * 9, (activePage - 1) * 9 + 9)
-        );
-      }
-    } else {
-      const tempPageItems = [];
-      for (let number = 1; number <= Math.ceil(data.length / 9); number++) {
-        tempPageItems.push(
-          <Pagination.Item
-            key={number}
-            active={number === activePage}
-            onClick={() => setActivePage(number)}
-          >
-            {number}
-          </Pagination.Item>
-        );
-        setPageItems([...tempPageItems]);
-      }
-      if (activePage === 1) {
-        setFilteredResults(data.slice(0, 9));
-      } else {
-        setFilteredResults(
-          data.slice((activePage - 1) * 9, (activePage - 1) * 9 + 9)
-        );
-      }
+  useEffect(() => {
+    async function getLabs() {
+      updateTitle("All Labs");
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_labs`)
+        setLabs(response.data);
+        console.log(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to fetch labs", err);
+        setError("Failed to fetch labs.");
+        setLoading(false);
+      };
     }
-  }, [searchInput, data, pageItems.length, activePage]);
+    getLabs()
+  }, []);
+
+  React.useEffect(() => {
+    const data = labs.filter((lab) =>
+      lab.title.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    const totalPages = Math.ceil(data.length / labsPerPage);
+    const tempPageItems = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      tempPageItems.push(
+        <Pagination.Item
+          key={i}
+          active={i === activePage}
+          onClick={() => setActivePage(i)}
+        >
+          {i}
+        </Pagination.Item>
+      );
+    }
+
+    setPageItems(tempPageItems);
+
+    const start = (activePage - 1) * labsPerPage;
+    const end = start + labsPerPage;
+    setFilteredResults(data.slice(start, end));
+  }, [labs, searchInput, activePage]);
+  // console.log(labs);
 
   React.useEffect(() => {
     setActivePage(1);
   }, [searchInput]);
 
-  if (isLoading) {
-    content = (
-      <>
-        <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"ICS Labs"} />
-        </Container>
-        <Container className="d-flex flex-column justify-content-center">
-          <Loading />
-        </Container>
-      </>
+  if (loading) {
+    return (
+      <Container className="text-center my-5">
+        <Title size={"h2"} text={"ICS Labs"} />
+        <Loading />
+      </Container>
     );
-  } else if (isSuccess) {
-    content = (
-      <>
-        <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"ICS Labs"} />
-        </Container>
-        <Container className="mb-3">
-          <p className="text-center fs-5 text-muted">
-            Industrial Control Systems (ICS) are of paramount importance nowadays. In this series of labs, we will help you understand what a Programmable Logic Controller (PLC) is, what ICS are, the security vectors of ICS, how PLC binaries differ from standard binaries, and how to reverse engineer and fuzz them. All materials could be found on our Github repository : https://github.com/HaithemLamri/OTSsec-Hub/tree/main.
-          </p>
-          <p className="text-center fs-7 text-muted mb-4">
-            Built a hands-on lab others can learn from? Share it with the community{" "}
-            <Link to="/Resources/All-Labs/Lab-Submission" className="text-primary fw-semibold text-decoration-none">
-              here.
-            </Link>
-          </p>
-        </Container>
-        <Container>
-          <InputGroup className="mx-auto mb-3">
-            <InputGroup.Text id="search">
-              <Icon icon="ic:round-search" />
-            </InputGroup.Text>
-            <FormControl
-              placeholder="Lab name"
-              aria-label="Search labs"
-              aria-describedby="search"
-              onChange={(e) => setSearchInput(e.currentTarget.value)}
-            />
-          </InputGroup>
-          <Row xs={1} md={2} lg={3} className="g-4 justify-content-center row">
-            {searchInput.length > 0
-              ? filteredResults.map((element) => {
-                  return (
-                    <Col key={element.id}>
-                      <ProjectCard
-                        image={element.image}
-                        name={element.name}
-                        description={element.description}
-                        url={element.html_url}
-                        demo={element.homepage}
-                      />
-                    </Col>
-                  );
-                })
-              : filteredResults.map((element) => {
-                  return (
-                    <Col key={element.id}>
-                      <ProjectCard
-                        image={element.image}
-                        name={element.name}
-                        description={element.description}
-                        url={element.html_url}
-                        demo={element.homepage}
-                      />
-                    </Col>
-                  );
-                })}
-          </Row>
-          <Container className="d-flex justify-content-center mt-5">
-            {pageItems.length <= 2 ? (
-              <Pagination size="lg">{pageItems}</Pagination>
-            ) : (
-              <Pagination>
-                <Pagination.Prev
-                  onClick={() =>
-                    activePage === 1
-                      ? setActivePage(pageItems.length)
-                      : setActivePage(activePage - 1)
-                  }
-                />
-                {pageItems[0]}
-                <Pagination.Ellipsis />
-                <Pagination.Item active={true}>{activePage}</Pagination.Item>
-                <Pagination.Ellipsis />
-                {pageItems[pageItems.length - 1]}
-                <Pagination.Next
-                  onClick={() =>
-                    activePage === pageItems.length
-                      ? setActivePage(1)
-                      : setActivePage(activePage + 1)
-                  }
-                />
-              </Pagination>
-            )}
-          </Container>
-        </Container>
-      </>
-    );
-  } else if (isError) {
-    content = (
-      <Container className="d-flex align-items-center justify-content-center">
-        <h2>{`${error.status} - check URLs in  src/app/apiSlice.js`}</h2>
+  }
+
+  if (error) {
+    return (
+      <Container className="text-center mt-5">
+        <h2>{error}</h2>
       </Container>
     );
   }
@@ -221,13 +111,91 @@ const AllProjects = () => {
     <>
       <main>
         <StyledSection className="d-flex flex-column justify-content-center">
-          {content}
+          <Container className="d-flex justify-content-center">
+            <Title size={"h2"} text={"ICS Labs"} />
+          </Container>
+
+          <Container className="mb-3">
+            <p className="text-center fs-5 text-muted">
+              Industrial Control Systems (ICS) are of paramount importance nowadays...
+            </p>
+            <p className="text-center fs-7 text-muted mb-4">
+              Built a hands-on lab others can learn from? Share it with the community{" "}
+              <Link to="/Resources/All-Labs/Lab-Submission" className="text-primary fw-semibold text-decoration-none">
+                here.
+              </Link>
+            </p>
+          </Container>
+
+          <Container>
+            <InputGroup className="mx-auto mb-3">
+              <InputGroup.Text id="search">
+                <Icon icon="ic:round-search" />
+              </InputGroup.Text>
+              <FormControl
+                placeholder="Lab name"
+                aria-label="Search labs"
+                aria-describedby="search"
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+            </InputGroup>
+
+            <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
+              {filteredResults.map((lab) => (
+                <Col key={lab.id} className="d-flex justify-content-center">
+                  <Card className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary" style={{ width: "18rem" }}>
+                    <div className="w-100">
+                      <Card.Img
+                        variant="top"
+                        src={lab.lab_img || "/default-lab.jpg"}
+                        alt={lab.title}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          borderRadius: "0.5rem"
+                        }}
+                      />
+                    </div>
+                    <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+                      <Card.Title className=" w-100">{lab?.title?.trim() || "Explore this lab"}</Card.Title>
+                      <Link to={`/All-Labs/${lab.id}`} className="btn btn-primary mt-2">
+                        Explore
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+
+
+            {pageItems.length > 1 && (
+              <Container className="d-flex justify-content-center mt-5">
+                <Pagination>
+                  <Pagination.Prev
+                    onClick={() =>
+                      setActivePage((prev) =>
+                        prev === 1 ? pageItems.length : prev - 1
+                      )
+                    }
+                  />
+                  {pageItems}
+                  <Pagination.Next
+                    onClick={() =>
+                      setActivePage((prev) =>
+                        prev === pageItems.length ? 1 : prev + 1
+                      )
+                    }
+                  />
+                </Pagination>
+              </Container>
+            )}
+          </Container>
         </StyledSection>
       </main>
       <BackToTop home={"Home"} />
     </>
   );
 };
-// #endregion
 
 export default AllProjects;

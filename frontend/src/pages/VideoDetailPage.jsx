@@ -28,7 +28,7 @@ const BackButton = styled(Button)`
 //         id: 1,
 //         question: "What is the minimum amount of free disk space recommended for installing the required lab software?",
 //         options: ["10 GB", "20 GB", "40 GB", "100 GB"],
-//         correctAnswer: "40 GB",
+//         correct_answer: "40 GB",
 //     },
 //     {
 //         id: 2,
@@ -39,7 +39,7 @@ const BackButton = styled(Button)`
 //             "Simulink only",
 //             "No add-ons are needed",
 //         ],
-//         correctAnswer: "Simulink and Simulink PLC Coder",
+//         correct_answer: "Simulink and Simulink PLC Coder",
 //     },
 //     {
 //         id: 3,
@@ -50,7 +50,7 @@ const BackButton = styled(Button)`
 //             "It is too slow for simulations",
 //             "It’s not compatible with Windows",
 //         ],
-//         correctAnswer: "It does not support all required features",
+//         correct_answer: "It does not support all required features",
 //     },
 //     {
 //         id: 4,
@@ -61,7 +61,7 @@ const BackButton = styled(Button)`
 //             "Version 3.5.20.0 (64-bit)",
 //             "Web-based version",
 //         ],
-//         correctAnswer: "Version 3.5.17.0 (32-bit)",
+//         correct_answer: "Version 3.5.17.0 (32-bit)",
 //     },
 // ];
 
@@ -72,10 +72,11 @@ const VideoDetailPage = () => {
     const [quizzes, setQuizzes] = useState([]);
     const navigate = useNavigate();
 
+    // get quiz for the specific video
     useEffect(() => {
         async function fetchVideo() {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/video/get_video/${videoId}`)
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_video/${videoId}`)
                 setVideo(response.data);
                 console.log('video with questions:', response.data.quizzes);
                 setQuizzes(response.data.quizzes)
@@ -86,12 +87,13 @@ const VideoDetailPage = () => {
         fetchVideo()
     }, [])
 
-
+    // add video to db as watched but not complete quiz yet
     const handlePlay = async () => {
         if (!hasPlayed) {
             try {
-                await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/video_view`, {
-                    video_id: videoId
+                await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/track_progress`, {
+                    content_type: 'video',
+                    content_id: videoId
                 }, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`,

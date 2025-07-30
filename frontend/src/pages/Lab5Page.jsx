@@ -5,11 +5,72 @@ import BackToTop from "../components/BackToTop";
 // Utils
 import { updateTitle } from "../utils";
 // Styles
+
 import { Container } from "react-bootstrap";
 import Title from "../components/Title";
 import image from "../images/lab5_Items/lab5.webp";
+import Quiz from "../components/Quiz";
+import { useParams } from "react-router-dom";
 
-const Lab5Page = () => {
+const lab5QuizQuestions = [
+  {
+    id: 1,
+    question: "What is the main target of the process-aware attack in Lab 6?",
+    options: [
+      "The firewall configuration of a PLC network",
+      "The physical wiring of the plant’s sensors",
+      "The PID controllers regulating the desalination process",
+      "The IP address of the SCADA master",
+    ],
+    correct_answer: "The PID controllers regulating the desalination process",
+  },
+  {
+    id: 2,
+    question: "What tool is used to reverse engineer the PLC binary in this lab?",
+    options: [
+      "Wireshark",
+      "ICSREF",
+      "ModScan",
+      "ImHex Debugger",
+    ],
+    correct_answer: "ICSREF",
+  },
+  {
+    id: 3,
+    question: "Which specific change is made to the PID parameters during the attack?",
+    options: [
+      "The PID controller is deleted",
+      "The Setpoint value is replaced with a random integer",
+      "The Integral gain is increased to cause instability",
+      "The PLC cycle time is doubled",
+    ],
+    correct_answer: "The Integral gain is increased to cause instability",
+  },
+  {
+    id: 4,
+    question: "How are memory addresses of PID parameters identified in the `.PRG` binary?",
+    options: [
+      "By decoding Modbus messages from the HMI",
+      "By using hex editors with process logs",
+      "By running pidargs and analyzing subroutine call graphs in ICSREF",
+      "By scanning the Simulink model structure",
+    ],
+    correct_answer: "By running pidargs and analyzing subroutine call graphs in ICSREF",
+  },
+  {
+    id: 5,
+    question: "What is a key observable effect of the attack on the simulated desalination process?",
+    options: [
+      "The network interface stops responding",
+      "The temperature readings are encrypted",
+      "Distillate flow rate (Wd) becomes unstable or overshoots",
+      "The SCADA HMI stops refreshing",
+    ],
+    correct_answer: "Distillate flow rate (Wd) becomes unstable or overshoots",
+  },
+];
+
+const Lab5Page = ({labId}) => {
   React.useEffect(() => {
     updateTitle("lab5 | OTSec-Hub.io");
   }, []);
@@ -217,6 +278,8 @@ const Lab5Page = () => {
                   📄 Lab5_Analysis.pdf
                 </a>
               </section>
+              <Quiz questions={lab5QuizQuestions} labId={labId} mode="lab" />
+
             </div>
           </div>
         </Container>

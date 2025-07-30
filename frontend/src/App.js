@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 // Styles
 import { ThemeProvider } from "styled-components";
 // State
@@ -12,7 +13,7 @@ import {
 import { useGetUsersQuery, useGetProjectsQuery } from "./app/apiSlice";
 import PropTypes from "prop-types";
 // Router
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";
@@ -23,11 +24,11 @@ import Lab3Page from "./pages/Lab3Page";
 import Lab4Page from "./pages/Lab4Page";
 import Lab5Page from "./pages/Lab5Page";
 import Lab6Page from "./pages/Lab6Page";
-import Exercise001 from "./pages/Exercise-001"
-import Exercise002 from './pages/Exercise-002'
-import Exercise003 from './pages/Exercise-003'
-import Benchmarks from "./pages/Benchmarks"
-import Exercises from "./pages/Exercises"
+import Exercise001 from "./pages/Exercise-001";
+import Exercise002 from "./pages/Exercise-002";
+import Exercise003 from "./pages/Exercise-003";
+import Benchmarks from "./pages/Benchmarks";
+import Exercises from "./pages/Exercises";
 import Announcements from "./pages/Announcements";
 import Discussions from "./pages/Discussions";
 import ContactPage from "./pages/ContactPage";
@@ -41,9 +42,9 @@ import ProfilePage from "./pages/ProfilePage";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import UsersManagment from "./pages/Admin/UsersManagment";
 import TrackProgress from "./pages/Admin/TrackProgress";
-import LabsManagement from "./pages/Admin/LabsManagement"
+import LabsManagement from "./pages/Admin/LabsManagement";
 import VerificationPage from "./pages/VerificationPage";
-import VideoSubmissionPage from "./pages/StudentVideoSubmission";
+import VideoSubmissionPage from "./pages/MemberVideoSubmission";
 import ExerciseSubmission from "./pages/ExerciseSubmission";
 import VideosManagment from "./pages/Admin/VideosManagement";
 import LabSubmission from "./pages/LabSubmission";
@@ -67,30 +68,31 @@ import Footer from "./components/Footer";
 import { footerTheme, navLogo } from "./config";
 // Util
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
+// Auth
+import { ProtectedRoute, AdminRoute } from './app/ProtectedRoutes';
+import LabPage from "./pages/LabPage";
 
-
-// #region component
-const propTypes = {
-  filteredProjects: PropTypes.arrayOf(PropTypes.string),
-  projectCardImages: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      image: PropTypes.node.isRequired,
-    })
-  ),
-};
+// Styled layout component
+const AppLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
+  main {
+    flex: 1;
+    padding-bottom: 2rem;
+  }
+`;
 
 // Helper function to import all images from a folder
 function importAll(r) {
   let images = {};
   r.keys().forEach((item) => {
-    // item is like './imageName.png'
     images[item.replace('./', '')] = r(item);
   });
   return images;
 }
 
-// Import all images from src/images folder
 const projectImages = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
 
 const App = ({ projectCardImages = [], filteredProjects = [] }) => {
@@ -103,7 +105,6 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
   // Set all projects state
   React.useEffect(() => {
-
     const placeholderProjects = [
       {
         id: "Lab0",
@@ -162,56 +163,40 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         url: "Lab6",
       },
     ];
-
     dispatch(setProjects(placeholderProjects));
-    //}
   }, [projectsData, projectCardImages, dispatch]);
 
   // Set main projects state
   React.useEffect(() => {
     if (projects.length !== 0) {
-      if (
-        filteredProjects !== (undefined && null) &&
-        filteredProjects.length !== 0
-      ) {
-        const tempArray = projects.filter((obj) =>
-          filteredProjects.includes(obj.name)
-        );
-        tempArray.length !== 0
-          ? dispatch(setMainProjects([...tempArray]))
-          : dispatch(setMainProjects([...projects.slice(0, 3)]));
+      if (filteredProjects?.length > 0) {
+        const tempArray = projects.filter((obj) => filteredProjects.includes(obj.name));
+        dispatch(setMainProjects(tempArray.length ? [...tempArray] : [...projects.slice(0, 3)]));
       } else {
         dispatch(setMainProjects([...projects.slice(0, 3)]));
       }
     }
   }, [projects, filteredProjects, dispatch]);
 
-  // Theme
-  const setThemes = React.useCallback(
-    (theme) => {
-      if (theme) {
-        dispatch(setMode(theme));
-        setTheme(theme);
-      } else {
-        dispatch(setMode(getPreferredTheme()));
-        setTheme(getPreferredTheme());
-      }
-    },
-    [dispatch]
-  );
+  // Theme management
+  const setThemes = React.useCallback((theme) => {
+    const selectedTheme = theme || getPreferredTheme();
+    dispatch(setMode(selectedTheme));
+    setTheme(selectedTheme);
+  }, [dispatch]);
 
   React.useEffect(() => {
     setThemes();
-  }, [setThemes]);
-
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = () => {
       const storedTheme = getStoredTheme();
       if (storedTheme !== "light" && storedTheme !== "dark") {
         setThemes();
       }
-    });
+    };
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, [setThemes]);
 
   if (isLoading) {
     content = (
@@ -221,12 +206,18 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
     );
   } else if (isSuccess) {
     content = (
-      <>
-        <Element name={"Home"} id="home">
-          <NavBar Logo={navLogo} callBack={(theme) => setThemes(theme)} />
-        </Element>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
+      <Routes>
+
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/Announcements" element={<Announcements />} />
+        <Route path="/Weekly-Discussions" element={<Discussions />} />
+        <Route path="/ContactPage" element={<ContactPage />} />
+        <Route path="/LoginPage" element={<LoginPage />} />
+        <Route path="/RegisterPage" element={<RegisterPage />} />
+
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}>
           <Route path="/Resources/All-Labs" element={<AllProjects />} />
           <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
           <Route path="/Resources/Exercises" element={<Exercises />} />
@@ -240,41 +231,40 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Resources/Exercises/Exercise-Submission" element={<ExerciseSubmission />} />
           <Route path="/Resources/All-Labs/Lab-Submission" element={<LabSubmission />} />
           <Route path="/Resources/Benchmarks/Benchmark-Submission" element={<BenchmarkSubmission />} />
-          <Route path="/Announcements" element={<Announcements />} />
-          <Route path="/Weekly-Discussions" element={<Discussions />} />
           <Route path="/Community/Community-Labs" element={<CommunityLabs />} />
           <Route path="/Community/Community-Exercises" element={<CommunityExercises />} />
           <Route path="/Community/Community-Videos" element={<CommunityVideos />} />
           <Route path="/Community/Community-Benchmarks" element={<CommunityBenchmarks />} />
-          <Route path="/ContactPage" element={<ContactPage />} />
-          <Route path="/LoginPage" element={<LoginPage />} />
-          <Route path="/RegisterPage" element={<RegisterPage />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
+          <Route path="/All-Labs/:id" element={<LabPage />} />
+          <Route path="/All-Labs/0" element={<Lab0Page labId={0} />} />
+          {/* <Route path="/All-Labs/1" element={<Lab1Page labId={1} />} />
+          <Route path="/All-Labs/2" element={<Lab2Page labId={2} />} />
+          <Route path="/All-Labs/3" element={<Lab3Page labId={3} />} />
+          <Route path="/All-Labs/4" element={<Lab4Page labId={4} />} />
+          <Route path="/All-Labs/5" element={<Lab5Page labId={5} />} />
+          <Route path="/All-Labs/6" element={<Lab6Page labId={6} />} /> */}
+        </Route>
+
+        {/* Admin Routes */}
+        <Route element={<AdminRoute />}>
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/UsersManagment" element={<UsersManagment />} />
           <Route path="/TrackProgress" element={<TrackProgress />} />
           <Route path="/VideosManagement" element={<VideosManagment />} />
           <Route path="/LabsManagement" element={<LabsManagement />} />
-          <Route path="/verify-email" element={<VerificationPage />} />
-          <Route path="/All-Labs/Lab0" element={<Lab0Page />} />
-          <Route path="/All-Labs/Lab1" element={<Lab1Page />} />
-          <Route path="/All-Labs/Lab2" element={<Lab2Page />} />
-          <Route path="/All-Labs/Lab3" element={<Lab3Page />} />
-          <Route path="/All-Labs/Lab4" element={<Lab4Page />} />
-          <Route path="/All-Labs/Lab5" element={<Lab5Page />} />
-          <Route path="/All-Labs/Lab6" element={<Lab6Page />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer mode={footerTheme} />
-      </>
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     );
   } else if (isError) {
     content = (
       <Container className="d-flex vh-100 align-items-center justify-content-center">
         <h2>
           {error.status !== "FETCH_ERROR"
-            ? `${error.status}: ${error.data.message} - check githubUsername in src/config.js`
-            : `${error.status} - check URLs in  src/app/apiSlice.js`}
+            ? `${error.status}: ${error.data.message}`
+            : "Network Error - Please check your connection"}
         </h2>
       </Container>
     );
@@ -282,20 +272,34 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
   return (
     <ErrorBoundary FallbackComponent={AppFallback}>
-      {/* https://reactrouter.com/6.28.0/upgrading/future#v7_starttransition */}
-      {/* https://reactrouter.com/6.28.0/upgrading/future#v7_relativesplatpath */}
-      <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true, }}>
-        <ThemeProvider theme={{ name: theme }}>
-          <ScrollToTop />
-          <GlobalStyles />
-          {content}
-        </ThemeProvider>
-      </HashRouter>
+      {/* Removed the Router wrapper since it's already in index.js */}
+      <ThemeProvider theme={{ name: theme }}>
+        <ScrollToTop />
+        <GlobalStyles />
+        <AppLayout>
+          <Element name="Home" id="home">
+            <NavBar Logo={navLogo} callBack={setThemes} />
+          </Element>
+          <main>
+            {/* <Container> */}
+              {content}
+            {/* </Container> */}
+          </main>
+          <Footer mode={footerTheme} />
+        </AppLayout>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 };
 
-App.propTypes = propTypes;
-// #endregion
+App.propTypes = {
+  filteredProjects: PropTypes.arrayOf(PropTypes.string),
+  projectCardImages: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      image: PropTypes.node.isRequired,
+    })
+  ),
+};
 
 export default App;

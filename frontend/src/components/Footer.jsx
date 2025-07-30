@@ -1,59 +1,50 @@
+// src/components/Footer.js
 import React from "react";
-// Styles
 import styled from "styled-components";
-// State
 import PropTypes from "prop-types";
-// Components
 import SocialLinks from "./SocialLinks";
 
-// #region styled-components
 const StyledFooter = styled.footer`
-  height: calc(var(--nav-height) + 1rem);
   background: var(--bs-primary);
+  padding: 1rem 0;
+  color: ${({ $mode }) => $mode?.toLowerCase() === "light" ? "var(--bs-light)" : "var(--bs-gray-dark)"};
+  margin-top: auto; // Ensures footer stays at bottom
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 
   a {
-    color: ${({ $mode }) => {
-      if ($mode !== undefined && $mode !== null) {
-        return $mode.toLowerCase() === "light"
-          ? "var(--bs-light)"
-          : "var(--bs-gray-dark)";
-      } else {
-        return "var(--bs-gray-dark)";
-      }
-    }};
-
+    color: inherit;
+    transition: color 0.2s ease;
+    
     &:hover {
-      color: ${({ $mode }) => {
-        if ($mode !== undefined && $mode !== null) {
-          return $mode.toLowerCase() === "light"
-            ? "var(--bs-gray-dark)"
-            : "var(--bs-light)";
-        } else {
-          return "var(--bs-gray-dark)";
-        }
-      }};
+      color: ${({ $mode }) => $mode?.toLowerCase() === "light" ? "var(--bs-gray-dark)" : "var(--bs-light)"};
+      transform: scale(1.1);
     }
   }
 `;
-// #endregion
-
-// #region component
-const propTypes = {
-  mode: PropTypes.string.isRequired,
-};
 
 const Footer = ({ mode }) => {
   return (
-    <StyledFooter
-      $mode={mode}
-      className="d-flex align-items-center justify-content-center p-2"
-    >    
-    <SocialLinks />
+    <StyledFooter $mode={mode}>
+      <div className="container">
+        <div className="footer-content">
+          <SocialLinks />
+          <div className="copyright">
+            &copy; {new Date().getFullYear()} OTSec-Hub
+          </div>
+        </div>
+      </div>
     </StyledFooter>
   );
 };
 
-Footer.propTypes = propTypes;
-// #endregion
+Footer.propTypes = {
+  mode: PropTypes.string.isRequired,
+};
 
 export default Footer;

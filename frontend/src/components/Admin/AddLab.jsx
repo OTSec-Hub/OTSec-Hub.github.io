@@ -6,25 +6,20 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
-import { Alert } from "react-bootstrap";
 import axios from "axios";
 
-export default function AddVideo() {
+export default function AddLab() {
     const [open, setOpen] = React.useState(false);
-    const [step, setStep] = React.useState(1); // Step 1 = video form, Step 2 = questions
-    const [video, setVideo] = React.useState({
+    const [step, setStep] = React.useState(1);
+    const [lab, setLab] = React.useState({
         title: "",
-        subtitle: "",
-        description: "",
-        url: "",
+        lab_img: "",
+        content: "",
     });
-    const [questions, setQuestions] = React.useState([
-        { question: "", correct_answer: "", options: ["", "", "", ""] },
-        { question: "", correct_answer: "", options: ["", "", "", ""] },
-        { question: "", correct_answer: "", options: ["", "", "", ""] },
-        { question: "", correct_answer: "", options: ["", "", "", ""] },
-    ]);
-
+    const token = localStorage.getItem('token')
+    const [questions, setQuestions] = React.useState(
+        Array(4).fill({ question: "", correct_answer: "", options: ["", "", "", ""] })
+    );
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
     const [success, setSuccess] = React.useState(false);
@@ -38,18 +33,15 @@ export default function AddVideo() {
 
     const handleClose = () => {
         setOpen(false);
-        setVideo({ title: "", subtitle: "", description: "", url: "" });
-        setQuestions([
-            { question: "", correct_answer: "", options: ["", "", "", ""] },
-            { question: "", correct_answer: "", options: ["", "", "", ""] },
-            { question: "", correct_answer: "", options: ["", "", "", ""] },
-            { question: "", correct_answer: "", options: ["", "", "", ""] },
-        ]);
+        setLab({ title: "", lab_img: "", content: "" });
+        setQuestions(
+            Array(4).fill({ question: "", correct_answer: "", options: ["", "", "", ""] })
+        );
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setVideo((prev) => ({
+        setLab((prev) => ({
             ...prev,
             [name]: value,
         }));
@@ -67,8 +59,8 @@ export default function AddVideo() {
     };
 
     const handleNext = () => {
-        if (!video.title || !video.subtitle || !video.description || !video.url) {
-            setError("Please fill all video fields");
+        if (!lab.title || !lab.lab_img || !lab.content) {
+            setError("Please fill all lab fields");
             return;
         }
         setError(null);
@@ -79,11 +71,15 @@ export default function AddVideo() {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.post(
-                `${process.env.REACT_APP_API_BASE_URL}/api/add_video`,
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/create_lab`, {
+                ...lab,
+                quizzes: questions,
+            },
                 {
-                    ...video,
-                    quizzes: questions,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
                 }
             );
             setSuccess(true);
@@ -91,7 +87,8 @@ export default function AddVideo() {
                 handleClose();
             }, 1500);
         } catch (err) {
-            setError(err.response?.data?.detail || "Failed to add video with questions");
+            console.error(err);
+            setError(err.response?.data?.detail || "Failed to add lab with questions");
         } finally {
             setLoading(false);
         }
@@ -106,57 +103,46 @@ export default function AddVideo() {
                 onClick={handleClickOpen}
                 sx={{ mt: 2, mb: 2 }}
             >
-                Video
+                Lab
             </Button>
 
             <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-                <DialogTitle>{step === 1 ? "Add New Video" : "Add Questions"}</DialogTitle>
+                <DialogTitle>{step === 1 ? "Add New Lab" : "Add Questions"}</DialogTitle>
                 <DialogContent>
                     {step === 1 && (
                         <>
                             <TextField
                                 margin="dense"
-                                name="url"
-                                label="Video URL"
-                                fullWidth
-                                variant="standard"
-                                value={video.url}
-                                onChange={handleChange}
-                                disabled={loading}
-                            />
-                            <TextField
-                                margin="dense"
                                 name="title"
-                                label="Video Title"
+                                label="Lab Title"
                                 fullWidth
                                 variant="standard"
-                                value={video.title}
+                                value={lab.title}
                                 onChange={handleChange}
                                 disabled={loading}
                             />
                             <TextField
                                 margin="dense"
-                                name="subtitle"
-                                label="Video Subtitle"
+                                name="lab_img"
+                                label="Lab Image URL"
                                 fullWidth
                                 variant="standard"
-                                value={video.subtitle}
+                                value={lab.lab_img}
                                 onChange={handleChange}
                                 disabled={loading}
                             />
                             <TextField
                                 margin="dense"
-                                name="description"
-                                label="Video Description"
+                                name="content"
+                                label="Lab Content"
                                 fullWidth
                                 variant="standard"
-                                value={video.description}
+                                value={lab.content}
                                 onChange={handleChange}
                                 disabled={loading}
                             />
                         </>
                     )}
-
 
                     {step === 2 &&
                         questions.map((q, idx) => (
@@ -214,12 +200,7 @@ export default function AddVideo() {
                     {step === 1 && (
                         <Button
                             onClick={handleNext}
-                            disabled={
-                                !video.title ||
-                                !video.subtitle ||
-                                !video.description ||
-                                !video.url
-                            }
+                            disabled={!lab.title || !lab.lab_img || !lab.content}
                         >
                             Next
                         </Button>

@@ -66,7 +66,7 @@ const EditVideoBtn = ({ video }) => {
       console.log("Payload to send:", payload); // debug
 
       const response = await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/api/video/update_video/${videoData.id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/update_video/${videoData.id}`,
         payload
       );
 

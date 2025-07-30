@@ -64,34 +64,37 @@ const StyledCard = styled.div`
 
 // #region component
 const propTypes = {
-  demo: PropTypes.string,
-  description: PropTypes.string,
   image: PropTypes.node,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 };
 
 
-const ProjectCard = ({ demo, description, image, name, url }) => {
-  console.log("demo value:", demo);
+const ProjectCard = ({ title, image, url }) => {
+  // console.log("demo value:", demo);
   return (
     <StyledCard>
       <Card>
         <Card.Img
           variant="top"
           src={image ? image : GH}
-          alt={name}
+          alt={title}
           className="mx-auto"
         />
         <Card.Body className="overflow-auto text-center">
-          <Card.Title>{name}</Card.Title>
-          <Card.Text>{description}</Card.Text>
-          {demo ? (
-            <Link to={`/All-Labs/${demo}`} style={{ textDecoration: "none" }}>
+          <Card.Title>{title}</Card.Title>
+          {/* <Card.Text>{description}</Card.Text> */}
+          {url && (
+            <Link to={`/All-Labs/${url}`} style={{ textDecoration: "none", marginRight: "10px" }}>
               Click Here <Icon icon="icon-park-outline:code-computer" />
             </Link>
-          ) : null}
+          )}
         </Card.Body>
+        {/* <Card.Footer className="text-center">
+          <Link className="card-link" to={`/All-Labs/${url}`}>
+            Click Here <Icon icon="icomoon-free:github" />
+          </Link>
+        </Card.Footer> */}
         {/* <Card.Footer className="text-center">
           <Card.Link href={url}>
             {"Click Here!"}

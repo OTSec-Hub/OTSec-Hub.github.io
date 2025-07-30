@@ -26,6 +26,7 @@ import image12 from "../images/lab6_Items/step2,4.png"
 import image13 from "../images/lab6_Items/step2,5.png"
 import image14 from "../images/lab6_Items/step2,6.png"
 import image15 from "../images/lab6_Items/step2,7.png"
+import { useParams } from "react-router-dom";
 
 const lab6QuizQuestions = [
   {
@@ -37,7 +38,7 @@ const lab6QuizQuestions = [
       "The PID controllers regulating the desalination process",
       "The IP address of the SCADA master",
     ],
-    correctAnswer: "The PID controllers regulating the desalination process",
+    correct_answer: "The PID controllers regulating the desalination process",
   },
   {
     id: 2,
@@ -48,7 +49,7 @@ const lab6QuizQuestions = [
       "ModScan",
       "ImHex Debugger",
     ],
-    correctAnswer: "ICSREF",
+    correct_answer: "ICSREF",
   },
   {
     id: 3,
@@ -59,7 +60,7 @@ const lab6QuizQuestions = [
       "The Integral gain is increased to cause instability",
       "The PLC cycle time is doubled",
     ],
-    correctAnswer: "The Integral gain is increased to cause instability",
+    correct_answer: "The Integral gain is increased to cause instability",
   },
   {
     id: 4,
@@ -70,7 +71,7 @@ const lab6QuizQuestions = [
       "By running pidargs and analyzing subroutine call graphs in ICSREF",
       "By scanning the Simulink model structure",
     ],
-    correctAnswer: "By running pidargs and analyzing subroutine call graphs in ICSREF",
+    correct_answer: "By running pidargs and analyzing subroutine call graphs in ICSREF",
   },
   {
     id: 5,
@@ -81,15 +82,17 @@ const lab6QuizQuestions = [
       "Distillate flow rate (Wd) becomes unstable or overshoots",
       "The SCADA HMI stops refreshing",
     ],
-    correctAnswer: "Distillate flow rate (Wd) becomes unstable or overshoots",
+    correct_answer: "Distillate flow rate (Wd) becomes unstable or overshoots",
   },
 ];
 
 
-const Lab6Page = () => {
+const Lab6Page = ({labId}) => {
+  
   React.useEffect(() => {
     updateTitle("lab6 | OTSec-Hub.io");
   }, []);
+  
 
   return (
     <>
@@ -685,7 +688,7 @@ const Lab6Page = () => {
                 </ul>
                 </p>
               </section>
-              <Quiz questions={lab6QuizQuestions} />
+              <Quiz questions={lab6QuizQuestions} labId={labId} mode="lab" />
             </div>
           </div>
         </Container>

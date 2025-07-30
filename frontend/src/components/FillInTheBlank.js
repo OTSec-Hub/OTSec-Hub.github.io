@@ -48,11 +48,11 @@ const FillInTheBlank = ({ questions }) => {
           </p>
           {showResults && (
             <div style={{ marginTop: 6 }}>
-              {userAnswers[q.id]?.trim().toLowerCase() === q.correctAnswer.toLowerCase() ? (
+              {userAnswers[q.id]?.trim().toLowerCase() === q.correct_answer.toLowerCase() ? (
                 <span style={{ color: "green" }}>✅ Correct</span>
               ) : (
                 <span style={{ color: "red" }}>
-                  ❌ Incorrect — Correct answer: <strong>{q.correctAnswer}</strong>
+                  ❌ Incorrect — Correct answer: <strong>{q.correct_answer}</strong>
                 </span>
               )}
             </div>
