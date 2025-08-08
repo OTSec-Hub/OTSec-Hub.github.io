@@ -11,6 +11,8 @@ const LabPage = () => {
     const [lab, setLab] = useState({ content: "", quiz: {} });
     const { id } = useParams();
     const token = localStorage.getItem("token");
+    const [quizzes, setQuizzes] = useState([]);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -22,6 +24,7 @@ const LabPage = () => {
                     }
                 );
                 setLab(response.data);
+                setQuizzes(response.data.quizzes)
             } catch (err) {
                 console.error("Failed to fetch lab:", err);
             }
@@ -38,9 +41,9 @@ const LabPage = () => {
                             {lab.content}
                         </ReactMarkdown>
                     </div>
-                    <BackToTop home="Home" />
-                    <Quiz labId={id} mode="lab" />
+                    <Quiz questions={quizzes} labId={id} mode="lab" />
                 </div>
+                <BackToTop home="Home" />
             </Container>
         </main>
     );

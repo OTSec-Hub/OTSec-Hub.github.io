@@ -146,11 +146,25 @@ export default function LabsManagement({ children }) {
                                                         <img src={labData.lab_img} alt={labData.title} style={{ maxHeight: '50px', maxWidth: '100px' }} />
                                                     </ThemedTableCell>
                                                     <ThemedTableCell align="center">{labData.title}</ThemedTableCell>
-                                                    <ThemedTableCell align="center" style={{maxWidth: '300px'}}>{labData.content}</ThemedTableCell>
+                                                    <ThemedTableCell align="center">
+                                                        <Box
+                                                            sx={{
+                                                                margin: '0 auto',
+                                                                maxWidth: 400,
+                                                                maxHeight: 100,
+                                                                overflow: 'auto',
+                                                                whiteSpace: 'pre-wrap',
+                                                                wordWrap: 'break-word',
+                                                            }}
+                                                        >
+                                                            {labData.content}
+                                                        </Box>
+
+                                                    </ThemedTableCell>
                                                     <ThemedTableCell align="center">
                                                         <Box display="flex" gap={1} justifyContent="center">
                                                             <EditLab lab={labData} />
-                                                            <DeleteBtn name="lab" id={labData.id}  />
+                                                            <DeleteBtn name="lab" id={labData.id} />
                                                         </Box>
                                                     </ThemedTableCell>
                                                 </ThemedTableRow>

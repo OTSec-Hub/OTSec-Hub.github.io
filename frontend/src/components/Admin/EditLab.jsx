@@ -8,6 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import { Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import axios from "axios";
+import MarkDownEditor from "../MarkDownEditor";
 
 
 const EditLab = ({ lab }) => {
@@ -19,11 +20,19 @@ const EditLab = ({ lab }) => {
         content: lab.content || "",
         quizzes: lab.quizzes || [],
     });
+
+    const originalData = {
+        id: lab.id || "",
+        lab_img: lab.lab_img || "",
+        title: lab.title || "",
+        content: lab.content || "",
+        quizzes: lab.quizzes || [],
+    };
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
     const [success, setSuccess] = React.useState(false);
     console.log(labData);
-    
+
     const handleClickOpen = () => {
         setOpen(true);
         setError(null);
@@ -43,6 +52,32 @@ const EditLab = ({ lab }) => {
             [name]: value,
         }));
     };
+
+    const hasChanges = () => {
+        if (
+            labData.title !== originalData.title ||
+            labData.lab_img !== originalData.lab_img ||
+            labData.content !== originalData.content
+        ) return true;
+
+        if (labData.quizzes.length !== originalData.quizzes.length) return true;
+
+        for (let i = 0; i < labData.quizzes.length; i++) {
+            const newQuiz = labData.quizzes[i];
+            const originalQuiz = originalData.quizzes[i];
+            if (
+                newQuiz.question !== originalQuiz.question ||
+                newQuiz.correct_answer !== originalQuiz.correct_answer ||
+                newQuiz.option1 !== originalQuiz.option1 ||
+                newQuiz.option2 !== originalQuiz.option2 ||
+                newQuiz.option3 !== originalQuiz.option3 ||
+                newQuiz.option4 !== originalQuiz.option4
+            ) return true;
+        }
+
+        return false;
+    };
+
 
     const handleSubmit = async () => {
         setLoading(true);
@@ -90,7 +125,7 @@ const EditLab = ({ lab }) => {
                 </button>
             </StyledWrapper>
 
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                 <DialogTitle>Edit lab</DialogTitle>
                 <DialogContent>
                     <TextField
@@ -116,7 +151,7 @@ const EditLab = ({ lab }) => {
                         onChange={handleChange}
                         disabled={loading}
                     />
-                    <TextField
+                    {/* <TextField
                         margin="dense"
                         name="content"
                         label="Content"
@@ -125,6 +160,11 @@ const EditLab = ({ lab }) => {
                         variant="standard"
                         value={labData.content}
                         onChange={handleChange}
+                        disabled={loading}
+                    /> */}
+                    <MarkDownEditor
+                        value={labData.content}
+                        handleChange={handleChange}
                         disabled={loading}
                     />
 
@@ -210,7 +250,7 @@ const EditLab = ({ lab }) => {
                     {!success && (
                         <Button
                             onClick={handleSubmit}
-                            disabled={loading || !labData.title || !labData.lab_img}
+                            disabled={loading || !labData.title || !labData.lab_img || !hasChanges()}
                         >
                             {loading ? "Saving..." : "Save Changes"}
                         </Button>

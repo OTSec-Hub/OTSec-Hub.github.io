@@ -21,7 +21,7 @@ const navLinks = {
       private: true, // <-- Add flag
       children: [
         { id: "2R-1", name: "ICS Labs", route: "/Resources/All-Labs" },
-        { id: "2R-2", name: "Benchmarks", route: "/Resources/Benchmarks" },
+        // { id: "2R-2", name: "Benchmarks", route: "/Resources/Benchmarks" },
         { id: "2R-3", name: "Exercises", route: "/Resources/Exercises" },
         { id: "3R-4", name: "Videos", route: "/Resources/Videos" },
       ]
@@ -33,7 +33,7 @@ const navLinks = {
       private: true, // <-- Add flag
       children: [
         { id: "3R-1", name: "Labs", route: "/Community/Community-Labs" },
-        { id: "3R-2", name: "Benchmarks", route: "/Community/Community-Benchmarks" },
+        // { id: "3R-2", name: "Benchmarks", route: "/Community/Community-Benchmarks" },
         { id: "3R-3", name: "Exercises", route: "/Community/Community-Exercises" },
         { id: "3R-4", name: "Videos", route: "/Community/Community-Videos" },
       ]

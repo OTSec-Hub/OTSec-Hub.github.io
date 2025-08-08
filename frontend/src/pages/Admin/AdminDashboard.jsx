@@ -30,10 +30,10 @@ export default function AdminDashboard() {
     ];
 
     return (
-        <div className="d-flex min-h-screen w-100">
+        <div className="d-flex min-h-screen w-100" >
             <Sidebar />
 
-            <div className="flex-grow ml-[240px] p-5 bg-gray-50 min-h-screen w-100">
+            <div className="flex-grow ml-[240px] p-5 bg-gray-50 min-h-screen w-100" width={300} minWidth={300}>
                 <h1 className="text-2xl font-semibold mb-4">Admin Analytics</h1>
 
                 {/* Stat Cards */}
@@ -53,7 +53,7 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Line Chart */}
-                <div className=" p-6 rounded-2xl shadow-md">
+                <div className=" p-6 rounded-2xl shadow-md" >
                     <h3 className="text-lg font-semibold mb-4">Revenue Trend (Static)</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={revenueData}>

@@ -1,9 +1,11 @@
 // Sidebar.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Button, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { BarChart3, Users, BookOpen, LayoutDashboard, Flag, Dumbbell, Video, Settings, LineChart } from "lucide-react";
 import styled from "styled-components";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 
 const SidebarWrapper = styled.div`
@@ -55,38 +57,118 @@ const SidebarItems = [
     { name: "Dashboard", icon: <LayoutDashboard />, route: "/AdminDashboard" },
     { name: "User Management", icon: <Users />, route: "/UsersManagment" },
     { name: "Track Progress", icon: <BarChart3 />, route: "/TrackProgress" },
-    { name: "ICS Labs Management", icon: <BookOpen />, route: "/LabsManagement" },
-    { name: "Benchmarks Management", icon: <Flag />, route: "/BenchmarksManagement" },
-    { name: "Exercises Management", icon: <Dumbbell />, route: "/ExercisesManagement" },
-    { name: "Videos Management", icon: <Video />, route: "/VideosManagement" },
+    {
+        name: "OTSec-Hub Management", icon: <LineChart />, children: [
+            { name: "ICS Labs Management", icon: <BookOpen />, route: "/LabsManagement" },
+            { name: "Exercises Management", icon: <Dumbbell />, route: "/ExercisesManagement" },
+            { name: "Videos Management", icon: <Video />, route: "/VideosManagement" },
+
+        ]
+    },
+    {
+        name: "Community Submissions", icon: <LineChart />, children: [
+            { name: "Submitted Labs", icon: <BookOpen />, route: "/LabsManagement" },
+            { name: "Submitted Exercises", icon: <Dumbbell />, route: "/ExercisesManagement" },
+            { name: "Submitted Videos", icon: <Video />, route: "/VideosManagement" },
+
+        ]
+    },
+    {
+        name: "OTSec-Hub Community", icon: <LineChart />, children: [
+            { name: "ICS Labs Management", icon: <BookOpen />, route: "/LabsManagement" },
+            { name: "Exercises Management", icon: <Dumbbell />, route: "/ExercisesManagement" },
+            { name: "Videos Management", icon: <Video />, route: "/VideosManagement" },
+
+        ]
+    },
+    
+    // { name: "Benchmarks Management", icon: <Flag />, route: "/BenchmarksManagement" },
     { name: "Settings", icon: <Settings />, route: "/Settings" } // Optional
 ];
 
 
 const Sidebar = () => {
-    return (
-        <>
-            < SidebarWrapper >
-                <Link to="/" className="mb-4">
-                    <Button
-                        size="md"
-                        variant="outline-primary"
-                        className="rounded-pill px-4 fw-semibold shadow-sm w-100"
-                    >
-                        ← Back
-                    </Button>
-                </Link>
+    const [openDropdown, setOpenDropdown] = useState([]);
+    const location = useLocation()
 
-                <Nav className="flex-column">
-                    {SidebarItems.map((item) => (
-                        <SidebarLink as={NavLink} key={item.name} to={item.route} className="nav-link px-1">
-                            {item.icon}
-                            {item.name}
-                        </SidebarLink>
-                    ))}
-                </Nav>
-            </SidebarWrapper>
-        </>
+    const toggleDropdown = (name) => {
+        if (openDropdown.includes(name)) {
+            setOpenDropdown(openDropdown.filter(item => item !== name))
+        } else {
+            setOpenDropdown([...openDropdown, name]);
+        }
+    };
+
+    React.useEffect(() => {
+        SidebarItems.forEach((item) => {
+            if (item.children) {
+                const shouldOpen = item.children.some((child) =>
+                    location.pathname.includes(child.route)
+                );
+                if (shouldOpen && !openDropdown.includes(item.name)) {
+                    setOpenDropdown((prev) => [...prev, item.name]);
+                }
+            }
+        });
+    }, [location.pathname]);
+
+    return (
+        <SidebarWrapper>
+            <Link to="/" className="mb-4">
+                <Button
+                    size="md"
+                    variant="outline-primary"
+                    className="rounded-pill px-4 fw-semibold shadow-sm w-100"
+                >
+                    ← Back
+                </Button>
+            </Link>
+
+            <Nav className="flex-column " >
+                {SidebarItems.map((item) => (
+                    <div key={item.name} >
+                        {item.children ? (
+                            <>
+                                <SidebarLink
+                                    as="div"
+                                    onClick={() => toggleDropdown(item.name)}
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    {item.icon}
+                                    {item.name}
+                                    {openDropdown.includes(item.name) ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+
+                                </SidebarLink>
+
+                                {openDropdown.includes(item.name) && (
+                                    <div  style={{ marginLeft: "1.5rem" }}>
+                                        {item.children.map((child) => (
+                                            <SidebarLink
+                                                key={child.name}
+                                                to={child.route}
+                                                className="nav-link px-1"
+                                            >
+                                                {child.icon}
+                                                {child.name}
+                                            </SidebarLink>
+                                        ))}
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <SidebarLink
+                                as={NavLink}
+                                to={item.route}
+                                className="nav-link"
+                            >
+                                {item.icon}
+                                {item.name}
+                            </SidebarLink>
+                        )}
+                    </div>
+                ))}
+            </Nav>
+        </SidebarWrapper>
     );
 };
 

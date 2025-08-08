@@ -17,13 +17,13 @@ const Exercise001 = () => {
     marginTop: "0rem"
   };
 
-    // 👇 NEW: Form state
+  // 👇 NEW: Form state
   const [formResponses, setFormResponses] = React.useState({
     response1: "",
     response2: "",
     response3: "",
-    response4:"",
-    response5:""
+    response4: "",
+    response5: ""
   });
 
   const handleSubmit = (e) => {
@@ -74,16 +74,16 @@ const Exercise001 = () => {
                 <h4 style={sectionHeaderStyle}>Scenario</h4>
                 <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Day 1 – Sector Wide Threat Advisory:</h5>
                 <p>
-                CISA releases a sector-wide Cybersecurity Advisory describing the emergence of a threat actor group named “Phantom Signal” who are leveraging generative AI to craft highly targeted spear-phishing emails. These campaigns are aimed at industrial control system engineers, HMI operators, and maintenance personnel across a range of sectors reliant on operational technology, such as energy, water, manufacturing, and chemical processing.
+                  CISA releases a sector-wide Cybersecurity Advisory describing the emergence of a threat actor group named “Phantom Signal” who are leveraging generative AI to craft highly targeted spear-phishing emails. These campaigns are aimed at industrial control system engineers, HMI operators, and maintenance personnel across a range of sectors reliant on operational technology, such as energy, water, manufacturing, and chemical processing.
                 </p>
                 <p>
-                Emails impersonating known vendors include malicious attachments disguised as vendor configuration updates. Several critical infrastructure providers have flagged phishing emails that imitate their internal change management workflows and support ticket formats with alarming accuracy.
+                  Emails impersonating known vendors include malicious attachments disguised as vendor configuration updates. Several critical infrastructure providers have flagged phishing emails that imitate their internal change management workflows and support ticket formats with alarming accuracy.
                 </p>
                 <p>
-                 Your facility’s CISO forwards the alert to the OT Security Lead, noting that your plant’s SCADA vendor was referenced in the advisory; either as a spoofed sender or as a potential compromised source of updates. 
+                  Your facility’s CISO forwards the alert to the OT Security Lead, noting that your plant’s SCADA vendor was referenced in the advisory; either as a spoofed sender or as a potential compromised source of updates.
                 </p>
                 <p>
-                Later in the day, your OT Security team discovers that a shift engineer received an email appearing to be from the SCADA vendor’s support team, containing a ZIP file with a “critical patch.” The email was formatted correctly and referenced a known support ticket. Believing it was legitimate, the engineer unzipped the file and launched the included installer. No immediate issues were observed, and the activity was not reported at the time.
+                  Later in the day, your OT Security team discovers that a shift engineer received an email appearing to be from the SCADA vendor’s support team, containing a ZIP file with a “critical patch.” The email was formatted correctly and referenced a known support ticket. Believing it was legitimate, the engineer unzipped the file and launched the included installer. No immediate issues were observed, and the activity was not reported at the time.
                 </p>
                 <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Discussion Questions</h5>
                 <ol>
@@ -119,11 +119,11 @@ const Exercise001 = () => {
                   An engineer at an HMI Terminal receives a digital bulletin titled "Sensor Drift Advisory – Maintenance Override Authorized." The message appears to originate from your internal maintenance scheduler and instructs the engineer to manually override Safety Damper 32 due to pressure fluctuations allegedly caused by sensor drift.
                 </p>
                 <p>
-                 The bulletin is displayed through the standard workflow interface, uses exact internal formatting, and references a legitimate past maintenance ticket, making it appear fully credible. The system does not prompt for additional confirmation, and the override is staged and executed automatically. No alerts or warnings are triggered. 
+                  The bulletin is displayed through the standard workflow interface, uses exact internal formatting, and references a legitimate past maintenance ticket, making it appear fully credible. The system does not prompt for additional confirmation, and the override is staged and executed automatically. No alerts or warnings are triggered.
                 </p>
                 <p>
                   Upon later review, no record of the advisory exists in the CMMS (Computerized Maintenance Management System) or the central work order system. Internal audit logs show no official
-issuance of the override instruction. The command was generated by malware embedded within the HMI, mimicking past operator behavior based on cloned historical input patterns.
+                  issuance of the override instruction. The command was generated by malware embedded within the HMI, mimicking past operator behavior based on cloned historical input patterns.
                 </p>
                 <h5 style={{ marginTop: "1rem", color: "var(--custom-blue)" }}>Discussion Questions</h5>
                 <ol>
@@ -144,13 +144,13 @@ issuance of the override instruction. The command was generated by malware embed
                     <li>
                       Do you have digital forensics or change tracking on your HMI interface?
                     </li>
-                  </ol>                  
+                  </ol>
                   <li>Does the system support dual-operator confirmation for overrides</li>
                   <ol type="a">
                     <li>
                       Are there safeguards to prevent a single point of failure or insider threat?
                     </li>
-                  </ol>  
+                  </ol>
                 </ol>
               </section>
 
@@ -161,13 +161,13 @@ issuance of the override instruction. The command was generated by malware embed
                   During overnight monitoring, a shift supervisor notices system logs containing alerts timestamped 6 to 12 hours in the future. Sensor values appear plausible, for example, showing a gradual rise in temperature or pressure, but contradict real-time readings from nearby independent gauges.
                 </p>
                 <p>
-                 Some log entries have been edited and digitally signed using valid user credentials, even though those users were not on shift during the logged activity, suggesting credential compromise or impersonation. 
+                  Some log entries have been edited and digitally signed using valid user credentials, even though those users were not on shift during the logged activity, suggesting credential compromise or impersonation.
                 </p>
                 <p>
-                Initial IT investigation confirms that log authenticity checksums remain intact, indicating that manipulation likely occurred at the firmware or storage layer.  
+                  Initial IT investigation confirms that log authenticity checksums remain intact, indicating that manipulation likely occurred at the firmware or storage layer.
                 </p>
                 <p>
-                 While all ICS subsystems use NTP for time synchronization, clock skew is regionally inconsistent, adding complexity to the forensic analysis. 
+                  While all ICS subsystems use NTP for time synchronization, clock skew is regionally inconsistent, adding complexity to the forensic analysis.
                 </p>
                 <p><i>IT and OT teams must collaborate to determine how these sophisticated temporal manipulations are occurring undetected and to identify affected systems.</i></p>
 
@@ -199,7 +199,7 @@ issuance of the override instruction. The command was generated by malware embed
           </div>
         </Container>
 
-<Container>
+        <Container>
           <div className="row">
             <div className="col-md-8" style={{ marginLeft: "19%" }}>
               <section style={{ marginTop: "2rem", padding: "1rem", borderTop: "2px solid var(--custom-blue)" }}>

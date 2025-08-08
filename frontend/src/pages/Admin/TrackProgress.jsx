@@ -13,6 +13,7 @@ import { useTheme, styled } from "styled-components";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Sidebar from "../../components/Admin/AdminSidebar";
 import axios from "axios";
+import { exportToPdf } from "./exportToPdf";
 
 // Register Chart.js elements
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -45,6 +46,7 @@ const ThemedTypography = styled(Typography)`
 
 const TrackProgress = () => {
   const [membersProgress, setMembersProgress] = useState([]);
+  const [userAnswers, setUserAnswers] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const theme = useTheme();
@@ -76,11 +78,25 @@ const TrackProgress = () => {
     fetchMembers();
   }, []);
 
+  useEffect(() => {
+    const fetchExerciseAnswers = async () => {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/submission`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setUserAnswers(response.data);
+      console.log("User Answers:", response.data);
+
+    }
+    fetchExerciseAnswers();
+  }, [])
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded((prevExpanded) =>
       isExpanded
         ? [...prevExpanded, panel]
-        : prevExpanded.filter((id) => id !== panel) 
+        : prevExpanded.filter((id) => id !== panel)
     );
   };
 
@@ -97,7 +113,7 @@ const TrackProgress = () => {
       }}
     >
       <Sidebar />
-      <Box flexGrow={1} p={4}>
+      <Box flexGrow={1} p={4} width={300} minWidth={300}>
         <ThemedTypography variant="h4" fontWeight={600} mb={3}>
           Member Progress Tracker
         </ThemedTypography>
@@ -215,7 +231,7 @@ const TrackProgress = () => {
                       gap={4}
                       flexWrap="wrap"
                     >
-                      <Box height={270} width={270}>
+                      <Box height={200} width={200}>
                         <Typography
                           textAlign="center"
                           variant="subtitle2"
@@ -285,6 +301,24 @@ const TrackProgress = () => {
                           </p>
                         </div>
                       </Box>
+                      <div>
+                        {userAnswers.filter(submission => submission.user_id === member.id).length > 0 ? (
+                          userAnswers
+                            .filter(submission => submission.user_id === member.id)
+                            .map(exercise => (
+                              <div key={exercise.id} className="my-2 ">
+                                <a
+                                  onClick={() => exportToPdf(exercise)}
+                                  className="text-[var(--primary-color)] cursor-pointer"
+                                >
+                                  {exercise.exercise.title}(PDF)
+                                </a>
+                              </div>
+                            ))
+                        ) : (
+                          <div className="my-2 ">Member hasn't submitted any exercise yet.</div>
+                        )}
+                      </div>
                     </Box>
                   </AccordionDetails>
                 </Accordion>

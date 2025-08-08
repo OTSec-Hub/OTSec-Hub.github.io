@@ -54,7 +54,7 @@ function CommunityLabs() {
           </p>
         </Container>
 
-      <div className="p-4 max-w-xl mx-auto">
+      <Container className="p-4 max-w-xl mx-auto">
         {datasets.map((dataset) => (
           <div key={dataset.id} className="mb-3 border rounded p-3 bg-gray-100">
             <h2 className="text-xl font-medium">{dataset.title}</h2>
@@ -67,7 +67,7 @@ function CommunityLabs() {
             </Link>
           </div>
         ))}
-      </div>
+      </Container>
     </div>
   );
 }

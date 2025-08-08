@@ -1,0 +1,51 @@
+/* markdown-custom.css */
+.markdown-body {
+  margin: 0 auto;
+}
+
+.markdown-body img {
+  max-width: 80%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 1em auto;
+}
+
+.markdown-body h1 + hr {
+  border: none;
+  border-top: 5px dotted #28a745;
+  width: 50%;
+  margin: 1rem auto;
+}
+
+.markdown-body h2 + hr {
+  border: none;
+  border-top: 5px dashed #28a745;
+  width: 50%;
+}
+
+.markdown-body h1 {
+  text-align: center;
+  color: #28a745;
+}
+
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6,
+.markdown-body hr {
+  color: #28a745; /* Green headers */
+}
+
+.markdown-body a {
+  color: #28a745; /* Green links */
+  text-decoration: underline;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 1em;
+  color: #555;
+  background-color: #f9f9f9;
+}

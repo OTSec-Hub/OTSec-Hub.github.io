@@ -316,3 +316,74 @@ const Lab0Page = ({labId}) => {
 };
 
 export default Lab0Page;
+
+// # Lab 0 - Installing Course Software
+
+// ![image](https://res.cloudinary.com/mano22/image/upload/v1753985319/lab0_anrl18.webp)
+
+// > In order to complete the Lab Assignments, you need to download and use several applications on a Windows PC (this can be a virtual machine) with about **40 GB of free space**. Both applications need to be installed on the same system.
+
+// ---
+
+// ## MATLAB, Simulink and Simulink PLC Coder
+
+// You should first install **MATLAB**. A licensed version of MATLAB is provided by NYU and can be downloaded from the [NYU Software Library](https://www.nyu.edu/life/information-technology/computing-support/software/software/matlab.html).
+
+// > ⚠️ **Note:** MATLAB offers an online version of the software. This will **not work** with all of the labs in this course.
+
+// 1. Create a new account on the MATLAB portal using your **NYU email**.  
+// 2. This grants you a **special license** as a member of New York University.
+// 3. Make sure you have this account information and your **NYU Net ID** during the installation — you will need them multiple times.
+
+// Once registered, download the installer for the **latest version of MATLAB** and install it.
+
+// ![Screenshot 1](https://res.cloudinary.com/mano22/image/upload/v1753985314/pic1_qynpbw.png)
+
+// During configuration:
+// - Check **Simulink** (2nd item on the list).
+// - Check **Simulink PLC Coder** to install them.
+
+// If you already have the latest MATLAB installed but are missing the add-ons, simply repeat the installation and select **Simulink** and **Simulink PLC Coder**.
+
+// ![Screenshot 2](https://res.cloudinary.com/mano22/image/upload/v1753985316/pic2_gxr2v4.png)  
+// ![Screenshot 3](https://res.cloudinary.com/mano22/image/upload/v1753985319/pic3_jflulo.png)
+
+// ---
+
+// ## CODESYS
+
+// **CODESYS** can be downloaded from [CODESYS Store](https://us.store.codesys.com/) by creating an account using your **NYU email** (create an _Individual Customer Account_).
+
+// ### To install **CODESYS 3.5.17.0**, follow these steps:
+
+// > 🧠 This process assumes that CODESYS is **not installed** on the target system.
+
+// 1. Visit: [https://us.store.codesys.com/](https://us.store.codesys.com/)
+// 2. Login to the website.
+// 3. Click the **"Details"** button.
+
+// ![Screenshot 4](https://res.cloudinary.com/mano22/image/upload/v1753985316/pic4_ztryrt.png)
+
+// 4. Click on the **Versions** tab.
+
+// ![Screenshot 5](https://res.cloudinary.com/mano22/image/upload/v1753985317/pic5_hvcugt.png)
+
+// 5. Scroll down and click on the **32-bit version of 3.5.17.0**.  
+//    > 📌 The project uses a 32-bit library, so **32-bit version** is required.
+
+// ![Screenshot 6](https://res.cloudinary.com/mano22/image/upload/v1753985319/pic6_txht8v.png)
+
+// 6. Accept the terms.
+// 7. Download the software.
+// 8. Run the installer and begin the installation.
+// 9. When prompted, choose **Complete Installation**.
+
+// ![Screenshot 7](https://res.cloudinary.com/mano22/image/upload/v1753985320/pic7_rqlgnr.png)
+
+// 10. Complete the installation process.
+
+// ---
+
+// ## Wireshark
+
+// Download the **latest stable release** of Wireshark from [https://www.wireshark.org/](https://www.wireshark.org/).

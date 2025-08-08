@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import MarkDownEditor from "../MarkDownEditor";
 
 export default function AddLab() {
     const [open, setOpen] = React.useState(false);
@@ -17,8 +18,13 @@ export default function AddLab() {
         content: "",
     });
     const token = localStorage.getItem('token')
+    const createEmptyQuestion = () => ({
+        question: "",
+        correct_answer: "",
+        options: ["", "", "", ""],
+    });
     const [questions, setQuestions] = React.useState(
-        Array(4).fill({ question: "", correct_answer: "", options: ["", "", "", ""] })
+        Array.from({ length: 4 }, () => createEmptyQuestion())
     );
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
@@ -34,9 +40,8 @@ export default function AddLab() {
     const handleClose = () => {
         setOpen(false);
         setLab({ title: "", lab_img: "", content: "" });
-        setQuestions(
-            Array(4).fill({ question: "", correct_answer: "", options: ["", "", "", ""] })
-        );
+        setQuestions(Array.from({ length: 4 }, () => createEmptyQuestion()));
+
     };
 
     const handleChange = (e) => {
@@ -131,7 +136,7 @@ export default function AddLab() {
                                 onChange={handleChange}
                                 disabled={loading}
                             />
-                            <TextField
+                            {/* <TextField
                                 margin="dense"
                                 name="content"
                                 label="Lab Content"
@@ -139,6 +144,11 @@ export default function AddLab() {
                                 variant="standard"
                                 value={lab.content}
                                 onChange={handleChange}
+                                disabled={loading}
+                            /> */}
+                            <MarkDownEditor
+                                value={lab.content}
+                                handleChange={handleChange}
                                 disabled={loading}
                             />
                         </>

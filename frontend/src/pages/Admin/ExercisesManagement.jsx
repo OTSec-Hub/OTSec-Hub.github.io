@@ -19,11 +19,12 @@ import {
     CircularProgress,
 } from "@mui/material";
 import Sidebar from "../../components/Admin/AdminSidebar";
+import DeleteBtn from "../../components/Admin/DeleteBtn";
 import styled from "styled-components";
-import AddVideo from "../../components/Admin/AddVideo";
-import { Link } from "react-router-dom";
-import EditVideoBtn from "../../components/Admin/EditVideoBtn";
-import DeleteBtn from './../../components/Admin/DeleteBtn';
+import EditLab from "../../components/Admin/EditLab";
+import AddExercise from "../../components/Admin/AddExercise";
+import EditExercise from "../../components/Admin/EditExercise";
+
 // Simple themed components
 const ThemedTableContainer = styled(TableContainer)`
   background-color: ${({ theme }) => theme.name === "light" ? "#f8f9fa" : "#3a3b3c"};
@@ -44,13 +45,13 @@ const ThemedTableRow = styled(TableRow)`
 `;
 
 const ThemedTypography = styled(Typography)`
-color: ${({ theme }) => theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"} !important;
+  color: ${({ theme }) => theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"} !important;
 `;
 
 
-export default function VideoManagement({ children }) {
-    const [videos, setVideos] = useState([]);
-    const [loading, setLoading] = useState(false);
+export default function ExcercisesManagement({ children }) {
+    const [exercises, setExercises] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
 
     const theme = useTheme();
@@ -58,43 +59,28 @@ export default function VideoManagement({ children }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_videos`);
-                setVideos(response.data);
-                console.log(response.data);
-                setLoading(false)
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_exercises`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    }
+                });
+                console.log("Fetched exercises:", response.data);
+
+                setExercises(response.data);
             } catch (error) {
-                console.error("Error fetching videos:", error);
-                setLoading(true)
-            } 
+                console.error("Error fetching exercises:", error);
+            } finally {
+                setLoading(false);
+            }
         }
         fetchData();
     }, []);
 
-    const filteredVideos = videos.filter((video) => {
+    const filteredExercises = exercises.filter((exercise) => {
         const matchesSearch =
-            video.title.toLowerCase().includes(searchQuery.toLowerCase())
+            exercise.title.toLowerCase().includes(searchQuery.toLowerCase())
         return matchesSearch;
     });
-
-    function getYouTubeVideoId(url) {
-        try {
-            const parsed = new URL(url);
-            if (parsed.hostname === 'youtu.be') {
-                return parsed.pathname.slice(1);
-            } else if (
-                parsed.hostname === 'www.youtube.com' ||
-                parsed.hostname === 'youtube.com'
-            ) {
-                return parsed.searchParams.get('v');
-            }
-            return null;
-        } catch (err) {
-            console.error('Invalid YouTube URL:', err);
-            return null;
-        }
-    }
-
-    // console.log(videos[0].id);
 
     return (
         <Box display="flex" minHeight="100vh" sx={{
@@ -106,7 +92,7 @@ export default function VideoManagement({ children }) {
                 {children || (
                     <>
                         <ThemedTypography variant="h5" fontWeight={600} mb={3}>
-                            All Videos
+                            All Exercises
                         </ThemedTypography>
 
                         {loading ? (
@@ -119,7 +105,7 @@ export default function VideoManagement({ children }) {
                             <>
                                 <Box display="flex" gap={2} mb={2} alignItems="center">
                                     <TextField
-                                        label="Search by name"
+                                        label="Search by Name"
                                         variant="outlined"
                                         size="small"
                                         value={searchQuery}
@@ -127,7 +113,7 @@ export default function VideoManagement({ children }) {
                                         fullWidth
                                         sx={{
                                             '& .MuiInputLabel-root': {
-                                                color: theme?.name === "light" ? "#212529" : "#ffffff",
+                                                color: theme?.name === "light" ? "#212529" : "rgba(255, 255, 255, 0.8)",
                                             },
                                             '& .MuiOutlinedInput-root': {
                                                 '& fieldset': {
@@ -142,79 +128,72 @@ export default function VideoManagement({ children }) {
                                             },
                                         }}
                                     />
-                                    <AddVideo />
+                                    <AddExercise />
                                 </Box>
 
                                 <ThemedTableContainer component={Paper}>
                                     <Table>
                                         <ThemedTableHead>
                                             <TableRow>
-                                                <ThemedTableCell align="center">Video</ThemedTableCell>
+                                                <ThemedTableCell align="center">ID</ThemedTableCell>
                                                 <ThemedTableCell align="center">Title</ThemedTableCell>
-                                                <ThemedTableCell align="center">Subtitle</ThemedTableCell>
-                                                <ThemedTableCell align="center">Description</ThemedTableCell>
+                                                <ThemedTableCell align="center">subtitle</ThemedTableCell>
+                                                <ThemedTableCell align="center">Content</ThemedTableCell>
+                                                <ThemedTableCell align="center">Questions</ThemedTableCell>
                                                 <ThemedTableCell align="center">Actions</ThemedTableCell>
                                             </TableRow>
                                         </ThemedTableHead>
 
                                         <TableBody>
-                                            {filteredVideos.map((videoData) => (
-                                                <ThemedTableRow key={videoData.id} hover>
-                                                    <ThemedTableCell align="center">
-                                                        <Link to={videoData.url} target="_blank" style={{ textDecoration: 'none' }}>
-                                                            <img
-                                                                src={`https://img.youtube.com/vi/${getYouTubeVideoId(videoData.url)}/sddefault.jpg`}
-                                                                alt={videoData.title}
-                                                                style={{ maxHeight: '50px', maxWidth: '100px' }}
-                                                            />
-                                                        </Link>
-                                                    </ThemedTableCell>
+                                            {filteredExercises.map((exerciseData) => (
+                                                <ThemedTableRow key={exerciseData.id} hover>
+                                                    <ThemedTableCell align="center" sx={{ width: 60 }}>{exerciseData.id}</ThemedTableCell>
+                                                    <ThemedTableCell align="center" sx={{ width: 150 }}>{exerciseData.title}</ThemedTableCell>
+                                                    <ThemedTableCell align="center" sx={{ width: 150 }}>{exerciseData.subtitle}</ThemedTableCell>
 
-                                                    <ThemedTableCell align="center" sx={{
-                                                        maxWidth: 200,
-                                                        maxHeight: 60,
-                                                    }}>{videoData.title}</ThemedTableCell>
-
-                                                    <ThemedTableCell align="center">
+                                                    <ThemedTableCell align="center" sx={{ width: 300 }}>
                                                         <Box
                                                             sx={{
-                                                                maxWidth: 200,
-                                                                maxHeight: 60,
-                                                                margin: '0 auto',
-                                                                overflow: 'auto',
-                                                                whiteSpace: 'pre-wrap',
-                                                                wordWrap: 'break-word',
-                                                            }}
-                                                        >
-                                                            {videoData.subtitle}
-                                                        </Box>
-                                                    </ThemedTableCell>
-
-                                                    <ThemedTableCell align="center">
-                                                        <Box
-                                                            sx={{
-                                                                margin: '0 auto',
-                                                                maxWidth: 300,
                                                                 maxHeight: 100,
-                                                                overflow: 'auto',
-                                                                whiteSpace: 'pre-wrap',
-                                                                wordWrap: 'break-word',
+                                                                overflowY: "auto",
+                                                                overflowX: "hidden",
+                                                                whiteSpace: "pre-wrap",
+                                                                wordBreak: "break-word",
+                                                                p: 1,
                                                             }}
                                                         >
-                                                            {videoData.description}
+                                                            {exerciseData.content}
                                                         </Box>
                                                     </ThemedTableCell>
 
-                                                    <ThemedTableCell align="center">
-                                                        <Box display="flex" justifyContent="center" gap={1}>
-                                                            <EditVideoBtn video={videoData} />
-                                                            <DeleteBtn name="video" id={videoData.id}  />
+                                                    <ThemedTableCell align="center" sx={{ width: 300 }}>
+                                                        {exerciseData.questions.length === 0 ? (
+                                                            <Typography variant="body2">No questions added</Typography>
+                                                        ) : (
+                                                            <Box
+                                                                sx={{
+                                                                    maxHeight: 100,
+                                                                    overflowY: "auto",
+                                                                    overflowX: "hidden",
+                                                                    whiteSpace: "pre-wrap",
+                                                                    wordBreak: "break-word",
+                                                                    p: 1,
+                                                                }}
+                                                            >
+                                                                {exerciseData.questions.join(", ")}
+                                                            </Box>
+                                                        )}
+                                                    </ThemedTableCell>
+
+                                                    <ThemedTableCell align="center" sx={{ width: 160 }}>
+                                                        <Box display="flex" gap={1} justifyContent="center">
+                                                            <EditExercise exercise={exerciseData} />
+                                                            <DeleteBtn name="exercise" id={exerciseData.id} />
                                                         </Box>
                                                     </ThemedTableCell>
                                                 </ThemedTableRow>
                                             ))}
                                         </TableBody>
-
                                     </Table>
                                 </ThemedTableContainer>
                             </>
@@ -222,6 +201,9 @@ export default function VideoManagement({ children }) {
                     </>
                 )}
             </Box>
-        </Box>
+        </Box >
     );
 }
+
+// AI Augmented Intrusion: Reconnaissance and Deception
+// Evaluate your ability to detect, analyze, and respond to early-staged AI enhanced intrusions.

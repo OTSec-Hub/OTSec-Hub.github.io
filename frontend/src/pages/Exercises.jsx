@@ -12,18 +12,39 @@ import datasets from "../components/exercises";
 import { updateTitle } from "../utils";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { Icon } from "@iconify/react";
+import axios from "axios";
 
 
 function Exercises() {
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [exercises, setExercises] = React.useState([]);
 
-  const filteredDatasets = datasets.filter(dataset =>
-    dataset.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    dataset.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  React.useEffect(()=> {
+    const fetchExercises = async () =>{
+      try{
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_exercises`,{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        console.log(response.data);
+        setExercises(response.data);
+      }catch (error) {
+        console.error("Error fetching exercises:", error);
+      }
+    }
+    fetchExercises();
+  }, [])
+
+  // const filteredDatasets = exercises.filter(exercise =>
+  //   exercise.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   exercise.description.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
   React.useEffect(() => {
     updateTitle("exercises | OTSec-Hub.io");
   }, []);
+  
   return (
     <div>
       <Container className="text-center my-5">
@@ -57,12 +78,12 @@ function Exercises() {
       <Container>
 
         <div className="p-4 max-w-xl mx-auto">
-          {filteredDatasets.map(dataset => (
-            <div key={dataset.id} className="mb-3 border rounded p-3 bg-gray-100">
-              <h2 className="text-xl font-medium">{dataset.title}</h2>
-              <p>{dataset.description}</p>
+          {exercises.map(exercise => (
+            <div key={exercise.id} className="mb-3 border rounded p-3 bg-gray-100">
+              <h2 className="text-xl font-medium">{exercise.title}</h2>
+              <p>{exercise.subtitle}</p>
               <Link
-                to={`/Exercises/${encodeURIComponent(dataset.link)}`}
+                to={`/Resources/Exercises/${exercise.id}`}
                 className="text-blue-600 underline text-sm mt-1 inline-block"
               >
                 View Details

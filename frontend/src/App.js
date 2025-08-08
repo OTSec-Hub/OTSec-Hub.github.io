@@ -16,7 +16,6 @@ import PropTypes from "prop-types";
 import { Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
-import AllProjects from "./pages/AllProjects";
 import Lab0Page from "./pages/Lab0Page";
 import Lab1Page from "./pages/Lab1Page";
 import Lab2Page from "./pages/Lab2Page";
@@ -71,6 +70,9 @@ import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
 // Auth
 import { ProtectedRoute, AdminRoute } from './app/ProtectedRoutes';
 import LabPage from "./pages/LabPage";
+import ExcercisesManagement from "./pages/Admin/ExercisesManagement";
+import AllLabs from "./pages/AllLabs";
+import ExercisePage from "./pages/ExercisePage";
 
 // Styled layout component
 const AppLayout = styled.div`
@@ -104,67 +106,67 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
   let content;
 
   // Set all projects state
-  React.useEffect(() => {
-    const placeholderProjects = [
-      {
-        id: "Lab0",
-        homepage: "Lab0",
-        description: "Installing Course Software",
-        image: projectImages['lab0.png'],
-        name: "Lab 0",
-        url: "Lab0",
-      },
-      {
-        id: "Lab1",
-        homepage: "Lab1",
-        description: "Industrial process simulation and process-aware attacks",
-        image: projectImages['id_card.png'],
-        name: "Lab 1 ",
-        url: "Lab1",
-      },
-      {
-        id: "Lab2",
-        homepage: "Lab2",
-        description: "Programmable Logic Controller programming",
-        image: projectImages['security_1.png'],
-        name: "Lab 2",
-        url: "Lab2",
-      },
-      {
-        id: "Lab3",
-        homepage: "Lab3",
-        description: "Human Machine Interface (HMI) development and interfacing",
-        image: projectImages['laptop.png'],
-        name: "Lab 3",
-        url: "Lab3",
-      },
-      {
-        id: "Lab4",
-        homepage: "Lab4",
-        description: "Industrial Protocols Programming and Interfacing",
-        image: projectImages['lock.png'],
-        name: "Lab 4",
-        url: "Lab4",
-      },
-      {
-        id: "Lab5",
-        homepage: "Lab5",
-        description: "Operational Technology networks analysis",
-        image: projectImages['lab5.png'],
-        name: "Lab 5",
-        url: "Lab5",
-      },
-      {
-        id: "Lab6",
-        homepage: "Lab6",
-        description: "PLC Binary Reverse Engineering",
-        image: projectImages['lab6.png'],
-        name: "Lab 6",
-        url: "Lab6",
-      },
-    ];
-    dispatch(setProjects(placeholderProjects));
-  }, [projectsData, projectCardImages, dispatch]);
+  // React.useEffect(() => {
+  //   const placeholderProjects = [
+  //     {
+  //       id: "Lab0",
+  //       homepage: "Lab0",
+  //       description: "Installing Course Software",
+  //       image: projectImages['lab0.png'],
+  //       name: "Lab 0",
+  //       url: "Lab0",
+  //     },
+  //     {
+  //       id: "Lab1",
+  //       homepage: "Lab1",
+  //       description: "Industrial process simulation and process-aware attacks",
+  //       image: projectImages['id_card.png'],
+  //       name: "Lab 1 ",
+  //       url: "Lab1",
+  //     },
+  //     {
+  //       id: "Lab2",
+  //       homepage: "Lab2",
+  //       description: "Programmable Logic Controller programming",
+  //       image: projectImages['security_1.png'],
+  //       name: "Lab 2",
+  //       url: "Lab2",
+  //     },
+  //     {
+  //       id: "Lab3",
+  //       homepage: "Lab3",
+  //       description: "Human Machine Interface (HMI) development and interfacing",
+  //       image: projectImages['laptop.png'],
+  //       name: "Lab 3",
+  //       url: "Lab3",
+  //     },
+  //     {
+  //       id: "Lab4",
+  //       homepage: "Lab4",
+  //       description: "Industrial Protocols Programming and Interfacing",
+  //       image: projectImages['lock.png'],
+  //       name: "Lab 4",
+  //       url: "Lab4",
+  //     },
+  //     {
+  //       id: "Lab5",
+  //       homepage: "Lab5",
+  //       description: "Operational Technology networks analysis",
+  //       image: projectImages['lab5.png'],
+  //       name: "Lab 5",
+  //       url: "Lab5",
+  //     },
+  //     {
+  //       id: "Lab6",
+  //       homepage: "Lab6",
+  //       description: "PLC Binary Reverse Engineering",
+  //       image: projectImages['lab6.png'],
+  //       name: "Lab 6",
+  //       url: "Lab6",
+  //     },
+  //   ];
+  //   dispatch(setProjects(placeholderProjects));
+  // }, [projectsData, projectCardImages, dispatch]);
 
   // Set main projects state
   React.useEffect(() => {
@@ -218,15 +220,16 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/Resources/All-Labs" element={<AllProjects />} />
+          <Route path="/Resources/All-Labs" element={<AllLabs />} />
           <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
           <Route path="/Resources/Exercises" element={<Exercises />} />
           <Route path="/Resources/Videos" element={<Videos />} />
           <Route path="/Resources/Videos/:videoId" element={<VideoDetailPage />} />
           <Route path="/Benchmarks/:datasetId" element={<DatasetDetail />} />
-          <Route path="/Exercises/Exercise-001" element={<Exercise001 />} />
-          <Route path="/Exercises/Exercise-002" element={<Exercise002 />} />
-          <Route path="/Exercises/Exercise-003" element={<Exercise003 />} />
+          <Route path="/Resources/Exercises/:exerciseId" element={<ExercisePage />} />
+          {/* <Route path="/Exercises/Exercise-001" element={<Exercise001 />} /> */}
+          {/* <Route path="/Exercises/Exercise-002" element={<Exercise002 />} />
+          <Route path="/Exercises/Exercise-003" element={<Exercise003 />} /> */}
           <Route path="/Resources/Videos/Video-Submission" element={<VideoSubmissionPage />} />
           <Route path="/Resources/Exercises/Exercise-Submission" element={<ExerciseSubmission />} />
           <Route path="/Resources/All-Labs/Lab-Submission" element={<LabSubmission />} />
@@ -236,8 +239,8 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Community/Community-Videos" element={<CommunityVideos />} />
           <Route path="/Community/Community-Benchmarks" element={<CommunityBenchmarks />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
-          <Route path="/All-Labs/:id" element={<LabPage />} />
-          <Route path="/All-Labs/0" element={<Lab0Page labId={0} />} />
+          <Route path="/Resources/All-Labs/:id" element={<LabPage />} />
+          <Route path="/Resources/All-Labs/0" element={<Lab0Page labId={0} />} />
           {/* <Route path="/All-Labs/1" element={<Lab1Page labId={1} />} />
           <Route path="/All-Labs/2" element={<Lab2Page labId={2} />} />
           <Route path="/All-Labs/3" element={<Lab3Page labId={3} />} />
@@ -253,6 +256,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/TrackProgress" element={<TrackProgress />} />
           <Route path="/VideosManagement" element={<VideosManagment />} />
           <Route path="/LabsManagement" element={<LabsManagement />} />
+          <Route path="/ExercisesManagement" element={<ExcercisesManagement />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

@@ -31,7 +31,7 @@ const StyledSection = styled.section`
   }
 `;
 
-const AllProjects = () => {
+const AllLabs = () => {
   const [labs, setLabs] = React.useState([]);
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [searchInput, setSearchInput] = React.useState("");
@@ -159,7 +159,7 @@ const AllProjects = () => {
                     </div>
                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                       <Card.Title className=" w-100">{lab?.title?.trim() || "Explore this lab"}</Card.Title>
-                      <Link to={`/All-Labs/${lab.id}`} className="btn btn-primary mt-2">
+                      <Link to={`/Resources/All-Labs/${lab.id}`} className="btn btn-primary mt-2">
                         Explore
                       </Link>
                     </Card.Body>
@@ -198,4 +198,4 @@ const AllProjects = () => {
   );
 };
 
-export default AllProjects;
+export default AllLabs;

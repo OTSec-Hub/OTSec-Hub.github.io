@@ -136,7 +136,7 @@ const VideoDetailPage = () => {
                 </div>
                 <p className="text-muted my-4">{video.description}</p>
                 <div className="">
-                    <Quiz questions={quizzes} videoId={videoId} />
+                    <Quiz questions={quizzes} videoId={videoId} mode="video" />
                 </div>
             </div>
         </Container>
