@@ -32,10 +32,9 @@ const navLinks = {
       dropdown: true,
       private: true, // <-- Add flag
       children: [
-        { id: "3R-1", name: "Labs", route: "/Community/Community-Labs" },
+        { id: "3R-1", name: "Members Labs", route: "/Community/Community-Labs" },
         // { id: "3R-2", name: "Benchmarks", route: "/Community/Community-Benchmarks" },
-        { id: "3R-3", name: "Exercises", route: "/Community/Community-Exercises" },
-        { id: "3R-4", name: "Videos", route: "/Community/Community-Videos" },
+        { id: "3R-4", name: "Members Videos", route: "/Community/Community-Videos" },
       ]
     },
     { id: "4R", name: "Announcements", route: "/Announcements" },

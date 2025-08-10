@@ -43,14 +43,11 @@ import UsersManagment from "./pages/Admin/UsersManagment";
 import TrackProgress from "./pages/Admin/TrackProgress";
 import LabsManagement from "./pages/Admin/LabsManagement";
 import VerificationPage from "./pages/VerificationPage";
-import VideoSubmissionPage from "./pages/MemberVideoSubmission";
 import ExerciseSubmission from "./pages/ExerciseSubmission";
 import VideosManagment from "./pages/Admin/VideosManagement";
 import LabSubmission from "./pages/LabSubmission";
 import BenchmarkSubmission from "./pages/BenchmarkSubmission";
-import CommunityLabs from "./pages/CommunityLabs";
 import CommunityExercises from "./pages/CommunityExercises";
-import CommunityVideos from "./pages/CommunityVideos";
 import CommunityBenchmarks from "./pages/CommunityBenchmarks";
 
 // Components
@@ -73,6 +70,13 @@ import LabPage from "./pages/LabPage";
 import ExcercisesManagement from "./pages/Admin/ExercisesManagement";
 import AllLabs from "./pages/AllLabs";
 import ExercisePage from "./pages/ExercisePage";
+import CommunityLab from "./pages/CommunityLab";
+import AllCommunityLabs from "./pages/AllCommunityLabs";
+import VideoSubmission from "./pages/VideoSubmission";
+import SubmittedLabs from "./pages/Admin/SubmittedLabs";
+import SubmittedVideos from "./pages/Admin/SubmittedVideos";
+import AllCommunityVideos from "./pages/AllCommunityVideos";
+import CommunityVideo from "./pages/CommunityVideo";
 
 // Styled layout component
 const AppLayout = styled.div`
@@ -230,13 +234,15 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           {/* <Route path="/Exercises/Exercise-001" element={<Exercise001 />} /> */}
           {/* <Route path="/Exercises/Exercise-002" element={<Exercise002 />} />
           <Route path="/Exercises/Exercise-003" element={<Exercise003 />} /> */}
-          <Route path="/Resources/Videos/Video-Submission" element={<VideoSubmissionPage />} />
+          <Route path="/Resources/Videos/Video-Submission" element={<VideoSubmission />} />
           <Route path="/Resources/Exercises/Exercise-Submission" element={<ExerciseSubmission />} />
           <Route path="/Resources/All-Labs/Lab-Submission" element={<LabSubmission />} />
           <Route path="/Resources/Benchmarks/Benchmark-Submission" element={<BenchmarkSubmission />} />
-          <Route path="/Community/Community-Labs" element={<CommunityLabs />} />
+          <Route path="/Community/Community-Labs" element={<AllCommunityLabs />} />
+          <Route path="/Community/Community-Labs/:id" element={<CommunityLab />} />
           <Route path="/Community/Community-Exercises" element={<CommunityExercises />} />
-          <Route path="/Community/Community-Videos" element={<CommunityVideos />} />
+          <Route path="/Community/Community-Videos" element={<AllCommunityVideos />} />
+          <Route path="/Community/Community-Videos/:id" element={<CommunityVideo />} />
           <Route path="/Community/Community-Benchmarks" element={<CommunityBenchmarks />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/Resources/All-Labs/:id" element={<LabPage />} />
@@ -257,6 +263,8 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/VideosManagement" element={<VideosManagment />} />
           <Route path="/LabsManagement" element={<LabsManagement />} />
           <Route path="/ExercisesManagement" element={<ExcercisesManagement />} />
+          <Route path="/SubmittedLabs" element={<SubmittedLabs />} />
+          <Route path="/SubmittedVideos" element={<SubmittedVideos />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

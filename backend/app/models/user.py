@@ -13,3 +13,5 @@ class User(Base):
     verification_token = Column(String, nullable=True)
     
     user_progress = relationship("UserProgress", back_populates="user", cascade="all, delete-orphan")
+    community_labs = relationship("CommunityLab", back_populates="user")
+    community_videos = relationship("CommunityVideo", back_populates="user")

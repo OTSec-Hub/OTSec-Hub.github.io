@@ -66,22 +66,11 @@ const SidebarItems = [
         ]
     },
     {
-        name: "Community Submissions", icon: <LineChart />, children: [
-            { name: "Submitted Labs", icon: <BookOpen />, route: "/LabsManagement" },
-            { name: "Submitted Exercises", icon: <Dumbbell />, route: "/ExercisesManagement" },
-            { name: "Submitted Videos", icon: <Video />, route: "/VideosManagement" },
-
+        name: "Community Managment", icon: <LineChart />, children: [
+            { name: "Submitted Labs", icon: <BookOpen />, route: "/SubmittedLabs" },
+            { name: "Submitted Videos", icon: <Video />, route: "/SubmittedVideos" },
         ]
     },
-    {
-        name: "OTSec-Hub Community", icon: <LineChart />, children: [
-            { name: "ICS Labs Management", icon: <BookOpen />, route: "/LabsManagement" },
-            { name: "Exercises Management", icon: <Dumbbell />, route: "/ExercisesManagement" },
-            { name: "Videos Management", icon: <Video />, route: "/VideosManagement" },
-
-        ]
-    },
-    
     // { name: "Benchmarks Management", icon: <Flag />, route: "/BenchmarksManagement" },
     { name: "Settings", icon: <Settings />, route: "/Settings" } // Optional
 ];
