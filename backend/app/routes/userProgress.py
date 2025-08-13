@@ -65,7 +65,10 @@ async def get_video_views(
     try:
         views = (
             db.query(UserProgress)
-            .filter(UserProgress.content_type == "video", UserProgress.user_id == current_user.id)
+            .filter(
+            UserProgress.content_type.in_(["video", "lab"]),
+            UserProgress.user_id == current_user.id
+            )
             .join(User, UserProgress.user_id == User.id)
             .options(joinedload(UserProgress.user))
             .all()
@@ -76,6 +79,9 @@ async def get_video_views(
             if view.content_type == "video":
                 video = db.query(Video).filter(Video.id == view.content_id).first()
                 content_title = video.title if video else None
+            elif view.content_type == "lab":
+                lab = db.query(Lab).filter(Lab.id == view.content_id).first()
+                content_title = lab.title if lab else None
             result.append(
                 UserProgressOut(
                     user_id=view.user_id,
