@@ -77,6 +77,10 @@ import SubmittedLabs from "./pages/Admin/SubmittedLabs";
 import SubmittedVideos from "./pages/Admin/SubmittedVideos";
 import AllCommunityVideos from "./pages/AllCommunityVideos";
 import CommunityVideo from "./pages/CommunityVideo";
+import ProfileCompletedLabs from './pages/ProfileCompletedLabs';
+import ProfileSolvedQuizzes from './pages/ProfileSolvedQuizzes';
+import ProfileSubmittedExercises from './pages/ProfileSubmittedExercises';
+import ProfileWatchedVideos from './pages/ProfileWatchedVideos';
 
 // Styled layout component
 const AppLayout = styled.div`
@@ -108,69 +112,6 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
   const { isLoading, isSuccess, isError, error } = useGetUsersQuery();
   const { data: projectsData } = useGetProjectsQuery();
   let content;
-
-  // Set all projects state
-  // React.useEffect(() => {
-  //   const placeholderProjects = [
-  //     {
-  //       id: "Lab0",
-  //       homepage: "Lab0",
-  //       description: "Installing Course Software",
-  //       image: projectImages['lab0.png'],
-  //       name: "Lab 0",
-  //       url: "Lab0",
-  //     },
-  //     {
-  //       id: "Lab1",
-  //       homepage: "Lab1",
-  //       description: "Industrial process simulation and process-aware attacks",
-  //       image: projectImages['id_card.png'],
-  //       name: "Lab 1 ",
-  //       url: "Lab1",
-  //     },
-  //     {
-  //       id: "Lab2",
-  //       homepage: "Lab2",
-  //       description: "Programmable Logic Controller programming",
-  //       image: projectImages['security_1.png'],
-  //       name: "Lab 2",
-  //       url: "Lab2",
-  //     },
-  //     {
-  //       id: "Lab3",
-  //       homepage: "Lab3",
-  //       description: "Human Machine Interface (HMI) development and interfacing",
-  //       image: projectImages['laptop.png'],
-  //       name: "Lab 3",
-  //       url: "Lab3",
-  //     },
-  //     {
-  //       id: "Lab4",
-  //       homepage: "Lab4",
-  //       description: "Industrial Protocols Programming and Interfacing",
-  //       image: projectImages['lock.png'],
-  //       name: "Lab 4",
-  //       url: "Lab4",
-  //     },
-  //     {
-  //       id: "Lab5",
-  //       homepage: "Lab5",
-  //       description: "Operational Technology networks analysis",
-  //       image: projectImages['lab5.png'],
-  //       name: "Lab 5",
-  //       url: "Lab5",
-  //     },
-  //     {
-  //       id: "Lab6",
-  //       homepage: "Lab6",
-  //       description: "PLC Binary Reverse Engineering",
-  //       image: projectImages['lab6.png'],
-  //       name: "Lab 6",
-  //       url: "Lab6",
-  //     },
-  //   ];
-  //   dispatch(setProjects(placeholderProjects));
-  // }, [projectsData, projectCardImages, dispatch]);
 
   // Set main projects state
   React.useEffect(() => {
@@ -244,9 +185,13 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Community/Community-Videos" element={<AllCommunityVideos />} />
           <Route path="/Community/Community-Videos/:id" element={<CommunityVideo />} />
           <Route path="/Community/Community-Benchmarks" element={<CommunityBenchmarks />} />
-          <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/Resources/All-Labs/:id" element={<LabPage />} />
           <Route path="/Resources/All-Labs/0" element={<Lab0Page labId={0} />} />
+          <Route path="/ProfilePage" element={<ProfilePage />} />
+          <Route path="/CompletedLabs" element={<ProfileCompletedLabs />} />
+          <Route path="/SolvedQuizzes" element={<ProfileSolvedQuizzes />} />
+          <Route path="/SubmittedExercises" element={<ProfileSubmittedExercises />} />
+          <Route path="/WatchedVideos" element={<ProfileWatchedVideos />} />
           {/* <Route path="/All-Labs/1" element={<Lab1Page labId={1} />} />
           <Route path="/All-Labs/2" element={<Lab2Page labId={2} />} />
           <Route path="/All-Labs/3" element={<Lab3Page labId={3} />} />

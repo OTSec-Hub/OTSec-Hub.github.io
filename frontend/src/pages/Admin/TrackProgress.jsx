@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
+  Select,
+  MenuItem,
+  FormControl,
   Box,
   TextField,
   Accordion as MuiAccordion,
@@ -148,7 +151,7 @@ const TrackProgress = () => {
             }}
           />
         </Box>
-        <Box display="flex" flexWrap="wrap" gap={2} mt={3}>
+        <Box display="flex" flexWrap="wrap" gap={1} mt={3}>
           {filteredMembers.map((member) => {
             const {
               id,
@@ -162,26 +165,19 @@ const TrackProgress = () => {
             } = member;
 
             const totalVideos = completedVideos + remainingVideos;
-
             const totalQuizzes = completedQuizzes + remainingQuizzes;
-
             const totalLabs = completedLabs + remainingLabs;
 
-            const totalCompleted = completedLabs + completedQuizzes + completedVideos
-            const totalItems = totalLabs + totalQuizzes + totalVideos
+            const totalCompleted = completedLabs + completedQuizzes + completedVideos;
+            const totalItems = totalLabs + totalQuizzes + totalVideos;
 
-            const overallPercent = totalItems > 0 ? Math.round((totalCompleted / totalItems) * 100) : 0
+            const overallPercent = totalItems > 0 ? Math.round((totalCompleted / totalItems) * 100) : 0;
 
             const percentQuizzes =
-              totalQuizzes > 0
-                ? Math.round((completedQuizzes / totalQuizzes) * 100)
-                : 0;
-
+              totalQuizzes > 0 ? Math.round((completedQuizzes / totalQuizzes) * 100) : 0;
 
             const percentVideos =
-              totalVideos > 0
-                ? Math.round((completedVideos / totalVideos) * 100)
-                : 0;
+              totalVideos > 0 ? Math.round((completedVideos / totalVideos) * 100) : 0;
 
             return (
               <Box
@@ -189,7 +185,10 @@ const TrackProgress = () => {
                 sx={{
                   flex: "1 1 100%",
                   "@media (min-width: 768px)": {
-                    flex: "1 1 calc(50% - 16px)",
+                    flex: "1 1 calc(70% - 8px)", // wider on medium screens
+                  },
+                  "@media (min-width: 1200px)": {
+                    flex: "1 1 calc(45% - 8px)", // wider on large screens
                   },
                 }}
               >
@@ -198,28 +197,20 @@ const TrackProgress = () => {
                   onChange={handleChange(id)}
                   theme={theme}
                   sx={{
-                    backgroundColor:
-                      theme?.name === "light" ? "#e9ecef" : "#343a40",
-                    color:
-                      theme?.name === "light" ? "#212529" : "#cecfd0",
+                    backgroundColor: theme?.name === "light" ? "#e9ecef" : "#343a40",
+                    color: theme?.name === "light" ? "#212529" : "#cecfd0",
                   }}
                 >
                   <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Box
-                      display="flex"
-                      justifyContent="space-between"
-                      width="100%"
-                    >
+                    <Box display="flex" justifyContent="space-between" width="100%">
                       <Typography fontWeight={500}>{name}</Typography>
                       <Typography>{overallPercent}% Completed</Typography>
                     </Box>
                   </AccordionSummary>
                   <AccordionDetails
                     sx={{
-                      backgroundColor:
-                        theme?.name === "light" ? "#f8f9fa" : "#3a3b3c",
-                      color:
-                        theme?.name === "light" ? "#212529" : "#cecfd0",
+                      backgroundColor: theme?.name === "light" ? "#f8f9fa" : "#3a3b3c",
+                      color: theme?.name === "light" ? "#212529" : "#cecfd0",
                       padding: "50px 0px",
                     }}
                   >
@@ -228,7 +219,7 @@ const TrackProgress = () => {
                       alignItems="center"
                       justifyContent="center"
                       sx={{ padding: "0 20px" }}
-                      gap={4}
+                      gap={3} // slightly smaller gap
                       flexWrap="wrap"
                     >
                       <Box height={200} width={200}>
@@ -236,9 +227,7 @@ const TrackProgress = () => {
                           textAlign="center"
                           variant="subtitle2"
                           mb={1}
-                          color={
-                            theme?.name === "light" ? "#212529" : "#cecfd0"
-                          }
+                          color={theme?.name === "light" ? "#212529" : "#cecfd0"}
                         >
                           Video and Quiz Progress
                         </Typography>
@@ -249,8 +238,6 @@ const TrackProgress = () => {
                               "Completed Quizzes",
                               "Completed Labs",
                               "Remaining",
-                              // "Remaining Quizzes",
-                              // "Remaining Labs",
                             ],
                             datasets: [
                               {
@@ -259,18 +246,8 @@ const TrackProgress = () => {
                                   completedQuizzes,
                                   completedLabs,
                                   remainingVideos + remainingQuizzes + remainingLabs,
-                                  // remainingVideos,
-                                  // remainingQuizzes,
-                                  // remainingLabs
                                 ],
-                                backgroundColor: [
-                                  "#4CAF50",
-                                  "#f39821",
-                                  "#2196F3", // New color for labs
-                                  "#E0E0E0",
-                                  // "#B0B0B0",
-                                  // "#78909C", //
-                                ],
+                                backgroundColor: ["#4CAF50", "#f39821", "#2196F3", "#E0E0E0"],
                                 borderWidth: 1,
                               },
                             ],
@@ -305,18 +282,76 @@ const TrackProgress = () => {
                         {userAnswers.filter(submission => submission.user_id === member.id).length > 0 ? (
                           userAnswers
                             .filter(submission => submission.user_id === member.id)
-                            .map(exercise => (
-                              <div key={exercise.id} className="my-2 ">
+                            .map((exercise) => (
+                              <div
+                                key={exercise.id}
+                                className="my-2 d-flex align-items-center justify-content-between"
+                                style={{ gap: "12px" }}
+                              >
                                 <a
                                   onClick={() => exportToPdf(exercise)}
-                                  className="text-[var(--primary-color)] cursor-pointer"
+                                  className="text-[var(--primary-color)] cursor-pointer text-decoration-none"
                                 >
-                                  {exercise.exercise.title}(PDF)
+                                  {exercise.exercise.title} (PDF)
                                 </a>
+
+                                <FormControl size="small" sx={{ minWidth: 150 }}>
+                                  <Select
+                                    value={exercise.status}
+                                    onChange={async (e) => {
+                                      const newStatus = e.target.value;
+                                      try {
+                                        await axios.patch(
+                                          `${process.env.REACT_APP_API_BASE_URL}/api/submission/${exercise.id}`,
+                                          { status: newStatus },
+                                          {
+                                            headers: {
+                                              Authorization: `Bearer ${localStorage.getItem("token")}`,
+                                            },
+                                          }
+                                        );
+                                        setUserAnswers((prev) =>
+                                          prev.map((item) =>
+                                            item.id === exercise.id ? { ...item, status: newStatus } : item
+                                          )
+                                        );
+                                      } catch (err) {
+                                        console.error("Failed to update status:", err);
+                                        alert("Failed to update status");
+                                      }
+                                    }}
+                                    sx={{
+                                      "& .MuiSelect-select": {
+                                        color:
+                                          exercise.status === "approved"
+                                            ? "#ffffff"
+                                            : exercise.status === "rejected"
+                                              ? "#ffffff"
+                                              : "#212529",
+                                        backgroundColor:
+                                          exercise.status === "approved"
+                                            ? "#28a745"
+                                            : exercise.status === "rejected"
+                                              ? "#dc3545"
+                                              : "#ffc107",
+                                      },
+                                      "& .MuiOutlinedInput-notchedOutline": {
+                                        borderColor: "#ced4da",
+                                      },
+                                      "&:hover .MuiOutlinedInput-notchedOutline": {
+                                        borderColor: "#adb5bd",
+                                      },
+                                    }}
+                                  >
+                                    <MenuItem value="pending">Pending</MenuItem>
+                                    <MenuItem value="approved">Approved</MenuItem>
+                                    <MenuItem value="rejected">Rejected</MenuItem>
+                                  </Select>
+                                </FormControl>
                               </div>
                             ))
                         ) : (
-                          <div className="my-2 ">Member hasn't submitted any exercise yet.</div>
+                          <div className="my-2">Member hasn't submitted any exercise yet.</div>
                         )}
                       </div>
                     </Box>

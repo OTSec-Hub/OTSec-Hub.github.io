@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const Quiz = ({ questions = [], videoId, labId, mode = "video" }) => {
+const Quiz = ({ questions = [], videoId, labId, mode }) => {
   const isLab = mode === "lab";
   const isStatic = mode === "static";
   const contentId = mode === "video" ? videoId : labId;
@@ -32,7 +32,7 @@ const Quiz = ({ questions = [], videoId, labId, mode = "video" }) => {
                 content_type: mode,
                 content_id: contentId
               },
-              headers: {  // Proper headers structure
+              headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
               }
             }
@@ -88,7 +88,8 @@ const Quiz = ({ questions = [], videoId, labId, mode = "video" }) => {
       setShowScore(true);
 
       // Track progress if all answers correct
-      if (score === questions.length && !isStatic) {
+      if (score === questions.length && mode === 'lab') {
+        console.log('here');
         try {
           await axios.post(
             `${process.env.REACT_APP_API_BASE_URL}/api/track_progress`,
@@ -105,6 +106,20 @@ const Quiz = ({ questions = [], videoId, labId, mode = "video" }) => {
           if (mode === "lab") {
             setIsWatched(true);
           }
+        } catch (err) {
+          console.error("Progress update failed:", err);
+        }
+      } else if (score === questions.length && mode === 'video') {
+        try {
+          // patch("/track_progress/fullmark/{video_id}")
+          await axios.patch(
+            `${process.env.REACT_APP_API_BASE_URL}/api/track_progress/fullmark/${videoId}`,
+            {},
+            { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+          );
+          console.log('token here', localStorage.getItem("token"));
+
+          setCompletedQuiz(true);
         } catch (err) {
           console.error("Progress update failed:", err);
         }
