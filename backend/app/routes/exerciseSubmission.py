@@ -31,11 +31,9 @@ def submit_exercise(
 @router.get("/submission", response_model=List[ExerciseSubmissionOut])
 def get_submission(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    # current_user: User = Depends(get_current_user)
 ):
-    submission = db.query(ExerciseSubmission).options(joinedload(ExerciseSubmission.exercise)).filter_by(user_id=current_user.id).all()
-    if not submission:
-        raise HTTPException(status_code=404, detail="No submissions found")
+    submission = db.query(ExerciseSubmission).options(joinedload(ExerciseSubmission.exercise)).all()
     return submission
 
 @router.patch("/submission/{submission_id}", response_model=ExerciseSubmissionOut)

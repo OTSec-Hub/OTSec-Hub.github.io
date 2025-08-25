@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import user, auth, educators, video, userProgress, pieProgress, lab, exercise, exerciseSubmission, communityLab, communityVideo
+from app.routes import user, auth, educators, video, userProgress, pieProgress, lab, exercise, exerciseSubmission, communityLab, communityVideo, analytics
 from app import models
 
 from app.database import engine, Base
@@ -34,7 +34,9 @@ app.include_router(communityLab.router, prefix="/api", tags=["communityLab"])
 app.include_router(communityVideo.router, prefix="/api", tags=["communityVideo"])
 app.include_router(exercise.router, prefix="/api", tags=["exercisess"])
 app.include_router(pieProgress.router, prefix="/api/progress", tags=["pieProgress"])
-app.include_router(exerciseSubmission.router, prefix="/api", tags=["exerciseSubmission"]) 
+app.include_router(exerciseSubmission.router, prefix="/api", tags=["exerciseSubmission"])
+app.include_router(analytics.router, prefix="/api", tags=["analytics"])
+
 
 # Initialize database
 # Base.metadata.drop_all(bind=engine)

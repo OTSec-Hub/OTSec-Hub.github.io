@@ -1,11 +1,13 @@
 // Sidebar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { BarChart3, Users, BookOpen, LayoutDashboard, Flag, Dumbbell, Video, Settings, LineChart } from "lucide-react";
 import styled from "styled-components";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 
 const SidebarWrapper = styled.div`
@@ -72,13 +74,41 @@ const SidebarItems = [
         ]
     },
     // { name: "Benchmarks Management", icon: <Flag />, route: "/BenchmarksManagement" },
-    { name: "Settings", icon: <Settings />, route: "/Settings" } // Optional
+    // { name: "Settings", icon: <Settings />, route: "/Settings" } // Optional
 ];
 
 
 const Sidebar = () => {
     const [openDropdown, setOpenDropdown] = useState([]);
     const location = useLocation()
+
+    const [role, setRole] = useState(null);
+
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+        if (!token) return;
+
+        try {
+            const decoded = jwtDecode(token);
+            const userId = decoded.user_id;
+
+            axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/${userId}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(res => setRole(res.data.role))
+                .catch(err => console.error(err));
+
+        } catch (err) {
+            console.error("Invalid token", err);
+        }
+    }, [token]);
+
+    const filteredItems = SidebarItems.filter(item => {
+        if (role === "educator" && item.name === "User Management") {
+            return false;
+        }
+        return true;
+    });
 
     const toggleDropdown = (name) => {
         if (openDropdown.includes(name)) {
@@ -114,7 +144,7 @@ const Sidebar = () => {
             </Link>
 
             <Nav className="flex-column " >
-                {SidebarItems.map((item) => (
+                {filteredItems.map((item) => (
                     <div key={item.name} >
                         {item.children ? (
                             <>
@@ -130,7 +160,7 @@ const Sidebar = () => {
                                 </SidebarLink>
 
                                 {openDropdown.includes(item.name) && (
-                                    <div  style={{ marginLeft: "1.5rem" }}>
+                                    <div style={{ marginLeft: "1.5rem" }}>
                                         {item.children.map((child) => (
                                             <SidebarLink
                                                 key={child.name}

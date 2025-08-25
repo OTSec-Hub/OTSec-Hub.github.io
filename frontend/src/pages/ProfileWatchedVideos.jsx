@@ -37,7 +37,7 @@ const WatchedVideos = () => {
                 const filtered = response.data.filter(
                     item => item.content_type === "video"
                 );
-                console.log(filtered);
+                console.log('mano',filtered);
                 setProgress(filtered);
             } catch (err) {
                 console.error("Failed to fetch progress:", err);
@@ -63,33 +63,35 @@ const WatchedVideos = () => {
             backgroundColor: theme?.name === "light" ? "#ffffff" : "#212529"
         }}>
             <UserSidebar />
-            <Container className="mt-5" style={{ maxWidth: "600px" }}>
+            <Container className="mt-5" style={{ maxWidth: "1000px" }}>
                 <Card>
                     <Card.Header as="h4">Watched Videos</Card.Header>
                     <Card.Body>
                         {error && <Alert variant="danger">{error}</Alert>}
-                            <ListGroup variant="flush">
-                                {progress.map((item, index) => (
-                                    <ListGroup.Item
-                                        key={index}
-                                        className="d-flex justify-content-between align-items-center"
+                        <ListGroup variant="flush">
+                            {progress.length > 0 ? (progress.map((item, index) => (
+                                <ListGroup.Item
+                                    key={index}
+                                    className="d-flex justify-content-between align-items-center"
+                                >
+                                    <Link
+                                        to={`/Resources/Video/${item.content_id}`}
+                                        className="text-decoration-none"
                                     >
-                                        <Link
-                                            to={`/Resources/Video/${item.content_id}`}
-                                            className="text-decoration-none"
-                                        >
-                                            {item.content_title}
-                                        </Link>
+                                        {item.content_title}
+                                    </Link>
 
-                                        <span
-                                            className={`badge ${item.quiz_completed ? "bg-success" : "bg-danger"}`}
-                                            style={{ textTransform: "capitalize" }}
-                                        >
-                                            {item.quiz_completed ? "Quiz Completed" : "Quiz Not Completed"}
-                                        </span>
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
+                                    <span
+                                        className={`badge ${item.quiz_completed ? "bg-success" : "bg-danger"}`}
+                                        style={{ textTransform: "capitalize" }}
+                                    >
+                                        {item.quiz_completed ? "Quiz Completed" : "Quiz Not Completed"}
+                                    </span>
+                                </ListGroup.Item>
+                            ))) : (
+                                <ListGroup.Item>No videos watched yet.</ListGroup.Item>
+                            )}
+                        </ListGroup>
                     </Card.Body>
                 </Card>
             </Container>

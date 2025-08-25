@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi import APIRouter, Depends, Query, HTTPException, Response
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.userProgress import UserProgress
@@ -10,6 +10,8 @@ from app.schemas.lab import LabOut, LabCreate, LabUpdate
 from app.auth.auth import get_current_user
 from app.models.user import User
 from typing import List
+from app.schemas.pagination import PaginatedResponse
+
 
 router = APIRouter()
 
@@ -51,12 +53,31 @@ async def get_lab(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Lab not found")
     return lab
 
-@router.get('/get_labs', response_model=List[LabOut])
-async def get_labs(db: Session = Depends(get_db)):
-    labs = db.query(Lab).all()
-    if not labs:
-        raise HTTPException(status_code=404, detail="Lab not found")
-    return labs
+@router.get("/get_labs", response_model=PaginatedResponse[LabOut])
+async def get_labs(
+    page: int = Query(1, ge=1),
+    limit: int = Query(9, ge=1),
+    db: Session = Depends(get_db),
+):
+    labs_query = db.query(Lab)
+    total = labs_query.count()
+
+    labs = labs_query.offset((page - 1) * limit).limit(limit).all()
+    
+    # Convert SQLAlchemy objects to Pydantic schemas
+    lab_items = [LabOut.from_orm(lab) for lab in labs]
+
+    if not lab_items:
+        raise HTTPException(status_code=404, detail="No labs found")
+
+    return PaginatedResponse(
+        total=total,
+        page=page,
+        limit=limit,
+        items=lab_items
+    )
+
+
 
 @router.put("/update_lab/{lab_id}", response_model=LabOut)
 def update_lab(lab_id: int, lab: LabUpdate, db: Session = Depends(get_db)):

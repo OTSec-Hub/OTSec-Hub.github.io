@@ -15,6 +15,9 @@ class LabOut(BaseModel):
     lab_img : str
     quizzes: List[QuizOut]
     
+    class Config:
+        from_attributes=True
+    
 class LabUpdate(BaseModel):
     content: Optional[str] = None
     title: str

@@ -6,7 +6,7 @@ from typing import List
 from app.models.communityVideo import CommunityVideo
 from app.models.user import User
 from app.schemas.communityVideo import VideoCreate, VideoOut, VideoUpdate
-from app.auth.auth import get_current_user
+from app.auth.auth import get_current_user, admin_or_educator
 
 router = APIRouter()
 
@@ -14,7 +14,7 @@ router = APIRouter()
 async def create_video(
     video_data: VideoCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(admin_or_educator)
 ) -> VideoOut:
     new_video = CommunityVideo(
         title=video_data.title,
@@ -49,12 +49,26 @@ async def get_videos(db: Session = Depends(get_db)) -> List[VideoOut]:
         raise HTTPException(status_code=404, detail="No CommunityVideos found")
     return videos
 
+
+@router.get('/get_userCommunityVideos', response_model=List[VideoOut])
+async def get_labs(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> List[VideoOut]:
+    """
+    Get all community videos submitted by the current user.
+    """
+    videos = db.query(CommunityVideo).filter(CommunityVideo.user_id == current_user.id).all()
+    
+    if not videos:
+        raise HTTPException(status_code=404, detail="No CommunityVideos found")
+    
+    return videos
+
+
 @router.put("/update_communityVideo/{video_id}", response_model=VideoOut)
 async def update_video(
     video_id: int,
     video: VideoUpdate,
     db: Session = Depends(get_db),
-    # current_user: User = Depends(get_current_user)
+    current_user: User = Depends(admin_or_educator)
 ) -> VideoOut:
     db_video = db.query(CommunityVideo).filter(CommunityVideo.id == video_id).first()
     if not db_video:
@@ -73,7 +87,7 @@ async def update_video(
 async def delete_video(
     video_id: int,
     db: Session = Depends(get_db),
-    # current_user: User = Depends(get_current_user)
+    current_user: User = Depends(admin_or_educator)
 ) -> JSONResponse:
     db_video = db.query(CommunityVideo).filter(CommunityVideo.id == video_id).first()
     if not db_video:

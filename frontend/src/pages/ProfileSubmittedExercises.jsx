@@ -59,13 +59,13 @@ const ProfileSubmittedExercises = () => {
             backgroundColor: theme?.name === "light" ? "#ffffff" : "#212529"
         }}>
             <UserSidebar />
-            <Container className="mt-5" style={{ maxWidth: "600px" }}>
+            <Container className="mt-5" style={{ maxWidth: "1000px" }}>
                 <Card>
                     <Card.Header as="h4">Submitted Exercises</Card.Header>
                     <Card.Body>
-                        {error && <Alert variant="danger">{error}</Alert>}
+                        {/* {error && <Alert variant="danger">{error}</Alert>} */}
                         <ListGroup variant="flush">
-                            {progress.map((item, index) => (
+                            {progress.length > 0 ? (progress.map((item, index) => (
                                 <ListGroup.Item
                                     key={index}
                                     className="d-flex gap-3 justify-content-between align-items-center"
@@ -79,17 +79,21 @@ const ProfileSubmittedExercises = () => {
 
                                     <span
                                         className={`badge ${item.status?.toLowerCase() === "approved"
-                                                ? "bg-success"
-                                                : item.status?.toLowerCase() === "rejected"
-                                                    ? "bg-danger"
-                                                    : "bg-warning text-dark"
+                                            ? "bg-success"
+                                            : item.status?.toLowerCase() === "rejected"
+                                                ? "bg-danger"
+                                                : "bg-warning text-dark"
                                             }`}
                                         style={{ textTransform: "capitalize" }}
                                     >
-                                        {item.status} Review
+                                        {item.status}
                                     </span>
+                                    {/* <br />
+                                    {item.message && <p className="text-muted">{item.message}</p>} */}
                                 </ListGroup.Item>
-                            ))}
+                            ))) : (
+                                <ListGroup.Item>No exercises submitted yet.</ListGroup.Item>
+                            )}
                         </ListGroup>
                     </Card.Body>
                 </Card>

@@ -84,9 +84,6 @@ const TrackProgress = () => {
   useEffect(() => {
     const fetchExerciseAnswers = async () => {
       const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/submission`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
       });
       setUserAnswers(response.data);
       console.log("User Answers:", response.data);

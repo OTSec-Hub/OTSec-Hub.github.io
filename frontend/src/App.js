@@ -81,6 +81,8 @@ import ProfileCompletedLabs from './pages/ProfileCompletedLabs';
 import ProfileSolvedQuizzes from './pages/ProfileSolvedQuizzes';
 import ProfileSubmittedExercises from './pages/ProfileSubmittedExercises';
 import ProfileWatchedVideos from './pages/ProfileWatchedVideos';
+import ProfileCommunityLabs from "./pages/ProfileCommunityLabs";
+import ProfileCommunityVideos from "./pages/ProfileCommunityVideos";
 
 // Styled layout component
 const AppLayout = styled.div`
@@ -192,6 +194,8 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/SolvedQuizzes" element={<ProfileSolvedQuizzes />} />
           <Route path="/SubmittedExercises" element={<ProfileSubmittedExercises />} />
           <Route path="/WatchedVideos" element={<ProfileWatchedVideos />} />
+          <Route path="/ProfileCommunityLabs" element={<ProfileCommunityLabs />} />
+          <Route path="/ProfileCommunityVideos" element={<ProfileCommunityVideos />} />
           {/* <Route path="/All-Labs/1" element={<Lab1Page labId={1} />} />
           <Route path="/All-Labs/2" element={<Lab2Page labId={2} />} />
           <Route path="/All-Labs/3" element={<Lab3Page labId={3} />} />

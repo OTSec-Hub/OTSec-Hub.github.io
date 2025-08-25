@@ -38,8 +38,8 @@ const navLinks = {
       ]
     },
     { id: "4R", name: "Announcements", route: "/Announcements" },
-    { id: "5R", private: true, name: "Discussions Forums", route: "/Weekly-Discussions" },
-    { id: "6R", name: "Contact Us", route: "/ContactPage" }
+    // { id: "5R", private: true, name: "Discussions Forums", route: "/Weekly-Discussions" },
+    { id: "5R", name: "Contact Us", route: "/ContactPage" }
   ]
 };
 

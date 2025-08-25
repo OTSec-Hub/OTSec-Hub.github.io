@@ -23,48 +23,6 @@ const BackButton = styled(Button)`
   }
 `;
 
-// const lab0QuizQuestions = [
-//     {
-//         id: 1,
-//         question: "What is the minimum amount of free disk space recommended for installing the required lab software?",
-//         options: ["10 GB", "20 GB", "40 GB", "100 GB"],
-//         correct_answer: "40 GB",
-//     },
-//     {
-//         id: 2,
-//         question: "Which MATLAB tools must be installed to complete all labs?",
-//         options: [
-//             "Simulink and Data Acquisition Toolbox",
-//             "Simulink and Simulink PLC Coder",
-//             "Simulink only",
-//             "No add-ons are needed",
-//         ],
-//         correct_answer: "Simulink and Simulink PLC Coder",
-//     },
-//     {
-//         id: 3,
-//         question: "Why can’t the online version of MATLAB be used for this course?",
-//         options: [
-//             "It is a paid service",
-//             "It does not support all required features",
-//             "It is too slow for simulations",
-//             "It’s not compatible with Windows",
-//         ],
-//         correct_answer: "It does not support all required features",
-//     },
-//     {
-//         id: 4,
-//         question: "What version of CODESYS is required for the labs?",
-//         options: [
-//             "Latest version (any)",
-//             "Version 3.5.17.0 (32-bit)",
-//             "Version 3.5.20.0 (64-bit)",
-//             "Web-based version",
-//         ],
-//         correct_answer: "Version 3.5.17.0 (32-bit)",
-//     },
-// ];
-
 const VideoDetailPage = () => {
     const { videoId } = useParams();
     const [video, setVideo] = useState(null)
@@ -100,12 +58,15 @@ const VideoDetailPage = () => {
                         "Content-Type": "application/json"
                     }
                 });
+
+                // update state immediately
                 setHasPlayed(true);
             } catch (err) {
                 console.error('Failed to track video play:', err);
             }
         }
     };
+
 
     if (!video) return (
         <div className="text-center mt-5">
@@ -136,7 +97,7 @@ const VideoDetailPage = () => {
                 </div>
                 <p className="text-muted my-4">{video.description}</p>
                 <div className="">
-                    <Quiz questions={quizzes} videoId={videoId} mode="video" />
+                    <Quiz questions={quizzes} videoId={videoId} mode="video" isWatched={hasPlayed} />
                 </div>
             </div>
         </Container>

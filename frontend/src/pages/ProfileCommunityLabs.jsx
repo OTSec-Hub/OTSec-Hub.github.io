@@ -7,7 +7,7 @@ import UserSidebar from "../components/UserSidebar";
 import { Box } from "@mui/material";
 import { useTheme } from 'styled-components';
 
-const SubmittedLabs = () => {
+const ProfileCommunityLabs = () => {
     const [progress, setProgress] = useState([]);
     // const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,19 +27,15 @@ const SubmittedLabs = () => {
                 const decoded = jwtDecode(token);
 
                 const response = await axios.get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/track_progresss`,
+                    `${process.env.REACT_APP_API_BASE_URL}/api/get_userCommunityLabs`,
                     {
                         headers: { Authorization: `Bearer ${token}` }
                     }
                 );
-                console.log('hiii', response.data);
 
-                const filtered = response.data.filter(
-                    item => item.content_type === "lab" && item.quiz_completed === true
-                );
-                console.log('filtered', filtered);
+                console.log('user community labs', response.data);
 
-                setProgress(filtered);
+                setProgress(response.data);
             } catch (err) {
                 console.error("Failed to fetch progress:", err);
                 setError("Failed to load submitted labs.");
@@ -66,28 +62,48 @@ const SubmittedLabs = () => {
             <UserSidebar />
             <Container className="mt-5" style={{ maxWidth: "1000px" }}>
                 <Card>
-                    <Card.Header as="h4">Completed Labs</Card.Header>
+                    <Card.Header as="h4">Submitted Community Labs</Card.Header>
                     <Card.Body>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <ListGroup variant="flush">
                             {progress.length > 0 ? (progress.map((item, index) => (
                                 <ListGroup.Item
                                     key={index}
-                                    className="d-flex justify-content-between align-items-center"
+                                    className="d-flex flex-column mb-2 p-3"
                                 >
-                                    <Link
-                                        to={`/Resources/Video/${item.content_id}`}
-                                        className="text-decoration-none"
-                                    >
-                                        {item.content_title}
-                                    </Link>
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        {/* Lab image */}
+                                        <img
+                                            src={item.lab_img}
+                                            alt={item.content_title}
+                                            style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "5px" }}
+                                        />
 
-                                    <span
-                                        className={`badge ${item.quiz_completed ? "bg-success" : "bg-danger"}`}
-                                        style={{ textTransform: "capitalize" }}
-                                    >
-                                        {item.quiz_completed ? "Quiz Completed" : "Quiz Not Completed"}
-                                    </span>
+                                        {/* Lab title */}
+                                        <p className="mb-0 flex-grow-1 ms-3">
+                                            {item.title}
+                                        </p>
+
+                                        {/* Status badge */}
+                                        <span
+                                            className={`badge ${item.status?.toLowerCase() === "approved"
+                                                ? "bg-success"
+                                                : item.status?.toLowerCase() === "rejected"
+                                                    ? "bg-danger"
+                                                    : "bg-warning text-dark"
+                                                }`}
+                                            style={{ textTransform: "capitalize" }}
+                                        >
+                                            {item.status}
+                                        </span>
+                                    </div>
+
+                                    {/* Optional message */}
+                                    {item.message && (
+                                        <p className="text-muted fst-italic small mt-3 mb-0">
+                                            Feedback: {item.message}
+                                        </p>
+                                    )}
                                 </ListGroup.Item>
                             ))) : (
                                 <ListGroup.Item>No labs submitted yet.</ListGroup.Item>
@@ -101,4 +117,4 @@ const SubmittedLabs = () => {
     );
 };
 
-export default SubmittedLabs;
+export default ProfileCommunityLabs;

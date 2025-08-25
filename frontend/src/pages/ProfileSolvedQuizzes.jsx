@@ -60,18 +60,20 @@ const SolvedQuizzes = () => {
             backgroundColor: theme?.name === "light" ? "#ffffff" : "#212529"
         }}>
             <UserSidebar />
-            <Container className="mt-5" style={{ maxWidth: "600px" }}>
+            <Container className="mt-5" style={{ maxWidth: "1000px" }}>
                 <Card>
                     <Card.Header as="h4">Solved Quizzes</Card.Header>
                     <Card.Body>
                         {error && <Alert variant="danger">{error}</Alert>}
-                            <ListGroup variant="flush">
-                                {progress.map((item, index) => (
-                                    <ListGroup.Item key={index}>
-                                        {item.content_title}
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
+                        <ListGroup variant="flush">
+                            {progress.length() > 0 ? (progress.map((item, index) => (
+                                <ListGroup.Item key={index}>
+                                    {item.content_title}
+                                </ListGroup.Item>
+                            ))) : (
+                                <ListGroup.Item>No quizzes solved yet.</ListGroup.Item>
+                            )}
+                        </ListGroup>
                     </Card.Body>
                 </Card>
             </Container>

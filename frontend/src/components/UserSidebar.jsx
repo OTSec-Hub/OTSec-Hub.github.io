@@ -59,8 +59,10 @@ const SidebarItems = [
     { name: "Completed Labs", icon: <BarChart3 />, route: "/CompletedLabs" },
     // { name: "Solved Quizzes", icon: <BarChart3 />, route: "/SolvedQuizzes" },
     { name: "Submitted Exercises", icon: <BarChart3 />, route: "/SubmittedExercises" },
+    { name: "Submitted Community Labs", icon: <BarChart3 />, route: "/ProfileCommunityLabs" },
+    { name: "Submitted Community Videos", icon: <BarChart3 />, route: "/ProfileCommunityVideos" },
     // { name: "Benchmarks Management", icon: <Flag />, route: "/BenchmarksManagement" },
-    { name: "Settings", icon: <Settings />, route: "/Settings" } // Optional
+    // { name: "Settings", icon: <Settings />, route: "/Settings" } // Optional
 ];
 
 

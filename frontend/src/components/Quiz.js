@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const Quiz = ({ questions = [], videoId, labId, mode }) => {
+const Quiz = ({ questions = [], videoId, labId, mode, isWatched: parentWatched }) => {
+  const [isWatched, setIsWatched] = useState(parentWatched ?? false);
+
   const isLab = mode === "lab";
   const isStatic = mode === "static";
   const contentId = mode === "video" ? videoId : labId;
@@ -13,11 +15,14 @@ const Quiz = ({ questions = [], videoId, labId, mode }) => {
   const [showScore, setShowScore] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [userAnswers, setUserAnswers] = useState({});
-  const [isWatched, setIsWatched] = useState(null);
   const [completedQuiz, setCompletedQuiz] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  useEffect(() => {
+    setIsWatched(parentWatched); // sync with VideoDetailPage immediately
+  }, [parentWatched]);
 
   useEffect(() => {
     const initializeQuiz = async () => {
@@ -140,7 +145,7 @@ const Quiz = ({ questions = [], videoId, labId, mode }) => {
     return <div className="p-3">Loading quiz...</div>;
   }
 
-  if (mode === "video" && !isWatched && !isStatic) {
+  if (mode === "video" && !isWatched) {
     return (
       <div className="mt-4">
         <hr className="border-top border-primary opacity-40 my-4 w-95" />
@@ -150,6 +155,7 @@ const Quiz = ({ questions = [], videoId, labId, mode }) => {
       </div>
     );
   }
+
 
   // if (mode === "lab" && !isWatched && !isStatic) {
   //   return (

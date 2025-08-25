@@ -23,6 +23,9 @@ class QuizOut(BaseModel):
     option4: str
     correct_answer: str
     
+    class Config:
+        from_attributes = True
+    
 class QuizUpdate(BaseModel):
     id: int
     question: Optional[str] = None

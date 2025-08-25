@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -14,7 +14,6 @@ import {
 import { Icon } from "@iconify/react";
 import Title from "../components/Title";
 import BackToTop from "../components/BackToTop";
-import ProjectCard from "../components/ProjectCard";
 import Loading from "../components/Loading";
 import { updateTitle } from "../utils";
 
@@ -29,64 +28,65 @@ const StyledSection = styled.section`
       width: 75%;
     }
   }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  .pagination .page-item .page-link {
+    color: #28a745;
+    background-color: #222;
+    border-color: #444;
+  }
+
+  .pagination .page-item.active .page-link {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #222;
+  }
+
+  .pagination .page-item.disabled .page-link {
+    color: #666;
+    background-color: #222;
+    border-color: #444;
+  }
 `;
 
 const AllLabs = () => {
-  const [labs, setLabs] = React.useState([]);
-  const [filteredResults, setFilteredResults] = React.useState([]);
-  const [searchInput, setSearchInput] = React.useState("");
-  const [activePage, setActivePage] = React.useState(1);
-  const [pageItems, setPageItems] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(null);
+  const [labs, setLabs] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [activePage, setActivePage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const labsPerPage = 9;
 
+  // Fetch labs with server-side pagination and search
+  const getLabs = async (page = 1, search = "") => {
+    updateTitle("All Labs");
+    setLoading(true);
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_labs`, {
+        params: { page, limit: labsPerPage, search }
+      });
+      setLabs(response.data.items || []);
+      setTotalPages(Math.ceil(response.data.total / labsPerPage));
+      setLoading(false);
+    } catch (err) {
+      console.error("Failed to fetch labs", err);
+      setError("Failed to fetch labs.");
+      setLoading(false);
+    }
+  };
+
+  // Initial fetch on mount
   useEffect(() => {
-    async function getLabs() {
-      updateTitle("All Labs");
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_labs`)
-        setLabs(response.data);
-        console.log(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error("Failed to fetch labs", err);
-        setError("Failed to fetch labs.");
-        setLoading(false);
-      };
-    }
-    getLabs()
-  }, []);
+    getLabs(activePage, searchInput);
+  }, [activePage, searchInput]);
 
-  React.useEffect(() => {
-    const data = labs.filter((lab) =>
-      lab.title.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    const totalPages = Math.ceil(data.length / labsPerPage);
-    const tempPageItems = [];
-
-    for (let i = 1; i <= totalPages; i++) {
-      tempPageItems.push(
-        <Pagination.Item
-          key={i}
-          active={i === activePage}
-          onClick={() => setActivePage(i)}
-        >
-          {i}
-        </Pagination.Item>
-      );
-    }
-
-    setPageItems(tempPageItems);
-
-    const start = (activePage - 1) * labsPerPage;
-    const end = start + labsPerPage;
-    setFilteredResults(data.slice(start, end));
-  }, [labs, searchInput, activePage]);
-  // console.log(labs);
-
-  React.useEffect(() => {
+  // Reset page when searching
+  useEffect(() => {
     setActivePage(1);
   }, [searchInput]);
 
@@ -136,59 +136,67 @@ const AllLabs = () => {
                 placeholder="Lab name"
                 aria-label="Search labs"
                 aria-describedby="search"
+                value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
             </InputGroup>
 
-            <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
-              {filteredResults.map((lab) => (
-                <Col key={lab.id} className="d-flex justify-content-center">
-                  <Card className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary" style={{ width: "18rem" }}>
-                    <div className="w-100">
-                      <Card.Img
-                        variant="top"
-                        src={lab.lab_img || "/default-lab.jpg"}
-                        alt={lab.title}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          borderRadius: "0.5rem"
-                        }}
-                      />
-                    </div>
-                    <Card.Body className="d-flex flex-column justify-content-center align-items-center">
-                      <Card.Title className=" w-100">{lab?.title?.trim() || "Explore this lab"}</Card.Title>
-                      <Link to={`/Resources/All-Labs/${lab.id}`} className="btn btn-primary mt-2">
-                        Explore
-                      </Link>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-
-
-            {pageItems.length > 1 && (
-              <Container className="d-flex justify-content-center mt-5">
-                <Pagination>
-                  <Pagination.Prev
-                    onClick={() =>
-                      setActivePage((prev) =>
-                        prev === 1 ? pageItems.length : prev - 1
-                      )
-                    }
-                  />
-                  {pageItems}
-                  <Pagination.Next
-                    onClick={() =>
-                      setActivePage((prev) =>
-                        prev === pageItems.length ? 1 : prev + 1
-                      )
-                    }
-                  />
-                </Pagination>
+            {labs.length === 0 ? (
+              <Container className="text-center mt-5">
+                <h4>No labs found matching your search.</h4>
               </Container>
+            ) : (
+              <>
+                <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
+                  {labs.map((lab) => (
+                    <Col key={lab.id} className="d-flex justify-content-center">
+                      <Card className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary" style={{ width: "18rem" }}>
+                        <Card.Img
+                          variant="top"
+                          src={lab.lab_img || "/default-lab.jpg"}
+                          alt={lab.title}
+                          style={{
+                            width: "80%",
+                            height: "80%",
+                            objectFit: "cover",
+                            borderRadius: "0.5rem"
+                          }}
+                        />
+                        <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+                          <Card.Title className="w-100">{lab?.title?.trim() || "Explore this lab"}</Card.Title>
+                          <Link to={`/Resources/All-Labs/${lab.id}`} className="btn btn-primary mt-2">
+                            Explore
+                          </Link>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+
+                {totalPages > 1 && (
+                  <Container className="d-flex justify-content-center mt-5">
+                    <Pagination>
+                      <Pagination.Prev
+                        onClick={() => setActivePage(prev => (prev === 1 ? totalPages : prev - 1))}
+                        disabled={activePage === 1}
+                      />
+                      {Array.from({ length: totalPages }, (_, i) => (
+                        <Pagination.Item
+                          key={i + 1}
+                          active={i + 1 === activePage}
+                          onClick={() => setActivePage(i + 1)}
+                        >
+                          {i + 1}
+                        </Pagination.Item>
+                      ))}
+                      <Pagination.Next
+                        onClick={() => setActivePage(prev => (prev === totalPages ? 1 : prev + 1))}
+                        disabled={activePage === totalPages}
+                      />
+                    </Pagination>
+                  </Container>
+                )}
+              </>
             )}
           </Container>
         </StyledSection>

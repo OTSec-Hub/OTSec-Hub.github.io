@@ -4,7 +4,7 @@ from typing import List
 from app.database import get_db
 from app.models.communityLab import CommunityLab
 from app.schemas.communityLab import LabOut, LabCreate, LabUpdate
-from app.auth.auth import get_current_user
+from app.auth.auth import get_current_user, admin_or_educator, admin_only
 from app.models.user import User
 from fastapi.responses import JSONResponse
 
@@ -14,7 +14,7 @@ router = APIRouter()
 async def create_lab(
     lab_data: LabCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)  
+    current_user: User = Depends(admin_or_educator)  
 ) -> LabOut:
     """
     Create a new community lab.
@@ -59,13 +59,25 @@ async def get_labs(db: Session = Depends(get_db)) -> List[LabOut]:
     
     return labs
 
+@router.get('/get_userCommunityLabs', response_model=List[LabOut])
+async def get_labs(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> List[LabOut]:
+    """
+    Get all community labs submitted by the current user.
+    """
+    labs = db.query(CommunityLab).filter(CommunityLab.user_id == current_user.id).all()
+    
+    if not labs:
+        raise HTTPException(status_code=404, detail="No CommunityLabs found")
+    
+    return labs
+
 
 @router.put("/update_communityLab/{lab_id}", response_model=LabOut)
 async def update_lab(
     lab_id: int,
     lab: LabUpdate,
     db: Session = Depends(get_db),
-    # current_user: User = Depends(get_current_user)
+    current_user: User = Depends(admin_or_educator)
 ) -> LabOut:
     """
     Update a community lab by ID.
@@ -92,7 +104,7 @@ async def update_lab(
 async def delete_lab(
     lab_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(admin_or_educator)
 ) -> JSONResponse:
     """
     Delete a community lab by ID.
