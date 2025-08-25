@@ -83,6 +83,7 @@ import ProfileSubmittedExercises from './pages/ProfileSubmittedExercises';
 import ProfileWatchedVideos from './pages/ProfileWatchedVideos';
 import ProfileCommunityLabs from "./pages/ProfileCommunityLabs";
 import ProfileCommunityVideos from "./pages/ProfileCommunityVideos";
+import { Analytics } from '@vercel/analytics/react';
 
 // Styled layout component
 const AppLayout = styled.div`
@@ -233,7 +234,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
 
   return (
     <ErrorBoundary FallbackComponent={AppFallback}>
-      {/* Removed the Router wrapper since it's already in index.js */}
+
       <ThemeProvider theme={{ name: theme }}>
         <ScrollToTop />
         <GlobalStyles />
@@ -248,6 +249,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           </main>
           <Footer mode={footerTheme} />
         </AppLayout>
+        <Analytics />
       </ThemeProvider>
     </ErrorBoundary>
   );
