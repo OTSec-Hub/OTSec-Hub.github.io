@@ -91,7 +91,6 @@ export default function AddExercise() {
                 handleClose();
             }, 1500);
         } catch (err) {
-            console.error(err);
             setError(err.response?.data?.detail || "Failed to add exercise with questions");
         } finally {
             setLoading(false);

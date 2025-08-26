@@ -26,7 +26,6 @@ const LabPage = () => {
                 setLab(response.data);
                 setQuizzes(response.data.quizzes)
             } catch (err) {
-                console.error("Failed to fetch lab:", err);
             }
         }
         fetchData();

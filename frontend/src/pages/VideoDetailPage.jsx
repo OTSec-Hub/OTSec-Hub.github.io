@@ -36,10 +36,8 @@ const VideoDetailPage = () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_video/${videoId}`)
                 setVideo(response.data);
-                console.log('video with questions:', response.data.quizzes);
                 setQuizzes(response.data.quizzes)
             } catch (err) {
-                console.error('error fetch video:', err)
             }
         }
         fetchVideo()
@@ -62,7 +60,6 @@ const VideoDetailPage = () => {
                 // update state immediately
                 setHasPlayed(true);
             } catch (err) {
-                console.error('Failed to track video play:', err);
             }
         }
     };

@@ -30,7 +30,6 @@ const ProfilePage = () => {
         const fetchUserData = async () => {
             try {
                 const decoded = jwtDecode(token);
-                console.log(decoded);
 
                 const response = await axios.get(
                     `${process.env.REACT_APP_API_BASE_URL}/users/${decoded.user_id}`,
@@ -40,7 +39,6 @@ const ProfilePage = () => {
                 );
                 setUser(response.data);
             } catch (err) {
-                console.error("Failed to fetch user:", err);
                 setError("Failed to load user profile.");
             } finally {
                 // setLoading(false);
@@ -88,7 +86,6 @@ const ProfilePage = () => {
                 setConfirmPassword("");
             }
         } catch (err) {
-            console.error("Failed to update password:", err);
             setError(err.response?.data?.message || "Failed to update password.");
         } finally {
             // setUpdating(false);

@@ -33,11 +33,9 @@ const ProfileCommunityLabs = () => {
                     }
                 );
 
-                console.log('user community labs', response.data);
 
                 setProgress(response.data);
             } catch (err) {
-                console.error("Failed to fetch progress:", err);
                 setError("Failed to load submitted labs.");
             } finally {
                 // setLoading(false);
@@ -64,7 +62,7 @@ const ProfileCommunityLabs = () => {
                 <Card>
                     <Card.Header as="h4">Submitted Community Labs</Card.Header>
                     <Card.Body>
-                        {error && <Alert variant="danger">{error}</Alert>}
+                        {/* {error && <Alert variant="danger">{error}</Alert>} */}
                         <ListGroup variant="flush">
                             {progress.length > 0 ? (progress.map((item, index) => (
                                 <ListGroup.Item

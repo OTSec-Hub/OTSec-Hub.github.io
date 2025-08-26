@@ -31,7 +31,6 @@ const EditLab = ({ lab }) => {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
     const [success, setSuccess] = React.useState(false);
-    console.log(labData);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -97,8 +96,6 @@ const EditLab = ({ lab }) => {
                 }))
             };
 
-            console.log("Payload to send:", payload); // debug
-
             const response = await axios.put(
                 `${process.env.REACT_APP_API_BASE_URL}/api/update_lab/${labData.id}`,
                 payload
@@ -106,11 +103,9 @@ const EditLab = ({ lab }) => {
 
             setSuccess(true);
         } catch (err) {
-            console.error(err);
             setError("Failed to update lab.");
         } finally {
             setLoading(false);
-            console.log("Data updated successfully");
         }
     };
 

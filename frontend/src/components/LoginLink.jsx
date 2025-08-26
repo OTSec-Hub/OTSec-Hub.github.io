@@ -21,18 +21,15 @@ const LoginLink = ({ closeDelay = 250, setExpanded }) => {
 
         try {
             const decoded = jwtDecode(token);
-            console.log("Decoded user ID:", decoded);
 
             axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/${decoded.user_id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((res) => {
                     const userData = res.data;
-                    console.log("Fetched user:", userData);
                     setUser(userData);
                 })
                 .catch((err) => {
-                    console.error("Failed to fetch user:", err);
                     // Clear invalid token
                     localStorage.removeItem("token");
                 })
@@ -41,7 +38,6 @@ const LoginLink = ({ closeDelay = 250, setExpanded }) => {
                 });
 
         } catch (error) {
-            console.error("Token decode failed:", error);
             // Clear invalid token
             localStorage.removeItem("token");
             setLoading(false);

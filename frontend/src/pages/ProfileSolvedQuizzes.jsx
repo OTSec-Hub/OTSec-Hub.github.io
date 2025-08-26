@@ -37,7 +37,6 @@ const SolvedQuizzes = () => {
                 );
                 setProgress(filtered);
             } catch (err) {
-                console.error("Failed to fetch progress:", err);
                 setError("Failed to load solved quizzes.");
             } finally {
                 // setLoading(false);

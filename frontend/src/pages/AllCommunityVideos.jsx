@@ -61,7 +61,6 @@ const AllCommunityVideos = () => {
         setVideos(response.data);
         setLoading(false);
       } catch (err) {
-        console.error("Failed to fetch videos", err);
         setError("Failed to fetch videos.");
         setLoading(false);
       }
@@ -124,7 +123,6 @@ const AllCommunityVideos = () => {
       }
       return null;
     } catch (err) {
-      console.error('Invalid YouTube URL:', err);
       return null;
     }
   }

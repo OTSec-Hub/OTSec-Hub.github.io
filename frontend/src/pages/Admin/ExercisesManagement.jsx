@@ -64,11 +64,9 @@ export default function ExcercisesManagement({ children }) {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     }
                 });
-                console.log("Fetched exercises:", response.data);
 
                 setExercises(response.data);
             } catch (error) {
-                console.error("Error fetching exercises:", error);
             } finally {
                 setLoading(false);
             }

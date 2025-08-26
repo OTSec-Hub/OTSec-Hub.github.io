@@ -73,7 +73,6 @@ export default function VideoSubmission() {
             });
             // ... rest of your success handling
         } catch (err) {
-            console.error(err);
             if (Array.isArray(err.response?.data?.detail)) {
                 const messages = err.response.data.detail.map(d => d.msg).join(", ");
                 setError(messages);

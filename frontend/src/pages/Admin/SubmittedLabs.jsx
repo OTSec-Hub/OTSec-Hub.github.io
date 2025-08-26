@@ -90,7 +90,6 @@ export default function CommunityLabsManagement({ children }) {
                 });
                 setLabs(response.data);
             } catch (error) {
-                console.error("Error fetching labs:", error);
                 alert("Failed to fetch labs. Please check your login status.");
             } finally {
                 setLoading(false);
@@ -120,7 +119,6 @@ export default function CommunityLabsManagement({ children }) {
             setSelectedStatus("");
             setMessage("");
         } catch (error) {
-            console.error("Failed to update lab:", error);
             alert("Failed to update lab. Please check your login status.");
         }
     };
@@ -138,7 +136,6 @@ export default function CommunityLabsManagement({ children }) {
             setDeleteModalOpen(false);
             setSelectedLabId(null);
         } catch (error) {
-            console.error("Failed to delete lab:", error);
             alert("Failed to delete lab. Please check your login status.");
         }
     };

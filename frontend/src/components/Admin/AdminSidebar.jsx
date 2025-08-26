@@ -96,10 +96,8 @@ const Sidebar = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
                 .then(res => setRole(res.data.role))
-                .catch(err => console.error(err));
 
         } catch (err) {
-            console.error("Invalid token", err);
         }
     }, [token]);
 

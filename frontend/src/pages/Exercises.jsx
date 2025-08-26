@@ -27,10 +27,8 @@ function Exercises() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        console.log(response.data);
         setExercises(response.data);
       }catch (error) {
-        console.error("Error fetching exercises:", error);
       }
     }
     fetchExercises();

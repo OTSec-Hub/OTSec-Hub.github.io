@@ -74,7 +74,6 @@ const TrackProgress = () => {
 
         setMembersProgress(progressData);
       } catch (err) {
-        console.error("Failed to fetch member progress", err);
       }
     };
 
@@ -86,7 +85,6 @@ const TrackProgress = () => {
       const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/submission`, {
       });
       setUserAnswers(response.data);
-      console.log("User Answers:", response.data);
 
     }
     fetchExerciseAnswers();
@@ -313,7 +311,6 @@ const TrackProgress = () => {
                                           )
                                         );
                                       } catch (err) {
-                                        console.error("Failed to update status:", err);
                                         alert("Failed to update status");
                                       }
                                     }}

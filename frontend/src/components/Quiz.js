@@ -7,7 +7,6 @@ const Quiz = ({ questions = [], videoId, labId, mode, isWatched: parentWatched }
   const isLab = mode === "lab";
   const isStatic = mode === "static";
   const contentId = mode === "video" ? videoId : labId;
-  console.log(contentId);
 
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -42,7 +41,6 @@ const Quiz = ({ questions = [], videoId, labId, mode, isWatched: parentWatched }
               }
             }
           );
-          console.log(response.data);
 
           // For videos, check if watched (record exists)
           if (mode === "video") {
@@ -64,13 +62,11 @@ const Quiz = ({ questions = [], videoId, labId, mode, isWatched: parentWatched }
           setCompletedQuiz(false);
 
         } else {
-          console.error("Quiz initialization error:", error);
           setIsWatched(mode === "lab"); // Allow access to labs even if error
           setCompletedQuiz(false);
         }
       } finally {
         setLoading(false);
-        console.log('fail here');
       }
     };
 
@@ -94,7 +90,6 @@ const Quiz = ({ questions = [], videoId, labId, mode, isWatched: parentWatched }
 
       // Track progress if all answers correct
       if (score === questions.length && mode === 'lab') {
-        console.log('here');
         try {
           await axios.post(
             `${process.env.REACT_APP_API_BASE_URL}/api/track_progress`,
@@ -112,7 +107,6 @@ const Quiz = ({ questions = [], videoId, labId, mode, isWatched: parentWatched }
             setIsWatched(true);
           }
         } catch (err) {
-          console.error("Progress update failed:", err);
         }
       } else if (score === questions.length && mode === 'video') {
         try {
@@ -122,11 +116,9 @@ const Quiz = ({ questions = [], videoId, labId, mode, isWatched: parentWatched }
             {},
             { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
           );
-          console.log('token here', localStorage.getItem("token"));
 
           setCompletedQuiz(true);
         } catch (err) {
-          console.error("Progress update failed:", err);
         }
       }
     }

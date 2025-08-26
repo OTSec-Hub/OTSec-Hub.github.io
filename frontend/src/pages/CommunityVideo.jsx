@@ -33,9 +33,7 @@ const CommunityVideo = () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_communityVideo/${id}`)
                 setVideo(response.data);
-                console.log('video with questions:', response.data.quizzes);
             } catch (err) {
-                console.error('error fetch video:', err)
             }
         }
         fetchVideo()

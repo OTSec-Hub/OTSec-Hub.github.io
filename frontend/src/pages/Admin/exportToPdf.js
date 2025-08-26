@@ -2,7 +2,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 export const exportToPdf = (exercise) => {
-    console.log("Exporting to PDF:", exercise);
 
     const doc = new jsPDF();
     let y = 30;

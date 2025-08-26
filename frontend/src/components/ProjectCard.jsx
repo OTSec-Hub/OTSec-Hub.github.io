@@ -71,7 +71,6 @@ const propTypes = {
 
 
 const ProjectCard = ({ title, image, url }) => {
-  // console.log("demo value:", demo);
   return (
     <StyledCard>
       <Card>

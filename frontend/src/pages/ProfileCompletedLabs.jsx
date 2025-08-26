@@ -32,16 +32,13 @@ const SubmittedLabs = () => {
                         headers: { Authorization: `Bearer ${token}` }
                     }
                 );
-                console.log('hiii', response.data);
 
                 const filtered = response.data.filter(
                     item => item.content_type === "lab" && item.quiz_completed === true
                 );
-                console.log('filtered', filtered);
 
                 setProgress(filtered);
             } catch (err) {
-                console.error("Failed to fetch progress:", err);
                 setError("Failed to load submitted labs.");
             } finally {
                 // setLoading(false);

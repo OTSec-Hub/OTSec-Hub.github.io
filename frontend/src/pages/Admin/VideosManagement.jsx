@@ -60,10 +60,8 @@ export default function VideoManagement({ children }) {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_videos`);
                 setVideos(response.data);
-                console.log(response.data);
                 setLoading(false)
             } catch (error) {
-                console.error("Error fetching videos:", error);
                 setLoading(true)
             } 
         }
@@ -89,12 +87,10 @@ export default function VideoManagement({ children }) {
             }
             return null;
         } catch (err) {
-            console.error('Invalid YouTube URL:', err);
             return null;
         }
     }
 
-    // console.log(videos[0].id);
 
     return (
         <Box display="flex" minHeight="100vh" sx={{

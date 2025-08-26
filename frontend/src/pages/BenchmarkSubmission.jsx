@@ -47,7 +47,6 @@ const BenchmarkSubmission = () => {
     e.preventDefault();
     // Here you would handle submission, e.g. send to API
 
-    console.log("Submitted Benchmark:", formData);
     alert("Benchmark submission received!");
   };
 

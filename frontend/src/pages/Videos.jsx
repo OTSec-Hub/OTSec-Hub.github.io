@@ -40,7 +40,6 @@ const Videos = () => {
                 );
                 setVideos(response.data);
             } catch (error) {
-                console.error("Failed to fetch videos:", error);
                 setVideos([]);
             }
         }
@@ -64,7 +63,6 @@ const Videos = () => {
             }
             return null;
         } catch (err) {
-            console.error('Invalid YouTube URL:', err);
             return null;
         }
     }

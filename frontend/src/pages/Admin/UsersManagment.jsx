@@ -62,7 +62,6 @@ export default function UserManagment({ children }) {
                 const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/`);
                 setUsers(response.data);
             } catch (error) {
-                console.error("Error fetching users:", error);
             } finally {
                 setLoading(false);
             }

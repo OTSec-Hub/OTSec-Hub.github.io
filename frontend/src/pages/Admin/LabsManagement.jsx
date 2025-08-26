@@ -86,7 +86,6 @@ export default function LabsManagement({ children }) {
             setLabs(response.data.items || []);
             setTotalPages(Math.ceil(response.data.total / labsPerPage));
         } catch (error) {
-            console.error("Error fetching labs:", error);
         } finally {
             setLoading(false);
         }

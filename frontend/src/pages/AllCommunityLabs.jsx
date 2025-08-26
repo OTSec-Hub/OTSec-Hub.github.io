@@ -48,10 +48,8 @@ const AllCommunityLabs = () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_communityLabs`)
         setLabs(response.data);
-        console.log(response.data);
         setLoading(false);
       } catch (err) {
-        console.error("Failed to fetch labs", err);
         setError("Failed to fetch labs.");
         setLoading(false);
       };
@@ -87,7 +85,6 @@ const AllCommunityLabs = () => {
     setFilteredResults(data.slice(start, end));
   }, [labs, searchInput, activePage]);
 
-  // console.log(labs);
 
   React.useEffect(() => {
     setActivePage(1);

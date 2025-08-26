@@ -92,7 +92,6 @@ export default function AddLab() {
                 handleClose();
             }, 1500);
         } catch (err) {
-            console.error(err);
             setError(err.response?.data?.detail || "Failed to add lab with questions");
         } finally {
             setLoading(false);

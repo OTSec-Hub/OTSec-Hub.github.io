@@ -18,10 +18,8 @@ export const AuthProvider = ({ children }) => {
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     setUser(response.data);
-                    // console.log(response.data);
                     
                 } catch (err) {
-                    console.error("User fetch failed", err);
                     localStorage.removeItem("token");
                 }
             }

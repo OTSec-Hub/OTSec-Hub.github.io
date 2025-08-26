@@ -26,7 +26,6 @@ export default function ExercisePage() {
                 });
                 setExercise(response.data);
             } catch (error) {
-                console.error("Error fetching exercise:", error);
             }
         };
         fetchExercise();
@@ -55,7 +54,6 @@ export default function ExercisePage() {
 
             setSubmitSuccess(true);
         } catch (error) {
-            console.error("Submission failed:", error);
             setSubmitError("Failed to submit your answers. Please try again.");
         } finally {
             setLoading(false);

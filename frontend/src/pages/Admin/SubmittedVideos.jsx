@@ -90,7 +90,6 @@ export default function SubmittedVideos({ children }) {
                 });
                 setSubmittedVideos(response.data);
             } catch (error) {
-                console.error("Error fetching videos:", error);
                 alert("Failed to fetch videos. Please check your login status.");
             } finally {
                 setLoading(false);
@@ -120,7 +119,6 @@ export default function SubmittedVideos({ children }) {
             setSelectedStatus("");
             setMessage("");
         } catch (error) {
-            console.error("Failed to update video:", error);
             alert("Failed to update video. Please check your login status.");
         }
     };
@@ -138,7 +136,6 @@ export default function SubmittedVideos({ children }) {
             setDeleteModalOpen(false);
             setSelectedVideoId(null);
         } catch (error) {
-            console.error("Failed to delete video:", error);
             alert("Failed to delete video. Please check your login status.");
         }
     };
@@ -185,7 +182,6 @@ export default function SubmittedVideos({ children }) {
             }
             return null;
         } catch (err) {
-            console.error("Invalid YouTube URL:", err);
             return null;
         }
     }

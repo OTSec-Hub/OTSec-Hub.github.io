@@ -122,7 +122,6 @@ const EditExercise = ({ exercise }) => {
             setSuccess(true);
             setOpen(false);
         } catch (err) {
-            console.error("Update failed", err);
             setError("Failed to update exercise. Please try again.");
         } finally {
             setLoading(false);

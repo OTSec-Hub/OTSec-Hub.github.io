@@ -74,7 +74,6 @@ const AllLabs = () => {
       setTotalPages(Math.ceil(response.data.total / labsPerPage));
       setLoading(false);
     } catch (err) {
-      console.error("Failed to fetch labs", err);
       setError("Failed to fetch labs.");
       setLoading(false);
     }

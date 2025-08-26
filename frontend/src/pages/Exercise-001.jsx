@@ -28,7 +28,6 @@ const Exercise001 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted responses:", formResponses);
     alert("Thanks for submitting your reflections!");
     // You could also POST to an API or store in localStorage here
   };

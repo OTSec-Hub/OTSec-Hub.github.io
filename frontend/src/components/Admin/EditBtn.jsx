@@ -67,7 +67,6 @@ const EditBtn = ({ user }) => {
       );
       setSuccess(true);
     } catch (err) {
-      console.error(err);
       setError("Failed to update user.");
     } finally {
       setLoading(false);

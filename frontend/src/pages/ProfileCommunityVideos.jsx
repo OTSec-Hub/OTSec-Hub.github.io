@@ -33,11 +33,9 @@ const ProfileCommunityVideos = () => {
                     }
                 );
 
-                console.log('user community labs', response.data);
 
                 setProgress(response.data);
             } catch (err) {
-                console.error("Failed to fetch progress:", err);
                 setError("Failed to load submitted labs.");
             } finally {
                 // setLoading(false);
@@ -68,7 +66,6 @@ const ProfileCommunityVideos = () => {
             }
             return null;
         } catch (err) {
-            console.error('Invalid YouTube URL:', err);
             return null;
         }
     }
@@ -80,9 +77,9 @@ const ProfileCommunityVideos = () => {
             <UserSidebar />
             <Container className="mt-5" style={{ maxWidth: "1000px" }}>
                 <Card>
-                    <Card.Header as="h4">Submitted Community Labs</Card.Header>
+                    <Card.Header as="h4">Submitted Community Videos</Card.Header>
                     <Card.Body>
-                        {error && <Alert variant="danger">{error}</Alert>}
+                        {/* {error && <Alert variant="danger">{error}</Alert>} */}
                         <ListGroup variant="flush">
                             {progress.length > 0 ? (progress.map((item, index) => (
                                 <ListGroup.Item
@@ -124,7 +121,7 @@ const ProfileCommunityVideos = () => {
                                     )}
                                 </ListGroup.Item>
                             ))) : (
-                                <ListGroup.Item>No labs submitted yet.</ListGroup.Item>
+                                <ListGroup.Item>No videos submitted yet.</ListGroup.Item>
                             )}
 
                         </ListGroup>

@@ -60,7 +60,6 @@ export default function AddLab() {
         message:""
       });
     } catch (err) {
-      console.error(err);
       if (Array.isArray(err.response?.data?.detail)) {
         // Join all validation error messages into one string
         const messages = err.response.data.detail.map(d => d.msg).join(", ");

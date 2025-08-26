@@ -32,15 +32,13 @@ const WatchedVideos = () => {
                         headers: { Authorization: `Bearer ${token}` }
                     }
                 );
-                console.log(response.data);
+                (response.data);
 
                 const filtered = response.data.filter(
                     item => item.content_type === "video"
                 );
-                console.log('mano',filtered);
                 setProgress(filtered);
             } catch (err) {
-                console.error("Failed to fetch progress:", err);
                 setError("Failed to load watched videos.");
             } finally {
                 // setLoading(false);

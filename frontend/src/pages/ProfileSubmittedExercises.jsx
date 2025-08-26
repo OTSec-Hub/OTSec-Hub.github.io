@@ -33,10 +33,8 @@ const ProfileSubmittedExercises = () => {
                         headers: { Authorization: `Bearer ${token}` }
                     }
                 );
-                console.log(response.data);
                 setProgress(response.data);
             } catch (err) {
-                console.error("Failed to fetch progress:", err);
                 setError("Failed to load watched videos.");
             } finally {
                 // setLoading(false);

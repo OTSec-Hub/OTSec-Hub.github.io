@@ -39,7 +39,6 @@ export default datasets;
 //     const data = await response.json();
 //     return data;
 //   } catch (error) {
-//     console.error("Failed to fetch datasets from GitHub:", error);
 //     return []; // return empty array if fetch fails
 //   }
 // }
@@ -77,7 +76,6 @@ export async function getDatasets() {
 
     return Promise.all(datasetPromises);
   } catch (err) {
-    console.error("Error fetching datasets:", err);
     return [];
   }
 }

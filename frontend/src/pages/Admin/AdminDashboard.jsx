@@ -33,7 +33,6 @@ export default function AdminDashboard() {
                 );
                 setStats(res.data); // <-- res.data must have keys matching totalUsers, totalVideos etc.
             } catch (err) {
-                console.error("Failed to fetch analytics", err);
             }
         }
         fetchStats();
