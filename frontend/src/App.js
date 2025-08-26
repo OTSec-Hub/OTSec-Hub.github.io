@@ -165,6 +165,8 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         <Route path="/ContactPage" element={<ContactPage />} />
         <Route path="/LoginPage" element={<LoginPage />} />
         <Route path="/RegisterPage" element={<RegisterPage />} />
+        <Route path="/verify-email" element={<VerificationPage />} />
+
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>

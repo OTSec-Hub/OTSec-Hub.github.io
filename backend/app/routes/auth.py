@@ -63,7 +63,7 @@ async def register(user: UserCreate,background_tasks: BackgroundTasks
         email=user.email,
         name=user.name,
         token=token,
-        redirect_url=f"{os.getenv('REACT_DOT_SERVER')}/#/verify-email",
+        redirect_url=f"{os.getenv('REACT_DOT_SERVER')}/verify-email",
         background_tasks=background_tasks,
 
     )

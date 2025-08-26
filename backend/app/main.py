@@ -11,10 +11,7 @@ load_dotenv()
 
 app = FastAPI()
 
-origins = [
-    os.getenv("REACT_DOT_SERVER"),  # Vercel frontend
-    "http://localhost:3000",        # Local frontend for dev
-]
+origins = os.getenv("REACT_DOT_SERVER", "").split(",")
 
 app.add_middleware(
     CORSMiddleware,
