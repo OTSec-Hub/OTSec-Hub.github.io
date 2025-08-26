@@ -32,7 +32,6 @@ const WatchedVideos = () => {
                         headers: { Authorization: `Bearer ${token}` }
                     }
                 );
-                (response.data);
 
                 const filtered = response.data.filter(
                     item => item.content_type === "video"
