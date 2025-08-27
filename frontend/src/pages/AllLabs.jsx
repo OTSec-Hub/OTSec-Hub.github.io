@@ -58,7 +58,7 @@ const AllLabs = () => {
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const labsPerPage = 9;
 
@@ -75,7 +75,7 @@ const AllLabs = () => {
       setLoading(false);
     } catch (err) {
       setLabs([])
-      setError("Failed to fetch labs.");
+      // setError("Failed to fetch labs.");
       setLoading(false);
     }
   };
@@ -115,8 +115,8 @@ const AllLabs = () => {
             <Title size={"h2"} text={"ICS Labs"} />
           </Container>
 
-          <Container className="mb-3">
-            <p className="text-center fs-5 text-muted">
+          <Container>
+            <p className="text-center fs-5 text-muted mb-4">
               Industrial Control Systems (ICS) are of paramount importance nowadays...
             </p>
             <p className="text-center fs-7 text-muted mb-4">
