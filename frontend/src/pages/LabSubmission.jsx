@@ -76,7 +76,7 @@ export default function AddLab() {
     <Container className="py-5" style={{ maxWidth: "900px" }}>
       <div className="row align-items-center mb-4">
         <div className="col-auto">
-          <Button onClick={() => navigate(-1)}>← Back</Button>
+          {/* <Button onClick={() => navigate(-1)}>← Back</Button> */}
         </div>
         <div className="col text-center" style={{ marginLeft: "-65px" }}>
           <h1 className="mb-0">Submit Community Lab!</h1>

@@ -18,34 +18,35 @@ function Exercises() {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [exercises, setExercises] = React.useState([]);
 
-  React.useEffect(()=> {
-    const fetchExercises = async () =>{
-      try{
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_exercises`,{
+  React.useEffect(() => {
+    const fetchExercises = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_exercises`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
         setExercises(response.data);
-      }catch (error) {
+      } catch (error) {
+        setExercises([])
       }
     }
     fetchExercises();
   }, [])
 
-  // const filteredDatasets = exercises.filter(exercise =>
-  //   exercise.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   exercise.description.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+  const filteredDatasets = exercises.filter(exercise =>
+    exercise.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    exercise.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   React.useEffect(() => {
     updateTitle("exercises | OTSec-Hub.io");
   }, []);
-  
+
   return (
     <div>
-      <Container className="text-center my-5">
-        <Title size="h5" text="Exercises" />
+      <Container className="d-flex justify-content-center mt-3">
+        <Title size="h2" text="Exercises" />
       </Container>
 
       <Container>
@@ -69,18 +70,24 @@ function Exercises() {
       <Container>
 
         <div className="p-4 max-w-xl mx-auto">
-          {exercises.map(exercise => (
-            <div key={exercise.id} className="mb-3 border rounded p-3 bg-gray-100">
-              <h2 className="text-xl font-medium">{exercise.title}</h2>
-              <p>{exercise.subtitle}</p>
-              <Link
-                to={`/Resources/Exercises/${exercise.id}`}
-                className="text-blue-600 underline text-sm mt-1 inline-block"
-              >
-                View Details
-              </Link>
-            </div>
-          ))}
+          {exercises.length === 0 ? (
+            <Container className="text-center fs-5 text-muted mt-5">
+              <h4>No exercises yet.</h4>
+            </Container>
+          ) : (
+            filteredDatasets.map(exercise => (
+              <div key={exercise.id} className="mb-3 border rounded p-3 bg-gray-100">
+                <h2 className="text-xl font-medium">{exercise.title}</h2>
+                <p>{exercise.subtitle}</p>
+                <Link
+                  to={`/Resources/Exercises/${exercise.id}`}
+                  className="text-blue-600 underline text-sm mt-1 inline-block"
+                >
+                  View Details
+                </Link>
+              </div>
+            ))
+          )}
         </div>
       </Container>
     </div>

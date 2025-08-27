@@ -16,17 +16,6 @@ import PropTypes from "prop-types";
 import { Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
-import Lab0Page from "./pages/Lab0Page";
-import Lab1Page from "./pages/Lab1Page";
-import Lab2Page from "./pages/Lab2Page";
-import Lab3Page from "./pages/Lab3Page";
-import Lab4Page from "./pages/Lab4Page";
-import Lab5Page from "./pages/Lab5Page";
-import Lab6Page from "./pages/Lab6Page";
-import Exercise001 from "./pages/Exercise-001";
-import Exercise002 from "./pages/Exercise-002";
-import Exercise003 from "./pages/Exercise-003";
-import Benchmarks from "./pages/Benchmarks";
 import Exercises from "./pages/Exercises";
 import Announcements from "./pages/Announcements";
 import Discussions from "./pages/Discussions";
@@ -46,9 +35,7 @@ import VerificationPage from "./pages/VerificationPage";
 import ExerciseSubmission from "./pages/ExerciseSubmission";
 import VideosManagment from "./pages/Admin/VideosManagement";
 import LabSubmission from "./pages/LabSubmission";
-import BenchmarkSubmission from "./pages/BenchmarkSubmission";
 import CommunityExercises from "./pages/CommunityExercises";
-import CommunityBenchmarks from "./pages/CommunityBenchmarks";
 
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -171,27 +158,19 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/Resources/All-Labs" element={<AllLabs />} />
-          <Route path="/Resources/Benchmarks" element={<Benchmarks />} />
           <Route path="/Resources/Exercises" element={<Exercises />} />
           <Route path="/Resources/Videos" element={<Videos />} />
           <Route path="/Resources/Videos/:videoId" element={<VideoDetailPage />} />
-          <Route path="/Benchmarks/:datasetId" element={<DatasetDetail />} />
           <Route path="/Resources/Exercises/:exerciseId" element={<ExercisePage />} />
-          {/* <Route path="/Exercises/Exercise-001" element={<Exercise001 />} /> */}
-          {/* <Route path="/Exercises/Exercise-002" element={<Exercise002 />} />
-          <Route path="/Exercises/Exercise-003" element={<Exercise003 />} /> */}
           <Route path="/Resources/Videos/Video-Submission" element={<VideoSubmission />} />
           <Route path="/Resources/Exercises/Exercise-Submission" element={<ExerciseSubmission />} />
           <Route path="/Resources/All-Labs/Lab-Submission" element={<LabSubmission />} />
-          <Route path="/Resources/Benchmarks/Benchmark-Submission" element={<BenchmarkSubmission />} />
           <Route path="/Community/Community-Labs" element={<AllCommunityLabs />} />
           <Route path="/Community/Community-Labs/:id" element={<CommunityLab />} />
           <Route path="/Community/Community-Exercises" element={<CommunityExercises />} />
           <Route path="/Community/Community-Videos" element={<AllCommunityVideos />} />
           <Route path="/Community/Community-Videos/:id" element={<CommunityVideo />} />
-          <Route path="/Community/Community-Benchmarks" element={<CommunityBenchmarks />} />
           <Route path="/Resources/All-Labs/:id" element={<LabPage />} />
-          <Route path="/Resources/All-Labs/0" element={<Lab0Page labId={0} />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/CompletedLabs" element={<ProfileCompletedLabs />} />
           <Route path="/SolvedQuizzes" element={<ProfileSolvedQuizzes />} />
@@ -199,12 +178,6 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/WatchedVideos" element={<ProfileWatchedVideos />} />
           <Route path="/ProfileCommunityLabs" element={<ProfileCommunityLabs />} />
           <Route path="/ProfileCommunityVideos" element={<ProfileCommunityVideos />} />
-          {/* <Route path="/All-Labs/1" element={<Lab1Page labId={1} />} />
-          <Route path="/All-Labs/2" element={<Lab2Page labId={2} />} />
-          <Route path="/All-Labs/3" element={<Lab3Page labId={3} />} />
-          <Route path="/All-Labs/4" element={<Lab4Page labId={4} />} />
-          <Route path="/All-Labs/5" element={<Lab5Page labId={5} />} />
-          <Route path="/All-Labs/6" element={<Lab6Page labId={6} />} /> */}
         </Route>
 
         {/* Admin Routes */}

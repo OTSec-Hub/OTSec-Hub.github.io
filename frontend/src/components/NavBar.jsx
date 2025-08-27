@@ -32,9 +32,9 @@ const navLinks = {
       dropdown: true,
       private: true, // <-- Add flag
       children: [
-        { id: "3R-1", name: "Members Labs", route: "/Community/Community-Labs" },
+        { id: "3R-1", name: "Community Labs", route: "/Community/Community-Labs" },
         // { id: "3R-2", name: "Benchmarks", route: "/Community/Community-Benchmarks" },
-        { id: "3R-4", name: "Members Videos", route: "/Community/Community-Videos" },
+        { id: "3R-4", name: "Community Videos", route: "/Community/Community-Videos" },
       ]
     },
     { id: "4R", name: "Announcements", route: "/Announcements" },
@@ -104,7 +104,7 @@ const NavBar = ({ Logo = defaultLogo, callBack, closeDelay = 125 }) => {
       <Navbar
         id="nav"
         collapseOnSelect
-        expand="xl"
+        expand="lg"
         expanded={isExpanded}
         bg={theme === "light" ? "light" : "dark"}
         variant={theme === "light" ? "light" : "dark"}

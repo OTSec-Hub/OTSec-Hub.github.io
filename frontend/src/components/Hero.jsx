@@ -1,38 +1,27 @@
 import React from "react";
-// Styles
-import styled, { keyframes } from "styled-components";
-// State
+import styled from "styled-components";
 import PropTypes from "prop-types";
-// Icons
-import { Icon } from "@iconify/react";
-// Images
 import Logo from "../images/logo.png";
 import { Light, Dark } from "../config";
-// Components
 import { useErrorBoundary } from "react-error-boundary";
-import { Link } from "react-scroll";
-import { Button, Col, Container, Row } from "react-bootstrap";
-
 
 const StyledHero = styled.header`
   position: relative;
-  display: grid;
-  place-items: center;
-  max-width: 1920px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: calc(100vh - var(--nav-height));
+  padding: 1rem;
 
+  /* Background image */
   &::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0; /* top:0; left:0; right:0; bottom:0; */
     background: ${({ theme }) =>
       theme.name === "light"
-        ? "linear-gradient(135deg, var(--bs-primary), var(--bs-light))"
-        : "linear-gradient(135deg, var(--bs-primary), var(--bs-dark))"};
+        ? `url(${Light}) center center / cover no-repeat`
+        : `url(${Dark}) center center / cover no-repeat`};
     z-index: -2;
   }
 
@@ -40,95 +29,42 @@ const StyledHero = styled.header`
   &::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: ${({ theme }) =>
       theme.name === "light"
-        ? "rgba(255, 255, 255, 0.2)"
-        : "rgba(0, 0, 0, 0.2)"};
+        ? "rgba(255,255,255,0.2)"
+        : "rgba(0,0,0,0.2)"};
     z-index: -1;
   }
 
-  .down-container {
-    height: 10rem;
-  }
-
-
-  @media screen and (min-width: 1180px) {
-    &::before {
-      background: ${({ theme }) =>
-        theme.name === "light"
-          ? `url(${Light}) top center fixed no-repeat`
-          : `url(${Dark}) top center fixed no-repeat`};
-      background-size: 100vw auto;
-    }
-  }
-
-  @media screen and (min-width: 1367px) {
-    &::before {
-      background: ${({ theme }) =>
-        theme.name === "light"
-          ? `url(${Light}) center center fixed no-repeat`
-          : `url(${Dark}) center center fixed no-repeat`};
-      background-size: cover;
-    }
+  .hero-img {
+    max-width: 90%;
+    height: auto;
+    width: clamp(150px, 30vw, 400px); /* responsive size */
   }
 `;
-// #endregion
-
-// #region component
-const propTypes = {
-  name: PropTypes.string,
-};
 
 const Hero = ({ name }) => {
   const { showBoundary } = useErrorBoundary();
 
   return (
     <StyledHero>
-      <Container>
-        <Row className="align-items-center text-center">
-          <Col>
-            <h1 className="mb-3 display-3 title">
-              {name === null ? "null" : name}
-            </h1>
-          </Col>
-          <Col className="d-none d-md-block">
-            <img
-              src={Logo}
-              alt="React Logo"
-              // className="w-110 mx-auto hero-img"
-              className="hero-img"
-              style={{ width: "80%", marginTop: "0em", marginLeft: "-43rem"}}
-            />
-          </Col>
-        </Row>
-{/*        <Row className="align-items-end down-container">
-          <Col className="m-4 text-center">
-            <Link to={"About"} className="link-icons">
-              <Icon icon="fa6-solid:circle-chevron-down" />
-            </Link>
-          </Col>
-        </Row>*/}
-        <Button
-          className="d-none"
-          onClick={() =>
-            showBoundary({
-              name: "Error",
-              message: "Simulated error message",
-            })
-          }
-        >
-          Simulate Error Boundary
-        </Button>
-      </Container>
+      <img src={Logo} alt="Hero Logo" className="hero-img" />
+      {/* Hidden button for error boundary */}
+      <button
+        className="d-none"
+        onClick={() =>
+          showBoundary({ name: "Error", message: "Simulated error" })
+        }
+      >
+        Error
+      </button>
     </StyledHero>
   );
 };
 
-Hero.propTypes = propTypes;
-// #endregion
+Hero.propTypes = {
+  name: PropTypes.string,
+};
 
 export default Hero;

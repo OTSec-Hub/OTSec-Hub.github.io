@@ -78,6 +78,10 @@ const AllLabs = () => {
     }
   };
 
+  const filteredLabs = labs.filter(lab =>
+    lab?.title?.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   // Initial fetch on mount
   useEffect(() => {
     getLabs(activePage, searchInput);
@@ -88,14 +92,14 @@ const AllLabs = () => {
     setActivePage(1);
   }, [searchInput]);
 
-  if (loading) {
-    return (
-      <Container className="text-center my-5">
-        <Title size={"h2"} text={"ICS Labs"} />
-        <Loading />
-      </Container>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Container className="text-center my-5">
+  //       <Title size={"h2"} text={"ICS Labs"} />
+  //       <Loading />
+  //     </Container>
+  //   );
+  // }
 
 
   return (
@@ -133,13 +137,13 @@ const AllLabs = () => {
             </InputGroup>
 
             {labs.length === 0 ? (
-              <Container className="text-center mt-5">
-                <h4>No labs found matching your search.</h4>
+              <Container className="text-center fs-5 text-muted mt-5">
+                <h4>No labs yet.</h4>
               </Container>
             ) : (
               <>
                 <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
-                  {labs.map((lab) => (
+                  {filteredLabs.map((lab) => (
                     <Col key={lab.id} className="d-flex justify-content-center">
                       <Card className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary" style={{ width: "18rem" }}>
                         <Card.Img
@@ -163,6 +167,7 @@ const AllLabs = () => {
                     </Col>
                   ))}
                 </Row>
+
 
                 {totalPages > 1 && (
                   <Container className="d-flex justify-content-center mt-5">

@@ -15,9 +15,9 @@ import { postData } from "../utils";
 const StyledForm = styled.div`
   .form-control {
     background: ${({ theme }) =>
-      theme.name === "light"
-        ? "rgba(var(--bs-body-color-rgb), 0.03)"
-        : "var(--bs-gray-dark)"};
+    theme.name === "light"
+      ? "rgba(var(--bs-body-color-rgb), 0.03)"
+      : "var(--bs-gray-dark)"};
   }
 `;
 // #endregion
@@ -70,6 +70,7 @@ const ContactForm = () => {
     }
   };
 
+
   return (
     <StyledForm>
       <Form noValidate validated={isValidated} onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ const ContactForm = () => {
           <Form.Label>Name</Form.Label>
           <Form.Control required type="text" placeholder="Your name" />
           <Form.Control.Feedback type="invalid">
-            <h5>Name must be at least one character.</h5>
+            <p>Name must be at least one character.</p>
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mx-auto mb-3 form-group" controlId="email">
@@ -88,14 +89,14 @@ const ContactForm = () => {
             placeholder="someone@something.com"
           />
           <Form.Control.Feedback type="invalid">
-            <h5>Please enter a valid email.</h5>
+            <p>Please enter a valid email.</p>
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mx-auto mb-3 form-group" controlId="message">
           <Form.Label>Message</Form.Label>
           <Form.Control required as="textarea" placeholder="Your message..." />
           <Form.Control.Feedback type="invalid">
-            <h5>Please provide a valid message.</h5>
+            <p>Please provide a valid message.</p>
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mx-auto text-center form-group">
@@ -118,8 +119,9 @@ const ContactForm = () => {
             variant="success"
             onClose={() => setSuccess(false)}
             dismissible
+            className="p-8 text-sm"
           >
-            <Alert.Heading>Success! I will contact you soon.</Alert.Heading>
+            <Alert.Heading className="fs-6 m-0">Success! We will contact you soon.</Alert.Heading>
           </Alert>
           <Alert
             show={danger}
