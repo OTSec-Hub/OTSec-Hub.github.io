@@ -58,7 +58,6 @@ const AllLabs = () => {
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
 
   const labsPerPage = 9;
 
@@ -75,7 +74,6 @@ const AllLabs = () => {
       setLoading(false);
     } catch (err) {
       setLabs([])
-      // setError("Failed to fetch labs.");
       setLoading(false);
     }
   };
@@ -99,13 +97,6 @@ const AllLabs = () => {
     );
   }
 
-  // if (error) {
-  //   return (
-  //     <Container className="text-center mt-5">
-  //       <h2>{error}</h2>
-  //     </Container>
-  //   );
-  // }
 
   return (
     <>
