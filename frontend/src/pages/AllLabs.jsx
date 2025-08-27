@@ -74,6 +74,7 @@ const AllLabs = () => {
       setTotalPages(Math.ceil(response.data.total / labsPerPage));
       setLoading(false);
     } catch (err) {
+      setLabs([])
       setError("Failed to fetch labs.");
       setLoading(false);
     }
@@ -98,13 +99,13 @@ const AllLabs = () => {
     );
   }
 
-  if (error) {
-    return (
-      <Container className="text-center mt-5">
-        <h2>{error}</h2>
-      </Container>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <Container className="text-center mt-5">
+  //       <h2>{error}</h2>
+  //     </Container>
+  //   );
+  // }
 
   return (
     <>
