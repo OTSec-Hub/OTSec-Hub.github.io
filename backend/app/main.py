@@ -11,7 +11,7 @@ load_dotenv()
 
 app = FastAPI()
 
-origins = os.getenv("REACT_DOT_SERVER", "").split(",")
+origins = [os.getenv("REACT_DOT_SERVER").strip()]
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,6 +19,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 # Include routers
