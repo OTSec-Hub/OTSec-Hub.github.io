@@ -136,67 +136,64 @@ const AllLabs = () => {
               />
             </InputGroup>
 
-            {labs.length === 0 ? (
-              <Container className="text-center fs-5 text-muted mt-5">
-                <h4>No labs yet.</h4>
-              </Container>
-            ) : (
-              <>
-                <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
-                  {filteredLabs.map((lab) => (
-                    <Col key={lab.id} className="d-flex justify-content-center">
-                      <Card className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary" style={{ width: "18rem" }}>
-                        <Card.Img
-                          variant="top"
-                          src={lab.lab_img || "/default-lab.jpg"}
-                          alt={lab.title}
-                          style={{
-                            width: "80%",
-                            height: "80%",
-                            objectFit: "cover",
-                            borderRadius: "0.5rem"
-                          }}
-                        />
-                        <Card.Body className="d-flex flex-column justify-content-center align-items-center">
-                          <Card.Title className="w-100">{lab?.title?.trim() || "Explore this lab"}</Card.Title>
-                          <Link to={`/Resources/All-Labs/${lab.id}`} className="btn btn-primary mt-2">
-                            Explore
-                          </Link>
-                        </Card.Body>
-                      </Card>
-                    </Col>
+            <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
+              {loading ? (
+                <Container className="d-flex justify-content-center my-5">
+                  <Loading />
+                </Container>
+              ) : (
+                filteredLabs.map((lab) => (
+                  <Col key={lab.id} className="d-flex justify-content-center">
+                    <Card className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary" style={{ width: "18rem" }}>
+                      <Card.Img
+                        variant="top"
+                        src={lab.lab_img || "/default-lab.jpg"}
+                        alt={lab.title}
+                        style={{
+                          width: "80%",
+                          height: "80%",
+                          objectFit: "cover",
+                          borderRadius: "0.5rem"
+                        }}
+                      />
+                      <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+                        <Card.Title className="w-100">{lab?.title?.trim() || "Explore this lab"}</Card.Title>
+                        <Link to={`/Resources/All-Labs/${lab.id}`} className="btn btn-primary mt-2">
+                          Explore
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))
+              )}
+            </Row>
+
+            {totalPages > 1 && (
+              <Container className="d-flex justify-content-center mt-5">
+                <Pagination>
+                  <Pagination.Prev
+                    onClick={() => setActivePage(prev => (prev === 1 ? totalPages : prev - 1))}
+                    disabled={activePage === 1}
+                  />
+                  {Array.from({ length: totalPages }, (_, i) => (
+                    <Pagination.Item
+                      key={i + 1}
+                      active={i + 1 === activePage}
+                      onClick={() => setActivePage(i + 1)}
+                    >
+                      {i + 1}
+                    </Pagination.Item>
                   ))}
-                </Row>
-
-
-                {totalPages > 1 && (
-                  <Container className="d-flex justify-content-center mt-5">
-                    <Pagination>
-                      <Pagination.Prev
-                        onClick={() => setActivePage(prev => (prev === 1 ? totalPages : prev - 1))}
-                        disabled={activePage === 1}
-                      />
-                      {Array.from({ length: totalPages }, (_, i) => (
-                        <Pagination.Item
-                          key={i + 1}
-                          active={i + 1 === activePage}
-                          onClick={() => setActivePage(i + 1)}
-                        >
-                          {i + 1}
-                        </Pagination.Item>
-                      ))}
-                      <Pagination.Next
-                        onClick={() => setActivePage(prev => (prev === totalPages ? 1 : prev + 1))}
-                        disabled={activePage === totalPages}
-                      />
-                    </Pagination>
-                  </Container>
-                )}
-              </>
+                  <Pagination.Next
+                    onClick={() => setActivePage(prev => (prev === totalPages ? 1 : prev + 1))}
+                    disabled={activePage === totalPages}
+                  />
+                </Pagination>
+              </Container>
             )}
           </Container>
         </StyledSection>
-      </main>
+      </main >
       <BackToTop home={"Home"} />
     </>
   );

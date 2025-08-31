@@ -70,12 +70,12 @@ function Exercises() {
       <Container>
 
         <div className="p-4 max-w-xl mx-auto">
-          {exercises.length === 0 ? (
-            <Container className="text-center fs-5 text-muted mt-5">
-              <h4>No exercises yet.</h4>
+          {loading ? (
+            <Container className="d-flex justify-content-center my-5">
+              <Loading />
             </Container>
           ) : (
-            filteredDatasets.map(exercise => (
+            filteredDatasets.map((exercise) => (
               <div key={exercise.id} className="mb-3 border rounded p-3 bg-gray-100">
                 <h2 className="text-xl font-medium">{exercise.title}</h2>
                 <p>{exercise.subtitle}</p>
@@ -89,6 +89,7 @@ function Exercises() {
             ))
           )}
         </div>
+
       </Container>
     </div>
   );

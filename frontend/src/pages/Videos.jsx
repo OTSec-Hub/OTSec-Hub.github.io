@@ -103,12 +103,14 @@ const Videos = () => {
                     </Container>
 
                     <Container>
-                        {filteredVideos.length === 0 ? (
-                            <p className="text-center fs-5 text-muted mt-5">No videos yet.</p>
-                        ) : (
-                            <Row className="g-4">
-                                {filteredVideos.map((video) => (
-                                    <Col key={video.id} xs={12} md={6} lg={4}>
+                        <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
+                            {loading ? (
+                                <Container className="d-flex justify-content-center my-5">
+                                    <Loading />
+                                </Container>
+                            ) : (
+                                filteredVideos.map((video) => (
+                                    <Col key={video.id} className="d-flex justify-content-center">
                                         <Card className="video-card h-100">
                                             <Card.Img
                                                 variant="top"
@@ -119,15 +121,15 @@ const Videos = () => {
                                             <Card.Body>
                                                 <Card.Title>{video.title}</Card.Title>
                                                 <Card.Text>{video.subtitle}</Card.Text>
-                                                <Link to={`/Resources/Videos/${video.id}`}>
-                                                    <Button variant="primary">Watch</Button>
+                                                <Link to={`/Community/Community-Videos/${video.id}`}>
+                                                    <Button className="mt-3" variant="primary">Watch</Button>
                                                 </Link>
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                ))}
-                            </Row>
-                        )}
+                                ))
+                            )}
+                        </Row>
                     </Container>
                 </StyledSection>
             </main>
