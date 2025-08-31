@@ -5,7 +5,7 @@ from app.models.announcement import Announcement
 from fastapi.responses import JSONResponse
 from app.models.user import User
 from app.schemas.announcement import AnnouncementCreate, AnnouncementOut, AnnouncementUpdate
-from app.auth.auth import admin_or_educator, admin_or_educator
+from app.auth.auth import get_current_user, admin_or_educator
 from typing import List
 from app.schemas.pagination import PaginatedResponse
 
@@ -32,8 +32,12 @@ def add_announcement(
 async def create_announcement(
     data: AnnouncementCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)
+    current_user: User = Depends(get_current_user)
 ):
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     announcement = Announcement(
         content_type=data.content_type,
         content_id=data.content_id,
@@ -102,8 +106,12 @@ def update_announcement(announcement_id: int, announcement: AnnouncementUpdate, 
 async def delete_announcement(
     announcement_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)
+    current_user: User = Depends(get_current_user)
 ):
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     db_announcement = db.query(Announcement).filter(Announcement.id == announcement_id).first()
 
     if not db_announcement:

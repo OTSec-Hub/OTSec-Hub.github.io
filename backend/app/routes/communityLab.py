@@ -14,11 +14,15 @@ router = APIRouter()
 async def create_lab(
     lab_data: LabCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)  
+    current_user: User = Depends(get_current_user)  #here
 ) -> LabOut:
     """
     Create a new community lab.
     """
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     new_lab = CommunityLab(
         title=lab_data.title,
         lab_img=lab_data.lab_img,
@@ -77,12 +81,16 @@ async def update_lab(
     lab_id: int,
     lab: LabUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)
+    current_user: User = Depends(get_current_user)
 ) -> LabOut:
     """
     Update a community lab by ID.
     Only the owner of the lab can update.
     """
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     db_lab = db.query(CommunityLab).filter(CommunityLab.id == lab_id).first()
     if not db_lab:
         raise HTTPException(status_code=404, detail="CommunityLab not found")
@@ -104,12 +112,16 @@ async def update_lab(
 async def delete_lab(
     lab_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)
+    current_user: User = Depends(get_current_user)
 ) -> JSONResponse:
     """
     Delete a community lab by ID.
     Only the owner of the lab can delete.
     """
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     db_lab = db.query(CommunityLab).filter(CommunityLab.id == lab_id).first()
     
     if not db_lab:

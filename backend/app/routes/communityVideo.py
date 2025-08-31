@@ -14,8 +14,15 @@ router = APIRouter()
 async def create_video(
     video_data: VideoCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)
+    current_user: User = Depends(get_current_user)
 ) -> VideoOut:
+    
+    print(f"DEBUG: User role is: '{current_user.role}'")  # Add this line
+    print(f"DEBUG: User ID: {current_user.id}, Username: {current_user.username}")
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     new_video = CommunityVideo(
         title=video_data.title,
         subtitle=video_data.subtitle,
@@ -68,8 +75,12 @@ async def update_video(
     video_id: int,
     video: VideoUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)
+    current_user: User = Depends(get_current_user)
 ) -> VideoOut:
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     db_video = db.query(CommunityVideo).filter(CommunityVideo.id == video_id).first()
     if not db_video:
         raise HTTPException(status_code=404, detail="CommunityVideo not found")
@@ -87,8 +98,12 @@ async def update_video(
 async def delete_video(
     video_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(admin_or_educator)
+    current_user: User = Depends(get_current_user)
 ) -> JSONResponse:
+    
+    # if current_user.role not in ["admin", "educator"]:
+    #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")
+    
     db_video = db.query(CommunityVideo).filter(CommunityVideo.id == video_id).first()
     if not db_video:
         raise HTTPException(status_code=404, detail="CommunityVideo not found")

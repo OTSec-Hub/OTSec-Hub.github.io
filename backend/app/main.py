@@ -11,7 +11,7 @@ load_dotenv()
 
 app = FastAPI()
 
-origins = [os.getenv("REACT_DOT_SERVER").split(",")]
+origins = [os.getenv("REACT_DOT_SERVER").strip()]
 
 app.add_middleware(
     CORSMiddleware,
