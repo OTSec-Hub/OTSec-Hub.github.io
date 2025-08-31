@@ -28,6 +28,7 @@ async def create_lab(
         lab_img=lab_data.lab_img,
         pdf=lab_data.pdf,
         status=lab_data.status,
+        content=lab_data.content,
         user_id=current_user.id,
         message=lab_data.message
     )
@@ -102,6 +103,8 @@ async def update_lab(
         db_lab.status = lab.status
     if lab.message is not None:
         db_lab.message = lab.message
+    if lab.content is not None:
+        db_lab.content = lab.content
 
     db.commit()
     db.refresh(db_lab)

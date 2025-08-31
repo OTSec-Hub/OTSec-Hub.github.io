@@ -17,8 +17,6 @@ async def create_video(
     current_user: User = Depends(get_current_user)
 ) -> VideoOut:
     
-    print(f"DEBUG: User role is: '{current_user.role}'")  # Add this line
-    print(f"DEBUG: User ID: {current_user.id}, Username: {current_user.username}")
     
     # if current_user.role not in ["admin", "educator"]:
     #     raise HTTPException(status_code=403, detail="Admin or Educator privileges required")

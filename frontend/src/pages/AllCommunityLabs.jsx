@@ -50,6 +50,7 @@ const AllCommunityLabs = () => {
         setLabs(response.data);
         setLoading(false);
       } catch (err) {
+        setLabs([])
         setError("Failed to fetch labs.");
         setLoading(false);
       };
@@ -90,15 +91,6 @@ const AllCommunityLabs = () => {
     setActivePage(1);
   }, [searchInput]);
 
-  if (loading) {
-    return (
-      <Container className="text-center my-5">
-        <Title size={"h2"} text={"ICS Labs"} />
-        <Loading />
-      </Container>
-    );
-  }
-
 
   return (
     <>
@@ -134,38 +126,51 @@ const AllCommunityLabs = () => {
             </InputGroup>
 
             <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
-              {filteredResults.map((lab) => (
-                <Col key={lab.id} className="d-flex justify-content-center">
-                  <Card className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary" style={{ width: "18rem" }}>
-                    <div className="w-100">
-                      <Card.Img
-                        variant="top"
-                        src={lab.lab_img || "/default-lab.jpg"}
-                        alt={lab.title}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          borderRadius: "0.5rem"
-                        }}
-                      />
-                    </div>
-                    <Card.Body className="d-flex flex-column justify-content-center align-items-center">
-                      <Card.Title className="w-100">{lab?.title?.trim() || "Explore this lab"}</Card.Title>
-                      <small className="mb-2">
-                        <strong>By:</strong> <span className="text-muted">{lab.user_name}</span>
-                      </small>
-                      <Link
-                        to={`/Community/Community-Labs/${lab.id}`}
-                        className="btn btn-primary mt-2"
-                      >
-                        Explore
-                      </Link>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
+              {loading ? (
+                <Container className="d-flex justify-content-center my-5">
+                  <Loading />
+                </Container>
+              ) : (
+                filteredResults.map((lab) => (
+                  <Col key={lab.id} className="d-flex justify-content-center">
+                    <Card
+                      className="text-center h-100 d-flex flex-column align-items-center justify-content-center p-3 shadow bg-secondary"
+                      style={{ width: "18rem" }}
+                    >
+                      <div className="w-100">
+                        <Card.Img
+                          variant="top"
+                          src={lab.lab_img || "/default-lab.jpg"}
+                          alt={lab.title}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            borderRadius: "0.5rem",
+                          }}
+                        />
+                      </div>
+                      <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+                        <Card.Title className="w-100">
+                          {lab?.title?.trim() || "Explore this lab"}
+                        </Card.Title>
+                        <small className="mb-2">
+                          <strong>By:</strong>{" "}
+                          <span className="text-muted">{lab.user_name}</span>
+                        </small>
+                        <Link
+                          to={`/Community/Community-Labs/${lab.id}`}
+                          className="btn btn-primary mt-2"
+                        >
+                          Explore
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))
+              )}
             </Row>
+
 
 
             {pageItems.length > 1 && (

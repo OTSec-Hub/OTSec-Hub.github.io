@@ -19,34 +19,47 @@ import {
     CircularProgress,
     Modal,
     Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
 } from "@mui/material";
 import Sidebar from "../../components/Admin/AdminSidebar";
 import styled from "styled-components";
 import AddLab from "../../components/Admin/AddLab";
+import MarkDownEditor from "../../components/MarkDownEditor";
 
 // Styled components
 const ThemedTableContainer = styled(TableContainer)`
-  background-color: ${({ theme }) => (theme.name === "light" ? "#f8f9fa" : "#3a3b3c")};
+  background-color: ${({ theme }) =>
+        theme.name === "light" ? "#f8f9fa" : "#3a3b3c"};
   border-radius: 8px;
 `;
 
 const ThemedTableCell = styled(TableCell)`
   color: ${({ theme }) =>
-        theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"} !important;
-  border-color: ${({ theme }) => (theme.name === "light" ? "#dee2e6" : "#495057")} !important;
+        theme.name === "light"
+            ? "rgba(33, 37, 41, 0.85)"
+            : "rgba(255, 255, 255, 0.8)"} !important;
+  border-color: ${({ theme }) =>
+        theme.name === "light" ? "#dee2e6" : "#495057"} !important;
 `;
 
 const ThemedTableHead = styled(TableHead)`
-  background-color: ${({ theme }) => (theme.name === "light" ? "#e9ecef" : "#343a40")} !important;
+  background-color: ${({ theme }) =>
+        theme.name === "light" ? "#e9ecef" : "#343a40"} !important;
 `;
 
 const ThemedTableRow = styled(TableRow)`
-  background-color: ${({ theme }) => (theme.name === "light" ? "#f8f9fa" : "#3a3b3c")} !important;
+  background-color: ${({ theme }) =>
+        theme.name === "light" ? "#f8f9fa" : "#3a3b3c"} !important;
 `;
 
 const ThemedTypography = styled(Typography)`
   color: ${({ theme }) =>
-        theme.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)"} !important;
+        theme.name === "light"
+            ? "rgba(33, 37, 41, 0.85)"
+            : "rgba(255, 255, 255, 0.8)"} !important;
 `;
 
 const EditButton = styled(Button)`
@@ -76,8 +89,13 @@ export default function CommunityLabsManagement({ children }) {
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [selectedLabId, setSelectedLabId] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState("");
-    const [message, setMessage] = useState("");
+    const [formData, setFormData] = useState({
+        title: "",
+        lab_img: "",
+        content: "",
+        status: "pending",
+        message: "",
+    });
 
     const theme = useTheme();
     const token = localStorage.getItem("token");
@@ -85,18 +103,30 @@ export default function CommunityLabsManagement({ children }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/get_communityLabs`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
+                const response = await axios.get(
+                    `${process.env.REACT_APP_API_BASE_URL}/api/get_communityLabs`,
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
                 setLabs(response.data);
             } catch (error) {
-                alert("Failed to fetch labs. Please check your login status.");
+                setLabs([]);
             } finally {
                 setLoading(false);
             }
         }
         fetchData();
     }, []);
+
+    // universal handleChange for TextField / Select / Markdown
+    const handleChange = (eOrValue, fieldName) => {
+        if (typeof eOrValue === "string") {
+            // markdown case
+            setFormData((prev) => ({ ...prev, [fieldName]: eOrValue }));
+        } else {
+            const { name, value } = eOrValue.target;
+            setFormData((prev) => ({ ...prev, [name]: value }));
+        }
+    };
 
     const handleEdit = async () => {
         if (!token) {
@@ -106,18 +136,23 @@ export default function CommunityLabsManagement({ children }) {
         try {
             await axios.put(
                 `${process.env.REACT_APP_API_BASE_URL}/api/update_communityLab/${selectedLabId}`,
-                { status: selectedStatus, message },
+                formData,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setLabs((prevLabs) =>
                 prevLabs.map((lab) =>
-                    lab.id === selectedLabId ? { ...lab, status: selectedStatus, message } : lab
+                    lab.id === selectedLabId ? { ...lab, ...formData } : lab
                 )
             );
             setEditModalOpen(false);
             setSelectedLabId(null);
-            setSelectedStatus("");
-            setMessage("");
+            setFormData({
+                title: "",
+                lab_img: "",
+                content: "",
+                status: "pending",
+                message: "",
+            });
         } catch (error) {
             alert("Failed to update lab. Please check your login status.");
         }
@@ -129,10 +164,13 @@ export default function CommunityLabsManagement({ children }) {
             return;
         }
         try {
-            await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/delete_communityLab/${selectedLabId}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setLabs((prevLabs) => prevLabs.filter((lab) => lab.id !== selectedLabId));
+            await axios.delete(
+                `${process.env.REACT_APP_API_BASE_URL}/api/delete_communityLab/${selectedLabId}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setLabs((prevLabs) =>
+                prevLabs.filter((lab) => lab.id !== selectedLabId)
+            );
             setDeleteModalOpen(false);
             setSelectedLabId(null);
         } catch (error) {
@@ -142,8 +180,13 @@ export default function CommunityLabsManagement({ children }) {
 
     const handleOpenEditModal = (lab) => {
         setSelectedLabId(lab.id);
-        setSelectedStatus(lab.status || "pending");
-        setMessage(lab.message || "");
+        setFormData({
+            title: lab.title || "",
+            lab_img: lab.lab_img || "",
+            content: lab.content || "",
+            status: lab.status || "pending",
+            message: lab.message || "",
+        });
         setEditModalOpen(true);
     };
 
@@ -196,6 +239,7 @@ export default function CommunityLabsManagement({ children }) {
                             </Box>
                         ) : (
                             <>
+                                {/* Search + Add */}
                                 <Box display="flex" gap={2} mb={2} alignItems="center">
                                     <TextField
                                         label="Search by Name"
@@ -206,24 +250,33 @@ export default function CommunityLabsManagement({ children }) {
                                         fullWidth
                                         sx={{
                                             "& .MuiInputLabel-root": {
-                                                color: theme?.name === "light" ? "#212529" : "rgba(255, 255, 255, 0.8)",
+                                                color:
+                                                    theme?.name === "light"
+                                                        ? "#212529"
+                                                        : "rgba(255, 255, 255, 0.8)",
                                             },
                                             "& .MuiOutlinedInput-root": {
                                                 "& fieldset": {
-                                                    borderColor: theme?.name === "light" ? "#ced4da" : "#6c757d",
+                                                    borderColor:
+                                                        theme?.name === "light" ? "#ced4da" : "#6c757d",
                                                 },
                                                 "&:hover fieldset": {
-                                                    borderColor: theme?.name === "light" ? "#adb5bd" : "#495057",
+                                                    borderColor:
+                                                        theme?.name === "light" ? "#adb5bd" : "#495057",
                                                 },
                                             },
                                             "& .MuiInputBase-input": {
-                                                color: theme?.name === "light" ? "rgba(33, 37, 41, 0.85)" : "rgba(255, 255, 255, 0.8)",
+                                                color:
+                                                    theme?.name === "light"
+                                                        ? "rgba(33, 37, 41, 0.85)"
+                                                        : "rgba(255, 255, 255, 0.8)",
                                             },
                                         }}
                                     />
                                     <AddLab />
                                 </Box>
 
+                                {/* Table */}
                                 <ThemedTableContainer component={Paper}>
                                     <Table>
                                         <ThemedTableHead>
@@ -232,6 +285,7 @@ export default function CommunityLabsManagement({ children }) {
                                                 <ThemedTableCell align="center">Member Name</ThemedTableCell>
                                                 <ThemedTableCell align="center">Title</ThemedTableCell>
                                                 <ThemedTableCell align="center">PDF</ThemedTableCell>
+                                                <ThemedTableCell align="center">Content</ThemedTableCell>
                                                 <ThemedTableCell align="center">Status</ThemedTableCell>
                                                 <ThemedTableCell align="center">Actions</ThemedTableCell>
                                             </TableRow>
@@ -240,7 +294,11 @@ export default function CommunityLabsManagement({ children }) {
                                             {filteredLabs.map((lab) => (
                                                 <ThemedTableRow key={lab.id} hover>
                                                     <ThemedTableCell align="center">
-                                                        <a href={lab.lab_img} target="_blank" rel="noopener noreferrer">
+                                                        <a
+                                                            href={lab.lab_img}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
                                                             <img
                                                                 src={lab.lab_img}
                                                                 alt={lab.title}
@@ -251,11 +309,31 @@ export default function CommunityLabsManagement({ children }) {
                                                     <ThemedTableCell align="center">
                                                         {lab.user_name} ({lab.created_at?.substring(0, 10)})
                                                     </ThemedTableCell>
-                                                    <ThemedTableCell align="center">{lab.title}</ThemedTableCell>
                                                     <ThemedTableCell align="center">
-                                                        <a href={lab.pdf} target="_blank" rel="noopener noreferrer">
+                                                        {lab.title}
+                                                    </ThemedTableCell>
+                                                    <ThemedTableCell align="center">
+                                                        <a
+                                                            href={lab.pdf}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
                                                             Lab Content
                                                         </a>
+                                                    </ThemedTableCell>
+                                                    <ThemedTableCell align="center">
+                                                        <Box
+                                                            sx={{
+                                                                margin: "0 auto",
+                                                                maxWidth: 400,
+                                                                maxHeight: 100,
+                                                                overflow: "auto",
+                                                                whiteSpace: "pre-wrap",
+                                                                wordWrap: "break-word",
+                                                            }}
+                                                        >
+                                                            {lab.content}
+                                                        </Box>
                                                     </ThemedTableCell>
                                                     <ThemedTableCell align="center">
                                                         <div
@@ -267,7 +345,10 @@ export default function CommunityLabsManagement({ children }) {
                                                                         ? "alert-danger"
                                                                         : "alert-secondary"
                                                                 }`}
-                                                            style={{ fontWeight: 600, textTransform: "capitalize" }}
+                                                            style={{
+                                                                fontWeight: 600,
+                                                                textTransform: "capitalize",
+                                                            }}
                                                         >
                                                             {lab.status}
                                                         </div>
@@ -277,7 +358,9 @@ export default function CommunityLabsManagement({ children }) {
                                                             <EditButton onClick={() => handleOpenEditModal(lab)}>
                                                                 Edit
                                                             </EditButton>
-                                                            <DeleteButton onClick={() => handleOpenDeleteModal(lab)}>
+                                                            <DeleteButton
+                                                                onClick={() => handleOpenDeleteModal(lab)}
+                                                            >
                                                                 Delete
                                                             </DeleteButton>
                                                         </Box>
@@ -289,43 +372,115 @@ export default function CommunityLabsManagement({ children }) {
                                 </ThemedTableContainer>
 
                                 {/* Edit Modal */}
-                                <Modal
+                                <Dialog
                                     open={editModalOpen}
                                     onClose={() => setEditModalOpen(false)}
-                                    aria-labelledby="edit-modal-title"
-                                    aria-describedby="edit-modal-description"
+                                    maxWidth="md"
+                                    fullWidth
+                                    scroll="paper"
+                                    PaperProps={{
+                                        sx: {
+                                            bgcolor: theme.name === "light" ? "background.paper" : "#1e1e1e",
+                                            color: theme.name === "light" ? "#000" : "#fff",
+                                        },
+                                    }}
                                 >
-                                    <Box sx={modalStyle}>
-                                        <Typography
-                                            id="edit-modal-title"
-                                            variant="h6"
-                                            component="h2"
-                                            mb={2}
-                                            color={theme.name === "light" ? "black" : "white"}
-                                        >
-                                            Edit Lab
-                                        </Typography>
-                                        <FormControl fullWidth sx={{ mb: 2 }}>
+                                    <DialogTitle
+                                        sx={{ color: theme.name === "light" ? "black" : "white" }}
+                                    >
+                                        Edit Lab
+                                    </DialogTitle>
+                                    <DialogContent
+                                        dividers
+                                        sx={{
+                                            bgcolor: theme.name === "light" ? "background.paper" : "#1e1e1e",
+                                            color: theme.name === "light" ? "black" : "white",
+                                        }}
+                                    >
+                                        {/* Title */}
+                                        <TextField
+                                            name="title"
+                                            label="Title"
+                                            fullWidth
+                                            margin="dense"
+                                            variant="outlined"
+                                            value={formData.title}
+                                            onChange={handleChange}
+                                            InputLabelProps={{
+                                                style: {
+                                                    color:
+                                                        theme.name === "light"
+                                                            ? "rgba(0,0,0,0.6)"
+                                                            : "rgba(255,255,255,0.7)",
+                                                },
+                                            }}
+                                            inputProps={{
+                                                style: {
+                                                    color: theme.name === "light" ? "black" : "white",
+                                                },
+                                            }}
+                                            sx={{ mb: 2 }}
+                                        />
+
+                                        {/* Lab Image */}
+                                        <TextField
+                                            name="lab_img"
+                                            label="Lab Image URL"
+                                            fullWidth
+                                            margin="dense"
+                                            variant="outlined"
+                                            value={formData.lab_img}
+                                            onChange={handleChange}
+                                            InputLabelProps={{
+                                                style: {
+                                                    color:
+                                                        theme.name === "light"
+                                                            ? "rgba(0,0,0,0.6)"
+                                                            : "rgba(255,255,255,0.7)",
+                                                },
+                                            }}
+                                            inputProps={{
+                                                style: {
+                                                    color: theme.name === "light" ? "black" : "white",
+                                                },
+                                            }}
+                                            sx={{ mb: 2 }}
+                                        />
+
+                                        {/* Markdown Content */}
+                                        <MarkDownEditor
+                                            value={formData.content}
+                                            handleChange={(val) => handleChange(val, "content")}
+                                        />
+
+                                        {/* Status */}
+                                        <FormControl fullWidth sx={{ mt: 3, mb: 2 }}>
                                             <InputLabel
                                                 sx={{
-                                                    color: theme.name === "light" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.7)",
+                                                    color:
+                                                        theme.name === "light"
+                                                            ? "rgba(0,0,0,0.6)"
+                                                            : "rgba(255,255,255,0.7)",
                                                 }}
                                             >
                                                 Status
                                             </InputLabel>
                                             <Select
-                                                value={selectedStatus}
-                                                onChange={(e) => setSelectedStatus(e.target.value)}
+                                                name="status"
+                                                value={formData.status}
+                                                onChange={handleChange}
                                                 sx={{
                                                     color: theme.name === "light" ? "black" : "white",
                                                     "& .MuiSvgIcon-root": {
                                                         color: theme.name === "light" ? "black" : "white",
                                                     },
                                                     "& .MuiOutlinedInput-notchedOutline": {
-                                                        borderColor: theme.name === "light" ? "#ced4da" : "#6c757d",
+                                                        borderColor:
+                                                            theme.name === "light" ? "#ced4da" : "#6c757d",
                                                     },
                                                     "&:hover .MuiOutlinedInput-notchedOutline": {
-                                                        borderColor: theme.name === "light" ? "#adb5bd" : "#495057",
+                                                        borderColor:
+                                                            theme.name === "light" ? "#adb5bd" : "#495057",
                                                     },
                                                 }}
                                             >
@@ -334,37 +489,53 @@ export default function CommunityLabsManagement({ children }) {
                                                 <MenuItem value="rejected">Rejected</MenuItem>
                                             </Select>
                                         </FormControl>
+
+                                        {/* Message */}
                                         <TextField
+                                            name="message"
                                             label="Message"
                                             multiline
-                                            rows={4}
+                                            rows={3}
                                             fullWidth
-                                            value={message}
-                                            onChange={(e) => setMessage(e.target.value)}
+                                            value={formData.message}
+                                            onChange={handleChange}
                                             variant="outlined"
                                             InputLabelProps={{
                                                 style: {
-                                                    color: theme.name === "light" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.7)",
+                                                    color:
+                                                        theme.name === "light"
+                                                            ? "rgba(0,0,0,0.6)"
+                                                            : "rgba(255,255,255,0.7)",
                                                 },
                                             }}
                                             inputProps={{
-                                                style: {
-                                                    color: theme.name === "light" ? "black" : "white",
-                                                },
+                                                style: { color: theme.name === "light" ? "black" : "white" },
                                             }}
                                         />
-                                        <Box mt={3} display="flex" justifyContent="flex-end" gap={2}>
-                                            <Button variant="outlined" onClick={() => setEditModalOpen(false)}>
-                                                Cancel
-                                            </Button>
-                                            <Button variant="contained" color="primary" onClick={handleEdit}>
-                                                Save Changes
-                                            </Button>
-                                        </Box>
-                                    </Box>
-                                </Modal>
+                                    </DialogContent>
+                                    <DialogActions
+                                        sx={{
+                                            bgcolor: theme.name === "light" ? "background.paper" : "#1e1e1e",
+                                        }}
+                                    >
+                                        <Button
+                                            variant="outlined"
+                                            onClick={() => setEditModalOpen(false)}
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={handleEdit}
+                                        >
+                                            Save Changes
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
 
-                                {/* Delete Confirmation Modal */}
+
+                                {/* Delete Modal */}
                                 <Modal
                                     open={deleteModalOpen}
                                     onClose={() => setDeleteModalOpen(false)}
@@ -386,13 +557,21 @@ export default function CommunityLabsManagement({ children }) {
                                             mb={3}
                                             color={theme.name === "light" ? "black" : "white"}
                                         >
-                                            Are you sure you want to delete this lab? This action cannot be undone.
+                                            Are you sure you want to delete this lab? This action
+                                            cannot be undone.
                                         </Typography>
                                         <Box display="flex" justifyContent="flex-end" gap={2}>
-                                            <Button variant="contained" color="error" onClick={handleDelete}>
+                                            <Button
+                                                variant="contained"
+                                                color="error"
+                                                onClick={handleDelete}
+                                            >
                                                 Delete
                                             </Button>
-                                            <Button variant="outlined" onClick={() => setDeleteModalOpen(false)}>
+                                            <Button
+                                                variant="outlined"
+                                                onClick={() => setDeleteModalOpen(false)}
+                                            >
                                                 Cancel
                                             </Button>
                                         </Box>

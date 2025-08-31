@@ -8,10 +8,9 @@ import remarkGfm from "remark-gfm";
 import Quiz from "../components/Quiz";
 
 const CommunityLab = () => {
-    const [lab, setLab] = useState({ content: "", quiz: {} });
     const { id } = useParams();
+    const [lab, setLab] = useState({});
     const token = localStorage.getItem("token");
-    const [quizzes, setQuizzes] = useState([]);
 
 
     useEffect(() => {
@@ -24,13 +23,14 @@ const CommunityLab = () => {
                     }
                 );
                 setLab(response.data);
-                setQuizzes(response.data.quizzes)
             } catch (err) {
             }
         }
         fetchData();
     }, [id, token]);
 
+    console.log(lab);
+    
     return (
         <main className="min-h-screen">
             <Container className="px-4 sm:px-6 lg:px-8 mx-auto">

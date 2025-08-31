@@ -35,7 +35,6 @@ import VerificationPage from "./pages/VerificationPage";
 import ExerciseSubmission from "./pages/ExerciseSubmission";
 import VideosManagment from "./pages/Admin/VideosManagement";
 import LabSubmission from "./pages/LabSubmission";
-import CommunityExercises from "./pages/CommunityExercises";
 
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -167,7 +166,6 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/Resources/All-Labs/Lab-Submission" element={<LabSubmission />} />
           <Route path="/Community/Community-Labs" element={<AllCommunityLabs />} />
           <Route path="/Community/Community-Labs/:id" element={<CommunityLab />} />
-          <Route path="/Community/Community-Exercises" element={<CommunityExercises />} />
           <Route path="/Community/Community-Videos" element={<AllCommunityVideos />} />
           <Route path="/Community/Community-Videos/:id" element={<CommunityVideo />} />
           <Route path="/Resources/All-Labs/:id" element={<LabPage />} />

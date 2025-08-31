@@ -68,7 +68,7 @@ export default function ExcercisesManagement({ children }) {
                 
                 setExercises(response.data);
             } catch (error) {
-                alert('failed to load exercises')
+                setExercises([])
             } finally {
                 setLoading(false);
             }

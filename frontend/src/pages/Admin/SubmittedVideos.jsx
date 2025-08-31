@@ -90,7 +90,7 @@ export default function SubmittedVideos({ children }) {
                 });
                 setSubmittedVideos(response.data);
             } catch (error) {
-                alert("Failed to fetch videos. Please check your login status.");
+                setSubmittedVideos([])
             } finally {
                 setLoading(false);
             }

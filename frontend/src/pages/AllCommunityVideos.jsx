@@ -101,15 +101,6 @@ const AllCommunityVideos = () => {
     setActivePage(1);
   }, [searchInput]);
 
-  if (loading) {
-    return (
-      <Container className="text-center my-5">
-        <Title size="h2" text="Community Videos" />
-        <Loading />
-      </Container>
-    );
-  }
-
   function getYouTubeVideoId(url) {
     try {
       const parsed = new URL(url);
@@ -164,30 +155,41 @@ const AllCommunityVideos = () => {
             </InputGroup>
 
             <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
-              {filteredResults.map((video) => (
-                <Col key={video.id} className="d-flex justify-content-center">
-                  <Card className="video-card h-100">
-                    <Card.Img
-                      variant="top"
-                      src={`https://img.youtube.com/vi/${getYouTubeVideoId(video.url)}/sddefault.jpg`}
-                      alt={video.title}
-                      className="video-thumbnail"
-                    />
-                    <Card.Body>
-                      <Card.Title>{video.title}</Card.Title>
-                      {video.subtitle && <Card.Text className="m-0">{video.subtitle}</Card.Text>}
-                      <small className="text-muted fst-italic mb-2">
-                        By {video.user_name}
-                      </small>
-                      <br />
-                      <Link to={`/Community/Community-Videos/${video.id}`}>
-                        <Button className="mt-3" variant="primary">Watch</Button>
-                      </Link>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
+              {loading ? (
+                <Container className="d-flex justify-content-center my-5">
+                  <Loading />
+                </Container>
+              ) : (
+                filteredResults.map((video) => (
+                  <Col key={video.id} className="d-flex justify-content-center">
+                    <Card className="video-card h-100">
+                      <Card.Img
+                        variant="top"
+                        src={`https://img.youtube.com/vi/${getYouTubeVideoId(video.url)}/sddefault.jpg`}
+                        alt={video.title}
+                        className="video-thumbnail"
+                      />
+                      <Card.Body>
+                        <Card.Title>{video.title}</Card.Title>
+                        {video.subtitle && (
+                          <Card.Text className="m-0">{video.subtitle}</Card.Text>
+                        )}
+                        <small className="text-muted fst-italic mb-2">
+                          By {video.user_name}
+                        </small>
+                        <br />
+                        <Link to={`/Community/Community-Videos/${video.id}`}>
+                          <Button className="mt-3" variant="primary">
+                            Watch
+                          </Button>
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))
+              )}
             </Row>
+
 
             {pageItems.length > 1 && (
               <Container className="d-flex justify-content-center mt-5">

@@ -9,6 +9,7 @@ class CommunityLab(Base):
     title = Column(String, nullable=False)
     lab_img = Column(String, nullable=False)
     pdf = Column(String, nullable=False)
+    content = Column (String, nullable=True)
     status = Column(String, nullable=False)
     message = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
