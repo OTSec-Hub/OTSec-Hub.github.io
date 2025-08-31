@@ -113,7 +113,8 @@ const AllLabs = () => {
           <Container>
             <p className="text-center fs-5 text-muted mb-4">
               Industrial Control Systems (ICS) are of paramount importance nowadays...
-            </p>
+            </p>import Loading from './../components/Loading';
+
             <p className="text-center fs-7 text-muted mb-4">
               Built a hands-on lab others can learn from? Share it with the community{" "}
               <Link to="/Resources/All-Labs/Lab-Submission" className="text-primary fw-semibold text-decoration-none">

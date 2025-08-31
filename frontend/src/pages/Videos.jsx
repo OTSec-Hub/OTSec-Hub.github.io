@@ -9,6 +9,7 @@ import { Icon } from "@iconify/react";
 import Title from "../components/Title";
 import BackToTop from "../components/BackToTop";
 import { updateTitle } from "../utils";
+import Loading from "../components/Loading";
 
 // #region styled-components
 const StyledSection = styled.section`
@@ -29,6 +30,7 @@ const StyledSection = styled.section`
 const Videos = () => {
     const [videos, setVideos] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true)
 
     // Fetch videos
     useEffect(() => {
@@ -38,8 +40,10 @@ const Videos = () => {
                     `${process.env.REACT_APP_API_BASE_URL}/api/get_videos`
                 );
                 setVideos(response.data);
+                setLoading(false);
             } catch (error) {
                 setVideos([]);
+                setLoading(false);
             }
         }
         fetchVideos();

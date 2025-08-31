@@ -12,11 +12,12 @@ import { updateTitle } from "../utils";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 import axios from "axios";
-
+import Loading from "../components/Loading";
 
 function Exercises() {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [exercises, setExercises] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchExercises = async () => {
@@ -27,7 +28,9 @@ function Exercises() {
           },
         });
         setExercises(response.data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         setExercises([])
       }
     }
