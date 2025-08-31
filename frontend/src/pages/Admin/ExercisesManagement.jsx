@@ -64,9 +64,11 @@ export default function ExcercisesManagement({ children }) {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     }
                 });
-
+                console.log('success');
+                
                 setExercises(response.data);
             } catch (error) {
+                alert('failed to load exercises')
             } finally {
                 setLoading(false);
             }
