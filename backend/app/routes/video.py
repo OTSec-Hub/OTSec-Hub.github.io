@@ -8,6 +8,7 @@ from app.models.quiz import Quiz
 from app.database import get_db
 from typing import List
 from dotenv import load_dotenv
+from app.routes.announcements import add_announcement
 
 load_dotenv()
 router = APIRouter()
@@ -36,11 +37,20 @@ def add_video(video: VideoCreate, db: Session = Depends(get_db)):
             url=video.url,
             quizzes=quiz_objects
         )
-
+        
         db.add(db_video)
+        db.flush()
+        
+        add_announcement(
+            db=db,
+            content_type="video",
+            content_id=db_video.id,
+            title=db_video.title,
+            image=db_video.url
+        )
+
         db.commit()
         db.refresh(db_video)
-
         return db_video
 
     except IntegrityError as e:

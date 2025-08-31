@@ -5,6 +5,7 @@ from app.models.userProgress import UserProgress
 from app.models.lab import Lab
 from app.models.quiz import Quiz
 from fastapi.responses import JSONResponse
+from app.routes.announcements import add_announcement
 from app.schemas.userProgress import UserProgressCreate
 from app.schemas.lab import LabOut, LabCreate, LabUpdate
 from app.auth.auth import get_current_user
@@ -27,7 +28,15 @@ async def create_lab(
         content=lab_data.content
         )
     db.add(new_lab)
-    db.flush()  # To get lab.id
+    db.flush()
+    
+    add_announcement(
+        db=db,
+        content_type="lab",
+        content_id=new_lab.id,
+        title=new_lab.title,
+        image=new_lab.lab_img
+    )
 
     for quiz in lab_data.quizzes:
         new_quiz = Quiz(

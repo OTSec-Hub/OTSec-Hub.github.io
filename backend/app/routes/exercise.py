@@ -1,11 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.models.userProgress import UserProgress
 from app.models.exercise import Exercise
-from app.models.quiz import Quiz
 from fastapi.responses import JSONResponse
-from app.schemas.userProgress import UserProgressCreate
+from app.routes.announcements import add_announcement
 from app.schemas.exercise import ExerciseCreate, ExerciseOut, ExerciseUpdate
 from app.auth.auth import get_current_user
 from app.models.user import User
@@ -26,6 +24,16 @@ async def create_exercise(
         questions=exercise_data.questions # Assuming questions is a list of strings
     )
     db.add(new_exercise)
+    db.flush()
+    
+    add_announcement(
+        db=db,
+        content_type="exercise",
+        content_id=new_exercise.id,
+        title=new_exercise.title,
+        image=''
+    )
+    
     db.commit()
     db.refresh(new_exercise)
     return new_exercise

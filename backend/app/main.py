@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import user, auth, educators, video, userProgress, pieProgress, lab, exercise, exerciseSubmission, communityLab, communityVideo, analytics
+from app.routes import user, auth, educators, video, userProgress, pieProgress, lab, exercise, exerciseSubmission, communityLab, communityVideo, analytics, announcements
 from app import models
 
 from app.database import engine, Base
@@ -11,7 +11,7 @@ load_dotenv()
 
 app = FastAPI()
 
-origins = [os.getenv("REACT_DOT_SERVER").strip()]
+origins = [os.getenv("REACT_DOT_SERVER").split(",")]
 
 app.add_middleware(
     CORSMiddleware,
@@ -29,6 +29,7 @@ app.include_router(educators.router, prefix="/api", tags=["educators"])
 app.include_router(video.router, prefix="/api", tags=["videos"])
 app.include_router(userProgress.router, prefix="/api", tags=["video_views"])
 app.include_router(lab.router, prefix="/api", tags=["labs"])
+app.include_router(announcements.router, prefix="/api", tags=["announcements"])
 app.include_router(communityLab.router, prefix="/api", tags=["communityLab"])
 app.include_router(communityVideo.router, prefix="/api", tags=["communityVideo"])
 app.include_router(exercise.router, prefix="/api", tags=["exercisess"])
