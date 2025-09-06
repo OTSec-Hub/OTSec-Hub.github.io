@@ -401,149 +401,107 @@ const Lab6Page = () => {
                 access to the source code, and having some basic knowledge of the ICS process, we set out to attack the desalination plant to damage 
                 its equipment.
                 </p>
-                <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
-                In order to attack the PLC we will have to first reverse engineer its binary using ICSREF to better understand what it does. 
-                Therefore, ICSREF must be installed on a Linux machine following instructions at the github page:{" "}
-                  <a
-                    href="https://github.com/momalab/ICSREF"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                  >
-                  https://github.com/momalab/ICSREF
-                  </a>
-                  {" "}and{" "}
-                  <a
-                    href="https://github.com/momalab/ICSREF/blob/master/INSTALL.md"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                  >
-                  https://github.com/momalab/ICSREF/blob/master/INSTALL.md
-                  </a>
-                </p>
-                <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
-                ICSREF is built atop Python 2.7 and will require the use of a virtual machine (VM) based on Ubuntu 22.04 LTS.  
-                This process will only run on a PC or Mac(with Intel chip), it does not support Apple Silicon M series chipsets.  
-                Building the VM may be possible on Apple Silicon by using UTM but this is not tested and as of this writing will probably not work.
-                </p>
-                <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
-                Building the VM:
-                </p>
-                <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
-                  <ul>
-                    <li>Download Ubuntu 22.04 LTS ISO</li>
-                      <ul>
-                        <li>
-                          <a href="https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso" target="_blank" rel="noopener noreferrer" style={{ color: "var(--custom-blue)", textDecoration: "underline" }}>
-                            https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso
-                          </a>
-                        </li>
-                      </ul>
-                    <li>Create a new VM in Virtual Box using the ISO downloaded previously:</li>
-                      <ul>
-                        <li>You can setup unattended install and set the username and password for the VM.</li>
-                        <li>Setup the hardware for 2 CPU, 8 GB or RAM and 25 GB of hard disk (in Hardware and Hard Disk).</li>
-                        <li>Networking:</li>
-                        <ul>
-                            <li>Note:  Networking should default to NAT, which is OK for the lab.</li>
-                            <li>Note the VM will need Internet access for the download of packages and access to the GitHub.</li>
-                        </ul>
-                        <li>Click Finish.</li>
-                        <li>Start VM to start the installation</li>
-                        <li>Ubuntu will install</li>
-                      </ul>
-                    <li>Add Virtual Box Guest Additions to enable copy/paste and other drivers.</li>
-                      <ul>
-                        <li>Under Devices menu, select Insert Guest Additions CD Image... </li>
-                        <li>The CD will appear in Ubuntu on the desktop.</li>
-                        <li>Open a terminal window</li>
-                        <li>To change to the root user type:  su - </li>
-                        <li>In a terminal window cd to /media. </li>
-                        <li>A directory with your username created during installation should exist, cd into that directory. </li>
-                        <li>The directory should contain the mounted Guest Additions CD, cd into that directory.</li>
-                        <li>To install Guest Additions:  ./VBoxLinuxAdditions.run </li>
-                        <li>Once completed, restart the VM to ensure all of the guest additions function properly.</li>
-                      </ul>
-                    <li>Add the user account created during installation to the sudoers group</li>
-                      <ul>
-                        <li>su - </li>
-                        <li>Create a file in /etc/sudoers.d, you can name it sudoers </li>
-                        <li>Edit the file to add the following line to the file, change the username to the username created during installation.</li>
-                        <ul>
-                          <li>username  ALL=(ALL) NOPASSWD:ALL </li>
-                        </ul>
-                      </ul>
-                    <li>Install ImHex:</li>
-                      <ul>
-                        <li>Download from here:{" "} 
-                          <a 
-                            href="https://github.com/WerWolv/ImHex/releases/download/v1.32.1/imhex-1.32.1-Ubuntu-22.04-x86_64.deb"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                          >
-                            https://github.com/WerWolv/ImHex/releases/download/v1.32.1/imhex-1.32.1-Ubuntu-22.04-x86_64.deb
-                          </a>
-                        </li> 
-                        <li>cd into the Downloads directory </li>
-                        <li>Install using this command:  sudo apt install ./imhex-1.32.1-Ubuntu-22.04-x86_64.deb</li>
-                      </ul>
-                    <li>Prepare the VM for ICSREF</li>
-                      <ul>
-                        <li>Install curl: </li>
-                        <ul>
-                          <li>sudo apt install curl</li>
-                        </ul>
-                        <li>Install wheel a Python PIP package manager:</li>
-                        <ul>
-                          <li>sudo apt install python2-pip-whl</li>
-                        </ul>
-                      </ul>
-                    <li>To install ICSREF continue with the steps here:{" "}
-                      <a 
-                        href="https://github.com/momalab/ICSREF/blob/master/INSTALL.md"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                      >
-                        https://github.com/momalab/ICSREF/blob/master/INSTALL.md
-                      </a>
-                      <ul>
-                        <li>Note:  At Step 10, modify the command to install ICSREF to this:  pip2.7 install --no-index --find-links=ICSREF/wheelhouse -r ICSREF/requirements.txt</li>
-                      </ul>
-                    </li>
-                    <li>Note:  If you need to move files to and from the VM it may be necessary to use File Manager under the Machine menu in Virtual Box.</li>
-                    <li>Download the precompiled binary from here:{" "}
-                      <a 
-                        href="/labMaterials/lab6-Materials/Desalination_WIO.zip"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
-                      >
-                        Download Zip File
-                      </a>
-                      . Unzip and store the files in the ICSREF directory within the home directory.
-                    </li>
-                  </ul>
-                </p>
+                <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
+    To attack the PLC, we first need to reverse-engineer its binary with ICSREF to understand what it does.
+    Install ICSREF on a Linux machine by following the instructions on the GitHub page:{" "}
+    <a
+      href="https://github.com/HaithemLamri/ICSREF_PY3"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+    >
+      https://github.com/HaithemLamri/ICSREF_PY3
+    </a>.
+  </p>
+
+  <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
+    ICSREF was originally built for Python 2.7 and can be found here:{" "}
+    <a
+      href="https://github.com/momalab/ICSREF"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+    >
+      https://github.com/momalab/ICSREF
+    </a>, which includes technical details. We provide a Python 3 version to make ICSREF easier to use.
+  </p>
+
+  <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
+    Requirements: Linux (native or in a VM). Intel-based Macs can use a Linux VM. Apple Silicon (M-series) is not supported.
+    Using UTM on Apple Silicon may be possible but is untested and likely will not work.
+  </p>
+
+  <p style={{ fontSize: "1.1rem", maxWidth: "800px" }}>To use ICSREF, do the following:</p>
+
+  <ol style={{ fontSize: "1.1rem", maxWidth: "800px" }}>
+    <li>
+      Install ImHex:
+      <ul>
+        <li>
+          Download:{" "}
+          <a
+            href="https://github.com/WerWolv/ImHex/releases/download/v1.32.1/imhex-1.32.1-Ubuntu-22.04-x86_64.deb"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+          >
+            imhex-1.32.1-Ubuntu-22.04-x86_64.deb
+          </a>
+        </li>
+        <li>Open a terminal and <code>cd</code> into your Downloads directory.</li>
+        <li>
+          Install with:{" "}
+          <code>sudo apt install ./imhex-1.32.1-Ubuntu-22.04-x86_64.deb</code>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      Install ICSREF (Python 3): follow the steps in the README:{" "}
+      <a
+        href="https://github.com/HaithemLamri/ICSREF_PY3/blob/main/README.md"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+      >
+        https://github.com/HaithemLamri/ICSREF_PY3/blob/main/README.md
+      </a>
+      .
+    </li>
+
+    <li>
+      Download the precompiled binary:{" "}
+      <a
+        href="/labMaterials/lab6-Materials/Desalination_WIO.zip"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: "var(--custom-blue)", textDecoration: "underline" }}
+      >
+        Download Zip File
+      </a>
+      . Unzip and place the files in your ICSREF working directory (e.g., in your home folder).
+    </li>
+  </ol>
                 <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
                 After installing ICSREF, we first activate the python virtual environment and then execute 
                 ICSREF. When the ICSREF prompt loads, we can instruct it to analyze the <strong>Desalination_WIO.PRG</strong> binary.  
                 Note:  The directory and program file name may be different on your system.
                 </p>
-                <img
-                  src={image9}
-                  alt="step 2.1"
-                  style={{
-                    width: "75%",
-                    height: "300px",
-                    objectFit: "fill",
+                
+              <img
+                src={image9}
+                alt="step 2.1"
+                style={{
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "cover",
                     borderRadius: "0.5rem",
                     marginBottom: "1.5rem",
-                    marginLeft: "6.5%",
+                    marginLeft: "0.0%",
                   }}
                 />
+
+
                 <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
                 When the initial analysis has concluded we can search for PID loops inside the binary by 
                 issuing the <strong>exp_pid_match</strong> command, and then the <strong>pidargs</strong> command.
@@ -552,12 +510,12 @@ const Lab6Page = () => {
                   src={image10}
                   alt="step 2.2"
                   style={{
-                    width: "75%",
-                    height: "300px",
-                    objectFit: "fill",
+                    width: "85%",
+                    height: "auto",
+                    objectFit: "cover",
                     borderRadius: "0.5rem",
                     marginBottom: "1.5rem",
-                    marginLeft: "6.5%",
+                    marginLeft: "0.0%",
                   }}
                 />
                 <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
@@ -570,12 +528,12 @@ const Lab6Page = () => {
                   src={image11}
                   alt="step 2.3"
                   style={{
-                    width: "85%",
+                    width: "100%",
                     height: "425px",
                     objectFit: "fill",
                     borderRadius: "0.5rem",
                     marginBottom: "1.5rem",
-                    marginLeft: "2%",
+                    marginLeft: "0%",
                   }}
                 />
                 <p style={{fontSize: "1.1rem", maxWidth: "800px"}}>
@@ -651,13 +609,13 @@ const Lab6Page = () => {
                 <img
                   src={image15}
                   alt="step 2.7"
-                  style={{
-                    width: "75%",
-                    height: "275px",
-                    objectFit: "fill",
+                   style={{
+                    width: "85%",
+                    height: "auto",
+                    objectFit: "cover",
                     borderRadius: "0.5rem",
                     marginBottom: "1.5rem",
-                    marginLeft: "6.5%",
+                    marginLeft: "0.0%",
                   }}
                 />
               </section>
