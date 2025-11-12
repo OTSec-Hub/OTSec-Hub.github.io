@@ -22,41 +22,41 @@ const StyledSocialLinks = styled.div`
 const SocialLinks = () => {
   // Hardcoded social links data
   const socialLinks = [
-    { 
-      provider: "github", 
-      url: "https://github.com/yourusername",
-      label: "GitHub profile"
-    },
-    { 
-      provider: "linkedin", 
-      url: "https://linkedin.com/in/yourprofile",
-      label: "LinkedIn profile"
-    },
-    { 
-      provider: "twitter", 
-      url: "https://twitter.com/yourhandle",
-      label: "Twitter profile"
-    },
-    { 
-      provider: "facebook", 
-      url: "https://facebook.com/yourpage",
-      label: "Facebook page"
-    },
-    { 
-      provider: "instagram", 
-      url: "https://instagram.com/yourprofile",
-      label: "Instagram profile"
-    },
-    { 
-      provider: "tiktok", 
-      url: "https://tiktok.com/@yourusername",
-      label: "TikTok profile"
-    },
-    { 
-      provider: "blog", 
-      url: "https://yourblog.com",
-      label: "Personal blog"
-    }
+    // { 
+    //   provider: "github", 
+    //   url: "https://github.com/yourusername",
+    //   label: "GitHub profile"
+    // },
+    // { 
+    //   provider: "linkedin", 
+    //   url: "https://linkedin.com/in/yourprofile",
+    //   label: "LinkedIn profile"
+    // },
+    // { 
+    //   provider: "twitter", 
+    //   url: "https://twitter.com/yourhandle",
+    //   label: "Twitter profile"
+    // },
+    // { 
+    //   provider: "facebook", 
+    //   url: "https://facebook.com/yourpage",
+    //   label: "Facebook page"
+    // },
+    // { 
+    //   provider: "instagram", 
+    //   url: "https://instagram.com/yourprofile",
+    //   label: "Instagram profile"
+    // },
+    // { 
+    //   provider: "tiktok", 
+    //   url: "https://tiktok.com/@yourusername",
+    //   label: "TikTok profile"
+    // },
+    // { 
+    //   provider: "blog", 
+    //   url: "https://yourblog.com",
+    //   label: "Personal blog"
+    // }
   ];
 
   const getSocialIcon = (provider) => {
