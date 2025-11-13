@@ -112,7 +112,10 @@ const AllLabs = () => {
 
           <Container>
             <p className="text-center fs-5 text-muted mb-4">
-              Industrial Control Systems (ICS) are of paramount importance nowadays...
+              Industrial Control Systems (ICS) are of paramount importance nowadays. In this series of labs, we will help you understand 
+              what a Programmable Logic Controller (PLC) is, what ICS are, the security vectors of ICS, how PLC binaries differ from standard 
+              binaries, and how to reverse engineer and fuzz them. All materials could be found on our Github repository : 
+              https://github.com/HaithemLamri/OTSsec-Hub/tree/main.
             </p>
 
             <p className="text-center fs-7 text-muted mb-4">
