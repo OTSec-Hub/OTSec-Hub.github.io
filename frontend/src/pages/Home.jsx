@@ -87,7 +87,7 @@ const Home = () => {
                   </h4>
                   <p>
                     Interested in offering a talk, sharing a course or dataset, or just want to say hi?
-                    Reach out at <code>mm6446 at nyu dot edu</code> — we’d love to hear from you!
+                    Please visit our <Link to="/ContactPage" className="text-primary font-weight-bold">Contact Page</Link> — we’d love to hear from you!
                   </p>
                 </div>
               </section>
