@@ -53,7 +53,7 @@ const AllCommunityVideos = () => {
 
   useEffect(() => {
     async function getVideos() {
-      updateTitle("Community Videos | OTSec-Hub.io");
+      updateTitle("Community Videos | OTSec-Hub");  //Fix Title: Just OTSec-Hub
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_BASE_URL}/api/get_communityVideos`
