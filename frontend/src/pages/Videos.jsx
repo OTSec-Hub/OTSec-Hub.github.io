@@ -51,7 +51,7 @@ const Videos = () => {
 
     // Update page title
     useEffect(() => {
-        updateTitle("ICS Videos | OTSec-Hub.io");
+        updateTitle("ICS Videos | OTSec-Hub");  //Fix Title: Just OTSec-Hub
     }, []);
 
     // Get YouTube video ID from URL
