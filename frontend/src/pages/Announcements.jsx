@@ -49,7 +49,7 @@ const Announcements = () => {
   const limit = 6; // show 6 announcements per page
 
   useEffect(() => {
-    updateTitle("Announcements | OTSec-Hub.io");
+    updateTitle("Announcements | OTSec-Hub");  //Fix Title: Just OTSec-Hub
     fetchAnnouncements(page);
   }, [page]);
 
