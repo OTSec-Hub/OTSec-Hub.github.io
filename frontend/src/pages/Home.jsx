@@ -11,7 +11,7 @@ const Home = () => {
   const { data: userData } = useGetUsersQuery();
 
   React.useEffect(() => {
-    document.title = "OTSec-Hub.io";
+    document.title = "OTSec-Hub";  //Fix Title: Just OTSec-Hub
   }, [userData]);
 
   return (
