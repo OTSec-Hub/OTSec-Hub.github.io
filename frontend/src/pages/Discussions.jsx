@@ -12,7 +12,7 @@ import SidebarBox from "../components/SidebarBox";
 
 const Discussions = () => {
   React.useEffect(() => {
-    updateTitle("Discussion-Forums | OTSec-Hub.io");
+    updateTitle("Discussion-Forums | OTSec-Hub");  //Fix Title: Just OTSec-Hub
   }, []);
 
   return (
