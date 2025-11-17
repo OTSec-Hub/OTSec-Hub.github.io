@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends, Query, HTTPException, Response
 from sqlalchemy.orm import Session
+# NEW: Import 'desc' from sqlalchemy for descending order sorting
+from sqlalchemy import desc
 from app.database import get_db
 from app.models.announcement import Announcement
 from fastapi.responses import JSONResponse
@@ -58,6 +60,36 @@ async def get_announcement(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Announcement not found")
     return announcement
 
+# -----------------
+# START OF ANNOUNCEMENTS LISTING SECTION
+# -----------------
+
+# @router.get("/get_announcements", response_model=PaginatedResponse[AnnouncementOut])
+# async def get_announcements_original(
+#     page: int = Query(1, ge=1),
+#     limit: int = Query(9, ge=1),
+#     db: Session = Depends(get_db),
+# ):
+#     announcements_query = db.query(Announcement)
+#     total = announcements_query.count()
+
+#     # Original query: This implicitly orders by creation date (oldest to newest) 
+#     # if the primary key (id) is created chronologically.
+#     announcements = announcements_query.offset((page - 1) * limit).limit(limit).all()
+    
+#     # Convert SQLAlchemy objects to Pydantic schemas
+#     announcement_items = [AnnouncementOut.from_orm(announcement) for announcement in announcements]
+
+#     if not announcement_items:
+#         raise HTTPException(status_code=404, detail="No announcements found")
+
+#     return PaginatedResponse(
+#         total=total,
+#         page=page,
+#         limit=limit,
+#         items=announcement_items
+#     )
+
 @router.get("/get_announcements", response_model=PaginatedResponse[AnnouncementOut])
 async def get_announcements(
     page: int = Query(1, ge=1),
@@ -67,13 +99,24 @@ async def get_announcements(
     announcements_query = db.query(Announcement)
     total = announcements_query.count()
 
-    announcements = announcements_query.offset((page - 1) * limit).limit(limit).all()
+    # 👇 FIX: Order by 'created_at' in descending order (newest to oldest)
+    announcements = (
+        announcements_query
+        .order_by(desc(Announcement.created_at))
+        .offset((page - 1) * limit)
+        .limit(limit)
+        .all()
+    )
     
     # Convert SQLAlchemy objects to Pydantic schemas
     announcement_items = [AnnouncementOut.from_orm(announcement) for announcement in announcements]
 
-    if not announcement_items:
-        raise HTTPException(status_code=404, detail="No announcements found")
+    if not announcement_items and total > 0 and page > 1:
+        # User requested a page that is beyond the last page
+        raise HTTPException(status_code=404, detail="Page not found")
+    elif not announcement_items and total == 0:
+        # No announcements found at all
+        pass # Will return PaginatedResponse with items=[]
 
     return PaginatedResponse(
         total=total,
@@ -81,6 +124,10 @@ async def get_announcements(
         limit=limit,
         items=announcement_items
     )
+
+# -----------------
+# END OF ANNOUNCEMENTS LISTING SECTION
+# -----------------
 
 @router.put("/update_announcement/{announcement_id}", response_model=AnnouncementOut)
 def update_announcement(announcement_id: int, announcement: AnnouncementUpdate, db: Session = Depends(get_db)):
@@ -120,4 +167,3 @@ async def delete_announcement(
     db.delete(db_announcement)
     db.commit()
     return JSONResponse(content={"message": "Announcement deleted successfully"})
-
