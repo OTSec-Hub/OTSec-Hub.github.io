@@ -68,7 +68,8 @@ async def get_labs(
     limit: int = Query(9, ge=1),
     db: Session = Depends(get_db),
 ):
-    labs_query = db.query(Lab)
+    labs_query = db.query(Lab).order_by(Lab.id.asc())
+
     total = labs_query.count()
 
     labs = labs_query.offset((page - 1) * limit).limit(limit).all()
