@@ -125,7 +125,7 @@ const Videos = () => {
                                             <Card.Body>
                                                 <Card.Title>{video.title}</Card.Title>
                                                 <Card.Text>{video.subtitle}</Card.Text>
-                                                <Link to={`/Community/Community-Videos/${video.id}`}>
+                                                <Link to={`/Resources/Videos/${video.id}`}>
                                                     <Button className="mt-3" variant="primary">Watch</Button>
                                                 </Link>
                                             </Card.Body>

@@ -6,6 +6,7 @@ import BackToTop from "../components/BackToTop";
 import Title from "../components/Title"; // Make sure this import path is correct
 import { useGetUsersQuery } from "../app/apiSlice";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data: userData } = useGetUsersQuery();

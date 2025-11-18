@@ -1,15 +1,25 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { Spinner } from "react-bootstrap";
 
-// For all logged-in users
 export const ProtectedRoute = () => {
-    const { user } = useAuth();
-    return user ? <Outlet /> : <Navigate to="/*" replace />;
+    const { user, loading } = useAuth();
+
+    if (loading) return (
+        <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </Spinner>
+    ); // or loading spinner
+
+    return user ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
-// For admin and educators
 export const AdminRoute = () => {
-    const { user } = useAuth();
-    const hasRequiredRole = user?.role === "admin" || user?.role === "educator";
-    return user && hasRequiredRole ? <Outlet /> : <Navigate to="/*" replace />;
+    const { user, loading } = useAuth();
+
+    if (loading) return null;
+
+    const allowed = user?.role === "admin" || user?.role === "educator";
+
+    return user && allowed ? <Outlet /> : <Navigate to="/login" replace />;
 };
